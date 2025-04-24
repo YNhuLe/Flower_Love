@@ -1,7 +1,7 @@
 import React from "react";
-import Entry from "./Entry";
-import Footer from "./Footer";
-import flowerpedia from "../flowerpedia";
+import Entry from "./components/Entry/Entry";
+import Footer from "./components/Footer/Footer";
+import flowerpedia from "./flowerpedia";
 
 function App() {
   return (
