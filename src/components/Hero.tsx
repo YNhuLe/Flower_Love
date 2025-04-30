@@ -9,7 +9,7 @@ function Hero() {
 
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-green-800 rounded-full opacity-20 blur-2xl"></div>
 
-      <div className="z-10 max-w-xl">
+      <div className="z-10 max-w-xl mt-[8rem]">
         <h1 className="text-5xl font-bold text-green-900 mb-6 leading-tight">
           Plants make a<br />
           positive impact
