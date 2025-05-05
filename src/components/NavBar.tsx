@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
 import { Link } from "react-router-dom";
-import navLinks from "../constants";
+import { navLinks } from "../constants";
 function NavBar() {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -56,7 +56,7 @@ function NavBar() {
             <li key={nav.id} onClick={() => setActive(nav.title)}>
               <a
                 href={`#${nav.id}`}
-                className="transition-all duration-300 hover:text-[#204807] hover:scale-150">
+                className="transition-all duration-300 hover:text-primary hover:scale-150">
                 {nav.title}
               </a>
             </li>
@@ -64,14 +64,14 @@ function NavBar() {
         </ul>
         <div className="flex flex-row justify-center items-center h-[8rem] gap-4">
           <button
-            className="bg-[#204807] text-white w-[8rem] hover:text-[#204807] hover:bg-white border
+            className="bg-primary text-white w-[10rem] hover:text-primary hover:bg-white border
           
-          transition-all duration-300 hover:border-[#204807] font-semibold rounded-2xl cursor-pointer h-8">
-            Search Plants{" "}
+          transition-all duration-300 hover:border-primary font-semibold rounded-2xl cursor-pointer h-8">
+            Search Plants
           </button>
           <button
-            className="bg-white text-[#204807] font-semibold w-[8rem] rounded-2xl border border-[#204807] 
-          transition-all duration-300 hover:bg-[#204807] hover:text-white cursor-pointer h-8">
+            className="bg-white text-primary font-semibold w-[8rem] rounded-2xl border border-primary 
+          transition-all duration-300 hover:bg-primary hover:text-white cursor-pointer h-8">
             Get Started
           </button>
         </div>
