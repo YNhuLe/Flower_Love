@@ -81,6 +81,7 @@ const cardDetails = [
     title: "Wide variety of plants.",
     content:
       "Explore a diverse selection of plants ranging from succulents to exotic flowers.",
+    image: "/plant-25.jpg",
   },
 
   {
@@ -88,12 +89,14 @@ const cardDetails = [
     title: "Care tips for every plant.",
     content:
       "Receive detailed care instructions with each purchase to help your plants thrive.",
+    image: "/plant-27.jpg",
   },
   {
     id: "3",
     title: "Locally sourced blooms.",
     content:
       "We partner with nearby growers to provide fresh, seasonal flowers straight from the source.",
+    image: "/plant-20.jpg",
   },
 ];
 const cardImg = [
@@ -110,4 +113,4 @@ const cardImg = [
     img: "/plant-10.jpg",
   },
 ];
-export { navLinks, imgList, imgList2, cardDetails };
+export { navLinks, cardImg, imgList, imgList2, cardDetails };
