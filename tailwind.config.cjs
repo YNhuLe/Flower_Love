@@ -7,7 +7,8 @@ module.exports = {
       colors: {
         primary: "#204807",
         secondary: "#222831",
-        tertiary: "#151030",
+        tertiary: "#E1E8CA",
+        dark_green: "#1E2203",
       },
       keyframes: {
         scrollLeft: {

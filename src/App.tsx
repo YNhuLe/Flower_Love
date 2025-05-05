@@ -8,6 +8,7 @@ import ShowCase from "./components/ShowCase";
 import "./style.css";
 import FlashCard from "./components/FlashCard";
 import CardList from "./components/CardList";
+import SigUpCard from "./components/SigUpCard";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
 
       {/* <FlashCard /> */}
       <CardList />
+      <SigUpCard />
       <Footer />
     </BrowserRouter>
   );
