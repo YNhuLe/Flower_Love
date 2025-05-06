@@ -18,8 +18,9 @@ function App() {
       <ShowCase />
 
       {/* <FlashCard /> */}
-      <CardList />
+      <CardList type="card" />
       <SigUpCard />
+      <CardList type="com" />
       <Footer />
     </BrowserRouter>
   );

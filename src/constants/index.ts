@@ -99,18 +99,26 @@ const cardDetails = [
     image: "/plant-20.jpg",
   },
 ];
-const cardImg = [
+const comDetails = [
   {
-    id: "1",
-    img: "/plant-25.jpg",
+    id: "4",
+    title: "Wide Selection",
+    content: "Explore a diverse range of plants to buy or sell",
+    image: "/plant-21.jpg",
   },
   {
-    id: "2",
-    img: "/plant-12.jpg",
+    id: "5",
+    title: "Easy Buying and Selling",
+    content:
+      "Effortlessly buy or sell plants with just a few clicks, making the process seamless.",
+    image: "/plant-12.jpg",
   },
   {
-    id: "2",
-    img: "/plant-10.jpg",
+    id: "6",
+    title: "Community Engagement",
+    content:
+      "Connect with fellow plant enthusiasts, share tips, and engage in discussions about gardening.",
+    image: "/plant-10.jpg",
   },
 ];
-export { navLinks, cardImg, imgList, imgList2, cardDetails };
+export { navLinks, comDetails, imgList, imgList2, cardDetails };
