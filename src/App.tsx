@@ -9,6 +9,8 @@ import "./style.css";
 import FlashCard from "./components/FlashCard";
 import CardList from "./components/CardList";
 import SigUpCard from "./components/SigUpCard";
+import PriceList from "./components/PriceList";
+import TestimonialsList from "./components/TestimonialsList";
 function App() {
   return (
     <BrowserRouter>
@@ -18,8 +20,11 @@ function App() {
       <ShowCase />
 
       {/* <FlashCard /> */}
-      <CardList />
+      <CardList type="card" />
       <SigUpCard />
+      <CardList type="com" />
+      <PriceList />
+      <TestimonialsList />
       <Footer />
     </BrowserRouter>
   );

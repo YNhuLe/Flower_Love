@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { cardDetails } from "../constants";
+import { cardDetails, comDetails } from "../constants";
 import FlashCard from "./FlashCard";
-function CardList() {
-  const [topImg, setTopImg] = useState("/plant-25.jpg");
-  const [activeIndex, setActiveIndex] = useState("1");
+interface CardListProps {
+  type: "card" | "com";
+}
+
+function CardList({ type }: CardListProps) {
+  const dataType = type === "card" ? cardDetails : comDetails;
+  const [topImg, setTopImg] = useState(dataType[0].image);
+  const [activeIndex, setActiveIndex] = useState(dataType[0].id);
   const clickCard = (newImg: string) => {
     setTopImg(newImg);
   };
@@ -16,7 +21,7 @@ function CardList() {
         alt="top banner"
       />
       <div className="flex flex-col laptop:flex-col">
-        {cardDetails.map(
+        {dataType.map(
           ({
             id,
             title,
