@@ -121,4 +121,133 @@ const comDetails = [
     image: "/plant-10.jpg",
   },
 ];
-export { navLinks, comDetails, imgList, imgList2, cardDetails };
+
+const monthlyPlans = [
+  {
+    id: "1",
+    title: "Basic plan",
+    price: "$9.99/month",
+    sub_price: "or $200 yearly",
+    features: [
+      "List up to 10 plants for sale",
+      "Access to buyer inquiries",
+      "Basic seller support",
+    ],
+  },
+  {
+    id: "2",
+    title: "Business Plan",
+    price: "$19.99/month",
+    sub_price: "or $299/year",
+    features: [
+      "List up to 25 plants for sale",
+      "Featured listings on homepage",
+      "Dedicated seller support",
+      "Access to advanced analytics",
+      "Priority customer service",
+    ],
+  },
+  {
+    id: "3",
+    title: "Enterprise Plan",
+    price: "$29.99/month",
+    sub_price: "or $499/year",
+    features: [
+      "Unlimited plant listings",
+      "Homepage and newsletter promotion",
+      "Personal account manager",
+      "Advanced analytics with insights",
+      "Custom branding options",
+      "API access for automation",
+      "24/7 premium support",
+    ],
+  },
+];
+
+const yearlyPlans = [
+  {
+    id: "1",
+    title: "Basic Plan",
+    price: "$99/year",
+    sub_price: "or $9.99 monthly",
+    features: [
+      "List up to 10 plants for sale",
+      "Access to buyer inquiries",
+      "Basic seller support",
+    ],
+  },
+  {
+    id: "2",
+    title: "Business Plan",
+    price: "$199/year",
+    sub_price: "or $19.99 monthly",
+    features: [
+      "List up to 25 plants for sale",
+      "Featured listings on homepage",
+      "Dedicated seller support",
+      "Access to advanced analytics",
+      "Priority customer service",
+    ],
+  },
+  {
+    id: "3",
+    title: "Enterprise Plan",
+    price: "$299/year",
+    sub_price: "or $29.99 monthly",
+    features: [
+      "Unlimited plant listings",
+      "Homepage and newsletter promotion",
+      "Personal account manager",
+      "Advanced analytics with insights",
+      "Custom branding options",
+      "API access for automation",
+      "24/7 premium support",
+    ],
+  },
+];
+
+const testimonials = [
+  {
+    id: "1",
+    name: "Sarah Smith",
+    profilePic: "/profile-1.jpg",
+    title: "Plant Enthusiast",
+    content:
+      "I love how easy it is to find unique plants on this platform. The buying process is seamless, and I've added some rare finds to my collection!",
+  },
+  {
+    id: "2",
+    name: "James Lee",
+    profilePic: "/profile-2.jpg",
+    title: "Home Gardener",
+    content:
+      "This site has completely changed the way I shop for plants. The quality is outstanding and the delivery is always on time.",
+  },
+  {
+    id: "3",
+    name: "Aisha Khan",
+    profilePic: "/profile-3.jpg",
+    title: "Urban Jungle Creator",
+    content:
+      "I've created a mini jungle in my apartment thanks to this platform. Great selection, helpful tips, and fantastic customer service!",
+  },
+  {
+    id: "4",
+    name: "Daniel Romero",
+    profilePic: "/profile-4.jpg",
+    title: "Terrarium Artist",
+    content:
+      "Finding the right plants for my terrariums used to be a hassle. Now it’s simple and enjoyable thanks to this amazing marketplace!",
+  },
+];
+
+export {
+  navLinks,
+  comDetails,
+  imgList,
+  imgList2,
+  cardDetails,
+  monthlyPlans,
+  yearlyPlans,
+  testimonials,
+};
