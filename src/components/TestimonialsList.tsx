@@ -1,6 +1,7 @@
 import React from "react";
 import TestimonialsCard from "./TestimonialsCard";
 import { testimonials } from "../constants";
+
 function TestimonialsList() {
   return (
     <div className="m-4 mt-32 text-center">
