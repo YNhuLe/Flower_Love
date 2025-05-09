@@ -6,7 +6,7 @@ function PriceList() {
   const [planType, setPlanType] = useState<"monthly" | "yearly">("monthly");
   const activePlan = planType === "monthly" ? monthlyPlans : yearlyPlans;
   return (
-    <div className="flex flex-col m-4 mt-32">
+    <div className="flex flex-col m-4 mt-16">
       <p className="text-center">Choose the perfect plan for you</p>
       <h2 className="text-4xl text-center font-semibold m-8 ml-4 mr-4">
         Pricing plan

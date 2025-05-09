@@ -11,7 +11,6 @@ interface PriceCardProps {
 }
 function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
   return (
-    // <div className="bg-tertiary mt-8 m-4 p-4 rounded-md border-2 border-primary">
     <div
       className={`${
         id === "1"

@@ -241,6 +241,52 @@ const testimonials = [
   },
 ];
 
+
+const product = [
+  {
+    id: "01",
+    step: "Create an Account",
+    action:
+      "Sign up for a free account on our platform to start buying and selling plants.",
+  },
+
+  {
+    id: "02",
+    step: "Browse Listings",
+    action:
+      "Explore a wide variety of plants listed by other users or showcase your own for sale.",
+  },
+  {
+    id: "03",
+    step: "Connect with Sellers/Buyers",
+    action:
+      "Communicate with sellers to negotiate prices or connect with buyers interested in your plants.",
+  },
+  {
+    id: "04",
+    step: "Complete Transactions",
+    action:
+      "Finalize your plant purchases or sales securely through our platform for a seamless experience.",
+  },
+];
+
+const contact = [
+  {
+    id: "1",
+    image: "/headquarter.jpg",
+    campus: "Headquarters",
+    address: "123 Plant Street, Green City, USA",
+    link: "",
+  },
+  {
+    id: "2",
+    image: "/support_center.jpg",
+    campus: "Support Center",
+    address:
+      "For any inquiries or support needs, visit our support center at Support Plaza.",
+    link: "",
+  },
+];
 export {
   navLinks,
   comDetails,
@@ -250,4 +296,6 @@ export {
   monthlyPlans,
   yearlyPlans,
   testimonials,
+  product,
+  contact,
 };

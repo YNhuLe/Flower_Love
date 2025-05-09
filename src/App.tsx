@@ -11,6 +11,8 @@ import CardList from "./components/CardList";
 import SigUpCard from "./components/SigUpCard";
 import PriceList from "./components/PriceList";
 import TestimonialsList from "./components/TestimonialsList";
+import ProductList from "./components/ProductList";
+import ContactUs from "./components/ContactUs";
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +26,9 @@ function App() {
       <SigUpCard />
       <CardList type="com" />
       <PriceList />
+      <ProductList />
       <TestimonialsList />
+      <ContactUs />
       <Footer />
     </BrowserRouter>
   );
