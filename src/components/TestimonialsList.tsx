@@ -4,7 +4,7 @@ import { testimonials } from "../constants";
 
 function TestimonialsList() {
   return (
-    <div className="m-4 mt-32 text-center">
+    <div className="m-4 mt-16 text-center">
       <h2 className="text-4xl font-semibold mb-8">Testimonials</h2>
       <p>
         See what our users have to say about their experience with our platform.
