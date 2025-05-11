@@ -22,17 +22,18 @@ function TestimonialsCard({
       transitionSpeed={250}
       tiltMaxAngleX={25}
       tiltMaxAngleY={25}>
-      <div className=" mt-4 p-[.1rem] rounded-md bg-gradient-to-r from-green-700 via-green-500 to-blue-700">
+      <div className=" mt-4 p-[.1rem] rounded-md bg-gradient-to-r from-green-700 via-green-500 to-blue-700 tablet:mt-8">
         <div className="bg-tertiary  p-4 rounded-md">
           <div className="flex flex-row mb-6">
             <img
+              loading="lazy"
               className="w-10 h-10 rounded-full mr-4"
               src={`/Flower_Love/images/${profilePic}`}
               alt="profile-picture"
             />
             <div className="text-left">
-              <h2 className="font-semibold text-xl">{name}</h2>
-              <p>{title}</p>
+              <h2 className="font-semibold text-xl tablet:text-2xl">{name}</h2>
+              <p className="tablet:text-xl">{title}</p>
             </div>
           </div>
           <p className="text-left">{content}</p>

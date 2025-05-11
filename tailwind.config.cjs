@@ -4,6 +4,15 @@ module.exports = {
   mode: "jit",
   theme: {
     extend: {
+      screens: {
+        tablet: "640px",
+        laptop: "1024px",
+        desktop: "1280px",
+        ultra: "1600px",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         primary: "#204807",
         secondary: "#222831",

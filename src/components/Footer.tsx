@@ -8,6 +8,7 @@ function Footer() {
         <div className="flex flex-row items-center gap-4 justify-center mt-16 mb-4">
           {/* <a href="/"> */}
           <img
+            loading="lazy"
             src="/Flower_Love/images/logo.png"
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer"
@@ -16,20 +17,16 @@ function Footer() {
           {/* </a> */}
         </div>
       </a>
-      <div className="flex flex-row text-xs  gap-3">
-        <span className="cursor-pointer hover:text-primary ">About Us</span>
-        <span className="cursor-pointer   hover:text-primary">Contact Us</span>
-        <span className="cursor-pointer  hover:text-primary">FAQs</span>
-        <span className="cursor-pointer  hover:text-primary">
-          Terms and Conditions
-        </span>
-        <span className="cursor-pointer  hover:text-primary">
-          Privacy policy
-        </span>
+      <div className="flex flex-row flex-wrap justify-evenly text-xs gap-3">
+        <p className="cursor-pointer hover:text-primary ">About Us</p>
+        <p className="cursor-pointer   hover:text-primary">Contact Us</p>
+        <p className="cursor-pointer  hover:text-primary">FAQs</p>
+        <p className="cursor-pointer  hover:text-primary">Terms & Conditions</p>
+        <p className="cursor-pointer  hover:text-primary">Privacy policy</p>
       </div>
       <div className="border border-b-0 border-black my-8"></div>
       <p className="text-xs text-center">©{date} Evererdant</p>
-      <div className="text-xs text-center flex flex- mt-4">
+      <div className="text-xs text-center flex flex-wrap justify-evenly mt-4">
         <p className="cursor-pointer  hover:text-primary">Privacy Policy</p>
         <p className="cursor-pointer  hover:text-primary">
           Terms and Conditions

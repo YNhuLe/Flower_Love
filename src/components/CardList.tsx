@@ -16,11 +16,12 @@ function CardList({ type }: CardListProps) {
   return (
     <div className="flex flex-col laptop:flex-row laptop:bg-slate-600">
       <img
+        loading="lazy"
         src={`/Flower_Love/showcase/${topImg}`}
-        className="w-[calc(100%-2rem)] h-[20rem] m-auto mt-[8rem] rounded-xl laptop:w-[25rem] laptop:h-[25rem]"
+        className="w-[calc(100%-2rem)] h-[20rem] m-auto mt-[8rem] rounded-xl tablet:w-[calc(100%-4rem)]"
         alt="top banner"
       />
-      <div className="flex flex-col laptop:flex-col">
+      <div className="flex flex-col laptop:flex-col tablet:ml-8">
         {dataType.map(
           ({
             id,
