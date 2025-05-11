@@ -35,15 +35,17 @@ function NavBar() {
             window.scrollTo(0, 0);
           }}>
           <img
+            loading="lazy"
             src="/Flower_Love/images/logo.png"
             alt="logo2"
-            className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4"
+            className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4 tablet:w-[4rem] tablet:h-[4rem]"
           />
         </Link>
         <img
+          loading="lazy"
           src={toggle ? close : menu}
           alt="menu"
-          className="cursor-pointer mr-4"
+          className="cursor-pointer mr-4 tablet:w-[2.5rem]"
           onClick={() => setToggle(!toggle)}
         />
       </div>
@@ -56,22 +58,22 @@ function NavBar() {
             <li key={nav.id} onClick={() => setActive(nav.title)}>
               <a
                 href={`#${nav.id}`}
-                className="transition-all duration-300 hover:text-primary hover:scale-150">
+                className="transition-all duration-300 hover:text-primary hover:scale-150 tablet:text-2xl">
                 {nav.title}
               </a>
             </li>
           ))}
         </ul>
-        <div className="flex flex-row justify-center items-center h-[8rem] gap-4">
+        <div className="flex flex-row justify-center items-center h-[8rem] gap-4 tablet:gap-6">
           <button
-            className="bg-primary text-white w-[10rem] hover:text-primary hover:bg-white border
+            className="bg-primary text-white p-4 flex flex-row  items-center hover:text-primary hover:bg-white border
           
-          transition-all duration-300 hover:border-primary font-semibold rounded-2xl cursor-pointer h-8">
+          transition-all duration-300 hover:border-primary font-medium rounded-2xl cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
             Search Plants
           </button>
           <button
-            className="bg-white text-primary font-semibold w-[8rem] rounded-2xl border border-primary 
-          transition-all duration-300 hover:bg-primary hover:text-white cursor-pointer h-8">
+            className="bg-white text-primary font-medium p-4 flex flex-row  items-center rounded-2xl border border-primary 
+          transition-all duration-300 hover:bg-primary hover:text-white cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
             Get Started
           </button>
         </div>

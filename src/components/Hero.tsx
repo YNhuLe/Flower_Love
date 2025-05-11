@@ -10,39 +10,36 @@ function Hero() {
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary rounded-full opacity-20 blur-2xl"></div>
       <div className="absolute bottom-0 left-[8rem] w-72 h-72 bg-yellow-600 rounded-full opacity-20 blur-2xl"></div>
       <div className="z-10 max-w-xl mt-[8rem]">
-        <h1 className="text-4xl font-bold text-primary m-4 mb-6 leading-tight">
+        <h1 className="text-4xl font-bold text-primary m-4 mb-6 leading-tight tablet:text-5xl tablet:mt-10">
           Let the environment be green.🌿
         </h1>
 
-        <p className="text-green-800 text-lg m-4 mb-50 mt-10">
+        <p className="text-green-800 text-lg m-4 mb-50 mt-10 tablet:text-2xl">
           Make your days feeling good with beautiful plant.
         </p>
-        {/* <img
+        <img
+          loading="lazy"
           src="/Flower_Love/images/leaf.jpg"
           alt="leaf"
-          className="w-[15rem]  h-[15rem] right-0 absolute top-[15rem]"
-        /> */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 ">
+          className="w-[15rem]  h-[15rem] right-0 absolute top-[20rem] tablet:w-[25rem] tablet:h-[25rem] tablet:top-[20rem]"
+        />
+        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 mt-64 tablet:mt-80 tablet:flex-row tablet:justify-center">
           <button
             className="bg-primary  text-white w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border
           
-          transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10">
+          transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 
+          tablet:rounded-full tablet:w-[15rem]">
             Sign Up
           </button>
           <button
             className="bg-white text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary 
-          transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1">
+          transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full 
+          tablet:w-[15rem]">
             Learn more
             <span className="ml-1">🌻</span>
           </button>
         </div>
       </div>
-
-      {/* <img
-        src="/Flower_Love/images/daisy.jpg"
-        alt="leaf"
-        className="w-full  h-[15rem] right-0 absolute bottom-0"
-      /> */}
     </div>
   );
 }

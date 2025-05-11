@@ -1,5 +1,4 @@
 import React from "react";
-import EntryList from "./components/EntryList";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";

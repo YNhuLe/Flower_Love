@@ -81,7 +81,7 @@ const cardDetails = [
     title: "Wide variety of plants.",
     content:
       "Explore a diverse selection of plants ranging from succulents to exotic flowers.",
-    image: "/plant-25.jpg",
+    image: "/peony.jpg",
   },
 
   {
@@ -89,14 +89,14 @@ const cardDetails = [
     title: "Care tips for every plant.",
     content:
       "Receive detailed care instructions with each purchase to help your plants thrive.",
-    image: "/plant-27.jpg",
+    image: "/indoor.jpg",
   },
   {
     id: "3",
     title: "Locally sourced blooms.",
     content:
       "We partner with nearby growers to provide fresh, seasonal flowers straight from the source.",
-    image: "/plant-20.jpg",
+    image: "/indoor2.jpg",
   },
 ];
 const comDetails = [
@@ -104,21 +104,21 @@ const comDetails = [
     id: "4",
     title: "Wide Selection",
     content: "Explore a diverse range of plants to buy or sell",
-    image: "/plant-21.jpg",
+    image: "/flower.jpg",
   },
   {
     id: "5",
     title: "Easy Buying and Selling",
     content:
       "Effortlessly buy or sell plants with just a few clicks, making the process seamless.",
-    image: "/plant-12.jpg",
+    image: "/orchid.jpg",
   },
   {
     id: "6",
     title: "Community Engagement",
     content:
       "Connect with fellow plant enthusiasts, share tips, and engage in discussions about gardening.",
-    image: "/plant-10.jpg",
+    image: "/flower2.jpg",
   },
 ];
 
