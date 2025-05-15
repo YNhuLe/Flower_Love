@@ -10,7 +10,7 @@ function Hero() {
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary rounded-full opacity-20 blur-2xl"></div>
       <div className="absolute bottom-0 left-[8rem] w-72 h-72 bg-yellow-600 rounded-full opacity-20 blur-2xl"></div>
       <div className="z-10 max-w-xl mt-[8rem]">
-        <h1 className="text-4xl font-bold text-primary m-4 mb-6 leading-tight tablet:text-5xl tablet:mt-10">
+        <h1 className="text-4xl font-bold text-primary m-4 mb-6 leading-tight tablet:text-5xl tablet:mt-10 laptop:mt-20">
           Let the environment be green.🌿
         </h1>
 
@@ -23,7 +23,7 @@ function Hero() {
           alt="leaf"
           className="w-[15rem]  h-[15rem] right-0 absolute top-[20rem] tablet:w-[25rem] tablet:h-[25rem] tablet:top-[20rem]"
         />
-        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 mt-64 tablet:mt-80 tablet:flex-row tablet:justify-center">
+        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 mt-64 tablet:mt-80 tablet:justify-center laptop:mb-20">
           <button
             className="bg-primary  text-white w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border
           

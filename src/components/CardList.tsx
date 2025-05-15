@@ -12,16 +12,22 @@ function CardList({ type }: CardListProps) {
   const clickCard = (newImg: string) => {
     setTopImg(newImg);
   };
-
+  //w-[calc(100%-4rem)] laptop:w-[50rem]
   return (
-    <div className="flex flex-col laptop:flex-row laptop:bg-slate-600">
+    <div className="flex flex-col laptop:flex-row laptop:mx-20 laptop:my-32">
       <img
         loading="lazy"
         src={`/Flower_Love/showcase/${topImg}`}
-        className="w-[calc(100%-2rem)] h-[20rem] m-auto mt-[8rem] rounded-xl tablet:w-[calc(100%-4rem)]"
+        className=" h-[20rem] mx-auto items-center mt-[8rem] rounded-xl tablet:w-[calc(100%-8rem)] tablet:h-[25rem]
+ laptop:h-[25rem]
+w-full laptop:w-1/2
+  "
         alt="top banner"
       />
-      <div className="flex flex-col laptop:flex-col tablet:ml-8">
+      <div
+        className="flex flex-col laptop:flex-col tablet:ml-8 laptop:gap-2
+      w-full laptop:w-1/2
+      ">
         {dataType.map(
           ({
             id,

@@ -221,7 +221,7 @@ const testimonials = [
     profilePic: "/profile-2.jpg",
     title: "Home Gardener",
     content:
-      "This site has completely changed the way I shop for plants. The quality is outstanding and the delivery is always on time.",
+      "This site has completely changed the way I shop for plants. The quality is outstanding and the delivery is always on time. Highly recommended!!",
   },
   {
     id: "3",

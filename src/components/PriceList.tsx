@@ -32,17 +32,18 @@ function PriceList() {
           Yearly
         </button>
       </div>
-
-      {activePlan.map(({ id, title, price, sub_price, features }) => (
-        <PriceCard
-          id={id}
-          key={id}
-          title={title}
-          price={price}
-          sub_price={sub_price}
-          features={features}
-        />
-      ))}
+      <div className="desktop:flex flex-row gap-8">
+        {activePlan.map(({ id, title, price, sub_price, features }) => (
+          <PriceCard
+            id={id}
+            key={id}
+            title={title}
+            price={price}
+            sub_price={sub_price}
+            features={features}
+          />
+        ))}
+      </div>
     </div>
   );
 }

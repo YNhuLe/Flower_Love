@@ -4,8 +4,10 @@ import ContactCard from "./ContactCard";
 function ContactUs() {
   return (
     <div className="m-4 mt-16">
-      <h2 className="text-4xl font-semibold mb-4">Contact Us</h2>
-      <p>Have a question or need assistance? Feel free to reach out to us.</p>
+      <h2 className="text-4xl font-semibold mb-4 tablet:ml-8">Contact Us</h2>
+      <p className="tablet:ml-8">
+        Have a question or need assistance? Feel free to reach out to us.
+      </p>
       {contact.map(({ id, image, campus, address, link }) => (
         <ContactCard
           id={id}
