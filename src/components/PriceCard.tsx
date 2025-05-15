@@ -35,7 +35,7 @@ function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
               alt="check"
               className="tablet:ml-8"
             />
-            <p className="text-sm tablet:text-xl"> {fea}</p>
+            <p className="text-sm tablet:text-xl text-left"> {fea}</p>
           </li>
         ))}
       </ul>
