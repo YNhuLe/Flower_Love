@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="m-4">
       <a href="/">
-        <div className="flex flex-row items-center gap-4 justify-center mt-16 mb-4">
+        <div className="flex flex-row items-center gap-4 justify-center mt-16 mb-4 ultra:mb-12">
           {/* <a href="/"> */}
           <img
             loading="lazy"
