@@ -7,7 +7,7 @@ function SigUpCard() {
         <div
           className="bg-tertiary p-16 pl-10 pr-10 mt-16 rounded-xl transform -rotate-3 duration-300
         hover:bg-dark_green hover:text-white group 
-desktop:flex flex-row 
+        desktop:flex flex-row 
 
         ">
           <div className="desktop:flex flex-col">
@@ -22,10 +22,10 @@ desktop:flex flex-row
           </div>
           <button
             title="Sign Up"
-            className="bg-primary p-4 pb-0 pt-0 text-white  max-sm:w-[15rem] hover:text-primary  hover:bg-white border
+            className="bg-primary p-4 pb-0 pt-0 text-white  max-sm:w-[10rem] hover:text-primary  hover:bg-white border
           
           transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 mt-10
-          tablet:w-48 tablet:mt-14 tablet:h-12
+          tablet:w-48 tablet:mt-14 tablet:h-12 mx-auto
           ">
             Sign Up Now
           </button>

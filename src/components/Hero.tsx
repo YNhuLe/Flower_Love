@@ -6,9 +6,10 @@ function Hero() {
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#f5f1ea] to-[#eaf5ea] relative overflow-hidden">
       <NavBar />
       <div className="absolute top-0 right-0 w-56 h-56 bg-green-200 rounded-full opacity-30 blur-3xl"></div>
-
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary rounded-full opacity-20 blur-2xl"></div>
-      <div className="absolute bottom-0 left-[8rem] w-72 h-72 bg-yellow-600 rounded-full opacity-20 blur-2xl"></div>
+      <div className="absolute right-6 top-4 w-72 h-72 bg-primary rounded-full opacity-20 blur-2xl ultra:w-96 ultra:h-96 ultra:left-[20rem] ultra:blur-3xl"></div>
+      <div className="absolute right-6 top-4 w-72 h-72 bg-yellow-600 rounded-full opacity-20 blur-2xl ultra:w-96 ultra:h-96 ultra:left-[20rem] ultra:blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary rounded-full opacity-20 blur-2xl ultra:w-96 ultra:h-96 ultra:left-[20rem] ultra:blur-3xl"></div>
+      <div className="absolute bottom-0 left-[8rem] w-72 h-72 bg-yellow-600 rounded-full opacity-20 blur-2xl ultra:w-96 ultra:h-96 ultra:left-[20rem] ultra:blur-3xl"></div>
       <div className="z-10 max-w-xl mt-[8rem]">
         <h1 className="text-4xl font-bold text-primary m-4 mb-6 leading-tight tablet:text-5xl tablet:mt-10 laptop:mt-20">
           Let the environment be green.🌿

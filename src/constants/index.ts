@@ -276,15 +276,15 @@ const contact = [
     image: "/headquarter.jpg",
     campus: "Headquarters",
     address: "123 Plant Street, Green City, USA",
-    link: "",
+    link: "https://www.floriangreenhouse.com/index.html?utm_source=bing&utm_medium=cpc&utm_campaign=Florian%20Greenhouse%202024&utm_term=garden%20patio&utm_content=Patio",
   },
   {
     id: "2",
     image: "/support_center.jpg",
     campus: "Support Center",
     address:
-      "For any inquiries or support needs, visit our support center at Support Plaza.",
-    link: "",
+      "For any support needs, visit our support center at Support Plaza.",
+    link: "https://www.floriangreenhouse.com/index.html?utm_source=bing&utm_medium=cpc&utm_campaign=Florian%20Greenhouse%202024&utm_term=garden%20patio&utm_content=Patio",
   },
 ];
 export {

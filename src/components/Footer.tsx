@@ -17,7 +17,7 @@ function Footer() {
           {/* </a> */}
         </div>
       </a>
-      <div className="flex flex-row flex-wrap justify-evenly text-xs gap-3">
+      <div className="flex flex-row flex-wrap justify-evenly text-xs gap-3 laptop:text-[1rem]">
         <p className="cursor-pointer hover:text-primary ">About Us</p>
         <p className="cursor-pointer   hover:text-primary">Contact Us</p>
         <p className="cursor-pointer  hover:text-primary">FAQs</p>
@@ -25,8 +25,10 @@ function Footer() {
         <p className="cursor-pointer  hover:text-primary">Privacy policy</p>
       </div>
       <div className="border border-b-0 border-black my-8"></div>
-      <p className="text-xs text-center">©{date} Evererdant</p>
-      <div className="text-xs text-center flex flex-wrap justify-evenly mt-4">
+      <p className="text-xs text-center  laptop:text-[1rem]">
+        ©{date} Evererdant
+      </p>
+      <div className="text-xs text-center flex flex-wrap justify-evenly mt-4  laptop:text-[1rem]">
         <p className="cursor-pointer  hover:text-primary">Privacy Policy</p>
         <p className="cursor-pointer  hover:text-primary">
           Terms and Conditions
