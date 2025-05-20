@@ -7,4 +7,5 @@ export default defineConfig({
     postcss: "./postcss.config.cjs",
   },
   base: "/Flower_Love/",
+  // base: "/",
 });
