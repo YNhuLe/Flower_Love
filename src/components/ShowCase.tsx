@@ -7,7 +7,7 @@ function ShowCase() {
         {imgList.map((link: string, id: number) => (
           <div
             key={id}
-            className="w-[20rem]  [perspective:1000px] ultra:w-[30rem]">
+            className="w-[10rem] tablet:w-[20rem]  [perspective:1000px] ultra:w-[30rem]">
             <img
               loading="lazy"
               src={`/Flower_Love/showcase/${link}`}
@@ -25,7 +25,7 @@ function ShowCase() {
         {imgList2.map((link2: string, id: number) => (
           <div
             key={id}
-            className="w-[20rem]  [perspective:1000px] ultra:w-[30rem]">
+            className="w-[10rem] tablet:w-[20rem]   [perspective:1000px] ultra:w-[30rem]">
             <img
               loading="lazy"
               src={`/Flower_Love/showcase/${link2}`}
