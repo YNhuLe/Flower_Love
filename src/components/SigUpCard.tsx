@@ -2,8 +2,8 @@ import React from "react";
 
 function SigUpCard() {
   return (
-    <div className="m-4 transform duration-300 hover:scale-105 tablet:m-8">
-      <div className="bg-primary mt-16  transform rotate-2 w-[calc(100%-2rem)] mx-auto rounded-md">
+    <div className="m-4 transform duration-300 hover:scale-105 tablet:m-8 ">
+      <div className="bg-primary mt-16  transform rotate-2 w-[calc(100%-2rem)] mx-auto rounded-md ultra:w-[calc(100%-12rem)]">
         <div
           className="bg-tertiary p-16 pl-10 pr-10 mt-16 rounded-xl transform -rotate-3 duration-300
         hover:bg-dark_green hover:text-white group 
