@@ -6,6 +6,6 @@ export default defineConfig({
   css: {
     postcss: "./postcss.config.cjs",
   },
-  base: "/Flower_Love/",
-  // base: "/",
+  // base: "/Flower_Love/",
+  base: "/",
 });
