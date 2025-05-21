@@ -10,7 +10,7 @@ function ShowCase() {
             className="w-[10rem] tablet:w-[20rem]  [perspective:1000px] ultra:w-[30rem]">
             <img
               loading="lazy"
-              src={`/Flower_Love/showcase/${link}`}
+              src={`/showcase/${link}`}
               alt={link}
               className="w-40 h-40 object-cover rounded-md mt-4 
                transition duration-300 [transform-style:preserve-3d] hover:[transform:translateZ(2.5rem) tablet:hover:[transform:translateZ(8rem)] 
@@ -28,7 +28,7 @@ function ShowCase() {
             className="w-[10rem] tablet:w-[20rem]   [perspective:1000px] ultra:w-[30rem]">
             <img
               loading="lazy"
-              src={`/Flower_Love/showcase/${link2}`}
+              src={`/showcase/${link2}`}
               alt={link2}
               className="w-40 h-40 object-cover  rounded-md mt-4 
                transition duration-300 [transform-style:preserve-3d] hover:[transform:translateZ(2.5rem)]
