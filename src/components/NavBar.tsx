@@ -36,7 +36,7 @@ function NavBar() {
           }}>
           <img
             loading="lazy"
-            src="/Flower_Love/images/logo.png"
+            src="/images/logo.png"
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4 tablet:w-[4rem] tablet:h-[4rem] 
             laptop:mx-8

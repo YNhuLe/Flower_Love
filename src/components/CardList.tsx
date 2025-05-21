@@ -21,7 +21,7 @@ function CardList({ type }: CardListProps) {
     ">
       <img
         loading="lazy"
-        src={`/Flower_Love/showcase/${topImg}`}
+        src={`/showcase/${topImg}`}
         className="h-[20rem] w-[calc(100%-2rem)] mx-auto items-center mt-[8rem] rounded-xl tablet:w-[calc(100%-8rem)] tablet:h-[25rem]
  laptop:h-[25rem] laptop:w-1/2  laptop:mt-0
 

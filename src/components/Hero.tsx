@@ -24,7 +24,7 @@ function Hero() {
 
         <img
           loading="lazy"
-          src="/Flower_Love/images/leaf3.png"
+          src="/images/leaf3.png"
           alt="leaf"
           className="w-[calc(100%-2rem)]  h-[20rem] right-0 absolute top-[23rem] tablet:w-[25rem] tablet:h-[25rem] tablet:top-[20rem] -z-10
         laptop:h-[35rem] laptop:w-[30rem] laptop:top-[23rem]
@@ -33,7 +33,7 @@ function Hero() {
 
         <img
           loading="lazy"
-          src="/Flower_Love/images/leaf4.png"
+          src="/images/leaf4.png"
           alt="leaf"
           className="w-[calc(100%-2rem)]  h-[18rem] left-0 absolute top-[36rem] 
           tablet:w-[25rem] tablet:h-[31rem] tablet:top-[20rem] -z-10

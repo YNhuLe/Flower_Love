@@ -9,7 +9,7 @@ function Footer() {
           {/* <a href="/"> */}
           <img
             loading="lazy"
-            src="/Flower_Love/images/logo.png"
+            src="/images/logo.png"
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer"
           />{" "}

@@ -14,8 +14,8 @@ frontend:
   cache:
     paths:
       - .npm/**/*
-  # Redirect all URLs to /Flower_Love/index.html for SPA routing support
+  # Redirect all URLs to /index.html for SPA routing support
   redirects:
     - source: </*>
-      target: /Flower_Love/index.html
+      target: /index.html
       status: 200
