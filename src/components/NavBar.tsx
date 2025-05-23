@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import menu from "../assets/menu.svg";
-import close from "../assets/close.svg";
+import menu from "/public/assets/menu.svg";
+import close from "/public/assets/close.svg";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 function NavBar() {

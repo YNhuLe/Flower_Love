@@ -1,6 +1,6 @@
 import React from "react";
 
-import check from "../assets/check.svg";
+import check from "/public/assets/check.svg";
 
 interface PriceCardProps {
   id: string;
