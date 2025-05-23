@@ -30,7 +30,7 @@ function TestimonialsCard({
             <img
               loading="lazy"
               className="w-10 h-10 rounded-full mr-4"
-              src={`/images/${profilePic}`}
+              src={`${profilePic}`}
               alt="profile-picture"
             />
             <div className="text-left">
