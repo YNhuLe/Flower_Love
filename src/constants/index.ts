@@ -81,7 +81,7 @@ const cardDetails = [
     title: "Wide variety of plants.",
     content:
       "Explore a diverse selection of plants ranging from succulents to exotic flowers.",
-    image: "/peony.jpg",
+    image: "peony.jpg",
   },
 
   {
@@ -89,7 +89,7 @@ const cardDetails = [
     title: "Care tips for every plant.",
     content:
       "Receive detailed care instructions with each purchase to help your plants thrive.",
-    image: "/indoor.jpg",
+    image: "indoor.jpg",
   },
   {
     id: "3",
@@ -210,7 +210,7 @@ const testimonials = [
   {
     id: "1",
     name: "Sarah Smith",
-    profilePic: "/profile-1.jpg",
+    profilePic: "profile-1.jpg",
     title: "Plant Enthusiast",
     content:
       "I love how easy it is to find unique plants on this platform. The buying process is seamless, and I've added some rare finds to my collection!",
@@ -218,7 +218,7 @@ const testimonials = [
   {
     id: "2",
     name: "James Lee",
-    profilePic: "/profile-2.jpg",
+    profilePic: "profile-2.jpg",
     title: "Home Gardener",
     content:
       "This site has completely changed the way I shop for plants. The quality is outstanding and the delivery is always on time. Highly recommended!!",
@@ -226,7 +226,7 @@ const testimonials = [
   {
     id: "3",
     name: "Aisha Khan",
-    profilePic: "/profile-3.jpg",
+    profilePic: "profile-3.jpg",
     title: "Urban Jungle Creator",
     content:
       "I've created a mini jungle in my apartment thanks to this platform. Great selection, helpful tips, and fantastic customer service!",
@@ -234,7 +234,7 @@ const testimonials = [
   {
     id: "4",
     name: "Daniel Romero",
-    profilePic: "/profile-4.jpg",
+    profilePic: "profile-4.jpg",
     title: "Terrarium Artist",
     content:
       "Finding the right plants for my terrariums used to be a hassle. Now it’s simple and enjoyable thanks to this amazing marketplace!",
@@ -272,14 +272,14 @@ const product = [
 const contact = [
   {
     id: "1",
-    image: "/headquarter.jpg",
+    image: "headquarter.jpg",
     campus: "Headquarters",
     address: "123 Plant Street, Green City, USA",
     link: "https://www.floriangreenhouse.com/index.html?utm_source=bing&utm_medium=cpc&utm_campaign=Florian%20Greenhouse%202024&utm_term=garden%20patio&utm_content=Patio",
   },
   {
     id: "2",
-    image: "/support_center.jpg",
+    image: "support_center.jpg",
     campus: "Support Center",
     address:
       "For any support needs, visit our support center at Support Plaza.",
