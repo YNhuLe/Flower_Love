@@ -12,7 +12,7 @@ function ContactCard({ id, image, campus, address, link }: ContactCardProps) {
     <div className="flex flex-col items-center mt-8">
       <img
         loading="lazy"
-        src={`${image}`}
+        src={`/images/${image}`}
         alt="contact-picture"
         className="h-[12rem] w-full rounded-md my-4
         tablet:w-[35rem] tablet:h-[25rem]
