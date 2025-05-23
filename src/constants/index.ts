@@ -241,7 +241,6 @@ const testimonials = [
   },
 ];
 
-
 const product = [
   {
     id: "01",
