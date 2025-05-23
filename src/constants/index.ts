@@ -104,21 +104,21 @@ const comDetails = [
     id: "4",
     title: "Wide Selection",
     content: "Explore a diverse range of plants to buy or sell",
-    image: "/flower.jpg",
+    image: "flower.jpg",
   },
   {
     id: "5",
     title: "Easy Buying and Selling",
     content:
       "Effortlessly buy or sell plants with just a few clicks, making the process seamless.",
-    image: "/orchid.jpg",
+    image: "orchid.jpg",
   },
   {
     id: "6",
     title: "Community Engagement",
     content:
       "Connect with fellow plant enthusiasts, share tips, and engage in discussions about gardening.",
-    image: "/flower2.jpg",
+    image: "flower2.jpg",
   },
 ];
 
