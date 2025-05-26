@@ -96,7 +96,7 @@ const cardDetails = [
     title: "Locally sourced blooms.",
     content:
       "We partner with nearby growers to provide fresh, seasonal flowers straight from the source.",
-    image: "/indoor2.jpg",
+    image: "indoor2.jpg",
   },
 ];
 const comDetails = [
