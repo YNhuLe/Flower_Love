@@ -2,7 +2,6 @@ import React from "react";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
-import { BrowserRouter } from "react-router-dom";
 import ShowCase from "./components/ShowCase";
 import "./style.css";
 import FlashCard from "./components/FlashCard";
@@ -12,24 +11,20 @@ import PriceList from "./components/PriceList";
 import TestimonialsList from "./components/TestimonialsList";
 import ProductList from "./components/ProductList";
 import ContactUs from "./components/ContactUs";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import ProductPage from "./pages/ProductPage";
 function App() {
   return (
-    <BrowserRouter>
-      {/* <NavBar /> */}
-      <Hero />
-      {/* <EntryList /> */}
-      <ShowCase />
-
-      {/* <FlashCard /> */}
-      <CardList type="card" />
-      <SigUpCard />
-      <CardList type="com" />
-      <PriceList />
-      <ProductList />
-      <TestimonialsList />
-      <ContactUs />
-      <Footer />
-    </BrowserRouter>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductPage />} />
+        {/* <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<SignInPage />} /> */}
+        {/* <Route path="/products/:id" element={<ProductDetailPage />} />   */}
+      </Routes>
+    </Router>
   );
 }
 export default App;

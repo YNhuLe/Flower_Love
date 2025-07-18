@@ -12,7 +12,6 @@ function CardList({ type }: CardListProps) {
   const clickCard = (newImg: string) => {
     setTopImg(newImg);
   };
-  //w-[calc(100%-4rem)] laptop:w-[50rem]
   return (
     <div
       className="flex flex-col laptop:flex laptop:flex-row laptop:mx-20 laptop:my-32 laptop:items-center

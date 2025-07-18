@@ -286,6 +286,90 @@ const contact = [
     link: "https://www.floriangreenhouse.com/index.html?utm_source=bing&utm_medium=cpc&utm_campaign=Florian%20Greenhouse%202024&utm_term=garden%20patio&utm_content=Patio",
   },
 ];
+
+const dis_plants = [
+  {
+    id: "1",
+    plantName: "Succulents",
+    image: "profile-1.jpg",
+    details: "Low-maintenance plant perfect for dry climates and indoor decor.",
+    originalPrice: 18.99,
+    discountedPrice: 12.99,
+  },
+  {
+    id: "2",
+    plantName: "Lavender",
+    image: "profile-1.jpg",
+    details: "Fragrant herb known for its calming scent and purple blooms.",
+    originalPrice: 22.5,
+    discountedPrice: 16.5,
+  },
+  {
+    id: "3",
+    plantName: "Indoor Plants",
+    image: "profile-1.jpg",
+    details: "A curated mix of air-purifying houseplants for indoor spaces.",
+    originalPrice: 35.0,
+    discountedPrice: 26.99,
+  },
+  {
+    id: "4",
+    plantName: "House Plant",
+    image: "profile-1.jpg",
+    details: "Classic green foliage for any room in your home.",
+    originalPrice: 19.99,
+    discountedPrice: 14.99,
+  },
+  {
+    id: "5",
+    plantName: "Tropical",
+    image: "profile-1.jpg",
+    details: "Bright, exotic leaves that thrive in warm, humid areas.",
+    originalPrice: 27.99,
+    discountedPrice: 20.0,
+  },
+  {
+    id: "6",
+    plantName: "Cactus",
+    image: "profile-1.jpg",
+    details: "Minimal care plant that stores water and loves sunlight.",
+    originalPrice: 14.5,
+    discountedPrice: 9.5,
+  },
+  {
+    id: "7",
+    plantName: "Air Purifying",
+    image: "profile-1.jpg",
+    details: "Removes toxins and freshens your air naturally.",
+    originalPrice: 25.0,
+    discountedPrice: 18.5,
+  },
+  {
+    id: "8",
+    plantName: "Hanging Plants",
+    image: "profile-1.jpg",
+    details: "Great for vertical decor, adds green elegance to ceilings.",
+    originalPrice: 30.0,
+    discountedPrice: 21.0,
+  },
+  {
+    id: "9",
+    plantName: "Low Light",
+    image: "profile-1.jpg",
+    details: "Thrives in shady corners and indoor nooks with minimal sunlight.",
+    originalPrice: 23.5,
+    discountedPrice: 17.0,
+  },
+  {
+    id: "10",
+    plantName: "Flowering Plants",
+    image: "profile-1.jpg",
+    details: "Beautiful blooms to brighten your home all year round.",
+    originalPrice: 32.0,
+    discountedPrice: 24.0,
+  },
+];
+
 export {
   navLinks,
   comDetails,
@@ -297,4 +381,5 @@ export {
   testimonials,
   product,
   contact,
+  dis_plants,
 };
