@@ -299,7 +299,7 @@ const dis_plants = [
   {
     id: "2",
     plantName: "Lavender",
-    image: "profile-1.jpg",
+    image: "leaf3.png",
     details: "Fragrant herb known for its calming scent and purple blooms.",
     originalPrice: 22.5,
     discountedPrice: 16.5,
@@ -307,7 +307,7 @@ const dis_plants = [
   {
     id: "3",
     plantName: "Indoor Plants",
-    image: "profile-1.jpg",
+    image: "leaf4.png",
     details: "A curated mix of air-purifying houseplants for indoor spaces.",
     originalPrice: 35.0,
     discountedPrice: 26.99,

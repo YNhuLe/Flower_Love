@@ -15,9 +15,9 @@ function BestProductDetails({
   discountedPrice,
 }: BestProductProp) {
   return (
-    <div className="best__pro">
-      <h2 className="best__pro">{plantName}</h2>
-      <img src={`/images/${image}`} alt="best-pro-image" loading="lazy" />
+    <div className="w-40 h-50 mt-16 mb-8 p-4 border rounded-lg shadow-lg">
+      <h2 className="text-center mb-4">{plantName}</h2>
+      <img className="h-32 w-32" src={`/images/${image}`} alt="best-pro-image" loading="lazy" />
     </div>
   );
 }

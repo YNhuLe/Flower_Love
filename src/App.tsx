@@ -14,6 +14,10 @@ import ContactUs from "./components/ContactUs";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
+import BestProduct from "./components/BestProduct";
+import BestProductDetails from "./components/BestProductDetails";
+// import ProductDetailPage from "./pages/ProductDetailPage";
+
 function App() {
   return (
     <Router>
@@ -22,7 +26,8 @@ function App() {
         <Route path="/products" element={<ProductPage />} />
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
-        {/* <Route path="/products/:id" element={<ProductDetailPage />} />   */}
+        {/* <Route path="/products/:id" element={<ProductDetailPage />} /> */}
+        <Route path="/products" element={<BestProduct />} />
       </Routes>
     </Router>
   );
