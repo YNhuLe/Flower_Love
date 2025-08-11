@@ -362,7 +362,7 @@ const dis_plants = [
   },
   {
     id: "10",
-    plantName: "Flowering Plants",
+    plantName: "Flower Plants",
     image: "profile-1.jpg",
     details: "Beautiful blooms to brighten your home all year round.",
     originalPrice: 32.0,
