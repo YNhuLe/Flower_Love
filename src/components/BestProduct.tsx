@@ -8,6 +8,7 @@ import { Navigation } from "swiper/modules";
 function BestProduct() {
   return (
     <div className="w-full ">
+      <h2 className="ml-4">Best Product</h2>
       <Swiper
         modules={[Navigation]}
         spaceBetween={10}
