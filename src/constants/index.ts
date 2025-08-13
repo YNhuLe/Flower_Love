@@ -291,7 +291,7 @@ const dis_plants = [
   {
     id: "1",
     plantName: "Succulents",
-    image: "profile-1.jpg",
+    image: "succulent.png",
     details: "Low-maintenance plant perfect for dry climates and indoor decor.",
     originalPrice: 18.99,
     discountedPrice: 12.99,
