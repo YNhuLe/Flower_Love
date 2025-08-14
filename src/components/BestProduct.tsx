@@ -7,10 +7,12 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 function BestProduct() {
   return (
-    <div className="w-full ">
+    <div className="w-full">
+
+      <h2 className="m-4 mb-0">Best Products</h2>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={10}
+        // spaceBetween={15}
         slidesPerView={2}
         navigation
         loop

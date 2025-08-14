@@ -21,6 +21,7 @@ module.exports = {
         tertiary: "#E1E8CA",
         dark_green: "#1E2203",
         black: "#131717",
+        red: "#E43636",
       },
       keyframes: {
         scrollLeft: {
