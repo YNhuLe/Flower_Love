@@ -9,7 +9,7 @@ function BestProduct() {
   return (
     <div className="w-full">
 
-      <h2 className="m-4 mb-0">Best Products</h2>
+      <h2 className="m-4 mb-0 text-2xl">Best Products</h2>
       <Swiper
         modules={[Navigation]}
         // spaceBetween={15}

@@ -20,7 +20,7 @@ function BestProductDetails({
       <img className="h-32 w-28 m-auto" src={`/images/${image}`} alt="best-pro-image" loading="lazy" />
             <h2 className="text-center mt-4 text-xs">{plantName}</h2>
             <div className="flex flex-row justify-center gap-2">
-              <p className="text-center text-xs text-primary">${originalPrice}</p>
+              <p className="text-center text-xs text-primary font-semibold">${originalPrice}</p>
               <p className="text-center text-xs line-through ">${discountedPrice}</p>
               
             </div>
