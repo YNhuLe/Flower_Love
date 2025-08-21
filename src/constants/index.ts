@@ -291,7 +291,7 @@ const dis_plants = [
   {
     id: "1",
     plantName: "Succulents",
-    image: "profile-1.jpg",
+    image: "succulent.png",
     details: "Low-maintenance plant perfect for dry climates and indoor decor.",
     originalPrice: 18.99,
     discountedPrice: 12.99,
@@ -307,7 +307,7 @@ const dis_plants = [
   {
     id: "3",
     plantName: "Indoor Plants",
-    image: "leaf4.png",
+    image: "peace_lili.png",
     details: "A curated mix of air-purifying houseplants for indoor spaces.",
     originalPrice: 35.0,
     discountedPrice: 26.99,
@@ -315,7 +315,7 @@ const dis_plants = [
   {
     id: "4",
     plantName: "House Plant",
-    image: "profile-1.jpg",
+    image: "monstera.png",
     details: "Classic green foliage for any room in your home.",
     originalPrice: 19.99,
     discountedPrice: 14.99,
@@ -323,7 +323,7 @@ const dis_plants = [
   {
     id: "5",
     plantName: "Tropical",
-    image: "profile-1.jpg",
+    image: "hang.png",
     details: "Bright, exotic leaves that thrive in warm, humid areas.",
     originalPrice: 27.99,
     discountedPrice: 20.0,
@@ -331,7 +331,7 @@ const dis_plants = [
   {
     id: "6",
     plantName: "Cactus",
-    image: "profile-1.jpg",
+    image: "cactus.png",
     details: "Minimal care plant that stores water and loves sunlight.",
     originalPrice: 14.5,
     discountedPrice: 9.5,
