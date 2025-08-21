@@ -11,17 +11,18 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.5.3"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-parallax-tilt": "^1.7.295",
+    "react-router-dom": "^7.5.3",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@types/cors": "^2.8.19",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
@@ -30,7 +31,7 @@
     "gh-pages": "^6.2.0",
     "globals": "^15.11.0",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "vite": "^5.4.10"
   }
