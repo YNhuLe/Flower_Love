@@ -291,7 +291,7 @@ const dis_plants = [
   {
     id: "1",
     plantName: "Succulents",
-    image: "succulent.png",
+    image: "succulents.png",
     details: "Low-maintenance plant perfect for dry climates and indoor decor.",
     originalPrice: 18.99,
     discountedPrice: 12.99,
@@ -299,7 +299,7 @@ const dis_plants = [
   {
     id: "2",
     plantName: "Lavender",
-    image: "leaf3.png",
+    image: "lavender.png",
     details: "Fragrant herb known for its calming scent and purple blooms.",
     originalPrice: 22.5,
     discountedPrice: 16.5,
@@ -323,7 +323,7 @@ const dis_plants = [
   {
     id: "5",
     plantName: "Tropical",
-    image: "hang.png",
+    image: "tropical.png",
     details: "Bright, exotic leaves that thrive in warm, humid areas.",
     originalPrice: 27.99,
     discountedPrice: 20.0,
@@ -339,7 +339,7 @@ const dis_plants = [
   {
     id: "7",
     plantName: "Air Purifying",
-    image: "profile-1.jpg",
+    image: "photho.png",
     details: "Removes toxins and freshens your air naturally.",
     originalPrice: 25.0,
     discountedPrice: 18.5,
@@ -347,7 +347,7 @@ const dis_plants = [
   {
     id: "8",
     plantName: "Hanging Plants",
-    image: "profile-1.jpg",
+    image: "hang.png",
     details: "Great for vertical decor, adds green elegance to ceilings.",
     originalPrice: 30.0,
     discountedPrice: 21.0,
@@ -355,7 +355,7 @@ const dis_plants = [
   {
     id: "9",
     plantName: "Low Light",
-    image: "profile-1.jpg",
+    image: "mostera.png",
     details: "Thrives in shady corners and indoor nooks with minimal sunlight.",
     originalPrice: 23.5,
     discountedPrice: 17.0,
@@ -363,7 +363,7 @@ const dis_plants = [
   {
     id: "10",
     plantName: "Flower Plants",
-    image: "profile-1.jpg",
+    image: "flower_plants.png",
     details: "Beautiful blooms to brighten your home all year round.",
     originalPrice: 32.0,
     discountedPrice: 24.0,
