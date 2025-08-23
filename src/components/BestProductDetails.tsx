@@ -15,7 +15,7 @@ function BestProductDetails({
   discountedPrice,
 }: BestProductProp) {
   return (
-    <div className="max-w-fit h-50 mt-8 mb-8 p-4 border border-green-900 ml-2 rounded-lg shadow-lg">
+    <div className="max-w-fit h-50 mt-8 mb-8 p-4 border ml-2 mr-2 border-green-900 rounded-lg shadow-lg">
 
       <img className="h-32 w-28 m-auto" src={`/images/${image}`} alt="best-pro-image" loading="lazy" />
             <h2 className="text-center mt-4 text-xs">{plantName}</h2>
