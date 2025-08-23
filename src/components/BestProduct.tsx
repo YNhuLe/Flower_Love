@@ -12,10 +12,10 @@ function BestProduct() {
       <h2 className="m-4 mb-0 text-2xl">Best Products</h2>
       <Swiper
         modules={[Navigation]}
-        // spaceBetween={15}
+        spaceBetween={5}
         slidesPerView={2}
         navigation
-        loop
+        loop={false}
       >
         {dis_plants
           .slice(0, 10)
