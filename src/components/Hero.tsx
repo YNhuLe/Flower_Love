@@ -2,6 +2,8 @@ import React from "react";
 import NavBar from "./NavBar";
 
 function Hero() {
+      const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#f5f1ea] to-[#eaf5ea] relative overflow-hidden">
       <NavBar />
@@ -24,7 +26,7 @@ function Hero() {
 
         <img
           loading="lazy"
-          src="/images/leaf3.png"
+          src={`${cloud_url}/v1756387863/leaf3_ef38ac.png`}
           alt="leaf"
           className="w-[calc(100%-2rem)]  h-[20rem] right-0 absolute top-[23rem] tablet:w-[25rem] tablet:h-[25rem] tablet:top-[20rem] -z-10
         laptop:h-[35rem] laptop:w-[30rem] laptop:top-[23rem]
@@ -33,7 +35,7 @@ function Hero() {
 
         <img
           loading="lazy"
-          src="/images/leaf4.png"
+          src={`${cloud_url}/v1756387864/leaf4_xfagl8.png`}
           alt="leaf"
           className="w-[calc(100%-2rem)]  h-[18rem] left-0 absolute top-[36rem] 
           tablet:w-[25rem] tablet:h-[31rem] tablet:top-[20rem] -z-10

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import menu from "/public/assets/menu.svg";
-import close from "/public/assets/close.svg";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 function NavBar() {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +35,7 @@ function NavBar() {
           }}>
           <img
             loading="lazy"
-            src="/images/logo.png"
+            src={`${cloud_url}/v1756387918/logo_mqmxll.png`}
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4 tablet:w-[4rem] tablet:h-[4rem] 
             laptop:mx-8
@@ -45,9 +44,10 @@ function NavBar() {
         </Link>
         <img
           loading="lazy"
-          src={toggle ? close : menu}
+
+          src={`${toggle ? `${cloud_url}/v1756387918/close_nhwhzv.svg` : `${cloud_url}/v1756387919/menu_ir6xyk.svg`}`}
           alt="menu"
-          className="laptop:hidden cursor-pointer mr-4 tablet:w-[2.5rem]"
+          className="laptop:hidden cursor-pointer mr-4 tablet:w-[2.5rem] mobile:w-[.5rem]"
           onClick={() => setToggle(!toggle)}
         />
         <ul className="list-none hidden laptop:flex flex-row gap-4">
