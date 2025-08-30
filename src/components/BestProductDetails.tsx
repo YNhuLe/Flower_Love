@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import { BestProductProp } from "../types/types";
 function BestProductDetails({products}: {products: BestProductProp})
 
 {
   console.log(products);
+  if(!products){
+    return <p>Loading product details...</p>
+  }
   return (
     <div className="max-w-fit h-50 mt-8 mb-8 p-4 border ml-2 mr-2 border-green-900 rounded-lg shadow-lg">
 
@@ -15,7 +17,7 @@ function BestProductDetails({products}: {products: BestProductProp})
               <p className="text-center text-xs line-through ">${products.discounted_price}</p>
               
             </div>
-        
+        {/* dvdr5bwc7 */}
     </div>
   );
 }

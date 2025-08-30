@@ -11,6 +11,7 @@ function ContactUs() {
       <div className="ultra:flex flex-row gap-4 justify-center">
         {contact.map(({ id, image, campus, address, link }) => (
           <ContactCard
+          key={id}
             id={id}
             image={image}
             campus={campus}

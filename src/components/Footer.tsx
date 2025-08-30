@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 const date = new Date().getFullYear();
 function Footer() {
+    const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,w_800,h_600,f_auto,q_auto";
+
   return (
     <footer className="m-4">
       <a href="/">
@@ -9,7 +11,7 @@ function Footer() {
           {/* <a href="/"> */}
           <img
             loading="lazy"
-            src="/images/logo.png"
+            src={`${cloud_url}/v1756387918/logo_mqmxll.png`}
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer"
           />{" "}

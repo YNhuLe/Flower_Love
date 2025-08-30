@@ -8,11 +8,13 @@ interface ContactCardProps {
   link: string;
 }
 function ContactCard({ id, image, campus, address, link }: ContactCardProps) {
+
+  const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,w_800,h_600,f_auto,q_auto";
   return (
     <div className="flex flex-col items-center mt-8">
       <img
         loading="lazy"
-        src={`/images/${image}`}
+        src={`${cloud_url}/v1756387871/headquarter_kwvneo.jpg`}
         alt="contact-picture"
         className="h-[12rem] w-full rounded-md my-4
         tablet:w-[35rem] tablet:h-[25rem]
