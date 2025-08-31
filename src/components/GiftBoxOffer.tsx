@@ -5,14 +5,14 @@ function GiftBoxOffer(){
     return (
         
 
-        <section className="bg-green-300">
-            <h2>Gift Box Offer</h2>
+        <section className="bg-green-300 m-4">
+            <h2 className="text-sm bg-red">Gift Box Offer</h2>
 <div>
-    <h2>Best Plants Gift Box options for every plant lover.</h2>
-    <p> Make your days feeling good with beautiful plant.</p>
+    <h2 className="text-lg">Best Plants Gift Box collections.</h2>
+    <p> Make your days feeling good with beautiful plant. Make your days feeling good with beautiful plant.</p>
 </div>
 <div >
-    <img src="" alt="" />
+    <img src="/images/" alt="" />
 </div>
         </section>
        

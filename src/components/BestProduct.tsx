@@ -18,7 +18,7 @@ function BestProduct() {
       try{
 const response = await axios.get(`${baseUrl}/allplants`);
 setProducts(response.data);
-console.log(response.data);
+console.log("response", response.data);
       }catch(error: any){
         setError(error.message || "Failed to load products!")
       }finally{
@@ -27,6 +27,7 @@ console.log(response.data);
     }
     fetchProducts()
   }, []);
+  console.log("Prodcuts" ,products);
   
   return (
     <div className="w-full">

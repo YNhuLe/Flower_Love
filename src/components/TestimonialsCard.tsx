@@ -14,6 +14,8 @@ function TestimonialsCard({
   title,
   content,
 }: TestimonialsProps) {
+        const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+
   return (
     <Tilt
       glareEnable={true}
@@ -31,6 +33,7 @@ function TestimonialsCard({
               loading="lazy"
               className="w-10 h-10 rounded-full mr-4"
               src={`/images/${profilePic}`}
+              // src={`${cloud_url}/`}
               alt="profile-picture"
             />
             <div className="text-left">
