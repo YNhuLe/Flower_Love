@@ -1,7 +1,5 @@
 import React from "react";
 
-import check from "/public/assets/check.svg";
-
 interface PriceCardProps {
   id: string;
   title: string;
@@ -10,6 +8,8 @@ interface PriceCardProps {
   features: string[];
 }
 function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
+      const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,h_24,w_24,f_auto,q_auto";
+
   return (
     <div
       className={`${
@@ -31,7 +31,7 @@ function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
           <li key={id} className="flex flex-row gap-4 mt-4">
             <img
               loading="lazy"
-              src={check}
+            src={`${cloud_url}/v1756387917/check_e4icbm.svg`}
               alt="check"
               className="tablet:ml-8"
             />
