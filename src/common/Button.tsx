@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 interface ButtonProps {
-  btnType?: "add" | "submit" | "cancel";
+  btnType?: "add" | "submit" | "cancel" | "explore";
   url?: string
   onSubmit?: () => void;
   onClick?: () => void;
@@ -11,13 +11,13 @@ const styleMap: Record<string, string> ={
 
   add: "bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary text-tertiary",
   cancel: "bg-purple-500 hover:bg-blue-500 text-tertiary",
-  submit: "bg-pink-500 hover:bg-blue-500 text-tertiary"
-
+  submit: "bg-pink-500 hover:bg-blue-500 text-tertiary",
+explore: " border border-cartRed hover:bg-cartRed hover:text-third text-cartRed mt-5 mb-8"
 
 }
 
 const labelMap: Record<string, string> ={
-add: "Add", cancel: "Cancel", submit :"Submit"
+add: "Add", cancel: "Cancel", submit :"Submit", explore: "Explore The Shop"
 }
 
 function Button({ btnType="add", url, onSubmit, onClick }: ButtonProps) {
