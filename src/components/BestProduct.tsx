@@ -45,7 +45,7 @@ console.log("response", response.data);
         {products.map((product) => (
           <SwiperSlide >
             <BestProductDetails key={product.id}
-           products =   {product}
+           products = {product}
             />
           </SwiperSlide>
         ))}
