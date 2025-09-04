@@ -1,8 +1,8 @@
 import React from "react";
 import NavBar from "./NavBar";
-
+import Button from "../common/Button";
 function Hero() {
-      const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+  const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-br from-[#f5f1ea] to-[#eaf5ea] relative overflow-hidden">
@@ -42,21 +42,9 @@ function Hero() {
            laptop:h-[35rem] laptop:w-[30rem] laptop:top-[23rem]
                      ultra:h-[45rem] ultra:w-[40rem] ultra:top-[12rem] "
         />
-        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 mt-40 tablet:mt-80 tablet:justify-center laptop:mb-20">
-          <button
-            className="bg-primary  text-white w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border
-          
-          transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 
-          tablet:rounded-full tablet:w-[15rem]">
-            Sign Up
-          </button>
-          <button
-            className="bg-white text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary 
-          transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full 
-          tablet:w-[15rem]">
-            Learn more
-            <span className="ml-1">🌻</span>
-          </button>
+        <div className="flex flex-col sm:flex-row items-center gap-3 m-4 mt-40 tablet:mt-80 tablet:justify-center laptop:mb-30">
+          <Button btnType="signup" />
+          <Button btnType="learn_more" />
         </div>
       </div>
     </div>
