@@ -8,7 +8,7 @@ interface BestProductProp {
 }
 interface GiftBoxProps{
     id: string;
-    titile: string;
+    title: string;
     description: string;
     img_url: string;
     discount: number;

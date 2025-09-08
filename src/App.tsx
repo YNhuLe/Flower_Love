@@ -14,6 +14,7 @@ import ContactUs from "./components/ContactUs";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
+import GiftBoxOffer from "./components/GiftBoxOffer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/giftbox/:id" element={<GiftBoxOffer />} />
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>
