@@ -14,12 +14,13 @@ interface GiftBoxProps{
     discount: number;
     price: number;
     ori_price: number;
+    isFirst?:boolean
 }
 interface GiftboxItemsProps{
      id: number;
      giftbox_id: number;
      item_name: string;
-     quantity: number;
+     quantity: number;  
 
 }
 

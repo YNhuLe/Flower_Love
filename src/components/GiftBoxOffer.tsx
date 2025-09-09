@@ -53,52 +53,20 @@ function GiftBoxOffer() {
                     </div>
                 </div>
 
+                
+
+                
 
                 {
-                    giftboxes.map((giftbox) => (
-                        <GiftBoxCard key={giftbox.id} {...giftbox} />
+                    giftboxes.map((giftbox, index) => (
+                        <GiftBoxCard key={giftbox.id} {...giftbox} 
+                        isFirst={index===0}
+                        />
                     ))
                 }
 
-
-
-
-                {/* <div className="relative min-h-[150px] rounded-lg overflow-hidden shadow-md bg-cover bg-center"
-                    style={{ backgroundImage: `url(${cloud_url}/v1756927884/gift-box2_w3njnj.jpg)` }}>
-                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">32% OFF</div>
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white text-center p-4">
-                        <h3 className="text-lg font-bold">Big Saving</h3>
-                        <p className="text-sm">Summer Deal</p>
-
-                        <Button btnType="shop_now" />
-                    </div>
-                </div>
-
-
-                <div className="relative  min-h-[150px] rounded-lg overflow-hidden shadow-md bg-cover bg-center"
-                    style={{ backgroundImage: `url(${cloud_url}/v1756927883/gb5_zit5ic.webp)` }}>
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white text-center p-4">
-                        <h3 className="text-md font-bold">Customize</h3>
-                        <p className="text-xs">Build Your Own</p>
-
-                        <Button btnType="customize" />
-                    </div>
-                </div> */}
-
             </div>
-
-
-
-
-
-
-
-
-
-
         </section>
-
-
     )
 }
 export default GiftBoxOffer;
