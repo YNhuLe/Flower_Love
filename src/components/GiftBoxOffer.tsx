@@ -42,22 +42,11 @@ function GiftBoxOffer() {
             </div>
 
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2  grid-flow-row-dense">
-                <div className="relative  min-h-[150px] rounded-lg overflow-hidden shadow-md bg-cover bg-center row-span-2"
-                    style={{ backgroundImage: `url(${cloud_url}/v1756927884/gift-box_c1mcms.jpg)` }}>
-                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">26% OFF</div>
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white text-center p-4">
-                        <h3 className="text-lg font-bold">Best Selling</h3>
-                        <p className="text-sm">Modern Geometric Design</p>
-                        <Button btnType="shop_now" />
-                    </div>
-                </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2  grid-flow-row-dense">               
 
                 
 
-                
-
-                {
+             {
                     giftboxes.map((giftbox, index) => (
                         <GiftBoxCard key={giftbox.id} {...giftbox} 
                         isFirst={index===0}
