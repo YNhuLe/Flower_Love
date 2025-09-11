@@ -42,14 +42,14 @@ function GiftBoxOffer() {
             </div>
 
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2  grid-flow-row-dense">               
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2  grid-flow-row-dense bg-white blur-xs">               
 
                 
 
              {
                     giftboxes.map((giftbox, index) => (
-                        <GiftBoxCard key={giftbox.id} {...giftbox} 
-                        isFirst={index===0}
+                        <GiftBoxCard key={index} {...giftbox} 
+                        isFirst={index===0} customize={index % 2 === 1}
                         />
                     ))
                 }

@@ -4,26 +4,30 @@ import { GiftboxWithItemsProps } from "../types/types";
 
 function GiftBoxCard(giftbox: GiftboxWithItemsProps) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-    const baseClass = 'relative  min-h-[12rem] rounded-lg overflow-hidden shadow-md bg-cover bg-center  flex flex-col';
+    const baseClass = 'relative  min-h-[12rem] rounded-lg overflow-hidden shadow-md flex flex-col';
     const firstClass = giftbox.isFirst ? 'row-span-2' : '';
     return (
 
         <div className={`${baseClass} ${firstClass}`}>
-            <img src={`${cloud_url}/${giftbox.img_url}`} alt="giftboxes"
-                className="w-full h-full object-cover" />
+            <img  src={`${cloud_url}/${giftbox.img_url}`} alt="giftboxes"
+                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" />
             {/* <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">{giftbox.discount}% OFF</div> */}
-            <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-start items-start text-white text-left p-4">
-                <h3 className="text-sm font-bold">Best Selling</h3>
+            <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-start items-start text-white text-left p-4
+pointer-events-none
+            ">
+                <h3 className="text-xs font-semibold">Best Selling</h3>
                 <p className="text-sm">{giftbox.discount}% OFF</p>
                 {/* <p className="text-sm">${giftbox.price}</p>
                 <p className="text-sm">${giftbox.ori_price}</p> */}
 
-    <Button btnType="shop_now" />
+        
             </div>
-    
-            {/* <Button btnType="shop_now"/> */}
+             <Button btnType={giftbox.customize ? "customize" : "shop_now"} />
         </div>
     )
 }
-
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387865/photho_t32jjo.png
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387867/monstera_avcvdh.webp
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387862/mostera_q23itg.webp
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387863/hangging_jgfvlx.png
 export default GiftBoxCard;
