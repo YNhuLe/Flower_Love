@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
-
+import { FaShoppingCart } from "react-icons/fa";
+import { ReactNode } from "react";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize";
   url?: string
@@ -21,7 +23,7 @@ const styleMap: Record<string, string> = {
 }
 
 const labelMap: Record<string, string> = {
-  add: "Add",
+  add: "Add to Cart",
   cancel: "Cancel",
   submit: "Submit",
   explore: "Explore The Shop",
@@ -31,6 +33,9 @@ const labelMap: Record<string, string> = {
   customize: "Build Now"
 }
 
+const iconMap: Record<string,ReactNode>={
+  add:<ShoppingCartIcon className="w-5 h-5 text-white-700 hover:text-green-500 transition" />
+}
 const urlMap : Record<string, string> ={
   add:"/add-item",
   learn_more:"/products", 
@@ -54,10 +59,16 @@ function Button({ btnType = "add", url, onSubmit, onClick }: ButtonProps) {
     }
   }
   return (
-    <div className="flex flex-row justify-center">
-      <button className={`p-1 rounded-2xl px-4 mx-0 my-auto cursor-pointer ${btnClasses}`}
+    <div className="">
+      <button className={`p-1 rounded-2xl px-4 mx-0 my-auto cursor-pointer flex flex-row justify-center items-center gap-3 ${btnClasses}`}
       onClick={handleClick}
-      >{label}</button>
+      >
+      
+      {iconMap[btnType] && iconMap[btnType]}
+        <span>{label}</span>
+   
+       </button> 
+
     </div>
   );
 }
