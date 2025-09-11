@@ -26,8 +26,4 @@ pointer-events-none
         </div>
     )
 }
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387865/photho_t32jjo.png
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387867/monstera_avcvdh.webp
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387862/mostera_q23itg.webp
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387863/hangging_jgfvlx.png
 export default GiftBoxCard;
