@@ -5,6 +5,7 @@ interface BestProductProp {
   details: string;
   original_price: number;
   discounted_price: number;
+  rating: number
 }
 interface GiftBoxProps{
     id: string;
@@ -14,7 +15,8 @@ interface GiftBoxProps{
     discount: number;
     price: number;
     ori_price: number;
-    isFirst?:boolean
+    isFirst?:boolean;
+    customize?:boolean;
 }
 interface GiftboxItemsProps{
      id: number;
