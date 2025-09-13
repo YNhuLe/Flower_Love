@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BestProductDetails from "./BestProductDetails";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,22 +13,22 @@ function BestProduct() {
   const [products, setProducts] = useState<BestProductProp[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() =>{
-    const fetchProducts = async () =>{
-      try{
-const response = await axios.get(`${baseUrl}/allplants`);
-setProducts(response.data);
-console.log("response", response.data);
-      }catch(error: any){
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/allplants`);
+        setProducts(response.data);
+        console.log("response", response.data);
+      } catch (error: any) {
         setError(error.message || "Failed to load products!")
-      }finally{
+      } finally {
         setLoading(false);
       }
     }
     fetchProducts()
   }, []);
-  console.log("Prodcuts" ,products);
-  
+  console.log("Prodcuts", products);
+
   return (
     <div className="w-full mt-[7rem]">
 
@@ -46,7 +46,7 @@ console.log("response", response.data);
         {products.map((product) => (
           <SwiperSlide >
             <BestProductDetails key={product.id}
-           products = {product}
+              products={product}
             />
           </SwiperSlide>
         ))}
