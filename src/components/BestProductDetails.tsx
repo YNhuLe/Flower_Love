@@ -3,7 +3,7 @@ import { BestProductProp } from "../types/types";
 import Button from "../common/Button";
 import { FaStar, FaHeart } from "react-icons/fa";
 import HeartButton from "../common/HeartButton";
-
+import { FaShoppingCart } from "react-icons/fa";
 
 function BestProductDetails({ products }: { products: BestProductProp }) {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
@@ -22,7 +22,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
       </div>
 
       <img
-        className="h-60 w-60 m-auto"
+        className="h-60 w-60 m-auto transform transition-transform duration-300 hover:scale-105"
         src={`${cloud_url}/${products.image_url}`}
         alt="best-pro-image"
         loading="lazy"
@@ -39,7 +39,9 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
         <FaStar className="text-yellow-400 w-5 h-5 ml-20" />
         <p>{products.rating}</p>
       </div>
-      <Button btnType="add" />
+      <Button btnType="add"
+      
+      />
     </div>
   );
 }
