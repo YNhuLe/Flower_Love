@@ -14,9 +14,9 @@ function ToggleMenu({giftCategories} :ToggleMenuProps){
             giftCategories.map((labelCate) =>(
 
                 <button key={labelCate.id}
-                onClick={() => setSelectedCategory(capitalizeFirst(labelCate.name))}
-                className={`px-4 py-2 rounded-full text-xs ${
-                    selectedCategory === capitalizeFirst(labelCate.name) ? "bg-primary text-white" : "bg-third text-primary"
+                onClick={() => setSelectedCategory(labelCate.name)}
+                className={`px-4 py-2 rounded-full text-[.5rem] w-full ${
+                    selectedCategory === labelCate.name ? "bg-primary text-white" : "bg-third text-primary"
                 }`}
                 >
 {capitalizeFirst(labelCate.name)}
