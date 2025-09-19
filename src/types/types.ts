@@ -45,14 +45,15 @@ interface GiftItemProps {
 
 interface GiftCategories {
   id: number;
-  name: string;
+  category_name: string;
 }
 
 interface GiftItemsCategoriesProps extends GiftCategories {
-  gift_items: GiftCategories[];
+  gift_items: GiftItemProps[];
 }
 export type {
   BestProductProp,
   GiftboxWithItemsProps,
-  GiftItemsCategoriesProps, GiftCategories
+  GiftItemsCategoriesProps,
+  GiftCategories,GiftItemProps
 };
