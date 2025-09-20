@@ -3,9 +3,12 @@ import { GiftItemsCategoriesProps, GiftCategories } from "../../types/types";
 import axios from "axios";
 import ToggleMenu from "../../common/ToggleMenu";
 import CustomGiftBoxCard from "./CustomGiftBoxCard";
-function CustomGiftBox({ gift_items }: GiftItemsCategoriesProps) {
+interface CustomGiftBoxProps{
+    gift_items: GiftItemsCategoriesProps[];
+}
+function CustomGiftBox({ gift_items }: CustomGiftBoxProps) {
     // const [giftType, setGiftType] = useState<"plants" | "vases" | "accessories">("plants");
-    const [gifts, setGifts] = useState<GiftItemsCategoriesProps[]>([]);
+    // const [gifts, setGifts] = useState<GiftItemsCategoriesProps[]>([]);
     const [giftCategories, setGiftCategories] = useState<GiftCategories[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -14,24 +17,24 @@ const [selectedCategory, setSelectedCategory] = useState<string>("plants");
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
     //fetch gifts
-    useEffect(() => {
-        const fetchGifts = async () => {
-            try {
-                const response = await axios.get(`${baseUrl}/gifts`);
-                setGifts(response.data);
-                console.log(" GIFT: ", response);
+    // useEffect(() => {
+    //     const fetchGifts = async () => {
+    //         try {
+    //             const response = await axios.get(`${baseUrl}/gifts`);
+    //             setGifts(response.data);
+    //             console.log(" GIFT: ", response);
 
-            } catch (error: any) {
-                setError(error.message || "Failed to load products!");
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchGifts();
-    }, []);
+    //         } catch (error: any) {
+    //             setError(error.message || "Failed to load products!");
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
+    //     fetchGifts();
+    // }, []);
 
-    // console.log("Gift name: ", gifts[0].category_name);
-    console.log(gift_items);
+    // // console.log("Gift name: ", gifts[0].category_name);
+    // console.log(gift_items);
 
     //fetch categories
 
@@ -49,17 +52,19 @@ const [selectedCategory, setSelectedCategory] = useState<string>("plants");
         fetchGiftCategories();
     }, []);
 
-    console.log("GIFTs: ", gifts);
+    // console.log("GIFTs: ", gifts);
 
 if( loading) return <p>Loading...</p>
 if(error) return <p>{error}</p>
 
 
-const selectcategoryObj = giftCategories.find((cat) => cat.category_name === selectedCategory)
+const selectcategoryObj = giftCategories.find((cat) => cat.category_name === selectedCategory);
+ const filteredGifts = gift_items.flatMap(({ gift_items }) =>
+        Array.isArray(gift_items) ? gift_items.filter((item) => item.category_id === selectcategoryObj?.id) : []
+    );
 //filter the gifts based on selectedCategory
-const filteredGifts = gifts.flatMap(({gift_items}) =>
-Array.isArray(gift_items) ? gift_items.filter((item) => item.category_id === selectcategoryObj?.id) : []);
-    return (
+// 
+   return (
         <section className="my-10 mx-4">
             <h1 className="text-2xl font-semibold text-center">Custom Gift Box</h1>
             <p className="text-center mt-2">Create the perfect plant gift by choosing your favorite plants, pots, and accessories. Each gift box is beautifully packaged and ready to give.</p>
@@ -83,7 +88,7 @@ Array.isArray(gift_items) ? gift_items.filter((item) => item.category_id === sel
             </div>
 
         </section>
-    )
+)
 }
 
 export default CustomGiftBox;
