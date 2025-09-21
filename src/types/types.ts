@@ -34,6 +34,7 @@ interface GiftboxWithItemsProps extends GiftBoxProps {
 interface GiftItemProps {
   id: number;
   name: string;
+  category_name: string;
   description?: string;
   price: number;
   img_url?: string;
