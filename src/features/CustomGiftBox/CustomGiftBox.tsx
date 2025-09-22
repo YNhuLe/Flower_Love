@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import { GiftItemsCategoriesProps, GiftCategories,GiftItemProps } from "../../types/types";
+import {GiftCategories, GiftItemProps } from "../../types/types";
 import axios from "axios";
 import ToggleMenu from "../../common/ToggleMenu";
 import CustomGiftBoxCard from "./CustomGiftBoxCard";
 interface CustomGiftBoxProps {
-  giftItems: GiftItemProps[];
+    giftItems: GiftItemProps[];
 }
 function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
     const [giftCategories, setGiftCategories] = useState<GiftCategories[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     const [error, setError] = useState<string | null>(null);
-const [selectedCategory, setSelectedCategory] = useState<string>("plants");
+    const [selectedCategory, setSelectedCategory] = useState<string>("plants");
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
     useEffect(() => {
@@ -28,38 +28,37 @@ const [selectedCategory, setSelectedCategory] = useState<string>("plants");
         fetchGiftCategories();
     }, []);
 
-if (loading) {return <p>Loading...</p>}
-if (error) {return <p>{error}</p>}
+    if (loading) { return <p>Loading...</p> }
+    if (error) { return <p>{error}</p> }
 
 
-const selectcategoryObj = giftCategories.find((cat) => cat.category_name === selectedCategory);
-const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory)
-   return (
+    // const selectcategoryObj = giftCategories.find((cat) => cat.category_name === selectedCategory);
+    const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory)
+    return (
         <section className="my-10 mx-4">
             <h1 className="text-2xl font-semibold text-center">Custom Gift Box</h1>
             <p className="text-center mt-2">Create the perfect plant gift by choosing your favorite plants, pots, and accessories. Each gift box is beautifully packaged and ready to give.</p>
 
-            <ToggleMenu giftCategories={giftCategories} 
-  selectedCategory={selectedCategory}
-  setSelectedCategory={setSelectedCategory}/>
+            <ToggleMenu giftCategories={giftCategories}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory} />
             <div>
 
                 {
-                    filteredGifts.length > 0 ?(
-                            filteredGifts.map(({ id, name, price, category_id , category_name}) => (
-                                <CustomGiftBoxCard id={id} name={name} 
-                                price={price} category_id={category_id} category_name={category_name}/>
-                            ))
-                        ):(
-                            <p>No gift is available for this category..</p>
-                        )
+                    filteredGifts.length > 0 ? (
+                        filteredGifts.map(({ id, name, price, category_id, category_name }) => (
+                            <CustomGiftBoxCard id={id} name={name}
+                                price={price} category_id={category_id} category_name={category_name} />
+                        ))
+                    ) : (
+                        <p>No gift is available for this category..</p>
+                    )
                 }
 
 
             </div>
 
-        </section>
-)
+        </section>)
 }
 
 export default CustomGiftBox;

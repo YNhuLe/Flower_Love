@@ -16,7 +16,6 @@ function ProductPage() {
       try {
         const response = await axios.get(`${baseUrl}/gifts`);
         setGiftItems(response.data);
-        // console.log(" GIFT: ", response);
 
       } catch (error: any) {
         setError(error.message || "Failed to load products!");
