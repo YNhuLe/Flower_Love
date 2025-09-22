@@ -45,9 +45,9 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
 
                 {
                     filteredGifts.length > 0 ? (
-                        filteredGifts.map(({ id, name, price, category_id, category_name }) => (
+                        filteredGifts.map(({ id, name, price, category_id, category_name, img_url }) => (
                             <CustomGiftBoxCard id={id} name={name} 
-                                price={price} category_id={category_id} category_name={category_name} />
+                                price={price} category_id={category_id} category_name={category_name} img_url={img_url}/>
                         ))
                     ) : (
                         <p>No gift is available for this category..</p>
