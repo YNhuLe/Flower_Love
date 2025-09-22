@@ -32,7 +32,6 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
     if (error) { return <p>{error}</p> }
 
 
-    // const selectcategoryObj = giftCategories.find((cat) => cat.category_name === selectedCategory);
     const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory)
     return (
         <section className="my-10 mx-4">
@@ -47,15 +46,13 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
                 {
                     filteredGifts.length > 0 ? (
                         filteredGifts.map(({ id, name, price, category_id, category_name }) => (
-                            <CustomGiftBoxCard id={id} name={name}
+                            <CustomGiftBoxCard id={id} name={name} 
                                 price={price} category_id={category_id} category_name={category_name} />
                         ))
                     ) : (
                         <p>No gift is available for this category..</p>
                     )
                 }
-
-
             </div>
 
         </section>)
