@@ -4,7 +4,7 @@ import BestProduct from "../components/BestProduct";
 import GiftBoxOffer from "../components/GiftBoxOffer";
 import NavBar from "../components/NavBar";
 import CustomGiftBox from "../features/CustomGiftBox/CustomGiftBox";
-import { GiftItemProps, GiftItemsCategoriesProps } from "../types/types";
+import { GiftItemProps } from "../types/types";
 function ProductPage() {
   const [giftItems, setGiftItems] = useState<GiftItemProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
