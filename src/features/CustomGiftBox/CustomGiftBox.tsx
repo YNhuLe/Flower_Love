@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {GiftCategories, GiftItemProps } from "../../types/types";
+import { GiftCategories, GiftItemProps } from "../../types/types";
 import axios from "axios";
 import ToggleMenu from "../../common/ToggleMenu";
 import CustomGiftBoxCard from "./CustomGiftBoxCard";
@@ -46,8 +46,8 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
                 {
                     filteredGifts.length > 0 ? (
                         filteredGifts.map(({ id, name, price, category_id, category_name, img_url }) => (
-                            <CustomGiftBoxCard id={id} name={name} 
-                                price={price} category_id={category_id} category_name={category_name} img_url={img_url}/>
+                            <CustomGiftBoxCard id={id} name={name}
+                                price={price} category_id={category_id} category_name={category_name} img_url={img_url} />
                         ))
                     ) : (
                         <p>No gift is available for this category..</p>

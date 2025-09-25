@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 interface QuantitySelectorProps {
     value: number;
@@ -14,7 +14,7 @@ function QuantitySelector({ value, onChange, min = 0, max = Infinity }: Quantity
         }
     }
     const decrement = () => {
-        if (value > min) {
+        if (value >= min) {
             onChange(value - 1)
         }
     }
@@ -30,12 +30,12 @@ function QuantitySelector({ value, onChange, min = 0, max = Infinity }: Quantity
                 <p>{value}</p>
             </div>
 
-             <div className="p-2 rounded-md">
+            <div className="p-2 rounded-md">
 
                 <button className="bg-cartRed p-2 rounded-md" onClick={increment}>
-                      <PlusIcon className="h-4 w-4  text-third" /></button>
+                    <PlusIcon className="h-4 w-4  text-third" /></button>
             </div>
-           
+
         </div >
     )
 }

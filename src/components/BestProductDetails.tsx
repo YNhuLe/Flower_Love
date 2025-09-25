@@ -18,7 +18,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
     >
       <div className="flex flex-row justify-between">
         <p className="bg-primary  w-fit px-2 py-1 rounded-lg text-third text-[.65rem]">  New</p>
-          <HeartButton />
+          <HeartButton btnType="gift_box"/>
       </div>
 
       <img
