@@ -3,7 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { ReactNode } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 interface ButtonProps {
-  btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize";
+  btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize" | "explore";
   url?: string
   onSubmit?: () => void;
   onClick?: () => void;
@@ -14,11 +14,12 @@ const styleMap: Record<string, string> = {
   add: "w-full mt-2 text-sm bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary  transition-all duration-300 text-tertiary",
   cancel: " text-sm bg-purple-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
   submit: " text-sm bg-pink-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
-  explore: "  text-sm border border-cartRed hover:bg-cartRed hover:text-third transition-all duration-300  text-cartRed mt-5 mb-8",
+  // explore: "  text-sm border border-cartRed hover:bg-cartRed hover:text-third transition-all duration-300  text-cartRed mt-5 mb-8",
   signup: "bg-primary  text-third w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
   learn_more: "bg-white text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
   customize : "text-xs text-third bg-cartRed hover:bg-darkCartRed transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
-  shop_now: "text-xs text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]"
+  shop_now: "text-xs text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
+  explore:"text-xs text-lightGreen  "
 
 }
 
@@ -26,7 +27,7 @@ const labelMap: Record<string, string> = {
   add: "Add to Cart",
   cancel: "Cancel",
   submit: "Submit",
-  explore: "Explore The Shop",
+  explore: "Explore Category",
   signup: "Sign Up",
   learn_more: "Learn More 🌻",
   shop_now: "Shop Now", 
@@ -41,7 +42,8 @@ const urlMap : Record<string, string> ={
   learn_more:"/products", 
   signup:"/signup",
   customize:"/customize",
-  shop_now:"/shop"
+  shop_now:"/shop",
+  explore:"/category"
 
 }
 
