@@ -52,9 +52,19 @@ interface GiftCategories {
 interface GiftItemsCategoriesProps extends GiftCategories {
   gift_items: GiftItemProps[];
 }
+
+//categories interface
+interface CategoriesProps{ 
+  name: string;
+  description: string;
+  quantity: number;
+}
 export type {
   BestProductProp,
   GiftboxWithItemsProps,
   GiftItemsCategoriesProps,
-  GiftCategories,GiftItemProps
+  GiftCategories,
+  GiftItemProps,
+  CategoriesProps
+
 };
