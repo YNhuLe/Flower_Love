@@ -8,7 +8,6 @@ import { Navigation } from "swiper/modules";
 import { BestProductProp } from "../types/types";
 
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
-console.log("Base URL:", baseUrl);
 function BestProduct() {
   const [products, setProducts] = useState<BestProductProp[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,7 +17,6 @@ function BestProduct() {
       try {
         const response = await axios.get(`${baseUrl}/allplants`);
         setProducts(response.data);
-        console.log("response", response.data);
       } catch (error: any) {
         setError(error.message || "Failed to load products!")
       } finally {
@@ -27,7 +25,6 @@ function BestProduct() {
     }
     fetchProducts()
   }, []);
-  console.log("Prodcuts", products);
 
   return (
     <div className="w-full mt-[7rem]">
