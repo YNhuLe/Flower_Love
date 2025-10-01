@@ -6,6 +6,7 @@ import NavBar from "../components/NavBar";
 import CustomGiftBox from "../features/CustomGiftBox/CustomGiftBox";
 import { GiftItemProps } from "../types/types";
 import CategorySection from "../features/Category/CategorySection";
+import PlantQuiz from "../features/PlantQuiz/PlantQuiz";
 function ProductPage() {
   const [giftItems, setGiftItems] = useState<GiftItemProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -36,6 +37,7 @@ function ProductPage() {
       <GiftBoxOffer />
       <CustomGiftBox giftItems={giftItems} />
       <CategorySection />
+      <PlantQuiz />
     </>
   );
 }

@@ -8,6 +8,8 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
         return <p>Loading product categories...</p>
 
     }
+
+    const imgSrc = categories.cate_img ? `${cloud_url}/${categories.cate_img}` : `${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
     return (
 
         <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
@@ -15,8 +17,7 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
             <img
                 className="w-full h-[10rem] object-cover transform transition-transform duration-300 hover:scale-105"
 
-                // src={`${cloud_url}/${categories}`} alt="categories-pictures"
-                src="https://res.cloudinary.com/dvdr5bwc7/image/upload/v1758511648/glasses_tupu5g.jpg"
+                src={imgSrc} alt="categories-pictures"
                 loading="lazy"
             />
             <div className="flex flex-row justify-between mx-4 my-5">
@@ -35,3 +36,8 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
 }
 
 export default CategoryCard;
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/angele-kamp-OSRpN1D52EM-unsplash_ouwbln.jpg
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/feey-bz0NSMCveq0-unsplash_vkoyxt.jpg
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/huy-phan-dM317CbttyY-unsplash_jlzrxe.jpg
+//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387956/plant-12_rzcosb.jpg

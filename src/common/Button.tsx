@@ -3,7 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { ReactNode } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 interface ButtonProps {
-  btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize" | "explore";
+  btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" |"plant_quiz" | "view_all";
   url?: string
   onSubmit?: () => void;
   onClick?: () => void;
@@ -19,7 +19,9 @@ const styleMap: Record<string, string> = {
   learn_more: "bg-white text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
   customize : "text-xs text-third bg-cartRed hover:bg-darkCartRed transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
   shop_now: "text-xs text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
-  explore:"text-xs text-lightGreen  "
+  explore:"text-xs text-lightGreen  ",
+  plant_quiz:"text-xs text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
+  view_all:"text-xs text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
 
 }
 
@@ -31,7 +33,9 @@ const labelMap: Record<string, string> = {
   signup: "Sign Up",
   learn_more: "Learn More 🌻",
   shop_now: "Shop Now", 
-  customize: "Build Now"
+  customize: "Build Now",
+  plant_quiz:"Take Plant Quiz",
+  view_all: "View All Plants"
 }
 
 const iconMap: Record<string,ReactNode>={
@@ -43,7 +47,9 @@ const urlMap : Record<string, string> ={
   signup:"/signup",
   customize:"/customize",
   shop_now:"/shop",
-  explore:"/category"
+  explore:"/category",
+  plant_quiz:"/plant_quiz",
+  view_all:"/view_all"
 
 }
 

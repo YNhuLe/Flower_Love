@@ -26,9 +26,9 @@ function CategorySection() {
     console.log("Categories: ", categories);
 
     return (
-        <>
-            <h1>Find Plants by Category</h1>
-            <p>Explore our diverse collection of plants organized by type, size, and care requirements to find the perfect green companion for your space.</p>
+        <section className="mt-40">
+            <h1 className="text-2xl text-center font-semibold">Find Plants by Category</h1>
+            <p className="text-center  m-4 mt-2">Explore our diverse collection of plants organized by type, size, and care requirements to find the perfect green companion for your space.</p>
            
            {
             categories.map((category) =>(
@@ -37,7 +37,7 @@ function CategorySection() {
            }
            
        
-        </>
+        </ section>
     )
 }
 
