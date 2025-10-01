@@ -58,6 +58,7 @@ interface CategoriesProps{
   name: string;
   description: string;
   quantity: number;
+  cate_img?: string;
 }
 export type {
   BestProductProp,
