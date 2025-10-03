@@ -3,7 +3,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { ReactNode } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 interface ButtonProps {
-  btnType?: "add" | "submit" | "cancel" | "explore" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all";
+  btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all" 
+  | "add_to_cart" | "quick_view";
   url?: string
   onSubmit?: () => void;
   onClick?: () => void;
@@ -22,7 +23,8 @@ const styleMap: Record<string, string> = {
   explore: "text-xs text-lightGreen  ",
   plant_quiz: "text-xs text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
   view_all: "text-xs text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
-
+,add_to_cart:"w-full text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
+,quick_view: "text-xs text-primary bg-tertiary border rounded-xl hover:bg-primary hover:text-tertiary transition-all duration-300 "
 }
 
 const labelMap: Record<string, string> = {
@@ -35,7 +37,9 @@ const labelMap: Record<string, string> = {
   shop_now: "Shop Now",
   customize: "Build Now",
   plant_quiz: "Take Plant Quiz",
-  view_all: "View All Plants"
+  view_all: "View All Plants",
+  add_to_cart: "Add to Cart",
+  quick_view: "Quick View"
 }
 
 const iconMap: Record<string, ReactNode> = {
@@ -49,7 +53,9 @@ const urlMap: Record<string, string> = {
   shop_now: "/shop",
   explore: "/category",
   plant_quiz: "/plant_quiz",
-  view_all: "/view_all"
+  view_all: "/view_all",
+  add_to_cart:"/add_to_cart",
+  quick_view:"/quick_view"
 
 }
 
