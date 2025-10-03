@@ -60,12 +60,48 @@ interface CategoriesProps{
   quantity: number;
   cate_img?: string;
 }
+
+//products interface
+interface NewProductProps{
+  id: number;
+  common_name: string;
+  description: string;
+  image_url: string;
+  light_requirements: string;
+  watering_requirements: string;
+  humidity_preference: string;
+  tempareture_range: string;
+  soil_type: string;
+  fertilizer_info: string;
+  potting_tip: string;
+  common_problems: string;
+  growth_habit: string;
+  mature_width: string;
+  bloom_info: string;
+  is_pet_friendly: boolean;
+  air_purifying: boolean;
+  original_price: number;
+  discounted_price: number;
+  size_available: string;
+  stock_quantity: number;
+  shipping_info: string;
+  rating: number;
+  num_reviews: number;
+  isnewarrival: boolean;
+  plantinglevel: string;
+  isonsale: boolean;
+}
+
+interface ProductAndInfo extends CategoriesProps {
+  new_products: NewProductProps[];
+}
 export type {
   BestProductProp,
   GiftboxWithItemsProps,
   GiftItemsCategoriesProps,
   GiftCategories,
   GiftItemProps,
-  CategoriesProps
-
+  CategoriesProps,
+ProductAndInfo,
+NewProductProps
 };
