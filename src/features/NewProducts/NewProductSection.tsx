@@ -25,17 +25,17 @@ function NewProductSection() {
     }, []);
 
     console.log("New Products: ", newProducts);
-    
+
 
 
     return (
         <section>
             {
 
-                newProducts.map((newProduct) =>(
-<NewProductCard  key={newProduct.id}
-newProducts={newProduct}
-/>
+                newProducts.map((newProduct) => (
+                    <NewProductCard key={newProduct.id}
+                        newProducts={newProduct}
+                    />
                 ))
 
             }

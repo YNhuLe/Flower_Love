@@ -23,7 +23,7 @@ function NewProductCard({newProducts} :{newProducts: NewProductProps}){
             <div>
                 <h2>{newProducts.common_name}</h2>
         
-                <p>{newProducts.name}</p>
+                {/* <p>{newProducts.name}</p> */}
                 <FaStar className="text-yellow-400 w-5 h-5 ml-20" />
                 <p>{newProducts.rating}</p>
                 <p>{newProducts.size_available}</p>
