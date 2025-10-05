@@ -36,8 +36,3 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
 }
 
 export default CategoryCard;
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/angele-kamp-OSRpN1D52EM-unsplash_ouwbln.jpg
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/feey-bz0NSMCveq0-unsplash_vkoyxt.jpg
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1759276477/huy-phan-dM317CbttyY-unsplash_jlzrxe.jpg
-//https://res.cloudinary.com/dvdr5bwc7/image/upload/v1756387956/plant-12_rzcosb.jpg
