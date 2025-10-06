@@ -23,7 +23,7 @@ const styleMap: Record<string, string> = {
   explore: "text-xs text-lightGreen  ",
   plant_quiz: "text-xs text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
   view_all: "text-xs text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
-,add_to_cart:"w-full text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
+,add_to_cart:"w-full px-[37px] text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
 ,quick_view: "text-xs text-primary bg-tertiary border rounded-xl hover:bg-primary hover:text-tertiary transition-all duration-300 "
 }
 
