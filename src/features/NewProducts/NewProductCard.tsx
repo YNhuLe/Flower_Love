@@ -4,7 +4,7 @@ import { ProductAndInfo,ProductWithCategory } from "../../types/types";
 import { product } from "../../constants";
 function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-
+const imgSrc = newProduct.image_url ? `${cloud_url}/${newProduct.image_url}`:`${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
     if (!newProduct) {
         return <p>Loading new products...</p>
     }
@@ -16,7 +16,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                 <img
                     className="w-full h-[10rem] object-cover transform transition-transform duration-300 hover:scale-105"
 
-                    src={`${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`} alt="categories-pictures"
+                    src={imgSrc} alt="categories-pictures"
                     loading="lazy"
                 /> 
                  {/* <p>{newProduct.plantinglevel}</p> */}
