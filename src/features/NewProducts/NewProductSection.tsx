@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { NewProductProps } from "../../types/types";
+import { ProductWithCategory } from "../../types/types";
 import axios from "axios";
 import NewProductCard from "./NewProductCard";
-
 const baesUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
 function NewProductSection() {
 
-    const [newProducts, setNewProducts] = useState<NewProductProps[]>([]);
+    const [newProducts, setNewProducts] = useState<ProductWithCategory[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     useEffect(() => {
@@ -32,9 +31,9 @@ function NewProductSection() {
         <section>
             {
 
-                newProducts.map((newProduct) => (
+           newProducts.map((newProduct) => (
                     <NewProductCard key={newProduct.id}
-                        newProducts={newProduct}
+                        newProduct={newProduct}
                     />
                 ))
 

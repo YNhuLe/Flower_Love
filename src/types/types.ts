@@ -92,8 +92,11 @@ interface NewProductProps{
   isonsale: boolean;
 }
 
-interface ProductAndInfo extends CategoriesProps {
-  new_products: NewProductProps[];
+interface ProductWithCategory extends CategoriesProps, NewProductProps {
+}
+
+interface ProductAndInfo{
+  new_products : ProductWithCategory[]
 }
 export type {
   BestProductProp,
@@ -103,5 +106,5 @@ export type {
   GiftItemProps,
   CategoriesProps,
 ProductAndInfo,
-NewProductProps
+NewProductProps,ProductWithCategory
 };
