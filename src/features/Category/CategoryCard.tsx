@@ -32,7 +32,5 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
             </div>
         </section>
 
-    )
-}
-
+    )}
 export default CategoryCard;

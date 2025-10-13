@@ -2,6 +2,7 @@ import Button from "../../common/Button";
 import { FaStar, FaPaw } from "react-icons/fa";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { ProductWithCategory } from "../../types/types";
+import HeartButton from "../../common/HeartButton";
 
 function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
@@ -43,6 +44,8 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                             <FaPaw className="text-xs" />
                         </p>
                     )}
+
+                    <HeartButton btnType="new_product"/>
                 </div>
             </div>
             <div className="pl-4">
