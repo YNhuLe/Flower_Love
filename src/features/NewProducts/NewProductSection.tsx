@@ -23,9 +23,8 @@ function NewProductSection() {
         fetchNewProducts();
     }, []);
 
-    console.log("New Products: ", newProducts);
-
-
+if( loading) return <p>Loading...</p>
+if(error) return <p>Error...</p>
 
     return (
         <section>
