@@ -55,7 +55,7 @@ const urlMap: Record<string, string> = {
   plant_quiz: "/plant_quiz",
   view_all: "/view_all",
   add_to_cart:"/add_to_cart",
-  quick_view:"/quick_view"
+
 
 }
 

@@ -7,6 +7,9 @@ interface BestProductProp {
   original_price: number;
   discounted_price: number;
   rating: number;
+  isnewarrival: boolean;
+  watering_requirements:string;
+
 }
 interface GiftBoxProps {
   id: string;
@@ -77,6 +80,7 @@ interface NewProductProps{
   common_problems: string;
   growth_habit: string;
   mature_width: string;
+  mature_height: string;
   bloom_info: string;
   is_pet_friendly: boolean;
   air_purifying: boolean;
@@ -90,6 +94,7 @@ interface NewProductProps{
   isnewarrival: boolean;
   plantinglevel: string;
   isonsale: boolean;
+  category_id: string
 }
 
 interface ProductWithCategory extends CategoriesProps, NewProductProps {

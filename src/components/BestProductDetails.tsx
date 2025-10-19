@@ -17,7 +17,14 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
       className="max-w-fit h-50 mt-8 mb-8 p-4 border m-4 border-green-900 rounded-lg shadow-lg mx-auto mx-4"
     >
       <div className="flex flex-row justify-between">
-        <p className="bg-primary  w-fit px-2 py-1 rounded-lg text-third text-[.65rem]">  New</p>
+        <div>
+          {
+            products.isnewarrival && (
+               <p className="bg-primary  w-fit px-2 py-1 rounded-lg text-third text-[.65rem]">  New</p>
+       
+            )
+          }
+        </div>
           <HeartButton btnType="gift_box"/>
       </div>
 

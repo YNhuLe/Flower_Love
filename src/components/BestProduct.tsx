@@ -7,8 +7,8 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { BestProductProp } from "../types/types";
 
-const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 function BestProduct() {
+  const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
   const [products, setProducts] = useState<BestProductProp[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

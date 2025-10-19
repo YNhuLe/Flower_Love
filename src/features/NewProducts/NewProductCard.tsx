@@ -10,13 +10,16 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
     if (!newProduct) {
         return <p>Loading new products...</p>
     }
+
+    console.log("New Product: ", newProduct);
+    
     return (
         <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
 
             <div>
                 {
                     newProduct.isnewarrival && (
-                        <p className="text-third text-xs absolute z-40 border rounded-xl m-4 p-2 bg-primary">New</p>
+                        <p className="text-third text-[.65rem] absolute z-40 border rounded-lg m-4 px-2 py-1 bg-primary">New</p>
                     )
 
 
@@ -79,7 +82,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
             <div className="flex gap-2 justify-start mb-6 pl-4">
                 <Button btnType="add_to_cart" />
-                <Button btnType="quick_view" />
+                <Button btnType="quick_view" url={`/products/${newProduct.id}`} />
             </div>
         </section>
     )
