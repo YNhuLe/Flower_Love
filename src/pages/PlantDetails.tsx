@@ -10,7 +10,8 @@ const {id} = useParams();
     const [plantInfo, setPlantInfo] = useState<NewProductProps | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
+ const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+  
     useEffect(() =>{
         const fetchPlantInfo = async() => {
             try{
@@ -34,7 +35,7 @@ console.log(" Plant info: ", response.data);
     
     return ( plantInfo &&
         <section>
-         <div>   <img src="" alt="" />
+         <div>   <img src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
         <h2>{plantInfo.common_name}</h2>
         <p>{plantInfo.description}</p>
         <p>{plantInfo.growth_habit}</p>
