@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { BestProductProp ,NewProductProps} from "../types/types";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import QuantitySelector from "../common/QuantitySelector";
+import AddToCart from "../common/AddToCart";
 
 function PlantDetails(){
 
@@ -36,7 +38,14 @@ console.log(" Plant info: ", response.data);
     return ( plantInfo &&
         <section>
          <div>   <img src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-        <h2>{plantInfo.common_name}</h2>
+        <h2
+        className="font-semibold text-2xl"
+        >{plantInfo.common_name}</h2>
+
+        <p> $ {plantInfo.original_price}</p>
+
+        {/* <QuantitySelector /> */}
+        <AddToCart />
         <p>{plantInfo.description}</p>
         <p>{plantInfo.growth_habit}</p>
         <p>{plantInfo.bloom_info}</p>
