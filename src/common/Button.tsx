@@ -12,23 +12,23 @@ interface ButtonProps {
 
 const styleMap: Record<string, string> = {
 
-  add: "w-full mt-2 text-sm bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary  transition-all duration-300 text-tertiary",
-  cancel: " text-sm bg-purple-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
-  submit: " text-sm bg-pink-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
+  add: "w-full mt-2 rounded-xs text-sm bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary  transition-all duration-300 text-tertiary",
+  cancel: " rounded-2xl text-sm bg-purple-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
+  submit: " rounded-2xl text-sm bg-pink-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
   // explore: "  text-sm border border-cartRed hover:bg-cartRed hover:text-third transition-all duration-300  text-cartRed mt-5 mb-8",
-  signup: "bg-primary  text-third w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
-  learn_more: "bg-white text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
-  customize: "text-xs text-third bg-cartRed hover:bg-darkCartRed transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
-  shop_now: "text-xs text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
-  explore: "text-xs text-lightGreen  ",
-  plant_quiz: "text-xs text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
-  view_all: "text-xs text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
-,add_to_cart:"w-full px-[37px] text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
-,quick_view: "text-xs text-primary bg-tertiary border rounded-xl hover:bg-primary hover:text-tertiary transition-all duration-300 "
+  signup: "bg-primary rounded-2xl text-third w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
+  learn_more: "bg-white rounded-2xl text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
+  customize: "text-xs rounded-2xl text-third bg-cartRed hover:bg-darkCartRed transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
+  shop_now: "text-xs rounded-2xl text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
+  explore: "text-xs rounded-2xl text-lightGreen  ",
+  plant_quiz: "text-xs rounded-2xl text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
+  view_all: "text-xs rounded-2xl text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
+,add_to_cart:"w-full rounded-2xl px-[37px] text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
+,quick_view: "text-xs rounded-2xl text-primary bg-tertiary border rounded-xl hover:bg-primary hover:text-tertiary transition-all duration-300 "
 }
 
 const labelMap: Record<string, string> = {
-  add: "Add to Cart",
+  add: `Add to Cart - price`,
   cancel: "Cancel",
   submit: "Submit",
   explore: "Explore Category",
@@ -74,7 +74,7 @@ function Button({ btnType = "add", url, onSubmit, onClick }: ButtonProps) {
   }
   return (
     <div className="">
-      <button className={`p-1 rounded-2xl px-4 mx-0 my-auto cursor-pointer flex flex-row justify-center items-center gap-3 ${btnClasses}`}
+      <button className={`p-1  px-4 mx-0 my-auto cursor-pointer flex flex-row justify-center items-center gap-3 ${btnClasses}`}
         onClick={handleClick}
       >
 
