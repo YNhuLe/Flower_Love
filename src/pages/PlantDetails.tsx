@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { BestProductProp, NewProductProps } from "../types/types";
+import {NewProductProps } from "../types/types";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import QuantitySelector from "../common/QuantitySelector";
-import AddToCart from "../common/AddToCart";
-import { FaCheck, FaStar } from "react-icons/fa";
+import{ FaStar } from "react-icons/fa";
 import Button from "../common/Button";
 import { MdOutlineAutoAwesome } from "react-icons/md";
 import StockDisplay from "../common/StockDisplay";
+import RatingStatusChecker from "../common/RatingStatusChecker";
 
 
 
@@ -50,11 +49,12 @@ function PlantDetails() {
                     <img className="w-20 h-20 border border-grey rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                 </div>
                 <h2
-                    className="font-semibold text-2xl mb-6"
+                    className="font-semibold text-2xl mb-2"
                 >{plantInfo.common_name}</h2>
-                <FaStar className="text-yellow-400 w-5 h-5 ml-20" />
+                <p className="italic mb-2">{plantInfo.scientific_name}</p>
 
-                <div className="flex flex-row items-center gap-2 p-1 bg-lightGrey border rounded-3xl w-fit px-2 mb-8">
+<RatingStatusChecker rating={plantInfo.rating} ratingNum={plantInfo.rating} numReviews={plantInfo.num_reviews}/>
+                <div className="flex flex-row items-center gap-2 p-1 bg-lightGrey border rounded-3xl w-fit px-2 mb-6">
                     <MdOutlineAutoAwesome className="text-grey text-2xl" />
 
                     <p className="text-sm">Planting level: {plantInfo.plantinglevel}</p>
@@ -62,7 +62,7 @@ function PlantDetails() {
                 <hr className="border-t border-grey" ></hr>
                 <div className="flex flex-row justify-start gap-2 mt-4">
 
-                    <p className="text-xxs text-primary font-semibold">$ {plantInfo.discounted_price}</p>
+                    <p className="text-xl text-primary font-semibold">$ {plantInfo.discounted_price}</p>
                     <p className="text-xs line-through"> $ {plantInfo.original_price}</p></div>
                 <div className="text-lightGreen flex flex-row gap-1">
     
@@ -70,7 +70,7 @@ function PlantDetails() {
                 <StockDisplay stockQuantity={plantInfo.stock_quantity} />
     
                     </div>
-                <hr className="border-t border-grey" ></hr>
+                <hr className="border-t border-grey mt-4" ></hr>
 
                 {/* <QuantitySelector /> */}
                 <Button btnType="add" price={plantInfo.discounted_price}></Button>

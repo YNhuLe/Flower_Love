@@ -1,7 +1,6 @@
-import React from "react";
 import { BestProductProp } from "../types/types";
 import Button from "../common/Button";
-import { FaStar, FaHeart } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import HeartButton from "../common/HeartButton";
 
 
