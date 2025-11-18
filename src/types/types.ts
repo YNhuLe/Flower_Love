@@ -68,6 +68,7 @@ interface CategoriesProps{
 interface NewProductProps{
   id: number;
   common_name: string;
+  scientific_name: string;
   description: string;
   image_url: string;
   light_requirements: string;

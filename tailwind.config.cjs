@@ -27,6 +27,7 @@ module.exports = {
         cartRed: "#D96F32",
         darkCartRed: "#873b0eff",
         lightGreen: "#287d0bff",
+          lowStock: "#eabb14ff",
       },
       keyframes: {
         scrollLeft: {

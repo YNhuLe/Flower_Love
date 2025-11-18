@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCheck, FaStar, FaExclamationTriangle, FaTimes } from "react-icons/fa";
+import { FaCheck, FaExclamationTriangle, FaTimes } from "react-icons/fa";
 
 interface StockStatusProps {
     stockQuantity?: number;
@@ -12,8 +12,6 @@ const getStockStatus = (stockQuantity: number) => {
             text: 'In Stock',
             Icon: FaCheck,
             stockColor: 'text-lightGreen',
-        
-
         }
     } else if (stockQuantity >0 && stockQuantity <= 10) {
         return {
@@ -40,13 +38,11 @@ function ShowStockQuantity({stockQuantity = 0} : StockStatusProps){
 return (
     <>
     <StatusIcon 
-   
-        className={`w-4 h-4 mt-[.1rem] [${status.stockColor}]`}
-      
+        className={`w-3 h-4 mt-[.1rem] ${status.stockColor}`}
       />
       
       <p
-      className={`font-semibold [${status.stockColor}]`}
+      className={`font-medium ${status.stockColor}`}
       >
         {status.text}
       </p>
