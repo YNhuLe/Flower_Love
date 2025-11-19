@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import {NewProductProps } from "../types/types";
+import { NewProductProps } from "../types/types";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import{ FaStar } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import Button from "../common/Button";
 import { MdOutlineAutoAwesome } from "react-icons/md";
 import StockDisplay from "../common/StockDisplay";
 import RatingStatusChecker from "../common/RatingStatusChecker";
-
+import QuantitySelector from "../common/QuantitySelector";
 
 
 function PlantDetails() {
@@ -17,7 +17,9 @@ function PlantDetails() {
     const [plantInfo, setPlantInfo] = useState<NewProductProps | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [quantity, setQuantity] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+
 
     useEffect(() => {
         const fetchPlantInfo = async () => {
@@ -35,8 +37,17 @@ function PlantDetails() {
         fetchPlantInfo();
     }, [id]);
 
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error...</p>
+    let formatArr: string[] = [];
+    try {
+        const benefitArray: string[] = JSON.parse(plantInfo?.benefits || "[]");
+        formatArr = benefitArray.map(benefitArr => `${benefitArr}`)
+    } catch (error: any) {
+        console.log("Error: Could not parse benefit data.", error);
+
+    }
 
 
     return (plantInfo &&
@@ -53,7 +64,7 @@ function PlantDetails() {
                 >{plantInfo.common_name}</h2>
                 <p className="italic mb-2">{plantInfo.scientific_name}</p>
 
-<RatingStatusChecker rating={plantInfo.rating} ratingNum={plantInfo.rating} numReviews={plantInfo.num_reviews}/>
+                <RatingStatusChecker rating={plantInfo.rating} ratingNum={plantInfo.rating} numReviews={plantInfo.num_reviews} />
                 <div className="flex flex-row items-center gap-2 p-1 bg-lightGrey border rounded-3xl w-fit px-2 mb-6">
                     <MdOutlineAutoAwesome className="text-grey text-2xl" />
 
@@ -65,16 +76,35 @@ function PlantDetails() {
                     <p className="text-xl text-primary font-semibold">$ {plantInfo.discounted_price}</p>
                     <p className="text-xs line-through"> $ {plantInfo.original_price}</p></div>
                 <div className="text-lightGreen flex flex-row gap-1">
-    
 
-                <StockDisplay stockQuantity={plantInfo.stock_quantity} />
-    
-                    </div>
+
+                    <StockDisplay stockQuantity={plantInfo.stock_quantity} />
+
+                </div>
                 <hr className="border-t border-grey mt-4" ></hr>
-
-                {/* <QuantitySelector /> */}
+                <p className="text-sm mt-4">Quantity</p>
+                <QuantitySelector
+                    value={quantity} onChange={setQuantity} min={1} max={200}
+                />
                 <Button btnType="add" price={plantInfo.discounted_price}></Button>
-                <p>{plantInfo.description}</p>
+
+                <div className="p-6 bg-lightGrey border rounded-3xl w-fit my-6"> 
+                      <MdOutlineAutoAwesome className="text-grey text-2xl inline-block" />
+                     <h3 className="inline-block ml-2 mb-4">Plant Benefits</h3>
+                    {
+                        formatArr.map((benefit, index) => (
+                            <div className="flex flex-row gap-2">
+                            <FaCheck className="w-4 h-3 text-lightGreen " />
+                            <p key={index} className="text-xs mb-2 ">{benefit}</p></div>
+                        ))
+                    }
+
+                </div>
+                <article className="p-6 bg-third border rounded-3xl">
+                    <h3 className="text-xxs mb-2 font-semibold">About this Plant</h3>
+                             <p className="text-xs leading-[1.5]">{plantInfo.description}</p>
+                </article>
+       
                 <p>{plantInfo.growth_habit}</p>
                 <p>{plantInfo.bloom_info}</p>
                 <p>{plantInfo.fertilizer_info}</p>
