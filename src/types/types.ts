@@ -74,7 +74,7 @@ interface NewProductProps{
   light_requirements: string;
   watering_requirements: string;
   humidity_preference: string;
-  tempareture_range: string;
+  temperature_range: string;
   soil_type: string;
   fertilizer_info: string;
   potting_tip: string;
@@ -95,7 +95,8 @@ interface NewProductProps{
   isnewarrival: boolean;
   plantinglevel: string;
   isonsale: boolean;
-  category_id: string
+  category_id: string;
+  benefits: string
 }
 
 interface ProductWithCategory extends CategoriesProps, NewProductProps {
