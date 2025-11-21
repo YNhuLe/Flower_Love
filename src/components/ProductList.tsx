@@ -17,9 +17,9 @@ function ProductList() {
           transactions — all in one place. Grow your passion with us.
         </p>
         <button
-          className="bg-primary  text-white w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border
+          className="bg-brand-700  text-white w-full max-sm:w-[15rem] hover:text-brand-700  hover:bg-white border
           
-          transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 my-8 
+          transition-all duration-300 hover:border-brand-700  font-semibold rounded-3xl cursor-pointer h-10 my-8 
           tablet:w-[20rem] tablet:text-xl tablet:mx-8 tablet:h-12 tablet:mb-14">
           Main action
         </button>

@@ -16,17 +16,17 @@ function PriceList() {
       <p className="text-center mb-8 tablet:text-xl">
         The perfect plan that works great for you
       </p>
-      <div className="flex flex-row justify-center border border-primary rounded-3xl mx-6 w-70 tablet:mb-8">
+      <div className="flex flex-row justify-center border border-brand-700 rounded-3xl mx-6 w-70 tablet:mb-8">
         <button
           className={`px-6 py-4 rounded-3xl ${
-            planType === "monthly" ? "bg-primary text-white" : "text-primary"
+            planType === "monthly" ? "bg-brand-700 text-white" : "text-brand-700"
           } tablet:text-xl tablet:px-12`}
           onClick={() => setPlanType("monthly")}>
           Monthly
         </button>
         <button
           className={`px-6 py-4 rounded-3xl text-center ${
-            planType === "yearly" ? "bg-primary text-white" : "text-primary"
+            planType === "yearly" ? "bg-brand-700 text-white" : "text-brand-700"
           } tablet:text-xl tablet:px-12`}
           onClick={() => setPlanType("yearly")}>
           Yearly

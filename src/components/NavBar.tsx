@@ -55,7 +55,7 @@ function NavBar() {
             <li key={nav.id} onClick={() => setActive(nav.title)}>
               <a
                 href={`#${nav.id}`}
-                className="transition-all duration-300 hover:text-primary hover:scale-150 tablet:text-2xl
+                className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl
                 desktop:text-3xl
                 ">
                 {nav.title}
@@ -68,16 +68,16 @@ function NavBar() {
         
         ">
           <button
-            className="bg-primary text-white p-4 flex flex-row  items-center hover:text-primary hover:bg-white border
+            className="bg-brand-700 text-white p-4 flex flex-row  items-center hover:text-brand-700 hover:bg-white border
           
-          transition-all duration-300 hover:border-primary font-medium rounded-2xl cursor-pointer h-8 text-[1rem] laptop:p-4
+          transition-all duration-300 hover:border-brand-700 font-medium rounded-2xl cursor-pointer h-8 text-[1rem] laptop:p-4
           desktop:text-2xl desktop:h-10 desktop:rounded-3xl
           ">
             Search Plants
           </button>
           <button
-            className="bg-white text-primary font-medium p-4 flex flex-row  items-center rounded-2xl border border-primary 
-          transition-all duration-300 hover:bg-primary hover:text-white cursor-pointer h-8 text-[1rem]
+            className="bg-white text-brand-700 font-medium p-4 flex flex-row  items-center rounded-2xl border border-brand-700 
+          transition-all duration-300 hover:bg-brand-700 hover:text-white cursor-pointer h-8 text-[1rem]
              desktop:text-2xl desktop:h-10 desktop:rounded-3xl
           ">
             Get Started
@@ -90,7 +90,7 @@ function NavBar() {
           <li key={nav.id} onClick={() => setActive(nav.title)}>
             <a
               href={`#${nav.id}`}
-              className="transition-all duration-300 hover:text-primary hover:scale-150 tablet:text-2xl">
+              className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl">
               {nav.title}
             </a>
           </li>
@@ -105,7 +105,7 @@ function NavBar() {
             <li key={nav.id} onClick={() => setActive(nav.title)}>
               <a
                 href={`#${nav.id}`}
-                className="transition-all duration-300 hover:text-primary hover:scale-150 tablet:text-2xl">
+                className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl">
                 {nav.title}
               </a>
             </li>
@@ -116,14 +116,14 @@ function NavBar() {
         
         ">
           <button
-            className="bg-primary text-white p-4 flex flex-row  items-center hover:text-primary hover:bg-white border
+            className="bg-brand-700 text-white p-4 flex flex-row  items-center hover:text-brand-700 hover:bg-white border
           
-          transition-all duration-300 hover:border-primary font-medium rounded-2xl cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
+          transition-all duration-300 hover:border-brand-700 font-medium rounded-2xl cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
             Search Plants
           </button>
           <button
-            className="bg-white text-primary font-medium p-4 flex flex-row  items-center rounded-2xl border border-primary 
-          transition-all duration-300 hover:bg-primary hover:text-white cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
+            className="bg-white text-brand-700 font-medium p-4 flex flex-row  items-center rounded-2xl border border-brand-700 
+          transition-all duration-300 hover:bg-brand-700 hover:text-white cursor-pointer h-8 text-xs tablet:text-2xl tablet:p-6 tablet:rounded-3xl">
             Get Started
           </button>
         </div>

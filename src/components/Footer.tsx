@@ -15,27 +15,27 @@ function Footer() {
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer"
           />{" "}
-          <span className="text-3xl font-medium text-primary">Evererdant</span>
+          <span className="text-3xl font-medium text-brand-700">Evererdant</span>
           {/* </a> */}
         </div>
       </a>
       <div className="flex flex-row flex-wrap justify-evenly text-xs gap-3 laptop:text-[1rem]">
-        <p className="cursor-pointer hover:text-primary ">About Us</p>
-        <p className="cursor-pointer   hover:text-primary">Contact Us</p>
-        <p className="cursor-pointer  hover:text-primary">FAQs</p>
-        <p className="cursor-pointer  hover:text-primary">Terms & Conditions</p>
-        <p className="cursor-pointer  hover:text-primary">Privacy policy</p>
+        <p className="cursor-pointer hover:text-brand-700 ">About Us</p>
+        <p className="cursor-pointer   hover:text-brand-700">Contact Us</p>
+        <p className="cursor-pointer  hover:text-brand-700">FAQs</p>
+        <p className="cursor-pointer  hover:text-brand-700">Terms & Conditions</p>
+        <p className="cursor-pointer  hover:text-brand-700">Privacy policy</p>
       </div>
-      <div className="border border-b-0 border-black my-8"></div>
+      <div className="border border-b-0 border-text-primary my-8"></div>
       <p className="text-xs text-center  laptop:text-[1rem]">
         ©{date} Evererdant
       </p>
       <div className="text-xs text-center flex flex-wrap justify-evenly mt-4  laptop:text-[1rem]">
-        <p className="cursor-pointer  hover:text-primary">Privacy Policy</p>
-        <p className="cursor-pointer  hover:text-primary">
+        <p className="cursor-pointer  hover:text-brand-700">Privacy Policy</p>
+        <p className="cursor-pointer  hover:text-brand-700">
           Terms and Conditions
         </p>
-        <p className="cursor-pointer  hover:text-primary">Cookies Policy</p>
+        <p className="cursor-pointer  hover:text-brand-700">Cookies Policy</p>
       </div>
     </footer>
   );

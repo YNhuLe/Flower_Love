@@ -14,11 +14,11 @@ function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
     <div
       className={`${
         id === "1"
-          ? "bg-third border-primary "
+          ? "bg-surface-base border-brand-700 "
           : id === "2"
-          ? "bg-tertiary border-ternary"
-          : "bg-accent border-primary"
-      } mt-8 p-4 rounded-md border-[.1rem] border-primary w-full text-center`}>
+          ? "bg-brand-100 border-ternary"
+          : "bg-brand-500 border-brand-700"
+      } mt-8 p-4 rounded-md border-[.1rem] border-brand-700 w-full text-center`}>
       <p className="text-center m-4 tablet:text-3xl">{title}</p>
       <h2 className="text-3xl text-center font-semibold  tablet:text-4xl">
         {price}
@@ -42,13 +42,13 @@ function PriceCard({ title, price, sub_price, features, id }: PriceCardProps) {
       <button
         className={`border-2 ${
           id === "1"
-            ? "bg-third border-primary text-primary  hover:text-third"
+            ? "bg-surface-base border-brand-700 text-brand-700  hover:text-surface-base"
             : id === "2"
-            ? "bg-accent border-primary text-third"
-            : "bg-primary border-primary text-third"
-        } w-[15rem]  max-sm:w-[15rem] tablet:w-[20rem] mx-auto hover:bg-black border
+            ? "bg-brand-500 border-brand-700 text-surface-base"
+            : "bg-brand-700 border-brand-700 text-surface-base"
+        } w-[15rem]  max-sm:w-[15rem] tablet:w-[20rem] mx-auto hover:bg-text-primary border
           
-          transition-all duration-300 hover:border-primary  hover:scale-110 font-semibold rounded-3xl cursor-pointer h-10 mt-6
+          transition-all duration-300 hover:border-brand-700  hover:scale-110 font-semibold rounded-3xl cursor-pointer h-10 mt-6
             tablet:my-8 tablet:h-12`}>
         Sign Up Now
       </button>

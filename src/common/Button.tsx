@@ -13,19 +13,19 @@ interface ButtonProps {
 
 const styleMap: Record<string, string> = {
 
-  add: "w-[calc(100%-2rem)] p-2 mt-2 mx-auto  text-sm bg-primary rounded-3xl border border-tertiary hover:bg-third hover:border-primary hover:text-primary  transition-all duration-300 text-tertiary",
-  cancel: "rounded-2xl text-sm bg-purple-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
-  submit: "rounded-2xl text-sm bg-pink-500 hover:bg-blue-500  transition-all duration-300 text-tertiary",
-  // explore: "  text-sm border border-cartRed hover:bg-cartRed hover:text-third transition-all duration-300  text-cartRed mt-5 mb-8",
-  signup: "bg-primary rounded-2xl text-third w-full max-sm:w-[15rem] hover:text-primary  hover:bg-white border transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
-  learn_more: "p-1 bg-white rounded-2xl text-primary font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-primary transition-all duration-300 hover:bg-primary  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
-  customize: "p-1 text-xs px-4 py-2 rounded-2xl text-third bg-cartRed hover:bg-darkCartRed transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
-  shop_now: "text-xs px-4 py-2 rounded-2xl text-third bg-accent hover:bg-primary transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
-  explore: "text-xs rounded-2xl text-lightGreen",
-  plant_quiz: "p-1 text-xs px-4 rounded-2xl text-tertiary text-center bg-lightGreen hover:bg-tertiary transition-all duration-300 hover:text-lightGreen",
-  view_all: "text-xs rounded-2xl text-primary hover:bg-lightGreen transition-all duration-300 hover:text-tertiary hover:bg-lightGreen"
-  , add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-tertiary bg-primary border border-tertiary hover:bg-third hover:border-primary hover:text-primary transition-all duration-300 text-tertiary "
-  , quick_view: "p-1 text-xs px-4 rounded-2xl text-primary bg-tertiary border rounded-xl hover:bg-primary hover:text-tertiary transition-all duration-300 "
+  add: "w-[calc(100%-2rem)] p-2 mt-2 mx-auto  text-sm bg-brand-700 rounded-3xl border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700  transition-all duration-300 text-brand-100",
+  cancel: "rounded-2xl text-sm bg-purple-500 hover:bg-blue-500  transition-all duration-300 text-brand-100",
+  submit: "rounded-2xl text-sm bg-pink-500 hover:bg-blue-500  transition-all duration-300 text-brand-100",
+  // explore: "  text-sm border border-cart-500 hover:bg-cart-500 hover:text-surface-base transition-all duration-300  text-cart-500 mt-5 mb-8",
+  signup: "bg-brand-700 rounded-2xl text-surface-base w-full max-sm:w-[15rem] hover:text-brand-700  hover:bg-white border transition-all duration-300 hover:border-brand-700  font-semibold rounded-3xl cursor-pointer h-10 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
+  learn_more: "p-1 bg-white rounded-2xl text-brand-700 font-semibold w-full max-sm:w-[15rem] rounded-3xl border border-brand-700 transition-all duration-300 hover:bg-brand-700  hover:text-white cursor-pointer h-10 pl-1 tablet:text-2xl tablet:h-16 tablet:rounded-full tablet:w-[15rem]",
+  customize: "p-1 text-xs px-4 py-2 rounded-2xl text-surface-base bg-cart-500 hover:bg-cart-700 transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
+  shop_now: "text-xs px-4 py-2 rounded-2xl text-surface-base bg-brand-500 hover:bg-brand-700 transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
+  explore: "text-xs rounded-2xl text-success-500",
+  plant_quiz: "p-1 text-xs px-4 rounded-2xl text-brand-100 text-center bg-success-500 hover:bg-brand-100 transition-all duration-300 hover:text-success-500",
+  view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500"
+  , add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 "
+  , quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 "
 }
 
 const labelMap: Record<string, string> = {
@@ -62,7 +62,7 @@ const urlMap: Record<string, string> = {
 
 function Button({ btnType = "add", url, price, onSubmit, onClick }: ButtonProps) {
   const navigate = useNavigate();
-  const btnClasses = styleMap[btnType] || "bg-gray-300 text-black";
+  const btnClasses = styleMap[btnType] || "bg-gray-300 text-text-primary";
   // const label = labelMap[btnType] || "Click";
   const label = btnType === "add" && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
   const targetUrl = url || urlMap[btnType];

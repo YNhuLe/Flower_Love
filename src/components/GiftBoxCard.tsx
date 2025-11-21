@@ -11,8 +11,8 @@ function GiftBoxCard(giftbox: GiftboxWithItemsProps) {
         <div className={`${baseClass} ${firstClass}`}>
             <img  src={`${cloud_url}/${giftbox.img_url}`} alt="giftboxes"
                 className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" />
-            {/* <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">{giftbox.discount}% OFF</div> */}
-            <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-start items-start text-white text-left p-4
+            {/* <div className="absolute top-2 left-2 bg-error-DEFAULT text-white text-xs px-2 py-1 rounded">{giftbox.discount}% OFF</div> */}
+            <div className="absolute inset-0 bg-text-primary bg-opacity-30 flex flex-col justify-start items-start text-white text-left p-4
 pointer-events-none
             ">
                 <h3 className="text-xs font-semibold">Best Selling</h3>

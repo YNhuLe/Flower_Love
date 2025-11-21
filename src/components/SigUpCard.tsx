@@ -3,15 +3,15 @@ import React from "react";
 function SigUpCard() {
   return (
     <div className="m-4 transform duration-300 hover:scale-105 tablet:m-8 ">
-      <div className="bg-primary mt-16  transform rotate-2 w-[calc(100%-2rem)] mx-auto rounded-md ultra:w-[calc(100%-12rem)]">
+      <div className="bg-brand-700 mt-16  transform rotate-2 w-[calc(100%-2rem)] mx-auto rounded-md ultra:w-[calc(100%-12rem)]">
         <div
-          className="bg-tertiary p-16 pl-10 pr-10 mt-16 rounded-xl transform -rotate-3 duration-300
-        hover:bg-dark_green hover:text-white group 
+          className="bg-brand-100 p-16 pl-10 pr-10 mt-16 rounded-xl transform -rotate-3 duration-300
+        hover:bg-brand-900 hover:text-white group 
         desktop:flex flex-row 
 
         ">
           <div className="desktop:flex flex-col">
-            <h2 className="text-4xl text-secondary font-medium  mb-3 group-hover:text-white">
+            <h2 className="text-4xl text-text-secondary font-medium  mb-3 group-hover:text-white">
               Start Buying and Selling Plants Today!
             </h2>
             <p className="tablet:mt-8">
@@ -22,9 +22,9 @@ function SigUpCard() {
           </div>
           <button
             title="Sign Up"
-            className="bg-primary p-4 pb-0 pt-0 text-white  max-sm:w-[10rem] hover:text-primary  hover:bg-white border
+            className="bg-brand-700 p-4 pb-0 pt-0 text-white  max-sm:w-[10rem] hover:text-brand-700  hover:bg-white border
           
-          transition-all duration-300 hover:border-primary  font-semibold rounded-3xl cursor-pointer h-10 mt-10
+          transition-all duration-300 hover:border-brand-700  font-semibold rounded-3xl cursor-pointer h-10 mt-10
           tablet:w-48 tablet:mt-14 tablet:h-12 mx-auto
           ">
             Sign Up Now

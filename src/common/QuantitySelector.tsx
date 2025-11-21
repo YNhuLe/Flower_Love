@@ -22,8 +22,8 @@ function QuantitySelector({ value, onChange, min = 0, max = Infinity }: Quantity
         <div className="flex flex-row  items-center ml-2 mb-6">
             <div className="p-2 rounded-md">
 
-                <button className="border border-cartRed p-2 rounded-md" onClick={decrement}>
-                    <MinusIcon className="h-4 w-4 color-secondary" /></button>
+                <button className="border border-cart-500 p-2 rounded-md" onClick={decrement}>
+                    <MinusIcon className="h-4 w-4 text-secondary" /></button>
             </div>
 
             <div className="text-center w-14 flex justify-center items-center ">
@@ -32,8 +32,8 @@ function QuantitySelector({ value, onChange, min = 0, max = Infinity }: Quantity
 
             <div className="p-2 rounded-md">
 
-                <button className="bg-cartRed p-2 rounded-md" onClick={increment}>
-                    <PlusIcon className="h-4 w-4  text-third" /></button>
+                <button className="bg-cart-500 p-2 rounded-md" onClick={increment}>
+                    <PlusIcon className="h-4 w-4  text-surface-base" /></button>
             </div>
 
         </div >

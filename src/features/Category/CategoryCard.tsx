@@ -23,12 +23,12 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
             <div className="flex flex-row justify-between mx-4 my-5">
                 <h2 className="text-m font-semibold">{categories.name}</h2>
 
-                <p className="text-lightGreen">{categories.quantity}+ plants</p>
+                <p className="text-success-500">{categories.quantity}+ plants</p>
             </div>
             <p className="mx-4 mb-4 text-xs">{categories.description}</p>
-            <div className="flex flex-row mb-4 ml-4 hover:bg-tertiary transition-all duration-300 w-fit hover:border hover:rounded-xl pr-[.8rem]">
+            <div className="flex flex-row mb-4 ml-4 hover:bg-brand-100 transition-all duration-300 w-fit hover:border hover:rounded-xl pr-[.8rem]">
                 <Button btnType="explore" />
-                <ArrowRightIcon className="h-4 w-4 text-lightGreen self-center  transition-transform hover:translate-x-1" />
+                <ArrowRightIcon className="h-4 w-4 text-success-500 self-center  transition-transform hover:translate-x-1" />
             </div>
         </section>
 

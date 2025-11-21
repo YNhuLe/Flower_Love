@@ -4,7 +4,7 @@ function PlantQuiz() {
 
 
     return (
-        <article className="m-4 mt-[3rem] p-6 bg-lightGrey rounded-md">
+        <article className="m-4 mt-[3rem] p-6 bg-surface-raised rounded-md">
             <h2 className="text-center font-bold m-2">Not sure what you need?</h2>
             <p className="text-center text-xs">Take our plant quiz to find the perfect plants for your space, lifestyle, and experience level.</p>
 

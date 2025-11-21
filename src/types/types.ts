@@ -85,6 +85,8 @@ interface NewProductProps{
   bloom_info: string;
   is_pet_friendly: boolean;
   air_purifying: boolean;
+  humidity: string;
+  light: string;
   original_price: number;
   discounted_price: number;
   size_available: string;

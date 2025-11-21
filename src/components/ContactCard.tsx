@@ -23,9 +23,9 @@ function ContactCard({ id, image, campus, address, link }: ContactCardProps) {
       <h2 className="m-2 tablet:text-2xl">{campus}</h2>
       <p className="m-2 tablet:text-xl">{address}</p>
       <div
-        className="px-4 mt-8  h-10 text-accent  hover:text-white  hover:bg-primary border rounded-3xl
+        className="px-4 mt-8  h-10 text-brand-500  hover:text-white  hover:bg-brand-700 border rounded-3xl
           
-          transition-all duration-300 hover:border-primary  font-semibold flex items-center justify-center ">
+          transition-all duration-300 hover:border-brand-700  font-semibold flex items-center justify-center ">
         <a href={link} className="font-medium tablet:text-xl tablet:h-15">
           Get directions
         </a>

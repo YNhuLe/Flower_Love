@@ -61,15 +61,14 @@ function PlantDetails() {
 
     }
 
-
     return (plantInfo &&
         <section className="mx-4">
             <div>
-                <img className="bg-lightGrey rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
+                <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                 <div className="flex flex-row aligns-between gap-1 mt-4 mb-8">
-                    <img className="w-20 h-20 border border-grey rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                    <img className="w-20 h-20 border border-grey rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                    <img className="w-20 h-20 border border-grey rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
+                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
+                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
+                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                 </div>
                 <h2
                     className="font-semibold text-2xl mb-2"
@@ -77,90 +76,96 @@ function PlantDetails() {
                 <p className="italic mb-2">{plantInfo.scientific_name}</p>
 
                 <RatingStatusChecker rating={plantInfo.rating} ratingNum={plantInfo.rating} numReviews={plantInfo.num_reviews} />
-                <div className="flex flex-row items-center gap-2 p-1 bg-lightGrey border rounded-3xl w-fit px-2 mb-6">
-                    <Sparkles className="text-grey w-5 h-5" />
+                <div className="flex flex-row items-center gap-2 p-1 bg-surface-raised border rounded-3xl w-fit px-2 mb-6">
+                    <Sparkles className="text-text-muted w-5 h-5" />
 
                     <p className="text-sm">Planting level: {plantInfo.plantinglevel}</p>
                 </div>
-                <hr className="border-t border-grey" ></hr>
+                <hr className="border-t border-text-muted" ></hr>
                 <div className="flex flex-row justify-start gap-2 mt-4">
 
-                    <p className="text-xl text-primary font-semibold">$ {plantInfo.discounted_price}</p>
-                    <p className="text-xs line-through"> $ {plantInfo.original_price}</p></div>
-                <div className="text-lightGreen flex flex-row gap-1">
+                    <p className="text-xl text-brand-700 font-semibold">${plantInfo.discounted_price.toFixed(2)}</p>
+                    
+                    <p className="text-xs line-through"> $ {plantInfo.original_price.toFixed(2)}</p></div>
+                <div className="text-success-500 flex flex-row gap-1">
 
 
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
 
                 </div>
-                <hr className="border-t border-grey mt-4" ></hr>
+                <hr className="border-t border-text-muted mt-4" ></hr>
                 <p className="text-sm mt-4">Quantity</p>
                 <QuantitySelector
                     value={quantity} onChange={setQuantity} min={1} max={200}
                 />
                 <Button btnType="add" price={plantInfo.discounted_price}></Button>
 
-                <div className="p-6 bg-lightGrey border rounded-3xl w-fit my-6">
-                    <Sparkles className="text-grey w-5 h-5 inline-block" />
+                <div className="p-6 bg-surface-raised border rounded-3xl w-fit my-6">
+                    <Sparkles className="text-text-muted w-5 h-5 inline-block" />
                     <h3 className="inline-block ml-2 mb-4">Plant Benefits</h3>
                     {
                         formatArr.map((benefit, index) => (
                             <div className="flex flex-row gap-2">
-                                <FaCheck className="w-4 h-3 text-lightGreen " />
+                                <FaCheck className="w-4 h-3 text-success-500 " />
                                 <p key={index} className="text-xs mb-2 ">{benefit}</p></div>
                         ))
                     }
 
                 </div>
-                <article className="p-6 bg-third border rounded-3xl">
+                <article className="p-6 bg-surface-base border rounded-3xl">
                     <h3 className="text-xxs mb-2 font-semibold">About this Plant</h3>
-                    <p className="text-xs leading-[1.5]">{plantInfo.description}</p>
+                    <span className="text-xs leading-[1.5]">{plantInfo.description}</span>
+                    <span className="text-xs leading-[1.5]"> {plantInfo.growth_habit}</span>
+                    <p className="text-xs leading-[1.5]">{plantInfo.bloom_info}</p>
                 </article>
 
-                <p>{plantInfo.growth_habit}</p>
-                <p>{plantInfo.bloom_info}</p>
-                <p>{plantInfo.fertilizer_info}</p>
+                <div className="my-12">
 
-                <article className="p-4 border rounded-xl  mb-6">
-                    <div className="p-2 bg-yellow-200 rounded-full inline-flex items-center justify-center mb-2">
-                        <Droplets className="w-6 h-6 text-blue-600" /></div>
-                    <h3>Water</h3>
-                    <p className="text-xs">{plantInfo.watering_requirements}</p>
-                    {/* <p>{plantInfo.soil_type}</p> */}
-                </article>
-                <p>{plantInfo.potting_tip}</p>
-                <article className="p-4 border rounded-xl  mb-6">
-                    <div className="p-2 bg-yellow-200 rounded-full inline-flex items-center justify-center mb-2">
-                        <Sun className=" w-6 h-6 text-amber-600 bg-yellow-200 rounded-full" />
-                    </div>
-                    <h3>Light</h3>
-                    <p className="text-xs">Need a lot of sunlight</p>
+                    <h2 className="text-center m-4">Care instructions</h2>
 
-                </article>
+                    <article className="p-4 border rounded-xl  mb-6">
+                        <div className="p-2 bg-blue-100 rounded-full inline-flex items-center justify-center mb-2">
+                            <Droplets className="w-6 h-6 text-blue-600" /></div>
+                        <h3 className="mb-2">Water</h3>
+                        <p className="text-xs text-text-muted">{plantInfo.watering_requirements}</p>
+                        {/* <p>{plantInfo.soil_type}</p> */}
+                    </article>
+                    <p>{plantInfo.potting_tip}</p>
+                    <article className="p-4 border rounded-xl  mb-6">
+                        <div className="p-2 bg-amber-100 rounded-full inline-flex items-center justify-center mb-2">
+                            <Sun className=" w-6 h-6 text-amber-600 bg-yellow-200 rounded-full" />
+                        </div>
+                        <h3 className="mb-2">Light</h3>
+                        <p className="text-xs text-text-muted">{plantInfo.light}</p>
 
-
-
-                <article className="p-4 border rounded-xl  mb-6">
-                    <div className="p-2 bg-yellow-200 rounded-full inline-flex items-center justify-center mb-2">
-                        <Thermometer className="w-6 h-6 text-red" /></div>
-                    <h3>Temperature</h3><p className="text-xs">{plantInfo.humidity_preference}</p>
-                    <p className="text-xs">{plantInfo.temperature_range}</p>
-
-                </article>
-
-                <article className="p-4 border rounded-xl  mb-6">
-                    <div className="p-2 bg-yellow-200 rounded-full inline-flex items-center justify-center mb-2">
-                        <Wind className="w-6 h-6 text-cyan-600" /></div>
-                    <h3>Humidity</h3>
-                </article>
-
-                <article className="p-4 border rounded-xl  mb-6">
-                    <div className="p-2 bg-yellow-200 rounded-full inline-flex items-center justify-center mb-2">
-                        <Sparkles className="w-6 h-6 text-emerald-600" /></div>
-                    <h3>Fertilizer</h3> <p className="text-xs">{plantInfo.fertilizer_info}</p>
-                </article>
+                    </article>
 
 
+
+                    <article className="p-4 border rounded-xl  mb-6">
+                        <div className="p-2 bg-error-100 rounded-full inline-flex items-center justify-center mb-2">
+                            <Thermometer className="w-6 h-6 text-error-500" /></div>
+                        <h3 className="mb-2">Temperature</h3>
+                        <p className="text-xs text-text-muted">{plantInfo.humidity_preference},   <span className="text-xs text-text-muted">{plantInfo.temperature_range}</span></p>
+                      
+
+                    </article>
+
+                    <article className="p-4 border rounded-xl  mb-6">
+                        <div className="p-2 bg-cyan-100 rounded-full inline-flex items-center justify-center mb-2">
+                            <Wind className="w-6 h-6 text-cyan-600" /></div>
+                        <h3 className="mb-2">Humidity</h3>
+                        <p className="text-xs text-text-muted">{plantInfo.humidity}</p>
+                    </article>
+
+                    <article className="p-4 border rounded-xl  mb-6">
+                        <div className="p-2 bg-emerald-100 rounded-full inline-flex items-center justify-center mb-2">
+                            <Sparkles className="w-6 h-6 text-emerald-600" /></div>
+                        <h3 className="mb-2">Fertilizer</h3>
+                         <p className="text-xs text-text-muted">{plantInfo.fertilizer_info}</p>
+                    </article>
+
+                </div>
 
                 <p>{plantInfo.mature_width}</p>
                 <p>{plantInfo.mature_height}</p></div>

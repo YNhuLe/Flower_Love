@@ -9,7 +9,7 @@ interface ButtonType {
 const styleMap: Record<string, string>= {
   custom_gift: "absolute top-4 right-4 text-md",
   gift_box: "",
-  new_product:"bg-third px-[.2rem] py-[.2rem] border rounded-[50%] text-xs"
+  new_product:"bg-surface-base px-[.2rem] py-[.2rem] border rounded-[50%] text-xs"
 }
 
 const urlMap: Record<string, string> = {

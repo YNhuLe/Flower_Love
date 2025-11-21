@@ -11,20 +11,20 @@ const getStockStatus = (stockQuantity: number) => {
         return {
             text: 'In Stock',
             Icon: FaCheck,
-            stockColor: 'text-lightGreen',
+            stockColor: 'text-success-500',
         }
     } else if (stockQuantity >0 && stockQuantity <= 10) {
         return {
             text: 'Low In Stock',
             Icon: FaExclamationTriangle,
-            stockColor: 'text-lowStock',
+            stockColor: 'text-warning-500',
           
         }
     } else {
         return {
             text: 'Out of Stock',
             Icon: FaTimes,
-            stockColor: 'text-red',
+            stockColor: 'text-error-DEFAULT',
         
         }
     }

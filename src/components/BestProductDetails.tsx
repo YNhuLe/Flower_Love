@@ -18,7 +18,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
         <div>
           {
             products.isnewarrival && (
-              <p className="bg-primary  w-fit px-2 py-1 rounded-lg text-third text-[.65rem]">  New</p>
+              <p className="bg-brand-700  w-fit px-2 py-1 rounded-lg text-surface-base text-[.65rem]">  New</p>
 
             )
           }
@@ -35,7 +35,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
 
       <h2 className="text-left mt-4 text-xs">{products.common_name}</h2>
       <div className="flex flex-row justify-start gap-2">
-        <p className=" text-xxs text-primary font-semibold">
+        <p className=" text-xxs text-brand-700 font-semibold">
           ${products.discounted_price}
         </p>
         <p className="text-xs line-through ">
