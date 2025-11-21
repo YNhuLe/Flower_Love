@@ -31,7 +31,7 @@ function GiftBoxOffer() {
     return (
 
 
-        <section className="bg-third p-4">
+        <section className="bg-surface-base p-4">
             <div className="m-4 ">
                 <h2 className="text-sm uppercase text-cartRed ">Gift Box Offer</h2>
                 <div>

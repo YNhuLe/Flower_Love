@@ -16,7 +16,7 @@ function CustomGiftBoxCard({ name, price, img_url }: GiftItemProps) {
                 src={imgSrc} className="w-full h-[22rem] object-cover transform transition-transform duration-300 hover:scale-105" />
               <HeartButton btnType="custom_gift"/>
             <h1 className="text-sm m-4 mb-2"> {name}</h1>
-            <p className="text-cartRed font-semibold ml-4"> $ {price}</p>
+            <p className="text-cart-500 font-semibold ml-4"> $ {price}</p>
             <QuantitySelector value={quantity}
                 onChange={setQuantity}
                 min={1} max={200}

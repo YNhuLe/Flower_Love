@@ -19,7 +19,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
             <div>
                 {
                     newProduct.isnewarrival && (
-                        <p className="text-third text-[.65rem] absolute z-40 border rounded-lg m-4 px-2 py-1 bg-primary">New</p>
+                        <p className="text-surface-base text-[.65rem] absolute z-40 border rounded-lg m-4 px-2 py-1 bg-brand-700">New</p>
                     )
 
 
@@ -35,7 +35,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
                     {
                         newProduct.plantinglevel && (
-                            <p className="bg-third px-[.3rem] py-[.3rem] border rounded-[50%]">
+                            <p className="bg-surface-base px-[.3rem] py-[.3rem] border rounded-[50%]">
                                 <BsHandThumbsUp className="text-xs" />
 
                             </p>
@@ -43,7 +43,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                         )
                     }
                     {newProduct.is_pet_friendly && (
-                        <p className=" bg-third px-[.3rem] py-[.3rem] border rounded-[50%]">
+                        <p className=" bg-surface-base px-[.3rem] py-[.3rem] border rounded-[50%]">
                             <FaPaw className="text-xs" />
                         </p>
                     )}
@@ -60,7 +60,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                     <div className="flex row gap-1">
                         <FaStar className="text-yellow-400 w-5 h-5" />
                         <p>{newProduct.rating}</p>
-                        <p className="text-grey">({newProduct.num_reviews})</p>
+                        <p className="text-text-muted">({newProduct.num_reviews})</p>
 
                     </div>
 
@@ -75,7 +75,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
                 <div className="flex flex-row justify-start gap-2 my-4">
 
-                    <p className="text-primary font-semibold">{newProduct.discounted_price}</p>
+                    <p className="text-brand-700 font-semibold">{newProduct.discounted_price}</p>
                     <p className="text-xs line-through">{newProduct.original_price}</p>
                 </div>
             </div>

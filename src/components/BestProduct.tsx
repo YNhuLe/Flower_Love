@@ -32,7 +32,7 @@ function BestProduct() {
       <h2 className="m-4 mb-0 text-2xl text-center font-semibold">New Arrivals</h2>
       <p className="text-xs text-center m-4">Discover our latest collection of beautiful indoor plants, carefully selected to bring life and freshness to your space.</p>
       {loading && <p>Loading ...  </p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-error-DEFAULT">{error}</p>}
       <Swiper
         modules={[Navigation]}
         // spaceBetween={5}

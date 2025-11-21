@@ -28,7 +28,7 @@ function RatingStatusChecker({ numReviews, rating, maxStar = 5, iconSize = "w-4 
 
                 return (
 
-                    <StarComponent key={starPosition} className={`${iconSize} text-lowStock`} />
+                    <StarComponent key={starPosition} className={`${iconSize} text-warning-500`} />
                 )
             })}
             <p className="pl-1 text-xs">{rating}/5</p>

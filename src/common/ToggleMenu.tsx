@@ -11,7 +11,7 @@ function ToggleMenu( {giftCategories, selectedCategory, setSelectedCategory }: T
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
     return (
-        <div className="bg-third flex flex-row justify-between  my-4 mx-auto border border-primary rounded-full">
+        <div className="bg-third flex flex-row justify-between  my-4 mx-auto border border-brand-700 rounded-full">
             {
                 giftCategories.map((labelCate, index) => (
 
@@ -19,7 +19,7 @@ function ToggleMenu( {giftCategories, selectedCategory, setSelectedCategory }: T
                     //  key={labelCate.id}
                     key={index}
                         onClick={() => setSelectedCategory(labelCate.category_name)}
-                        className={`px-4 py-2 rounded-full text-[.65rem] w-full ${selectedCategory === labelCate.category_name ? "bg-primary text-white" : "bg-third text-primary"
+                        className={`px-4 py-2 rounded-full text-[.65rem] w-full ${selectedCategory === labelCate.category_name ? "bg-brand-700 text-white" : "bg-third text-brand-700"
                             }`}
                     >
                         {capitalizeFirst(labelCate.category_name)}
