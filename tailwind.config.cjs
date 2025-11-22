@@ -73,7 +73,7 @@ module.exports = {
           700: "#b12a2a", // darker (hover)
           500: "#E43636", // main
           300: "#f17878", // lighter
-              100: "#fde7e7",
+          100: "#fde7e7",
         },
 
         cart: {
