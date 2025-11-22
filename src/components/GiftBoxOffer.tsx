@@ -33,7 +33,7 @@ function GiftBoxOffer() {
 
         <section className="bg-surface-base p-4">
             <div className="m-4 ">
-                <h2 className="text-sm uppercase text-cartRed ">Gift Box Offer</h2>
+                <h2 className="text-sm uppercase text-cart-500 ">Gift Box Offer</h2>
                 <div>
                     <h2 className="text-3xl uppercase font-semibold mt-3">Best Plants Gift Box collections.</h2>
                     <p className="text-sm mt-5"> From planter materials to style options, discover which planter is best for your space..</p>
