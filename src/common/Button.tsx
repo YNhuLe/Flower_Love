@@ -9,6 +9,7 @@ interface ButtonProps {
   price?: string | number;
   onSubmit?: () => void;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const styleMap: Record<string, string> = {
@@ -25,7 +26,8 @@ const styleMap: Record<string, string> = {
   plant_quiz: "p-1 text-xs px-4 rounded-2xl text-brand-100 text-center bg-success-500 hover:bg-brand-100 transition-all duration-300 hover:text-success-500",
   view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500"
   , add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 "
-  , quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 "
+  , quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 ",
+  disabled: "opacity-50 cursor-not-allowed pointer-events-none bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white"
 }
 
 const labelMap: Record<string, string> = {
@@ -60,7 +62,7 @@ const urlMap: Record<string, string> = {
 
 }
 
-function Button({ btnType = "add", url, price, onSubmit, onClick }: ButtonProps) {
+function Button({ btnType = "add", url, price, onSubmit, onClick , disabled}: ButtonProps) {
   const navigate = useNavigate();
   const btnClasses = styleMap[btnType] || "bg-gray-300 text-text-primary";
   // const label = labelMap[btnType] || "Click";
@@ -68,6 +70,8 @@ function Button({ btnType = "add", url, price, onSubmit, onClick }: ButtonProps)
   const targetUrl = url || urlMap[btnType];
 
   const handleClick = () => {
+
+    if (disabled) return;
     if (onClick) {
       onClick();
     } else if (targetUrl) {
@@ -78,6 +82,7 @@ function Button({ btnType = "add", url, price, onSubmit, onClick }: ButtonProps)
     <div className="">
       <button className={`cursor-pointer flex flex-row justify-center items-center gap-3 ${btnClasses}`}
         onClick={handleClick}
+       disabled={disabled}
       >
 
         {iconMap[btnType] && iconMap[btnType]}

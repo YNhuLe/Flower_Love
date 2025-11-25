@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NewProductProps } from "../types/types";
+import { NewProductProps, PlantWithSize } from "../types/types";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
@@ -19,19 +19,23 @@ import {
     Sparkles,
     ChevronLeft,
     Check,
-    AlertCircle
+    AlertCircle,
+    Dice1
 } from 'lucide-react';
+import HeartButton from "../common/HeartButton";
 
 function PlantDetails() {
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
     const { id } = useParams();
-    const [plantInfo, setPlantInfo] = useState<NewProductProps | null>(null);
+    const [plantInfo, setPlantInfo] = useState<PlantWithSize | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(0);
+    const [selectSize, setSelectedSize] = useState(0);
+    const [selectImage, setSelectedImage] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-
+  
 
     useEffect(() => {
         const fetchPlantInfo = async () => {
@@ -51,54 +55,87 @@ function PlantDetails() {
 
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error...</p>
+    if (error) return <p>Error: {error}</p>
+    if (!plantInfo) return <p>No plant information available</p>;
+
+    // Parse benefits - it should already be an array from the backend
     let formatArr: string[] = [];
-    try {
-        const benefitArray: string[] = JSON.parse(plantInfo?.benefits || "[]");
-        formatArr = benefitArray.map(benefitArr => `${benefitArr}`)
-    } catch (error: any) {
-        console.log("Error: Could not parse benefit data.", error);
-
+    if (Array.isArray(plantInfo.benefits)) {
+        formatArr = plantInfo.benefits;
+    } else if (typeof plantInfo.benefits === 'string') {
+        try {
+            formatArr = JSON.parse(plantInfo.benefits);
+        } catch (error: any) {
+            console.log("Error: Could not parse benefit data.", error);
+            formatArr = [];
+        }
     }
-
+    const currentPrice = plantInfo.sizes[selectSize].original_price;
+    const discountedPrice = plantInfo.sizes[selectSize].discounted_price;
+    const isOutOfStock = plantInfo.stock_quantity <=0;
     return (plantInfo &&
         <section className="mx-4">
             <div>
                 <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                <div className="flex flex-row aligns-between gap-1 mt-4 mb-8">
+                <div className="flex aligns-between gap-1 mt-4 mb-8">
                     <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                     <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                     <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                 </div>
-                <h2
-                    className="font-semibold text-2xl mb-2"
-                >{plantInfo.common_name}</h2>
+
+                <div className="flex items-center justify-between">
+                    <h2
+                        className="font-semibold text-2xl mb-2 text-left"
+                    >{plantInfo.common_name}</h2>
+                    <div className="flex  gap-2">
+
+                        <HeartButton btnType="product_details" />
+                        <Share2 className="text-text-muted w-5 h-5" /></div></div>
                 <p className="italic mb-2">{plantInfo.scientific_name}</p>
 
                 <RatingStatusChecker rating={plantInfo.rating} ratingNum={plantInfo.rating} numReviews={plantInfo.num_reviews} />
-                <div className="flex flex-row items-center gap-2 p-1 bg-surface-raised border rounded-3xl w-fit px-2 mb-6">
+                <div className="flex items-center gap-2 p-1 bg-surface-raised border rounded-3xl w-fit px-2 mb-6">
                     <Sparkles className="text-text-muted w-5 h-5" />
 
                     <p className="text-sm">Planting level: {plantInfo.plantinglevel}</p>
                 </div>
                 <hr className="border-t border-text-muted" ></hr>
-                <div className="flex flex-row justify-start gap-2 mt-4">
-
-                    <p className="text-xl text-brand-700 font-semibold">${plantInfo.discounted_price.toFixed(2)}</p>
-                    
-                    <p className="text-xs line-through"> $ {plantInfo.original_price.toFixed(2)}</p></div>
-                <div className="text-success-500 flex flex-row gap-1">
-
-
+                <div className="mt-4 flex gap-2">
+                <p className="text-2xl text-brand-700 font-medium">${currentPrice.toFixed(2)}</p>
+                <p>${discountedPrice.toFixed(2)}</p></div>
+                <div className="text-success-500 flex gap-1">
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
-
                 </div>
                 <hr className="border-t border-text-muted mt-4" ></hr>
+                <div className="flex justify-start gap-2 mt-4">
+                    <div className=" flex gap-2 mt-4">
+                        {
+                            plantInfo.sizes && plantInfo.sizes.length > 0 ? (
+                                plantInfo.sizes.map((size, index) => (
+                                    <button key={index} 
+                                    onClick={() => setSelectedSize(index)}
+                                    className={`p-2 border rounded-xl
+                                ${selectSize === index ? 'border-2 border-brand-500 bg-brand-100' : 
+                                    'border-2 border-text-muted hover:border-brand-500'}`
+                                    }>
+                                        <p>{size.size}</p>
+                                        <p>${size.original_price}</p>
+                    
+
+                                    </button>
+                                ))
+                            ) : (
+                                <p className="text-sm text-text-muted">No sizes available</p>
+                            )
+                        }
+                    </div>
+
+                </div>
                 <p className="text-sm mt-4">Quantity</p>
                 <QuantitySelector
                     value={quantity} onChange={setQuantity} min={1} max={200}
                 />
-                <Button btnType="add" price={plantInfo.discounted_price}></Button>
+                <Button btnType="add" price={currentPrice * quantity} disabled={isOutOfStock}></Button>
 
                 <div className="p-6 bg-surface-raised border rounded-3xl w-fit my-6">
                     <Sparkles className="text-text-muted w-5 h-5 inline-block" />
@@ -116,7 +153,7 @@ function PlantDetails() {
                     <h3 className="text-xxs mb-2 font-semibold">About this Plant</h3>
                     <span className="text-xs leading-[1.5]">{plantInfo.description}</span>
                     <span className="text-xs leading-[1.5]"> {plantInfo.growth_habit}</span>
-                    <p className="text-xs leading-[1.5]">{plantInfo.bloom_info}</p>
+                    <span className="text-xs leading-[1.5]">{plantInfo.bloom_info}</span>
                 </article>
 
                 <div className="my-12">
@@ -147,7 +184,7 @@ function PlantDetails() {
                             <Thermometer className="w-6 h-6 text-error-500" /></div>
                         <h3 className="mb-2">Temperature</h3>
                         <p className="text-xs text-text-muted">{plantInfo.humidity_preference},   <span className="text-xs text-text-muted">{plantInfo.temperature_range}</span></p>
-                      
+
 
                     </article>
 
@@ -162,20 +199,13 @@ function PlantDetails() {
                         <div className="p-2 bg-emerald-100 rounded-full inline-flex items-center justify-center mb-2">
                             <Sparkles className="w-6 h-6 text-emerald-600" /></div>
                         <h3 className="mb-2">Fertilizer</h3>
-                         <p className="text-xs text-text-muted">{plantInfo.fertilizer_info}</p>
+                        <p className="text-xs text-text-muted">{plantInfo.fertilizer_info}</p>
                     </article>
 
                 </div>
 
-                <p>{plantInfo.mature_width}</p>
-                <p>{plantInfo.mature_height}</p></div>
-            <div>
-                <p>{plantInfo.shipping_info}</p>
-                <p>{plantInfo.stock_quantity}</p>
-                <p>{plantInfo.size_available}</p>
-                <p></p>
             </div>
-        </section>
+        </section >
     )
 }
 

@@ -24,7 +24,7 @@ const getStockStatus = (stockQuantity: number) => {
         return {
             text: 'Out of Stock',
             Icon: FaTimes,
-            stockColor: 'text-error-DEFAULT',
+            stockColor: 'text-error-500',
         
         }
     }
