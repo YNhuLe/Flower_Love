@@ -4,8 +4,6 @@ interface BestProductProp {
   common_name: string;
   image_url: string;
   details: string;
-  original_price: number;
-  discounted_price: number;
   rating: number;
   isnewarrival: boolean;
   watering_requirements:string;
@@ -87,9 +85,6 @@ interface NewProductProps{
   air_purifying: boolean;
   humidity: string;
   light: string;
-  original_price: number;
-  discounted_price: number;
-  size_available: string;
   stock_quantity: number;
   shipping_info: string;
   rating: number;
@@ -101,7 +96,20 @@ interface NewProductProps{
   benefits: string
 }
 
-interface ProductWithCategory extends CategoriesProps, NewProductProps {
+interface PlantSizeProps{
+  size_id: number;
+  plant_id: number;
+  original_price: number;
+  discount_percentage: number
+size: string
+}
+//Plant details with nested sizes array
+interface PlantWithSize extends NewProductProps{
+sizes: (PlantSizeProps & {discounted_price: number})[];
+}
+
+
+interface ProductWithCategory extends CategoriesProps, NewProductProps,PlantWithSize {
 }
 
 interface ProductAndInfo{
@@ -115,5 +123,6 @@ export type {
   GiftItemProps,
   CategoriesProps,
 ProductAndInfo,
-NewProductProps,ProductWithCategory
+NewProductProps,ProductWithCategory,
+PlantWithSize
 };

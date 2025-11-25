@@ -13,6 +13,8 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
     console.log("New Product: ", newProduct);
     
+
+    
     return (
         <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
 
@@ -65,18 +67,19 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                     </div>
 
                     <div className="flex gap-2 flex-wrap mr-4">
-                        {
-                            newProduct.size_available.split(",").map((size, index) => (
-                                <p className=" p-1 text-[.6rem] border rounded-lg" key={index}>{size.trim()}</p>
+                        {/* {
+                            newProduct.sizes.map((size, index) => (
+                                <p className=" p-1 text-[.6rem] border rounded-lg" key={index}>{size.size} - ${size.discount_percentage.toFixed(2)}</p>
                             ))
-                        }
+                
+                        } */}
                     </div>
                 </div>
 
                 <div className="flex flex-row justify-start gap-2 my-4">
 
-                    <p className="text-brand-700 font-semibold">{newProduct.discounted_price}</p>
-                    <p className="text-xs line-through">{newProduct.original_price}</p>
+                    {/* <p className="text-brand-700 font-semibold">{newProduct.original_price}</p> */}
+                    <p className="text-xs line-through">{}</p>
                 </div>
             </div>
 
