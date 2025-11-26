@@ -4,9 +4,10 @@ interface QuantitySelectorProps {
     value: number;
     onChange: (newValue: number) => void;
     min?: number;
-    max?: number
+    max?: number;
+    disabled?:boolean;
 }
-function QuantitySelector({ value, onChange, min = 0, max = Infinity }: QuantitySelectorProps) {
+function QuantitySelector({ value, onChange, min = 0, max = value , disabled}: QuantitySelectorProps) {
 
     const increment = () => {
         if (value < max) {
@@ -32,7 +33,9 @@ function QuantitySelector({ value, onChange, min = 0, max = Infinity }: Quantity
 
             <div className="p-2 rounded-md">
 
-                <button className="bg-cart-500 p-2 rounded-md" onClick={increment}>
+                <button className="bg-cart-500 p-2 rounded-md" 
+                // disabled
+                onClick={increment}>
                     <PlusIcon className="h-4 w-4  text-surface-base" /></button>
             </div>
 

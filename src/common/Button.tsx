@@ -65,6 +65,8 @@ const urlMap: Record<string, string> = {
 function Button({ btnType = "add", url, price, onSubmit, onClick , disabled}: ButtonProps) {
   const navigate = useNavigate();
   const btnClasses = styleMap[btnType] || "bg-gray-300 text-text-primary";
+  const disabledClass =disabled ? styleMap.disabled : "";
+  const finalStyle = `${btnClasses} ${disabledClass}`;
   // const label = labelMap[btnType] || "Click";
   const label = btnType === "add" && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
   const targetUrl = url || urlMap[btnType];
@@ -80,11 +82,10 @@ function Button({ btnType = "add", url, price, onSubmit, onClick , disabled}: Bu
   }
   return (
     <div className="">
-      <button className={`cursor-pointer flex flex-row justify-center items-center gap-3 ${btnClasses}`}
+      <button className={`cursor-pointer flex flex-row justify-center items-center gap-3 ${finalStyle}`}
         onClick={handleClick}
        disabled={disabled}
       >
-
         {iconMap[btnType] && iconMap[btnType]}
         <span>{label}</span>
 

@@ -74,7 +74,7 @@ function PlantDetails() {
     const discountedPrice = plantInfo.sizes[selectSize].discounted_price;
     const isOutOfStock = plantInfo.stock_quantity <=0;
     return (plantInfo &&
-        <section className="mx-4">
+        <section className="mx-4 mt-[7rem]">
             <div>
                 <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
                 <div className="flex aligns-between gap-1 mt-4 mb-8">
@@ -101,8 +101,8 @@ function PlantDetails() {
                 </div>
                 <hr className="border-t border-text-muted" ></hr>
                 <div className="mt-4 flex gap-2">
-                <p className="text-2xl text-brand-700 font-medium">${currentPrice.toFixed(2)}</p>
-                <p>${discountedPrice.toFixed(2)}</p></div>
+                <p className="text-2xl text-brand-700 font-medium">${discountedPrice.toFixed(2)}</p>
+                <p>${currentPrice.toFixed(2)}</p></div>
                 <div className="text-success-500 flex gap-1">
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
                 </div>
@@ -131,13 +131,15 @@ function PlantDetails() {
                     </div>
 
                 </div>
-                <p className="text-sm mt-4">Quantity</p>
+                <p className="text-sm mt-4">Quantity</p>              
                 <QuantitySelector
-                    value={quantity} onChange={setQuantity} min={1} max={200}
+                    value={quantity} onChange={setQuantity} min={1} max={plantInfo.stock_quantity}
+                disabled={isOutOfStock}
+                
                 />
-                <Button btnType="add" price={currentPrice * quantity} disabled={isOutOfStock}></Button>
+                <Button btnType="add" price={(discountedPrice * quantity).toFixed(2)} disabled={isOutOfStock}></Button>
 
-                <div className="p-6 bg-surface-raised border rounded-3xl w-fit my-6">
+                <div className="p-6 bg-surface-raised border rounded-3xl w-full my-6">
                     <Sparkles className="text-text-muted w-5 h-5 inline-block" />
                     <h3 className="inline-block ml-2 mb-4">Plant Benefits</h3>
                     {

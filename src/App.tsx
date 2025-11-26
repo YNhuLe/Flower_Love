@@ -16,6 +16,7 @@ import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import GiftBoxOffer from "./components/GiftBoxOffer";
 import PlantDetails from "./pages/PlantDetails";
+import PlantDetailsPage from "./pages/PlantDetailsPage";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/giftbox/:id" element={<GiftBoxOffer />} />
-        <Route path="/products/:id" element={<PlantDetails />} />
+        <Route path="/products/:id" element={<PlantDetailsPage />} />
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>
