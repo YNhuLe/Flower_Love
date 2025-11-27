@@ -76,12 +76,12 @@ function PlantDetails() {
     return (plantInfo &&
         <section className="mx-4 mt-[7rem]">
             <div>
-                <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
+                <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
                 <div className="flex aligns-between gap-1 mt-4 mb-8">
-                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                    <img className="w-20 h-20 border border-text-muted rounded-xl" src={`${cloud_url}/${plantInfo.image_url}`} alt={plantInfo.common_name} />
-                </div>
+                     <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
+               <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
+              
+               </div>
 
                 <div className="flex items-center justify-between">
                     <h2
@@ -101,8 +101,8 @@ function PlantDetails() {
                 </div>
                 <hr className="border-t border-text-muted" ></hr>
                 <div className="mt-4 flex gap-2">
-                <p className="text-2xl text-brand-700 font-medium">${discountedPrice.toFixed(2)}</p>
-                <p>${currentPrice.toFixed(2)}</p></div>
+                <p className="text-2xl text-brand-700 font-medium ">${discountedPrice.toFixed(2)}</p>
+                <p className="line-through">${currentPrice.toFixed(2)}</p></div>
                 <div className="text-success-500 flex gap-1">
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
                 </div>

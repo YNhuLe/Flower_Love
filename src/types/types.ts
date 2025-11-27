@@ -68,7 +68,10 @@ interface NewProductProps{
   common_name: string;
   scientific_name: string;
   description: string;
-  image_url: string;
+
+  image_url: string[];
+
+
   light_requirements: string;
   watering_requirements: string;
   humidity_preference: string;
