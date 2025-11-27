@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
+import {
+    ShoppingCart,
+    Heart,
+    Share2,
+    Star,
+    Droplets,
+    Sun,
+    Thermometer,
+    Wind,
+    Sparkles,
+    ChevronLeft,
+    Check,
+    AlertCircle,
+    ChevronRight,
+    Dice1,User
+} from 'lucide-react';
 function NavBar() {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -38,10 +54,18 @@ function NavBar() {
             src={`${cloud_url}/v1756387918/logo_mqmxll.png`}
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4 tablet:w-[4rem] tablet:h-[4rem] 
-            laptop:mx-8
-     "
+            laptop:mx-8"
+                       
           />
         </Link>
+
+        <div className="flex gap-6">
+          <Link
+          to="https://www.youtube.com/watch?v=eB5tWQqa3po&t=3357s"
+          > <User /></Link>
+       
+        <ShoppingCart />
+    
         <img
           loading="lazy"
 
@@ -84,7 +108,7 @@ function NavBar() {
           </button>
         </div>
       </div>
-
+</div>
       {/* <ul className="list-none hidden laptop:flex flex-row gap-4">
         {navLinks.map((nav: { id: string; title: string }) => (
           <li key={nav.id} onClick={() => setActive(nav.title)}>
