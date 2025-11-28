@@ -7,7 +7,7 @@ import PriceList from "../components/PriceList";
 import ProductList from "../components/ProductList";
 import TestimonialsList from "../components/TestimonialsList";
 import ContactUs from "../components/ContactUs";
-import Footer from "../components/Footer";
+import Footer from "../common/Footer";
 function Home() {
   return (
     <>

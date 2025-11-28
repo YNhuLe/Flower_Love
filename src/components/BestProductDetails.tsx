@@ -10,6 +10,9 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
   if (!products) {
     return <p>Loading product details...</p>;
   }
+
+  console.log("Products details: ", products);
+  
   return (
     <div
       className="max-w-fit h-50 mt-8 mb-8 p-4 border m-4 border-green-900 rounded-lg shadow-lg mx-auto mx-4"
@@ -28,7 +31,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
 
       <img
         className="h-60 w-60 m-auto transform transition-transform duration-300 hover:scale-105"
-        src={`${cloud_url}/${products.image_url}`}
+        src={`${cloud_url}/${products.image_url[0]}`}
         alt="best-pro-image"
         loading="lazy"
       />
