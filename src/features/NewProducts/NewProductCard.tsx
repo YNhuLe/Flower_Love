@@ -6,12 +6,14 @@ import HeartButton from "../../common/HeartButton";
 
 function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-    const imgSrc = newProduct.image_url ? `${cloud_url}/${newProduct.image_url}` : `${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
+   
+   
+    const imgSrc = newProduct.image_url ? `${cloud_url}/${newProduct.image_url[0]}` : `${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
     if (!newProduct) {
         return <p>Loading new products...</p>
     }
 
-    console.log("New Product: ", newProduct);
+    console.log("New Product: ", newProduct.image_url);
     
 
     

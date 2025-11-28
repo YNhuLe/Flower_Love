@@ -35,7 +35,7 @@ function PlantDetails() {
     const [selectSize, setSelectedSize] = useState(0);
     const [selectImage, setSelectedImage] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-  
+
 
     useEffect(() => {
         const fetchPlantInfo = async () => {
@@ -58,7 +58,7 @@ function PlantDetails() {
     if (error) return <p>Error: {error}</p>
     if (!plantInfo) return <p>No plant information available</p>;
 
-    // Parse benefits - it should already be an array from the backend
+    // Parse benefits from the backend
     let formatArr: string[] = [];
     if (Array.isArray(plantInfo.benefits)) {
         formatArr = plantInfo.benefits;
@@ -72,16 +72,32 @@ function PlantDetails() {
     }
     const currentPrice = plantInfo.sizes[selectSize].original_price;
     const discountedPrice = plantInfo.sizes[selectSize].discounted_price;
-    const isOutOfStock = plantInfo.stock_quantity <=0;
+    const isOutOfStock = plantInfo.stock_quantity <= 0;
     return (plantInfo &&
         <section className="mx-4 mt-[7rem]">
             <div>
-                <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
+                <img className="bg-surface-raised rounded-xl h-[20rem] w-full" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
                 <div className="flex aligns-between gap-1 mt-4 mb-8">
-                     <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
-               <img className="bg-surface-raised rounded-xl" src={`${cloud_url}/${plantInfo.image_url[selectImage]}`} alt={plantInfo.common_name} />
-              
-               </div>
+
+                    {
+                        plantInfo.image_url && plantInfo.image_url.length > 0 ? (
+
+
+                            plantInfo.image_url.map((image, index) => (
+                                <button key={index}
+                                    onClick={() => { setSelectedImage(index) }}
+
+                                >
+                                    <img className="bg-surface-raised rounded-xl w-[5rem] h-[5rem]" src={`${cloud_url}/${image}`} alt={plantInfo.common_name} />
+
+                                </button>
+                            ))
+                        ) : (
+                            <p>No image available!</p>
+                        )
+                    }
+                   
+                </div>
 
                 <div className="flex items-center justify-between">
                     <h2
@@ -101,8 +117,8 @@ function PlantDetails() {
                 </div>
                 <hr className="border-t border-text-muted" ></hr>
                 <div className="mt-4 flex gap-2">
-                <p className="text-2xl text-brand-700 font-medium ">${discountedPrice.toFixed(2)}</p>
-                <p className="line-through">${currentPrice.toFixed(2)}</p></div>
+                    <p className="text-2xl text-brand-700 font-medium ">${discountedPrice.toFixed(2)}</p>
+                    <p className="line-through">${currentPrice.toFixed(2)}</p></div>
                 <div className="text-success-500 flex gap-1">
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
                 </div>
@@ -112,15 +128,15 @@ function PlantDetails() {
                         {
                             plantInfo.sizes && plantInfo.sizes.length > 0 ? (
                                 plantInfo.sizes.map((size, index) => (
-                                    <button key={index} 
-                                    onClick={() => setSelectedSize(index)}
-                                    className={`p-2 border rounded-xl
-                                ${selectSize === index ? 'border-2 border-brand-500 bg-brand-100' : 
-                                    'border-2 border-text-muted hover:border-brand-500'}`
-                                    }>
+                                    <button key={index}
+                                        onClick={() => setSelectedSize(index)}
+                                        className={`p-2 border rounded-xl
+                                ${selectSize === index ? 'border-2 border-brand-500 bg-brand-100' :
+                                                'border-2 border-text-muted hover:border-brand-500'}`
+                                        }>
                                         <p>{size.size}</p>
                                         <p>${size.original_price}</p>
-                    
+
 
                                     </button>
                                 ))
@@ -131,11 +147,11 @@ function PlantDetails() {
                     </div>
 
                 </div>
-                <p className="text-sm mt-4">Quantity</p>              
+                <p className="text-sm mt-4">Quantity</p>
                 <QuantitySelector
                     value={quantity} onChange={setQuantity} min={1} max={plantInfo.stock_quantity}
-                disabled={isOutOfStock}
-                
+                    disabled={isOutOfStock}
+
                 />
                 <Button btnType="add" price={(discountedPrice * quantity).toFixed(2)} disabled={isOutOfStock}></Button>
 
