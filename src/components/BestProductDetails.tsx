@@ -39,7 +39,7 @@ function BestProductDetails({ products }: { products: BestProductProp }) {
       <h2 className="text-left mt-4 text-xs">{products.common_name}</h2>
       <div className="flex flex-row justify-start gap-2">
         <p className=" text-xxs text-brand-700 font-semibold">
-          ${products.discounted_price}
+          {/* ${products} */}
         </p>
         <p className="text-xs line-through ">
           ${products.original_price}
