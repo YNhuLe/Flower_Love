@@ -17,9 +17,24 @@ import ProductPage from "./pages/ProductPage";
 import GiftBoxOffer from "./components/GiftBoxOffer";
 import PlantDetails from "./pages/PlantDetails";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query';
+
+const queryClient = new QueryClient(
+  {
+    defaultOptions:{
+      queries:{
+        staleTime: 1000 * 60 * 6,
+      }
+    }
+  }
+)
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,7 +44,7 @@ function App() {
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>
-    </Router>
+    </Router></QueryClientProvider>
   );
 }
 export default App;

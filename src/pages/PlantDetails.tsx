@@ -23,40 +23,30 @@ import {
     Dice1
 } from 'lucide-react';
 import HeartButton from "../common/HeartButton";
-
+import usePlantDetails from "../hooks/usePlantDetails";
 function PlantDetails() {
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
-    const { id } = useParams();
-    const [plantInfo, setPlantInfo] = useState<PlantWithSize | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-    const [quantity, setQuantity] = useState(0);
+    const { id } = useParams<{ id: string }>();
+    // const [plantInfo, setPlantInfo] = useState<PlantWithSize | null>(null);
+    // const [loading, setLoading] = useState<boolean>(true);
+    // const [error, setError] = useState<string | null>(null);
+    const {
+        data: plantInfo,
+        isLoading,
+        isError,
+        error
+    } = usePlantDetails(id);
+    const [quantity, setQuantity] = useState(1);
     const [selectSize, setSelectedSize] = useState(0);
     const [selectImage, setSelectedImage] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
 
-
-    useEffect(() => {
-        const fetchPlantInfo = async () => {
-            try {
-                const response = await axios.get(`${baseUrl}/allplants/${id}`);
-                setPlantInfo(response.data);
-                console.log(" Plant info: ", response.data);
-
-            } catch (error: any) {
-                setError(error.message || "Failed to retrieve plant details!")
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchPlantInfo();
-    }, [id]);
-
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>
-    if (!plantInfo) return <p>No plant information available</p>;
+    if (isLoading) return <p>Loading...</p>;
+    if (isError || !plantInfo) {
+        const errorMessage = (error as Error)?.message || 'Failed to load plant data!'
+        return < div className="p-4 bg-red-100 text-red-800 rounded-lg" > Error : {errorMessage} </ div >;
+    }
 
     // Parse benefits from the backend
     let formatArr: string[] = [];
@@ -73,6 +63,7 @@ function PlantDetails() {
     const currentPrice = plantInfo.sizes[selectSize].original_price;
     const discountedPrice = plantInfo.sizes[selectSize].discounted_price;
     const isOutOfStock = plantInfo.stock_quantity <= 0;
+
     return (plantInfo &&
         <section className="mx-4 mt-[7rem]">
             <div>
@@ -84,8 +75,18 @@ function PlantDetails() {
 
 
                             plantInfo.image_url.map((image, index) => (
+
+
                                 <button key={index}
                                     onClick={() => { setSelectedImage(index) }}
+
+                                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all 
+                                        ${selectImage === index
+                                            ? 'border-brand-700 ring-1 ring-brand-700 ring-offset-1'
+                                            : 'border-muted hover:border-brand-500'
+                                        }`}
+
+
 
                                 >
                                     <img className="bg-surface-raised rounded-xl w-[5rem] h-[5rem]" src={`${cloud_url}/${image}`} alt={plantInfo.common_name} />
@@ -96,7 +97,7 @@ function PlantDetails() {
                             <p>No image available!</p>
                         )
                     }
-                   
+
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -130,8 +131,8 @@ function PlantDetails() {
                                 plantInfo.sizes.map((size, index) => (
                                     <button key={index}
                                         onClick={() => setSelectedSize(index)}
-                                        className={`p-2 border rounded-xl
-                                ${selectSize === index ? 'border-2 border-brand-500 bg-brand-100' :
+                                        className={`p-2 border rounded-xl 
+                                ${selectSize === index ? 'border-2 border-text-muted bg-brand-100' :
                                                 'border-2 border-text-muted hover:border-brand-500'}`
                                         }>
                                         <p>{size.size}</p>
