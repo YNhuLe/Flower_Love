@@ -1,8 +1,8 @@
 //product interface
 interface BestProductProp {
-  id: string;
+  best_pro_id: string;
   common_name: string;
-  image_url: string;
+  img_url: string;
   details: string;
   rating: number;
   isnewarrival: boolean;
@@ -96,7 +96,7 @@ interface NewProductProps{
   plantinglevel: string;
   isonsale: boolean;
   category_id: string;
-  benefits: string
+  benefits: string[]
 }
 
 interface PlantSizeProps{
@@ -107,7 +107,7 @@ interface PlantSizeProps{
 size: string
 }
 //Plant details with nested sizes array
-interface PlantWithSize extends NewProductProps{
+interface PlantWithSize extends NewProductProps, BestProductProp{
 sizes: (PlantSizeProps & {discounted_price: number})[];
 }
 
