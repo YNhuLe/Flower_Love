@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { NewProductProps, PlantWithSize } from "../types/types";
-import axios from "axios";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import Button from "../common/Button";
@@ -8,31 +6,19 @@ import StockDisplay from "../common/StockDisplay";
 import RatingStatusChecker from "../common/RatingStatusChecker";
 import QuantitySelector from "../common/QuantitySelector";
 import {
-    ShoppingCart,
-    Heart,
     Share2,
-    Star,
     Droplets,
     Sun,
     Thermometer,
     Wind,
     Sparkles,
-    ChevronLeft,
-    Check,
-    AlertCircle,
-    Dice1
 } from 'lucide-react';
 import HeartButton from "../common/HeartButton";
 import usePlantDetails from "../hooks/usePlantDetails";
 function PlantDetails() {
-
-    const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
     const { id } = useParams<{ id: string }>();
-    // const [plantInfo, setPlantInfo] = useState<PlantWithSize | null>(null);
-    // const [loading, setLoading] = useState<boolean>(true);
-    // const [error, setError] = useState<string | null>(null);
     const {
-        data: plantInfo,
+        data:plantInfo,
         isLoading,
         isError,
         error
@@ -41,15 +27,28 @@ function PlantDetails() {
     const [selectSize, setSelectedSize] = useState(0);
     const [selectImage, setSelectedImage] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
+if (isLoading){
+    return <p>Loading plant information... </p>
+}
+
+    console.log("Plants fetched: ", plantInfo);
+    console.log("Type of: ", typeof(plantInfo))
+
+// if(!plantDetails){
+//     console.log("it is undefined");
+    
+// }
+console.log(plantInfo?.benefits);
 
     if (isLoading) return <p>Loading...</p>;
-    if (isError || !plantInfo) {
-        const errorMessage = (error as Error)?.message || 'Failed to load plant data!'
-        return < div className="p-4 bg-red-100 text-red-800 rounded-lg" > Error : {errorMessage} </ div >;
-    }
+  if(isError || !plantInfo){
+return <p>Loading data!!</p>
+  }
 
     // Parse benefits from the backend
     let formatArr: string[] = [];
+    console.log("type of formatArr: ", Array.isArray(plantInfo.benefits));
+    
     if (Array.isArray(plantInfo.benefits)) {
         formatArr = plantInfo.benefits;
     } else if (typeof plantInfo.benefits === 'string') {
@@ -60,7 +59,7 @@ function PlantDetails() {
             formatArr = [];
         }
     }
-    const currentPrice = plantInfo.sizes[selectSize].original_price;
+    const currentPrice = plantInfo
     const discountedPrice = plantInfo.sizes[selectSize].discounted_price;
     const isOutOfStock = plantInfo.stock_quantity <= 0;
 
@@ -85,9 +84,6 @@ function PlantDetails() {
                                             ? 'border-brand-700 ring-1 ring-brand-700 ring-offset-1'
                                             : 'border-muted hover:border-brand-500'
                                         }`}
-
-
-
                                 >
                                     <img className="bg-surface-raised rounded-xl w-[5rem] h-[5rem]" src={`${cloud_url}/${image}`} alt={plantInfo.common_name} />
 
@@ -119,7 +115,9 @@ function PlantDetails() {
                 <hr className="border-t border-text-muted" ></hr>
                 <div className="mt-4 flex gap-2">
                     <p className="text-2xl text-brand-700 font-medium ">${discountedPrice.toFixed(2)}</p>
-                    <p className="line-through">${currentPrice.toFixed(2)}</p></div>
+                    {/* <p className="line-through">${currentPrice.toFixed(2)}</p> */}
+                    
+                    </div>
                 <div className="text-success-500 flex gap-1">
                     <StockDisplay stockQuantity={plantInfo.stock_quantity} />
                 </div>
@@ -163,7 +161,9 @@ function PlantDetails() {
                         formatArr.map((benefit, index) => (
                             <div className="flex flex-row gap-2">
                                 <FaCheck className="w-4 h-3 text-success-500 " />
-                                <p key={index} className="text-xs mb-2 ">{benefit}</p></div>
+                                <p key={index} className="text-xs mb-2 ">{benefit}</p>
+                           
+                                </div>
                         ))
                     }
 

@@ -13,27 +13,8 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
-      // colors: {
-      //   primary: "#204807",
-      //   secondary: "#222831",
-      //   third: "#FFFDF6",
-      //   accent: "#63734A",
-      //   tertiary: "#E1E8CA",
-      //   dark_green: "#1E2203",
-      //   black: "#131717",
-      //   grey: "#909690ff",
-      //   lightGrey: "#f1f4f4ff",
-      //   red: "#E43636",
-      //   cartRed: "#D96F32",
-      //   darkCartRed: "#873b0eff",
-      //   lightGreen: "#287d0bff",
-      //     lowStock: "#eabb14ff",
-      // }
       colors: {
-        // -----------------------------------
-        // BRAND (brand-700 Identity Colors)
-        // -----------------------------------
-        brand: {
+          brand: {
           900: "#1E2203", // deep forest
           700: "#204807", // brand-700
           500: "#63734A", // accent

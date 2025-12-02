@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import axios from "axios";
 import { PlantWithSize } from "../types/types";
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
@@ -16,8 +15,8 @@ const fetchPlant = async (): Promise<PlantWithSize[]> => {
 
 
 function useAllPlants() {
-  return useQuery<PlantWithSize[ ]>({
-    queryKey: ["plant"],
+  return useQuery<PlantWithSize[]>({
+    queryKey: ["allPlant"],
     queryFn: fetchPlant,   
        staleTime: 1000 * 60 * 10,//data considered fresh for 10 mins
   });

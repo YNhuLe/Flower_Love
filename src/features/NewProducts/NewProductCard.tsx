@@ -13,7 +13,6 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
         return <p>Loading new products...</p>
     }
 
-    console.log("New Product: ", newProduct.image_url);
     
 
     
