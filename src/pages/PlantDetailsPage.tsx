@@ -7,8 +7,9 @@ function PlantDetailsPage(){
     return (
         <>
         <NavBar />
-        <BreadCrumbs dynamicLabel="/products/2"/>
+      
         <SearchBar />
+          <BreadCrumbs />
         <PlantDetails />
         <Footer />
         </>
