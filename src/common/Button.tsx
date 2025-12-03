@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
 import { ReactNode } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 interface ButtonProps {
