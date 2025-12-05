@@ -27,6 +27,7 @@ module.exports = {
         surface: {
           base: "#FFFDF6", // main background
           raised: "#f1f4f4ff", // cards / panels
+          card: "#FFFFFF", 
         },
 
         // -----------------------------------
@@ -70,6 +71,7 @@ module.exports = {
           },
           amber: {
             600: "#D97706",
+            800: "#ae5e03ff",
             100: "#fff1d1",
           },
           cyan: {
