@@ -17,6 +17,7 @@ import ProductPage from "./pages/ProductPage";
 import GiftBoxOffer from "./components/GiftBoxOffer";
 import PlantDetails from "./pages/PlantDetails";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
+import PlantQuizPage from "./pages/PlantQuizPage";
 import {
   QueryClient,
   QueryClientProvider
@@ -41,6 +42,7 @@ function App() {
         <Route path="/products" element={<ProductPage />} />
         <Route path="/giftbox/:id" element={<GiftBoxOffer />} />
         <Route path="/products/:id" element={<PlantDetailsPage />} />
+        <Route path="products/quiz" element={<PlantQuizPage />}/>
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>

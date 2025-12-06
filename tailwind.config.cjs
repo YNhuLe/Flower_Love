@@ -73,6 +73,7 @@ module.exports = {
             600: "#D97706",
             800: "#ae5e03ff",
             100: "#fff1d1",
+              50: "#f5ebd4ff",
           },
           cyan: {
             600: "#0891B2",
