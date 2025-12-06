@@ -64,7 +64,7 @@ function PlantQuiz() {
                         </div>
                     </div>
 
-                    <Button btnType="plant_quiz"></Button>
+                    <Button btnType="plant_quiz" url="/products/quiz"></Button>
                 </div>
                 <div className="w-full w-full h-auto object-cover relative flex flex-col justify-center mt-4">
                     <div className="absolute p-2 bg-surface-card border rounded-xl w-fit m-4 flex gap-2 items-center 
