@@ -118,6 +118,31 @@ interface ProductWithCategory extends CategoriesProps, NewProductProps,PlantWith
 interface ProductAndInfo{
   new_products : ProductWithCategory[]
 }
+
+//room condition
+interface RoomConditions {
+ light: string;
+  temperature_range: string;
+  humidity_preference: string;
+  plantinglevel: string;
+  room_type: string;
+  //category name
+  name: string,
+  plantsToAvoid: string[];
+}
+
+//plant recommendations from AI
+interface PlantRecommendation {
+  id: string;
+  name: string;
+  scientificName: string;
+  image: string;
+  matchScore: number;
+  reasons: string[];
+  careLevel: string;
+  price: number;
+}
+
 export type {
   BestProductProp,
   GiftboxWithItemsProps,
@@ -127,5 +152,7 @@ export type {
   CategoriesProps,
 ProductAndInfo,
 NewProductProps,ProductWithCategory,
-PlantWithSize
+PlantWithSize,
+PlantRecommendation,
+RoomConditions
 };
