@@ -6,7 +6,8 @@ import {
   Wind, Award,
   Sparkles,
   Camera, Brain, Image, CheckCircle, ArrowLeft, XCircle,
-  Leaf, AlertOctagon
+  Leaf, AlertOctagon,
+  Divide
 } from 'lucide-react';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -31,7 +32,7 @@ function PlantQuizPage() {
   //the most recommended plant
   const [selectedPlant, setSelectedPlant] = useState<PlantRecommendation | null>(null);
 
-  const handleAnalyze = () =>{ setStep('analyzing')}
+  const handleAnalyze = () => { setStep('analyzing') }
   return (
     <section>
       <div className=" p-4 flex flex-col items-center">
@@ -60,112 +61,30 @@ function PlantQuizPage() {
 
       {/* form for the recommendations from AI */}
       <div className='rounded-xl m-4 shadow-2xl'>
-      <AnimatePresence mode='wait'>
-        {
-          step === 'questionnaire' &&
-          <motion.div
-            key="questionnaire"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
-          >
-            <h2 className='text-center mb-4'>Tell Us About Your Room</h2>
-            <p className='text-center  mb-8'>Answer these questions to help us find your perfect plant match</p>
-            <div>
-              {/* Sunlight section */}
+        <AnimatePresence mode='wait'>
+          {
+            step === 'questionnaire' &&
+            <motion.div
+              key="questionnaire"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+            >
+              <h2 className='text-center mb-4'>Tell Us About Your Room</h2>
+              <p className='text-center  mb-8'>Answer these questions to help us find your perfect plant match</p>
+              <div>
+                {/* Sunlight section */}
 
-              <label className='flex gap-2 items-center'>
-                <Sun className="w-[3rem] h-[3rem] mr-2 text-amber-600" />
-                How much natural sunlight does this room get?
+                <label className='flex gap-2 items-center'>
+                  <Sun className="w-[3rem] h-[3rem] mr-2 text-amber-600" />
+                  How much natural sunlight does this room get?
 
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
 
-                {
-                  ['Low', 'Medium', 'Bright', 'Direct'].map((option) => (
-
-                    <button
-                      key={option}
-                      onClick={() => setConditions({ ...conditions, light: option })}
-                      className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
-                        ? 'border border-amber-800 bg-amber-50 text-amber-600'
-                        : 'border-text-muted hover:border-amber-600 text-text-primary'
-                        }`}
-                    >{option}</button>
-                  )
-
-                  )
-                }
-              </div>
-
-
-              {/* Temp range section  */}
-
-              <label className='flex gap-2 items-center mt-8'>
-                <Thermometer className="w-[2.5rem] h-[2.5rem] mr-2 text-amber-600" />
-                What's the typical temperature range?
-
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['Cool (60-65°F)', 'Moderate (65-75°F)', 'Warm (75-85°F)'].map((option) => (
-
-                    <button
-                      key={option}
-                      onClick={() => setConditions({ ...conditions, light: option })}
-                      className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
-                        ? 'border border-amber-800 bg-amber-50 text-amber-600'
-                        : 'border-text-muted hover:border-amber-600 text-text-primary'
-                        }`}
-                    >{option}</button>
-                  )
-
-                  )
-                }
-              </div>
-
-
-              {/* humidity Preference section  */}
-
-              <label className='flex gap-2 items-center mt-8'>
-                <Droplets className="w-7 h-7 mr-2 text-amber-600" />
-                How humid is your space?
-
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['Dry', 'Average', 'Humid'].map((option) => (
-
-                    <button
-                      key={option}
-                      onClick={() => setConditions({ ...conditions, light: option })}
-                      className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
-                        ? 'border border-amber-800 bg-amber-50 text-amber-600'
-                        : 'border-text-muted hover:border-amber-600 text-text-primary'
-                        }`}
-                    >{option}</button>
-                  )
-
-                  )
-                }
-              </div>
-
-
-              {/* Planting level section  */}
-
-              <label className='flex gap-2 items-center mt-8'>
-                <Award className="w-10 h-10 mr-2 text-amber-600" />
-                How confident are you in caring for plants?
-
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['Beginner (I’ve killed succulents before 😅)',
-                    'Intermediate (I can keep a few alive)', 'Advanced (I love a challenge)'].map((option) => (
+                  {
+                    ['Low', 'Medium', 'Bright', 'Direct'].map((option) => (
 
                       <button
                         key={option}
@@ -178,120 +97,203 @@ function PlantQuizPage() {
                     )
 
                     )
-                }
+                  }
+                </div>
+
+
+                {/* Temp range section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <Thermometer className="w-[2.5rem] h-[2.5rem] mr-2 text-amber-600" />
+                  What's the typical temperature range?
+
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['Cool (60-65°F)', 'Moderate (65-75°F)', 'Warm (75-85°F)'].map((option) => (
+
+                      <button
+                        key={option}
+                        onClick={() => setConditions({ ...conditions, light: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                          ? 'border border-amber-800 bg-amber-50 text-amber-600'
+                          : 'border-text-muted hover:border-amber-600 text-text-primary'
+                          }`}
+                      >{option}</button>
+                    )
+
+                    )
+                  }
+                </div>
+
+
+                {/* humidity Preference section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <Droplets className="w-7 h-7 mr-2 text-amber-600" />
+                  How humid is your space?
+
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['Dry', 'Average', 'Humid'].map((option) => (
+
+                      <button
+                        key={option}
+                        onClick={() => setConditions({ ...conditions, light: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                          ? 'border border-amber-800 bg-amber-50 text-amber-600'
+                          : 'border-text-muted hover:border-amber-600 text-text-primary'
+                          }`}
+                      >{option}</button>
+                    )
+
+                    )
+                  }
+                </div>
+
+
+                {/* Planting level section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <Award className="w-10 h-10 mr-2 text-amber-600" />
+                  How confident are you in caring for plants?
+
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['Beginner (I’ve killed succulents before 😅)',
+                      'Intermediate (I can keep a few alive)', 'Advanced (I love a challenge)'].map((option) => (
+
+                        <button
+                          key={option}
+                          onClick={() => setConditions({ ...conditions, light: option })}
+                          className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                            ? 'border border-amber-800 bg-amber-50 text-amber-600'
+                            : 'border-text-muted hover:border-amber-600 text-text-primary'
+                            }`}
+                        >{option}</button>
+                      )
+
+                      )
+                  }
+                </div>
+
+                {/* Room type section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <Camera className="w-7 h-7 mr-2 text-amber-600" />
+                  What type of room is this?
+
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['Living Room', 'Bedroom', 'Office', 'Bathroom', 'Kitchen', 'Hallway'].map((option) => (
+
+                      <button
+                        key={option}
+                        onClick={() => setConditions({ ...conditions, light: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                          ? 'border border-amber-800 bg-amber-50 text-amber-600'
+                          : 'border-text-muted hover:border-amber-600 text-text-primary'
+                          }`}
+                      >{option}</button>
+                    )
+
+                    )
+                  }
+                </div>
+
+                {/* plant interest section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <Leaf className="w-10 h-10 mr-2 text-amber-600" />
+                  Waht type of plant are you interested in?
+
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['Foliage Plants', 'Flowering Plants', 'Succulents & Cacti', 'Climbing Vines', 'Air-Purifying', 'Pet-Friendly'].map((option) => (
+
+                      <button
+                        key={option}
+                        onClick={() => setConditions({ ...conditions, light: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                          ? 'border border-amber-800 bg-amber-50 text-amber-600'
+                          : 'border-text-muted hover:border-amber-600 text-text-primary'
+                          }`}
+                      >{option}</button>
+                    )
+
+                    )
+                  }
+                </div>
+
+                {/* Avoid plant section  */}
+
+                <label className='flex gap-2 items-center mt-8'>
+                  <AlertOctagon className="w-[5rem] h-[5rem] mr-2 text-error-700" />
+                  Are there any plant types you'd like to avoid?
+                  <p className='text-text-muted'>(Optional - Select all that apply)</p>
+                </label>
+                <div className='grid grid-cols-2 gap-2 mt-4'>
+
+                  {
+                    ['High Maintenance', 'Toxic to Pets', 'Requires Frequent Watering', 'Needs High Humidity', 'Large/Bulky Plants', 'Prone to Pests'].map((option) => (
+
+                      <button
+                        key={option}
+                        onClick={() => {
+                          const isSelected = conditions.plantsToAvoid.includes(option);
+                          if (isSelected) {
+                            setConditions(
+                              {
+                                ...conditions,
+                                plantsToAvoid: conditions.plantsToAvoid.filter(plant => plant !== option)
+                              }
+                            )
+                          } else {
+                            setConditions(
+                              {
+                                ...conditions,
+                                plantsToAvoid: [...conditions.plantsToAvoid, option]
+                              }
+                            )
+                          }
+                        }}
+                        className={`p-2 rounded-xl border transition-all p-4 relative text-xs ${conditions.plantsToAvoid.includes(option)
+                          ? 'border border-error-700 bg-error-200 text-error-700'
+                          : 'border-text-muted hover:border-error-700 text-text-primary'
+                          }`}
+                      >{option}
+                        {conditions.plantsToAvoid.includes(option) &&
+
+                          (<AlertOctagon className="w-3 h-3 text-error-700 absolute  ml-2 right-1 top-2 " />)}
+
+                      </button>
+                    )
+                    )
+                  }
+                </div>
               </div>
 
-              {/* Room type section  */}
+              {/* Ai analyse AI button */}
+              <div>
+                <Button btnType='AI_analyze' disabled={!conditions.light || !conditions.light ||
+                  !conditions.humidity_preference || !conditions.name || !conditions.plantinglevel || !conditions.temperature_range
+                }></Button>
 
-              <label className='flex gap-2 items-center mt-8'>
-                <Camera className="w-7 h-7 mr-2 text-amber-600" />
-                What type of room is this?
-
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['Living Room', 'Bedroom', 'Office', 'Bathroom', 'Kitchen', 'Hallway'].map((option) => (
-
-                    <button
-                      key={option}
-                      onClick={() => setConditions({ ...conditions, light: option })}
-                      className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
-                        ? 'border border-amber-800 bg-amber-50 text-amber-600'
-                        : 'border-text-muted hover:border-amber-600 text-text-primary'
-                        }`}
-                    >{option}</button>
-                  )
-
-                  )
-                }
               </div>
 
-              {/* plant interest section  */}
+            </motion.div>
+          }
 
-              <label className='flex gap-2 items-center mt-8'>
-                <Leaf className="w-10 h-10 mr-2 text-amber-600" />
-                Waht type of plant are you interested in?
-
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['Foliage Plants', 'Flowering Plants', 'Succulents & Cacti', 'Climbing Vines', 'Air-Purifying', 'Pet-Friendly'].map((option) => (
-
-                    <button
-                      key={option}
-                      onClick={() => setConditions({ ...conditions, light: option })}
-                      className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
-                        ? 'border border-amber-800 bg-amber-50 text-amber-600'
-                        : 'border-text-muted hover:border-amber-600 text-text-primary'
-                        }`}
-                    >{option}</button>
-                  )
-
-                  )
-                }
-              </div>
-
-              {/* Avoid plant section  */}
-
-              <label className='flex gap-2 items-center mt-8'>
-                <AlertOctagon className="w-[5rem] h-[5rem] mr-2 text-error-700" />
-                Are there any plant types you'd like to avoid?
-                <p className='text-text-muted'>(Optional - Select all that apply)</p>
-              </label>
-              <div className='grid grid-cols-2 gap-2 mt-4'>
-
-                {
-                  ['High Maintenance', 'Toxic to Pets', 'Requires Frequent Watering', 'Needs High Humidity', 'Large/Bulky Plants', 'Prone to Pests'].map((option) => (
-
-                    <button 
-                      key={option}
-                      onClick={() => {
-                        const isSelected = conditions.plantsToAvoid.includes(option);
-                        if( isSelected){
-                          setConditions(
-                            {
-                              ...conditions, 
-                              plantsToAvoid: conditions.plantsToAvoid.filter(plant => plant !== option)
-                            }
-                          )
-                        }else{
-                          setConditions(
-                            {
-                              ...conditions,
-                              plantsToAvoid: [...conditions.plantsToAvoid, option]
-                            }
-                          )
-                        }
-                      }}
-                      className={`p-2 rounded-xl border transition-all relative w-auto text-xs ${conditions.plantsToAvoid.includes(option)
-                        ? 'border border-error-700 bg-error-200 text-error-700'
-                        : 'border-text-muted hover:border-error-700 text-text-primary'
-                        }`}
-                    >{option}
-                    {conditions.plantsToAvoid.includes(option) && 
-                    (  <AlertOctagon className="w-3 h-3 mr-2 text-error-700 absolute right-0 m-2 mt-0 top-2" />)}
-                    
-                    </button>
-                  )
-                )
-                }
-              </div>
-            </div>
-
-            {/* Ai analyse AI button */}
-            <div>
-<Button btnType='AI_analyze'  disabled={!conditions.light || !conditions.light ||
-  !conditions.humidity_preference || !conditions.name || !conditions.plantinglevel || !conditions.temperature_range
-}></Button>
-
-            </div>
-
-          </motion.div>
-        }
-
-      </AnimatePresence>
+        </AnimatePresence>
       </div>
     </section>
   )
