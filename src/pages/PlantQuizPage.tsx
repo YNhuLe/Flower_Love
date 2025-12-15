@@ -5,7 +5,7 @@ import {
   Thermometer,
   Wind, Award,
   Sparkles,
-  Camera, Brain, Image, CheckCircle, ArrowLeft, XCircle,
+  Camera, Brain, Image, CheckCircle, 
   Leaf, AlertOctagon,
   Divide
 } from 'lucide-react';
@@ -14,8 +14,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { RoomConditions, PlantRecommendation } from '../types/types';
 import Button from '../common/Button';
+import axios from 'axios';
+import BreadCrumbs from '../common/BreadCrumbs';
 
-function PlantQuizPage() {
+const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+
+  function PlantQuizPage() {
+  const [error, setError] = useState<string | null>(null);
+ const [loading, setLoading] = useState<boolean>(true);
   const [step, setStep] = useState<'questionnaire' | 'analyzing' | 'results'>('questionnaire');
   const [conditions, setConditions] = useState<RoomConditions>({
     light: '',
@@ -27,6 +33,23 @@ function PlantQuizPage() {
     plantsToAvoid: []
   });
 
+//send the result to the Backend to look for the plant
+const handleSubmit = async () =>{
+try{
+
+  const response = await axios.post(`${baseUrl}/quiz/answers`, 
+    {answer : conditions}
+  );
+  console.log("Result data : ", response.data);
+  
+}catch(error: any){
+setError(error.message || "Failed to send the plant quiz result to backend!")
+}finally{
+setLoading(false);
+}
+};
+
+  console.log("Conditions from quiz: ", conditions)
   //top 3 recommended plants
   const [recommendations, setRecommendations] = useState<PlantRecommendation[]>([]);
   //the most recommended plant
@@ -35,12 +58,13 @@ function PlantQuizPage() {
   const handleAnalyze = () => { setStep('analyzing') }
   return (
     <section>
+      <BreadCrumbs />
       <div className=" p-4 flex flex-col items-center">
         <div className="p-4 bg-gradient-to-r from-amber-600 to-amber-800 border rounded-xl w-fit mt-4">
           <Sparkles className="w-6 h-6 text-brand-100" /></div>
         <h1 className='my-4'>AI Plant Finder</h1>
         <p className='text-xs text-center'>Answer a few questions about your space and our AI will recommend the perfect plants that will thrive in your environment.</p>
-        <div className="w-full w-full h-auto object-cover mx-auto flex justify-center mt-4">
+        <div className="w-full h-auto object-cover mx-auto flex justify-center mt-4">
           <div className=" p-2 bg-amber-50 border rounded-2xl border-amber-600 w-fit flex gap-2 items-center bottom-2">
             <Camera className="w-4 h-4 text-amber-600" />
             <p className="text-xs">AI-powered plant recommendations</p></div></div>
@@ -74,6 +98,7 @@ function PlantQuizPage() {
               <h2 className='text-center mb-4'>Tell Us About Your Room</h2>
               <p className='text-center  mb-8'>Answer these questions to help us find your perfect plant match</p>
               <div>
+                <div>
                 {/* Sunlight section */}
 
                 <label className='flex gap-2 items-center'>
@@ -99,10 +124,10 @@ function PlantQuizPage() {
                     )
                   }
                 </div>
-
+</div>
 
                 {/* Temp range section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <Thermometer className="w-[2.5rem] h-[2.5rem] mr-2 text-amber-600" />
                   What's the typical temperature range?
@@ -115,8 +140,8 @@ function PlantQuizPage() {
 
                       <button
                         key={option}
-                        onClick={() => setConditions({ ...conditions, light: option })}
-                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                        onClick={() => setConditions({ ...conditions, temperature_range: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.temperature_range === option
                           ? 'border border-amber-800 bg-amber-50 text-amber-600'
                           : 'border-text-muted hover:border-amber-600 text-text-primary'
                           }`}
@@ -126,10 +151,10 @@ function PlantQuizPage() {
                     )
                   }
                 </div>
-
+</div>
 
                 {/* humidity Preference section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <Droplets className="w-7 h-7 mr-2 text-amber-600" />
                   How humid is your space?
@@ -142,8 +167,8 @@ function PlantQuizPage() {
 
                       <button
                         key={option}
-                        onClick={() => setConditions({ ...conditions, light: option })}
-                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                        onClick={() => setConditions({ ...conditions, humidity_preference: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.humidity_preference === option
                           ? 'border border-amber-800 bg-amber-50 text-amber-600'
                           : 'border-text-muted hover:border-amber-600 text-text-primary'
                           }`}
@@ -154,9 +179,9 @@ function PlantQuizPage() {
                   }
                 </div>
 
-
+</div>
                 {/* Planting level section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <Award className="w-10 h-10 mr-2 text-amber-600" />
                   How confident are you in caring for plants?
@@ -170,8 +195,8 @@ function PlantQuizPage() {
 
                         <button
                           key={option}
-                          onClick={() => setConditions({ ...conditions, light: option })}
-                          className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                          onClick={() => setConditions({ ...conditions, plantinglevel: option })}
+                          className={`p-2 rounded-xl border transition-all text-xs ${conditions.plantinglevel === option
                             ? 'border border-amber-800 bg-amber-50 text-amber-600'
                             : 'border-text-muted hover:border-amber-600 text-text-primary'
                             }`}
@@ -181,9 +206,9 @@ function PlantQuizPage() {
                       )
                   }
                 </div>
-
+</div>
                 {/* Room type section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <Camera className="w-7 h-7 mr-2 text-amber-600" />
                   What type of room is this?
@@ -196,8 +221,8 @@ function PlantQuizPage() {
 
                       <button
                         key={option}
-                        onClick={() => setConditions({ ...conditions, light: option })}
-                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                        onClick={() => setConditions({ ...conditions, room_type: option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.room_type === option
                           ? 'border border-amber-800 bg-amber-50 text-amber-600'
                           : 'border-text-muted hover:border-amber-600 text-text-primary'
                           }`}
@@ -207,9 +232,9 @@ function PlantQuizPage() {
                     )
                   }
                 </div>
-
+</div>
                 {/* plant interest section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <Leaf className="w-10 h-10 mr-2 text-amber-600" />
                   Waht type of plant are you interested in?
@@ -222,8 +247,8 @@ function PlantQuizPage() {
 
                       <button
                         key={option}
-                        onClick={() => setConditions({ ...conditions, light: option })}
-                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.light === option
+                        onClick={() => setConditions({ ...conditions,name : option })}
+                        className={`p-2 rounded-xl border transition-all text-xs ${conditions.name === option
                           ? 'border border-amber-800 bg-amber-50 text-amber-600'
                           : 'border-text-muted hover:border-amber-600 text-text-primary'
                           }`}
@@ -233,9 +258,9 @@ function PlantQuizPage() {
                     )
                   }
                 </div>
-
+</div>
                 {/* Avoid plant section  */}
-
+<div>
                 <label className='flex gap-2 items-center mt-8'>
                   <AlertOctagon className="w-[5rem] h-[5rem] mr-2 text-error-700" />
                   Are there any plant types you'd like to avoid?
@@ -266,7 +291,7 @@ function PlantQuizPage() {
                             )
                           }
                         }}
-                        className={`p-2 rounded-xl border transition-all p-4 relative text-xs ${conditions.plantsToAvoid.includes(option)
+                        className={`rounded-xl border transition-all p-4 relative text-xs ${conditions.plantsToAvoid.includes(option)
                           ? 'border border-error-700 bg-error-200 text-error-700'
                           : 'border-text-muted hover:border-error-700 text-text-primary'
                           }`}
@@ -281,10 +306,12 @@ function PlantQuizPage() {
                   }
                 </div>
               </div>
-
+</div>
               {/* Ai analyse AI button */}
               <div>
-                <Button btnType='AI_analyze' disabled={!conditions.light || !conditions.light ||
+                <Button
+                onClick={handleSubmit}
+                btnType='AI_analyze' disabled={!conditions.light || !conditions.light ||
                   !conditions.humidity_preference || !conditions.name || !conditions.plantinglevel || !conditions.temperature_range
                 }></Button>
 

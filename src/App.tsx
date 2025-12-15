@@ -42,7 +42,8 @@ function App() {
         <Route path="/products" element={<ProductPage />} />
         <Route path="/giftbox/:id" element={<GiftBoxOffer />} />
         <Route path="/products/:id" element={<PlantDetailsPage />} />
-        <Route path="products/quiz" element={<PlantQuizPage />}/>
+        <Route path="/products/quiz" element={<PlantQuizPage />}/>
+        {/* <Route path="/products/quiz/quiz_result" element={<PlantQuizResult />} /> */}
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>

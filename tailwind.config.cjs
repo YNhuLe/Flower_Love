@@ -55,6 +55,7 @@ module.exports = {
           700: "#b12a2a", // darker (hover)
           500: "#E43636", // main
           300: "#f17878", // lighter
+           200: "#f6b3a4ff", 
           100: "#fde7e7",
         },
 
@@ -73,7 +74,7 @@ module.exports = {
             600: "#D97706",
             800: "#ae5e03ff",
             100: "#fff1d1",
-              50: "#f5ebd4ff",
+            50: "#f5ebd4ff",
           },
           cyan: {
             600: "#0891B2",
