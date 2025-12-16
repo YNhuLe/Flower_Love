@@ -71,7 +71,7 @@ const urlMap: Record<string, string> = {
   plant_quiz: "/plant_quiz",
   view_all: "/view_all",
   add_to_cart: "/add_to_cart",
-  AI_analyze: "/quiz_result"
+  AI_analyze: "/products/quiz/quiz_result"
 
 }
 

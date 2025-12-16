@@ -16,6 +16,7 @@ import { RoomConditions, PlantRecommendation } from '../types/types';
 import Button from '../common/Button';
 import axios from 'axios';
 import BreadCrumbs from '../common/BreadCrumbs';
+import AI_PlantQuizHeader from '../features/PlantQuiz/AI_PlantQuizHeader';
 
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
@@ -35,8 +36,14 @@ const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
 //send the result to the Backend to look for the plant
 const handleSubmit = async () =>{
-try{
 
+  setStep('analyzing');
+
+
+
+ 
+try{
+ await new Promise( resolve =>setTimeout(resolve, 3000));
   const response = await axios.post(`${baseUrl}/quiz/answers`, 
     {answer : conditions}
   );
@@ -44,9 +51,11 @@ try{
   
 }catch(error: any){
 setError(error.message || "Failed to send the plant quiz result to backend!")
-}finally{
-setLoading(false);
+console.log("Ai error");
 }
+// }finally{
+// setLoading(false);
+// } 
 };
 
   console.log("Conditions from quiz: ", conditions)
@@ -54,21 +63,10 @@ setLoading(false);
   const [recommendations, setRecommendations] = useState<PlantRecommendation[]>([]);
   //the most recommended plant
   const [selectedPlant, setSelectedPlant] = useState<PlantRecommendation | null>(null);
-
-  const handleAnalyze = () => { setStep('analyzing') }
   return (
     <section>
       <BreadCrumbs />
-      <div className=" p-4 flex flex-col items-center">
-        <div className="p-4 bg-gradient-to-r from-amber-600 to-amber-800 border rounded-xl w-fit mt-4">
-          <Sparkles className="w-6 h-6 text-brand-100" /></div>
-        <h1 className='my-4'>AI Plant Finder</h1>
-        <p className='text-xs text-center'>Answer a few questions about your space and our AI will recommend the perfect plants that will thrive in your environment.</p>
-        <div className="w-full h-auto object-cover mx-auto flex justify-center mt-4">
-          <div className=" p-2 bg-amber-50 border rounded-2xl border-amber-600 w-fit flex gap-2 items-center bottom-2">
-            <Camera className="w-4 h-4 text-amber-600" />
-            <p className="text-xs">AI-powered plant recommendations</p></div></div>
-      </div>
+      <AI_PlantQuizHeader />
 
       {/* the progress bar */}
       <div className="flex items-center justify-center mb-12 max-w-md mx-auto">
@@ -320,6 +318,7 @@ setLoading(false);
             </motion.div>
           }
 
+  
         </AnimatePresence>
       </div>
     </section>
