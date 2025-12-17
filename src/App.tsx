@@ -19,6 +19,7 @@ import PlantDetails from "./pages/PlantDetails";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 import PlantQuizPage from "./pages/PlantQuizPage";
 import PlantQuizResultPage from "./pages/PlantQuizResultPage";
+import { QuizProvider } from "./context/QuizContext";
 import {
   QueryClient,
   QueryClientProvider
@@ -36,6 +37,7 @@ const queryClient = new QueryClient(
 
 function App() {
   return (
+    <QuizProvider>
     <QueryClientProvider client={queryClient}>
     <Router>
       <Routes>
@@ -48,7 +50,7 @@ function App() {
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
       </Routes>
-    </Router></QueryClientProvider>
+    </Router></QueryClientProvider></QuizProvider>
   );
 }
 export default App;
