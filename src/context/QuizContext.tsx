@@ -35,7 +35,7 @@ const useQuiz = () => {
 
 function QuizProvider({children}: {children: ReactNode}) {
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [recommendations, setRecommendations] = useState<PlantRecommendation[]>([]);
   const [selectedPlant, setSelectedPlant] = useState<PlantRecommendation | null>(null);
   const [step, setStep] = useState<'questionnaire' | 'analyzing' | 'results'>('questionnaire');
