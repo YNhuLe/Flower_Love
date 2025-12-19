@@ -17,7 +17,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
     
     return (
-        <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
+        <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
 
             <div>
                 {
@@ -38,16 +38,15 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
 
                     {
                         newProduct.plantinglevel && (
-                            <p className="bg-surface-base px-[.3rem] py-[.3rem] border rounded-[50%]">
-                                <BsHandThumbsUp className="text-xs" />
-
+                            <p className="bg-surface-base p-2 border rounded-full">
+                                <BsHandThumbsUp className="w-4 h-4" />
                             </p>
 
                         )
                     }
                     {newProduct.is_pet_friendly && (
-                        <p className=" bg-surface-base px-[.3rem] py-[.3rem] border rounded-[50%]">
-                            <FaPaw className="text-xs" />
+                        <p className=" bg-surface-base p-2 border rounded-full">
+                            <FaPaw className="w-4 h-4" />
                         </p>
                     )}
 

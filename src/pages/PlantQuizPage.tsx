@@ -1,18 +1,13 @@
 import {
-  Share2,
   Droplets,
   Sun,
   Thermometer,
-  Wind, Award,
+Award,
   Sparkles,
-  Camera, Brain, Image, CheckCircle,
+  Camera,  CheckCircle,
   Leaf, AlertOctagon,
-  Divide
 } from 'lucide-react';
-import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-
-import { RoomConditions, PlantRecommendation } from '../types/types';
 import Button from '../common/Button';
 import axios from 'axios';
 import BreadCrumbs from '../common/BreadCrumbs';
@@ -28,18 +23,35 @@ function PlantQuizPage() {
     recommendations, setRecommendations, selectedPlant, setSelectedPlant
   } = useQuiz();
 
+  console.log("Conditions: ", conditions);
+  
+
   //send the result to the Backend to look for the plant
   const handleSubmit = async () => {
 
     setStep('analyzing');
     try {
       await new Promise(resolve => setTimeout(resolve, 3000));
+
+       const payload = {
+      user_id: 123, 
+      answers: [
+        { question_key: "plant_interest", answer_value: conditions.name },
+        { question_key: "avoid_types", answer_value: conditions.plantsToAvoid },
+        { question_key: "sunlight", answer_value: conditions.light },
+        { question_key: "humidity", answer_value: conditions.humidity_preference },
+        { question_key: "plantinglevel", answer_value: conditions.plantinglevel },
+        { question_key: "temperature", answer_value: conditions.temperature_range }
+      ]
+    }
+
+    console.log("Pay load: ", payload);
+    
       const response = await axios.post(`${baseUrl}/quiz/answers`,
-        { answer: conditions }
-        
+      
+        payload
       );
-      setRecommendations(response.data.recommendations);
-      setStep('results')
+ 
       console.log("Result data : ", response.data);
 
     } catch (error: any) {
@@ -347,9 +359,10 @@ function PlantQuizPage() {
 
 
         </AnimatePresence>
-        <PlantQuizResultPage />
+        {/* <PlantQuizResultPage /> */}
       </div>
     </section>
   )
 }
 export default PlantQuizPage;
+

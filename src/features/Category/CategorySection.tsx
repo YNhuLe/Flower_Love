@@ -30,8 +30,8 @@ function CategorySection() {
             <p className="text-center  m-4 mt-2">Explore our diverse collection of plants organized by type, size, and care requirements to find the perfect green companion for your space.</p>
 
             {
-                categories.map((category) => (
-                    <CategoryCard categories={category} />
+                categories.map((category, id) => (
+                    <CategoryCard key={id} categories={category} />
                 ))
             }
 
