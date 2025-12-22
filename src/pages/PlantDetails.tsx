@@ -38,7 +38,7 @@ if (isLoading){
 //     console.log("it is undefined");
     
 // }
-console.log(plantInfo?.benefits);
+// console.log(plantInfo?.benefits);
 
     if (isLoading) return <p>Loading...</p>;
   if(isError || !plantInfo){
@@ -47,7 +47,7 @@ return <p>Loading data!!</p>
 
     // Parse benefits from the backend
     let formatArr: string[] = [];
-    console.log("type of formatArr: ", Array.isArray(plantInfo.benefits));
+    // console.log("type of formatArr: ", Array.isArray(plantInfo.benefits));
     
     if (Array.isArray(plantInfo.benefits)) {
         formatArr = plantInfo.benefits;

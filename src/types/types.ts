@@ -134,13 +134,15 @@ interface RoomConditions {
 //plant recommendations from AI
 interface PlantRecommendation {
   id: string;
-  name: string;
-  scientificName: string;
+  common_name: string;
+  scientific_name: string;
   image: string;
-  matchScore: number;
+  scoreMatch: number;
   reasons: string[];
   careLevel: string;
   price: number;
+  plantinglevel: string,
+  benefits: string[]
 }
 
 export type {
