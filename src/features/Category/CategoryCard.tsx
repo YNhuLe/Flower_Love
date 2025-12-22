@@ -12,7 +12,7 @@ function CategoryCard({ categories }: { categories: CategoriesProps }) {
     const imgSrc = categories.cate_img ? `${cloud_url}/${categories.cate_img}` : `${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
     return (
 
-        <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
+        <section className="border rounded-xl w-[calc(100%-2rem)] mx-4 my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
 
             <img
                 className="w-full h-[10rem] object-cover transform transition-transform duration-300 hover:scale-105"

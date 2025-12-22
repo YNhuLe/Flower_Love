@@ -2,7 +2,7 @@ import {
   Droplets,
   Sun,
   Thermometer,
-Award,
+  Award,
   Sparkles,
   Camera,  CheckCircle,
   Leaf, AlertOctagon,
@@ -14,6 +14,7 @@ import BreadCrumbs from '../common/BreadCrumbs';
 import AI_PlantQuizHeader from '../features/PlantQuiz/AI_PlantQuizHeader';
 import { useQuiz } from '../context/QuizContext';
 import PlantQuizResultPage from './PlantQuizResultPage';
+import { useNavigate } from 'react-router-dom';
 
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
@@ -22,6 +23,7 @@ function PlantQuizPage() {
   const { step, setStep, conditions, setConditions, error, setError, loading, setLoading,
     recommendations, setRecommendations, selectedPlant, setSelectedPlant
   } = useQuiz();
+  const navigate = useNavigate();
 
   console.log("Conditions: ", conditions);
   
@@ -30,6 +32,7 @@ function PlantQuizPage() {
   const handleSubmit = async () => {
 
     setStep('analyzing');
+    // setLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -45,18 +48,19 @@ function PlantQuizPage() {
       ]
     }
 
-    console.log("Pay load: ", payload);
+    // console.log("Pay load: ", payload);
     
-      const response = await axios.post(`${baseUrl}/quiz/answers`,
-      
+      const response = await axios.post(`${baseUrl}/quiz/answers`,   
         payload
       );
- 
-      console.log("Result data : ", response.data);
+     console.log("Result data : ", response.data);
+       navigate('/products/quiz/quiz_result');
+       setRecommendations(response.data.recommendations);
+ setStep('results');
+   
 
     } catch (error: any) {
       setError(error.message || "Failed to send the plant quiz result to backend!")
-      console.log("Ai error");
 
     } finally {
       setLoading(false);
@@ -328,7 +332,7 @@ function PlantQuizPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+              className="bg-text-inverse rounded-2xl shadow-lg p-8 md:p-12"
             >
               <div className=" p-4 flex flex-col items-center">
                 <div className="p-4 bg-gradient-to-br from-amber-600 to-amber-800 border rounded-full w-fit mt-4 shadow-lg animate-pulse">
@@ -359,7 +363,7 @@ function PlantQuizPage() {
 
 
         </AnimatePresence>
-        {/* <PlantQuizResultPage /> */}
+   
       </div>
     </section>
   )
