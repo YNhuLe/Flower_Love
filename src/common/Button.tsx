@@ -8,7 +8,7 @@ import {
   Sun,
   Thermometer,
   Wind,
-  Sparkles,
+  Sparkles, ArrowLeft
 } from 'lucide-react';
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all"
@@ -31,7 +31,7 @@ const styleMap: Record<string, string> = {
   customize: "p-1 text-xs px-4 py-2 rounded-2xl text-surface-base bg-cart-500 hover:bg-cart-700 transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
   shop_now: "text-xs px-4 py-2 rounded-2xl text-surface-base bg-brand-500 hover:bg-brand-700 transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
   explore: "text-xs rounded-2xl text-success-500",
-  
+
   view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500"
   , add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 "
   , quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 ",
@@ -39,8 +39,8 @@ const styleMap: Record<string, string> = {
   plant_quiz: "p-2 text-xxs px-4 rounded-lg text-brand-100 text-center bg-gradient-to-r from-cart-700 to-amber-600 hover:bg-amber-800 transition-all duration-300",
   AI_analyze: "p-2 text-xxs rounded-lg bg-gradient-to-r from-cart-700 to-amber-600 text-surface-card mt-10 mx-auto ",
   AI_disabled: "opacity-50 cursor-not-allowed pointer-events-none",
-new_analysis:"",
-all_recommendations:""
+  new_analysis: "bg-text-inverse p-2 border  rounded-xl text-xs curosr-pointer ",
+  all_recommendations: ""
 }
 
 const labelMap: Record<string, string> = {
@@ -55,16 +55,18 @@ const labelMap: Record<string, string> = {
 
   view_all: "View All Plants",
   add_to_cart: "Add to Cart",
-  quick_view: "Quick View" ,
-   plant_quiz: "Try AI plant Finder",
+  quick_view: "Quick View",
+  plant_quiz: "Try AI plant Finder",
   AI_analyze: "Find My Perfect Plant",
-  new_analysis:"Start New Analysis",
-all_recommendations:"View All Recommendations"
+  new_analysis: "Start New Analysis",
+  all_recommendations: "View All Recommendations"
 }
 
 const iconMap: Record<string, ReactNode> = {
   add: <ShoppingCartIcon className="w-5 h-5 text-white-700 hover:text-green-500 transition" />,
-  AI_analyze: <Sparkles className="w-5 h-5 text-white-700" />
+  AI_analyze: <Sparkles className="w-5 h-5 text-white-700" />,
+    plant_quiz: <Sparkles className="w-5 h-5 text-white-700" />,
+  new_analysis: <ArrowLeft className="w-5 h-5 text-text-muted transition-transform duration-200 hover:-translate-x-1" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",
@@ -76,9 +78,9 @@ const urlMap: Record<string, string> = {
 
   view_all: "/view_all",
   add_to_cart: "/add_to_cart",
-    plant_quiz: "/plant_quiz",
+  plant_quiz: "/plant_quiz",
   AI_analyze: "/products/quiz/quiz_result",
-  new_analysis:"/"
+  new_analysis: "/products/quiz"
 
 }
 
@@ -107,18 +109,24 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
         disabled={disabled}
       >
         <span className="flex items-center gap-2">
-          {
-            btnType === 'plant_quiz' && (
-              <Sparkles className="w-6 h-6 text-brand-100" />
-            )}
-
-          {label}
 
           {
             btnType === 'AI_analyze' && (
-              <Sparkles className="w-5 h-5 text-brand-100"/>
+
+              <>
+             
+{iconMap[btnType] && iconMap[btnType]} {label} </>
             )
           }
+
+          {
+            btnType !== 'AI_analyze' &&(
+              <>
+              
+              {label} {iconMap[btnType] && iconMap[btnType]}</>
+            )
+          }
+
         </span>
 
       </button>
