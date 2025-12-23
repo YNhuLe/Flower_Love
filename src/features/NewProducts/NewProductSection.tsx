@@ -30,8 +30,8 @@ if(error) return <p>Error...</p>
         <section>
             {
 
-           newProducts.map((newProduct) => (
-                    <NewProductCard key={newProduct.id}
+           newProducts.map((newProduct, id) => (
+                    <NewProductCard key={id}
                         newProduct={newProduct}
                     />
                 ))

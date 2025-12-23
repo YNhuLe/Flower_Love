@@ -136,11 +136,11 @@ interface PlantRecommendation {
   id: string;
   common_name: string;
   scientific_name: string;
-  image: string;
+  image_url: string;
   scoreMatch: number;
-  reasons: string[];
+  reasoning: string;
   careLevel: string;
-  price: number;
+  original_price: number;
   plantinglevel: string,
   benefits: string[]
 }

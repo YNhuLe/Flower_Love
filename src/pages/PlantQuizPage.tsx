@@ -76,11 +76,11 @@ function PlantQuizPage() {
       {/* the progress bar */}
       <div className="flex items-center justify-center mb-12 max-w-md mx-auto">
         <div className="flex items-center w-full m-4">
-          <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'questionnaire' || step === 'analyzing' || step === 'results' ? 'bg-amber-500 text-white' : 'bg-stone-200 text-stone-500'}`}>
+          <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'questionnaire' || step === 'analyzing' || step === 'results' ? 'bg-amber-600 text-white' : 'bg-stone-200 text-stone-500'}`}>
             {step === 'analyzing' || step === 'results' ? <CheckCircle className="w-5 h-5" /> : '1'}
           </div>
-          <div className={`flex-1 h-1 mx-2 ${step === 'analyzing' || step === 'results' ? 'bg-amber-500' : 'bg-stone-200'}`} />
-          <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'analyzing' || step === 'results' ? 'bg-amber-500 text-white' : 'bg-stone-200 text-stone-500'}`}>
+          <div className={`flex-1 h-1 mx-2 ${step === 'analyzing' || step === 'results' ? 'bg-amber-600' : 'bg-stone-200'}`} />
+          <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'analyzing' || step === 'results' ? 'bg-amber-600 text-white' : 'bg-stone-200 text-stone-500'}`}>
             {step === 'results' ? <CheckCircle className="w-5 h-5" /> : '2'}
           </div>
         </div>
