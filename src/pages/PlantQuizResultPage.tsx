@@ -1,21 +1,8 @@
 import BreadCrumbs from "../common/BreadCrumbs";
 import {
-  Share2,
-  Droplets,
-  Sun,
-  Thermometer,
-  Wind, Award,
-  Sparkles,
-  Camera, Brain, Image, CheckCircle,
-  Leaf, AlertOctagon,
-  Divide,
-  Key, CircleCheck,MoreHorizontal
+  CheckCircle,MoreHorizontal
 } from 'lucide-react';
-import { FaCheckCircle } from 'react-icons/fa';
 
-import { FaCheck } from "react-icons/fa";
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from "react";
 import AI_PlantQuizHeader from "../features/PlantQuiz/AI_PlantQuizHeader";
 import { useQuiz } from "../context/QuizContext";
 import Button from "../common/Button";
@@ -65,22 +52,6 @@ function PlantQuizResultPage() {
             </div>
           </div>
         </div>
-
-        {/*     
-{
-  step === 'results' && selectedPlant && (
-   <motion.div
-              key="results"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
-            >
-         
-
-            </motion.div>
-  )
-} */}
 
         <article className="bg-text-inverse h-fit m-4 rounded-2xl overflow-hidden shadow-lg pb-6">
 
@@ -144,6 +115,9 @@ function PlantQuizResultPage() {
               <SecondaryRecommendedCard secondRecom={recoms} key={id} />
             ))
           }</article>
+          <div className="w-fit mx-auto my-8">
+          <Button btnType="new_analysis" />
+          </div>
       </section>
 
       <Footer />
