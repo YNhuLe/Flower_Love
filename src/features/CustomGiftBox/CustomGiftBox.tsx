@@ -32,7 +32,9 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
     if (error) { return <p>{error}</p> }
 
 
-    const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory)
+    const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory);
+    console.log(filteredGifts.map(g => g.id));
+
     return (
         <section className="my-10 mx-4">
             <h1 className="text-2xl font-semibold text-center">Custom Gift Box</h1>

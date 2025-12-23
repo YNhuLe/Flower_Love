@@ -9,15 +9,18 @@ import {
   Camera, Brain, Image, CheckCircle,
   Leaf, AlertOctagon,
   Divide,
-  Key
+  Key, CircleCheck,MoreHorizontal
 } from 'lucide-react';
+import { FaCheckCircle } from 'react-icons/fa';
+
 import { FaCheck } from "react-icons/fa";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from "react";
 import AI_PlantQuizHeader from "../features/PlantQuiz/AI_PlantQuizHeader";
 import { useQuiz } from "../context/QuizContext";
 import Button from "../common/Button";
-import { P } from "framer-motion/dist/types.d-DagZKalS";
+import SecondaryRecommendedCard from "../features/PlantQuiz/SecondaryRecommendedCard";
+import Footer from "../common/Footer";
 function PlantQuizResultPage() {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
 
@@ -30,31 +33,18 @@ function PlantQuizResultPage() {
   console.log("recommendations: ", recommendations);
   const firstRecom = recommendations[0];
   let formatArr: string[] = [];
-      if (Array.isArray(firstRecom.benefits)) {
-        formatArr = firstRecom.benefits;
-    } else if (typeof firstRecom.benefits === 'string') {
-        try {
-            formatArr = JSON.parse(firstRecom.benefits);
-        } catch (error: any) {
-            console.log("Error: Could not parse benefit data.", error);
-            formatArr = [];
-        }
+  if (Array.isArray(firstRecom.benefits)) {
+    formatArr = firstRecom.benefits;
+  } else if (typeof firstRecom.benefits === 'string') {
+    try {
+      formatArr = JSON.parse(firstRecom.benefits);
+    } catch (error: any) {
+      console.log("Error: Could not parse benefit data.", error);
+      formatArr = [];
     }
-  // formatArr = firstRecom.benefits
+  }
 
-  console.log("Type of: ", typeof(formatArr));
-  
-    
-    // if (Array.isArray(recommendations.benefits)) {
-    //     formatArr = plantInfo.benefits;
-    // } else if (typeof plantInfo.benefits === 'string') {
-    //     try {
-    //         formatArr = JSON.parse(plantInfo.benefits);
-    //     } catch (error: any) {
-    //         console.log("Error: Could not parse benefit data.", error);
-    //         formatArr = [];
-    //     }
-    // }
+
   return (
     <>
       <BreadCrumbs />
@@ -66,11 +56,11 @@ function PlantQuizResultPage() {
 
         <div className="flex items-center justify-center mb-12 max-w-md mx-auto">
           <div className="flex items-center w-full m-4">
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'questionnaire' || step === 'analyzing' || step === 'results' ? 'bg-amber-500 text-muted' : 'bg-stone-200 text-stone-500'}`}>
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'questionnaire' || step === 'analyzing' || step === 'results' ? 'bg-amber-600 text-muted' : 'bg-stone-200 text-stone-500'}`}>
               < OrangeCheckIcon />
             </div>
-            <div className={`flex-1 h-1 mx-2 ${step === 'analyzing' || step === 'results' ? 'bg-amber-500' : 'bg-amber-500'}`} />
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'analyzing' || step === 'results' ? 'bg-amber-500 text-white' : 'bg-stone-200 text-stone-500'}`}>
+            <div className={`flex-1 h-1 mx-2 ${step === 'analyzing' || step === 'results' ? 'bg-amber-600' : 'bg-amber-600'}`} />
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step === 'analyzing' || step === 'results' ? 'bg-amber-600 text-white' : 'bg-stone-200 text-stone-500'}`}>
               < OrangeCheckIcon />
             </div>
           </div>
@@ -92,7 +82,7 @@ function PlantQuizResultPage() {
   )
 } */}
 
-        <article className="bg-text-inverse h-fit mx-4 rounded-2xl overflow-hidden shadow-lg">
+        <article className="bg-text-inverse h-fit m-4 rounded-2xl overflow-hidden shadow-lg pb-6">
 
 
 
@@ -109,40 +99,54 @@ function PlantQuizResultPage() {
             </div>
           </div>
 
+          <div className="m-4 w-fit relative cursor-pointer hover:shadow-lg  transition-all ">
 
+            <img className="rounded-xl" src={`${cloud_url}/${firstRecom.image_url[0]}`} alt={firstRecom.common_name} />
+            <MoreHorizontal className="absolute left-56 bottom-4"/>
+          </div>
+          <h2 className="text-xxs mx-4">{firstRecom.common_name}</h2>
+          <p className="italic text-xs mx-4 text-text-muted">{firstRecom.scientific_name}</p>
 
-<img src={firstRecom.image} alt={firstRecom.common_name} />
+          <div className="flex gap-2 items-center">
+            <div className="w-fit p-2 px-4 m-4 bg-success-300/40 rounded-3xl flex  items-center">
+              <span className="text-success-500 text-xs">{firstRecom.plantinglevel}</span>
 
-<h2>{firstRecom.common_name}</h2>
-<p>{firstRecom.scientific_name}</p>
+            </div>
+            <p className="text-center text-amber-600">${firstRecom.original_price}</p></div>
 
-<div><span>{firstRecom.plantinglevel}</span></div>
+          <div className="m-4">
 
-          <div>
-
-            <h2 className="text-xxs">Why this plant is perfect for you:</h2>
+            <h2 className="text-xxs my-4">Why this plant is perfect for you:</h2>
 
             {
-     formatArr.map((ben, index) =>(
-                 <div className="flex flex-row gap-2">
-                                                <FaCheck className="w-4 h-3 text-success-500 " />
-                                                <p key={index} className="text-xs mb-2 ">{ben}</p>
-                                           
-                                                </div>
+              formatArr.map((ben, index) => (
+                <div key={index} className="flex flex-row gap-2 items-center mt-3">
+
+                  <CheckCircle className='text-success-500 w-4 h-4' />
+
+                  <p className="text-xs ">{ben}</p>
+
+                </div>
               ))
             }
           </div>
 
+          <div className="px-4">
 
-          {
-            recommendations.slice(1, 3).map((recoms, id) => (
-
-              <div></div>
-            ))
-          }
-          <Button btnType="add_to_cart"></Button>
+            <Button btnType="add_to_cart"></Button></div>
         </article>
+
+        <article className="bg-text-inverse h-fit m-4 rounded-2xl overflow-hidden shadow-lg pb-6">
+          <h1 className="text-xxs p-4">Other Great Matches</h1>
+          {
+            recommendations.slice(1, 4).map((recoms, id) => (
+
+              <SecondaryRecommendedCard secondRecom={recoms} key={id} />
+            ))
+          }</article>
       </section>
+
+      <Footer />
     </>
   )
 }
