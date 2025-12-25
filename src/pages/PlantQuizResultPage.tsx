@@ -1,6 +1,6 @@
 import BreadCrumbs from "../common/BreadCrumbs";
 import {
-  CheckCircle,MoreHorizontal
+  CheckCircle, MoreHorizontal
 } from 'lucide-react';
 
 import AI_PlantQuizHeader from "../features/PlantQuiz/AI_PlantQuizHeader";
@@ -8,15 +8,37 @@ import { useQuiz } from "../context/QuizContext";
 import Button from "../common/Button";
 import SecondaryRecommendedCard from "../features/PlantQuiz/SecondaryRecommendedCard";
 import Footer from "../common/Footer";
+import { useNavigate } from "react-router-dom";
 function PlantQuizResultPage() {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-
+const navigate = useNavigate();
   const { step, setStep, conditions, setConditions, recommendations, setRecommendations, selectedPlant, setSelectedPlant } = useQuiz();
   const OrangeCheckIcon = () => (
     <div className="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center">
       <CheckCircle className="text-white w-6 h-6" strokeWidth={2.5} />
     </div>
   );
+
+  //reset the quiz page
+  const resetAnalysis = () =>{
+    setStep('questionnaire');
+    console.log("New analysis button rendered: ");
+    
+    setConditions({
+      light:"",
+      temperature_range:"",
+      humidity_preference:"",
+      plantinglevel:"",
+      room_type:"",
+      name:"",
+      plantsToAvoid:[]
+    });
+    setRecommendations([]);
+    setSelectedPlant(null);
+    navigate("/products/quiz");
+
+  }
+
   console.log("recommendations: ", recommendations);
   const firstRecom = recommendations[0];
   let formatArr: string[] = [];
@@ -73,7 +95,7 @@ function PlantQuizResultPage() {
           <div className="m-4 w-fit relative cursor-pointer hover:shadow-lg  transition-all ">
 
             <img className="rounded-xl" src={`${cloud_url}/${firstRecom.image_url[0]}`} alt={firstRecom.common_name} />
-            <MoreHorizontal className="absolute left-56 bottom-4"/>
+            <MoreHorizontal className="absolute left-56 bottom-4" />
           </div>
           <h2 className="text-xxs mx-4">{firstRecom.common_name}</h2>
           <p className="italic text-xs mx-4 text-text-muted">{firstRecom.scientific_name}</p>
@@ -115,9 +137,9 @@ function PlantQuizResultPage() {
               <SecondaryRecommendedCard secondRecom={recoms} key={id} />
             ))
           }</article>
-          <div className="w-fit mx-auto my-8">
-          <Button btnType="new_analysis" />
-          </div>
+        <div className="w-fit mx-auto my-8">
+          <Button btnType="new_analysis"  onClick={resetAnalysis}/>
+        </div>
       </section>
 
       <Footer />
