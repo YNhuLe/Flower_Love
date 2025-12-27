@@ -15,7 +15,6 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import GiftBoxOffer from "./components/GiftBoxOffer";
-import PlantDetails from "./pages/PlantDetails";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 import PlantQuizPage from "./pages/PlantQuizPage";
 import PlantQuizResultPage from "./pages/PlantQuizResultPage";
@@ -44,7 +43,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/giftbox/:id" element={<GiftBoxOffer />} />
-        <Route path="/products/:id" element={<PlantDetailsPage />} />
+        <Route path="/products/:plant_id" element={<PlantDetailsPage />} />
         <Route path="/products/quiz" element={<PlantQuizPage />}/>
         <Route path="/products/quiz/quiz_result" element={<PlantQuizResultPage />} />
         {/* <Route path="/signup" element={<SignupPage />} />
