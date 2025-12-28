@@ -9,6 +9,8 @@ function NewProductSection() {
     const [newProducts, setNewProducts] = useState<ProductWithCategory[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    console.log("New Prods: ", newProducts);
+    
     useEffect(() => {
         const fetchNewProducts = async () => {
             try {
@@ -27,11 +29,11 @@ if( loading) return <p>Loading...</p>
 if(error) return <p>Error...</p>
 
     return (
-        <section>
+        <section >
             {
 
-           newProducts.map((newProduct, id) => (
-                    <NewProductCard key={id}
+           newProducts.map((newProduct) => (
+                    <NewProductCard key={newProduct.id}
                         newProduct={newProduct}
                     />
                 ))

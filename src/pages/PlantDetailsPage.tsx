@@ -5,14 +5,14 @@ import PlantDetails from "./PlantDetails";
 import BreadCrumbs from "../common/BreadCrumbs"
 function PlantDetailsPage(){
     return (
-        <>
+        <section className="">
         <NavBar />
       
         <SearchBar />
           <BreadCrumbs />
         <PlantDetails />
         <Footer />
-        </>
+        </section>
     )
 }
 

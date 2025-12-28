@@ -1,17 +1,17 @@
 import BreadCrumbs from "../common/BreadCrumbs";
 import {
-  CheckCircle, MoreHorizontal
+  CheckCircle, ArrowRight
 } from 'lucide-react';
-
+import { useMemo } from "react";
 import AI_PlantQuizHeader from "../features/PlantQuiz/AI_PlantQuizHeader";
 import { useQuiz } from "../context/QuizContext";
 import Button from "../common/Button";
 import SecondaryRecommendedCard from "../features/PlantQuiz/SecondaryRecommendedCard";
 import Footer from "../common/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 function PlantQuizResultPage() {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { step, setStep, conditions, setConditions, recommendations, setRecommendations, selectedPlant, setSelectedPlant } = useQuiz();
   const OrangeCheckIcon = () => (
     <div className="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center">
@@ -20,18 +20,18 @@ const navigate = useNavigate();
   );
 
   //reset the quiz page
-  const resetAnalysis = () =>{
+  const resetAnalysis = () => {
     setStep('questionnaire');
     console.log("New analysis button rendered: ");
-    
+
     setConditions({
-      light:"",
-      temperature_range:"",
-      humidity_preference:"",
-      plantinglevel:"",
-      room_type:"",
-      name:"",
-      plantsToAvoid:[]
+      light: "",
+      temperature_range: "",
+      humidity_preference: "",
+      plantinglevel: "",
+      room_type: "",
+      name: "",
+      plantsToAvoid: []
     });
     setRecommendations([]);
     setSelectedPlant(null);
@@ -39,7 +39,9 @@ const navigate = useNavigate();
 
   }
 
-  console.log("recommendations: ", recommendations);
+  // console.log("recommendations: ", recommendations);
+  console.log("Selected Plant: ", selectedPlant?.id);
+
   const firstRecom = recommendations[0];
   let formatArr: string[] = [];
   if (Array.isArray(firstRecom.benefits)) {
@@ -53,7 +55,18 @@ const navigate = useNavigate();
     }
   }
 
-
+  const gradients = [
+    "from-green-500 via-emerald-600 to-teal-700",
+    "from-purple-500 via-indigo-600 to-blue-700",
+    "from-orange-400 via-red-500 to-pink-600",
+    "from-rose-400 via-fuchsia-500 to-purple-600",
+    "from-sky-400 via-blue-500 to-indigo-600",
+    "from-amber-400 via-orange-500 to-yellow-600"
+  ];
+  const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+    const selectedGradient = useMemo(() => randomGradient, []);
+    console.log("Gradients: ", selectedGradient);
+    
   return (
     <>
       <BreadCrumbs />
@@ -92,11 +105,32 @@ const navigate = useNavigate();
             </div>
           </div>
 
-          <div className="m-4 w-fit relative cursor-pointer hover:shadow-lg  transition-all ">
+          <Link to={`/products/${recommendations[0].id}`}
+      className="group w-full h-full  cursor-pointer m-4  shadow-sm hover:shadow-2xl transition-all duration-500"
+      >
+            <div className="relative overflow-hidden h-[15rem] m-4">
+              <img
+                className="w-full h-full object-cover transition-all  duration-700 ease-in-out opacity-100 group-hover:scale-110 group-hover:backdrop-blur-sm "
 
-            <img className="rounded-xl" src={`${cloud_url}/${firstRecom.image_url[0]}`} alt={firstRecom.common_name} />
-            <MoreHorizontal className="absolute left-56 bottom-4" />
-          </div>
+                src={`${cloud_url}/${firstRecom.image_url[0]}`}
+                alt={firstRecom.common_name} />
+              <div
+                className={`absolute  rounded-xl w-full h-full inset-0 z-10 bg-gradient-to-br ${selectedGradient} opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none`}
+          />
+              <div className="absolute inset-0 z-20 flex gap-0 items-center justify-center  opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-90 group-hover:scale-100">
+                <span className="flex  bg-text-inverse/30 py-2 px-3 text-text-inverse font-bold rounded-full text-xs uppercase tracking-[0.2em] shadow-2xl m-0       
+            ">
+                  Explore
+
+             <ArrowRight className="w-4 h-4 text-text-inverse transition-tranform duration-300 ease-out transform group-hover:translate-x-1.5" />     </span> </div>
+
+            </div>
+
+     
+          </Link>
+
+
+
           <h2 className="text-xxs mx-4">{firstRecom.common_name}</h2>
           <p className="italic text-xs mx-4 text-text-muted">{firstRecom.scientific_name}</p>
 
@@ -134,11 +168,15 @@ const navigate = useNavigate();
           {
             recommendations.slice(1, 4).map((recoms, id) => (
 
-              <SecondaryRecommendedCard secondRecom={recoms} key={id} />
+              <Link to={`/products/${recoms.id}`} className="cursor-pointer hover:shadow-lg ">
+
+                <SecondaryRecommendedCard secondRecom={recoms} key={id} />
+                
+              </Link>
             ))
           }</article>
         <div className="w-fit mx-auto my-8">
-          <Button btnType="new_analysis"  onClick={resetAnalysis}/>
+          <Button btnType="new_analysis" onClick={resetAnalysis} />
         </div>
       </section>
 

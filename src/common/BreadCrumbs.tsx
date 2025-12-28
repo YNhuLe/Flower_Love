@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import usePlantDetails from "../hooks/usePlantDetails";
 
@@ -8,6 +8,9 @@ function BreadCrumbs() {
     const location = useLocation();
     const pathname = location.pathname;
 
+console.log("Pathname: ", pathname);
+console.log("Location: ", location);
+
 
     //split path into segments, filter(Boolean) returns falsy to remove the empty string
     const segments = pathname.split("/").filter(Boolean);
@@ -15,8 +18,11 @@ function BreadCrumbs() {
     //look through the segments, check individual seg and only return seg that contains digits 
     const isNumericId = segments.find((seg) => /^\d+$/.test(seg));
     //match ID from the seg with the plant'id from hook
-    const { data: plantInfo } = usePlantDetails(isNumericId || undefined);
+    const { data: plantInfo } = usePlantDetails(isNumericId ? Number(isNumericId) : undefined);
+console.log("NumericiD: ", isNumericId);
 
+    console.log("PlantInfo: ", plantInfo);
+    
     const crumbs = segments.map((segment, index) => {
         const path = "/" + segments.slice(0, index + 1).join("/");
         let label = segment;
