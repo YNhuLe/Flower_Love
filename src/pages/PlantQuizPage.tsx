@@ -25,7 +25,7 @@ function PlantQuizPage() {
   } = useQuiz();
   const navigate = useNavigate();
 
-  console.log("Conditions: ", conditions);
+  // console.log("Conditions: ", conditions);
   
 
   //send the result to the Backend to look for the plant

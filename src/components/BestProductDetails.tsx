@@ -10,6 +10,9 @@ function BestProductDetails({ products }: { products: PlantWithSize }) {
   if (!products) {
     return <p>Loading product details...</p>;
   }
+
+  // console.log("ID from the best product: ", products.id);
+  
   return (
 
     

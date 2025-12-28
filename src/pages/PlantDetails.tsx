@@ -16,23 +16,44 @@ import {
 import HeartButton from "../common/HeartButton";
 import usePlantDetails from "../hooks/usePlantDetails";
 function PlantDetails() {
-    const { id } = useParams<{ id: string }>();
+     console.log("🌐 Current URL:", window.location.pathname);
+    console.log("🌐 Current search:", window.location.search);
+    
+    const { plant_id } = useParams<{ plant_id: string }>();
+    console.log("ID: ", plant_id);
+    console.log("🔢 URL param plant_id:", plant_id);
+    console.log("🔢 Converted to number:", Number(plant_id));
+     console.log("🔢 useParams result:", useParams());
+    
+  
+    
+    
     const {
         data:plantInfo,
         isLoading,
         isError,
         error
-    } = usePlantDetails(id);
+    } = usePlantDetails(Number(plant_id));
+     console.log("📊 plantInfo from hook:", plantInfo);
+    console.log("📊 plantInfo.id:", plantInfo?.id);
+
+    
     const [quantity, setQuantity] = useState(1);
     const [selectSize, setSelectedSize] = useState(0);
     const [selectImage, setSelectedImage] = useState(0);
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-if (isLoading){
+
+    // console.log("Plants fetched: ", plantInfo);
+    // console.log("Type of: ", typeof(plantInfo))
+ console.log("Navigating to plant ID :", plantInfo);
+
+ 
+    if (isLoading){
     return <p>Loading plant information... </p>
 }
 
-    console.log("Plants fetched: ", plantInfo);
-    console.log("Type of: ", typeof(plantInfo))
+if (isError) { return ( <div className="text-center mt-10"> <p className="text-red-600 font-semibold">This plant does not exist.</p> <p className="text-sm text-gray-500">Please choose another plant.</p> </div> ); }
+
 
 // if(!plantDetails){
 //     console.log("it is undefined");
@@ -159,9 +180,9 @@ return <p>Loading data!!</p>
                     <h3 className="inline-block ml-2 mb-4">Plant Benefits</h3>
                     {
                         formatArr.map((benefit, index) => (
-                            <div className="flex flex-row gap-2">
+                            <div className="flex flex-row gap-2" key={index}>
                                 <FaCheck className="w-4 h-3 text-success-500 " />
-                                <p key={index} className="text-xs mb-2 ">{benefit}</p>
+                                <p className="text-xs mb-2 ">{benefit}</p>
                            
                                 </div>
                         ))

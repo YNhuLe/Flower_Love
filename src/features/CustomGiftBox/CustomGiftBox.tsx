@@ -48,7 +48,8 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
                 {
                     filteredGifts.length > 0 ? (
                         filteredGifts.map(({ id, name, price, category_id, category_name, img_url }) => (
-                            <CustomGiftBoxCard id={id} name={name}
+                            <CustomGiftBoxCard key={id} name={name} id={id}
+                            
                                 price={price} category_id={category_id} category_name={category_name} img_url={img_url} />
                         ))
                     ) : (

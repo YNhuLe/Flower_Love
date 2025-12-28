@@ -56,6 +56,7 @@ interface GiftItemsCategoriesProps extends GiftCategories {
 
 //categories interface
 interface CategoriesProps{ 
+  category_id: string;
   name: string;
   description: string;
   quantity: number;
@@ -68,10 +69,7 @@ interface NewProductProps{
   common_name: string;
   scientific_name: string;
   description: string;
-
   image_url: string[];
-
-
   light_requirements: string;
   watering_requirements: string;
   humidity_preference: string;
@@ -112,7 +110,59 @@ sizes: (PlantSizeProps & {discounted_price: number})[];
 }
 
 
-interface ProductWithCategory extends CategoriesProps, NewProductProps,PlantWithSize {
+// interface ProductWithCategory extends CategoriesProps, NewProductProps,PlantWithSize {
+// plant_id: number;
+// }
+
+// ...existing code...
+
+// Create a base interface without id conflicts
+interface ProductWithCategory {
+  // Plant fields (from NewProductProps)
+  id: number; // This is the plant ID
+  // plant_id: number; // Explicit plant_id for clarity
+  common_name: string;
+  scientific_name: string;
+  description: string;
+  image_url: string[];
+  light_requirements: string;
+  watering_requirements: string;
+  humidity_preference: string;
+  temperature_range: string;
+  soil_type: string;
+  fertilizer_info: string;
+  potting_tip: string;
+  common_problems: string;
+  growth_habit: string;
+  mature_width: string;
+  mature_height: string;
+  bloom_info: string;
+  is_pet_friendly: boolean;
+  air_purifying: boolean;
+  humidity: string;
+  light: string;
+  stock_quantity: number;
+  shipping_info: string;
+  rating: number;
+  num_reviews: number;
+  isnewarrival: boolean;
+  plantinglevel: string;
+  isonsale: boolean;
+  benefits: string[];
+  
+  // Category fields (from CategoriesProps)
+  category_id: string;
+  name: string; // Category name
+  quantity: number;
+  cate_img?: string;
+  
+  // Sizes (from PlantWithSize)
+  sizes: (PlantSizeProps & {discounted_price: number})[];
+  
+  // Best product fields
+  best_pro_id?: string;
+  details?: string;
+  img_url?: string;
 }
 
 interface ProductAndInfo{

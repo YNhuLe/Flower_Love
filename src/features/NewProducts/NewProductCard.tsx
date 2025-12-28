@@ -14,6 +14,8 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
     }
 
     
+// console.log("New prod with cate: ", newProduct.id);
+console.log("New product object:", newProduct.id);
 
     
     return (
@@ -83,7 +85,7 @@ function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
                 </div>
             </div>
 
-            <div className="flex gap-2 justify-start mb-6 pl-4">
+            <div className="flex bg-slate-900 gap-2 justify-start mb-6 pl-4">
                 <Button btnType="add_to_cart" />
                 <Button btnType="quick_view" url={`/products/${newProduct.id}`} />
             </div>

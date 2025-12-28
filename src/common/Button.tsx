@@ -65,7 +65,7 @@ const labelMap: Record<string, string> = {
 const iconMap: Record<string, ReactNode> = {
   add: <ShoppingCartIcon className="w-5 h-5 text-white-700 hover:text-green-500 transition" />,
   AI_analyze: <Sparkles className="w-5 h-5 text-white-700" />,
-    plant_quiz: <Sparkles className="w-5 h-5 text-white-700" />,
+  plant_quiz: <Sparkles className="w-5 h-5 text-white-700" />,
   new_analysis: <ArrowLeft className="w-5 h-5 text-text-muted transition-transform duration-200 hover:-translate-x-1" />
 }
 const urlMap: Record<string, string> = {
@@ -80,7 +80,6 @@ const urlMap: Record<string, string> = {
   add_to_cart: "/add_to_cart",
   plant_quiz: "/plant_quiz",
   AI_analyze: "/products/quiz/quiz_result",
-  new_analysis: "/products/quiz"
 
 }
 
@@ -89,19 +88,15 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
   const btnClasses = styleMap[btnType] || "bg-gray-300 text-text-primary";
   const disabledClass = disabled ? styleMap.disabled : "";
   const finalStyle = `${btnClasses} ${disabledClass}`;
-  // const label = labelMap[btnType] || "Click";
   const label = btnType === "add" && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
   const targetUrl = url || urlMap[btnType];
 
   const handleClick = () => {
 
     if (disabled) return;
-    if (onClick) {
-      onClick();
-    } else if (targetUrl) {
-      navigate(targetUrl);
-    }
-  }
+   if (onClick) return onClick();
+   if (targetUrl) navigate(targetUrl);}
+
   return (
     <div className="">
       <button className={`cursor-pointer flex flex-row justify-center items-center gap-3 ${finalStyle}`}
@@ -111,19 +106,19 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
         <span className="flex items-center gap-2">
 
           {
-            btnType === 'AI_analyze' && (
+          (  btnType === 'AI_analyze' ||  btnType === 'new_analysis')  && (
 
               <>
-             
-{iconMap[btnType] && iconMap[btnType]} {label} </>
+
+                {iconMap[btnType] && iconMap[btnType]} {label} </>
             )
           }
 
           {
-            btnType !== 'AI_analyze' &&(
+            btnType !== 'AI_analyze'  &&  btnType !== 'new_analysis' && (
               <>
-              
-              {label} {iconMap[btnType] && iconMap[btnType]}</>
+
+                {label} {iconMap[btnType] && iconMap[btnType]}</>
             )
           }
 

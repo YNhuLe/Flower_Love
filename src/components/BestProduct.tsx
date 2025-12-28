@@ -37,7 +37,7 @@ function BestProduct() {
         navigation
         loop={false}
       >
-        {plantInfo.map((product) => (
+        {plantInfo.map((product) => ( product.isnewarrival && 
           <SwiperSlide >
             <BestProductDetails key={product.id}
               products={product}
