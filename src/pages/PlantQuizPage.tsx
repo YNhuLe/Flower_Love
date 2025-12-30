@@ -24,10 +24,6 @@ function PlantQuizPage() {
     recommendations, setRecommendations, selectedPlant, setSelectedPlant
   } = useQuiz();
   const navigate = useNavigate();
-
-  // console.log("Conditions: ", conditions);
-  
-
   //send the result to the Backend to look for the plant
   const handleSubmit = async () => {
 

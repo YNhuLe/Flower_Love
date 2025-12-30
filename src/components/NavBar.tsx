@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 import {
-    ShoppingCart,
-    Heart,
-    Share2,
-    Star,
-    Droplets,
-    Sun,
-    Thermometer,
-    Wind,
-    Sparkles,
-    ChevronLeft,
-    Check,
-    AlertCircle,
-    ChevronRight,
-    Dice1,User
+  ShoppingCart,
+  Heart,
+  Share2,
+  Star,
+  Droplets,
+  Sun,
+  Thermometer,
+  Wind,
+  Sparkles,
+  ChevronLeft,
+  Check,
+  AlertCircle,
+  ChevronRight,
+  Dice1, User
 } from 'lucide-react';
 function NavBar() {
   const [active, setActive] = useState("");
@@ -55,60 +55,61 @@ function NavBar() {
             alt="logo2"
             className="w-[3rem] h-[3rem] rounded-full cursor-pointer ml-4 tablet:w-[4rem] tablet:h-[4rem] 
             laptop:mx-8"
-                       
+
           />
         </Link>
 
         <div className="flex gap-6">
           <Link
-          to="https://www.youtube.com/watch?v=eB5tWQqa3po&t=3357s"
-          > <User /></Link>
-       
-        <ShoppingCart />
-    
-        <img
-          loading="lazy"
+            to="https://www.youtube.com/watch?v=eB5tWQqa3po&t=3357s"
+          > <User />
+          </Link>
+          <Link to="/products/cart">
+            <ShoppingCart />
+          </Link>
+          <img
+            loading="lazy"
 
-          src={`${toggle ? `${cloud_url}/v1756387918/close_nhwhzv.svg` : `${cloud_url}/v1756387919/menu_ir6xyk.svg`}`}
-          alt="menu"
-          className="laptop:hidden cursor-pointer mr-4 tablet:w-[2.5rem] mobile:w-[.5rem]"
-          onClick={() => setToggle(!toggle)}
-        />
-        <ul className="list-none hidden laptop:flex flex-row gap-4">
-          {navLinks.map((nav: { id: string; title: string }) => (
-            <li key={nav.id} onClick={() => setActive(nav.title)}>
-              <a
-                href={`#${nav.id}`}
-                className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl
+            src={`${toggle ? `${cloud_url}/v1756387918/close_nhwhzv.svg` : `${cloud_url}/v1756387919/menu_ir6xyk.svg`}`}
+            alt="menu"
+            className="laptop:hidden cursor-pointer mr-4 tablet:w-[2.5rem] mobile:w-[.5rem]"
+            onClick={() => setToggle(!toggle)}
+          />
+          <ul className="list-none hidden laptop:flex flex-row gap-4">
+            {navLinks.map((nav: { id: string; title: string }) => (
+              <li key={nav.id} onClick={() => setActive(nav.title)}>
+                <a
+                  href={`#${nav.id}`}
+                  className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl
                 desktop:text-3xl
                 ">
-                {nav.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div
-          className="hidden laptop:flex flex-row laptop:justify-end items-center h-[5rem] laptop:gap-4 ml-auto laptop:mr-8
+                  {nav.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div
+            className="hidden laptop:flex flex-row laptop:justify-end items-center h-[5rem] laptop:gap-4 ml-auto laptop:mr-8
         
         ">
-          <button
-            className="bg-brand-700 text-white p-4 flex flex-row  items-center hover:text-brand-700 hover:bg-white border
+            <button
+              className="bg-brand-700 text-white p-4 flex flex-row  items-center hover:text-brand-700 hover:bg-white border
           
           transition-all duration-300 hover:border-brand-700 font-medium rounded-2xl cursor-pointer h-8 text-[1rem] laptop:p-4
           desktop:text-2xl desktop:h-10 desktop:rounded-3xl
           ">
-            Search Plants
-          </button>
-          <button
-            className="bg-white text-brand-700 font-medium p-4 flex flex-row  items-center rounded-2xl border border-brand-700 
+              Search Plants
+            </button>
+            <button
+              className="bg-white text-brand-700 font-medium p-4 flex flex-row  items-center rounded-2xl border border-brand-700 
           transition-all duration-300 hover:bg-brand-700 hover:text-white cursor-pointer h-8 text-[1rem]
              desktop:text-2xl desktop:h-10 desktop:rounded-3xl
           ">
-            Get Started
-          </button>
+              Get Started
+            </button>
+          </div>
         </div>
       </div>
-</div>
       {/* <ul className="list-none hidden laptop:flex flex-row gap-4">
         {navLinks.map((nav: { id: string; title: string }) => (
           <li key={nav.id} onClick={() => setActive(nav.title)}>
@@ -121,9 +122,8 @@ function NavBar() {
         ))}
       </ul> */}
       <div
-        className={` ${
-          !toggle ? "hidden" : "flex flex-col justify-center items-center"
-        }`}>
+        className={` ${!toggle ? "hidden" : "flex flex-col justify-center items-center"
+          }`}>
         <ul className="flex flex-col justify-center items-center h-[10rem] gap-4 font-medium">
           {navLinks.map((nav: { id: string; title: string }) => (
             <li key={nav.id} onClick={() => setActive(nav.title)}>
