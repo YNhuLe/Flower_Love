@@ -5,9 +5,10 @@ interface QuantitySelectorProps {
     onChange: (newValue: number) => void;
     min?: number;
     max?: number;
-    disabled?:boolean;
+    disabled?: boolean;
+    selectorType?: "plantItem" | "cartItem"
 }
-function QuantitySelector({ value, onChange, min = 0, max = value , disabled}: QuantitySelectorProps) {
+function QuantitySelector({ value, onChange, min = 0, max = value, disabled, selectorType }: QuantitySelectorProps) {
 
     const increment = () => {
         if (value < max) {
@@ -20,26 +21,60 @@ function QuantitySelector({ value, onChange, min = 0, max = value , disabled}: Q
         }
     }
     return (
-        <div className="flex flex-row  items-center ml-2 mb-6">
-            <div className="p-2 rounded-md">
 
-                <button className="border border-cart-500 p-2 rounded-md" onClick={decrement}>
-                    <MinusIcon className="h-4 w-4 text-secondary" /></button>
-            </div>
+        <>
+            {
+                selectorType === 'plantItem' && (
+                    <div className="flex flex-row  items-center ml-2 mb-6">
+                        <div className="p-2 rounded-md">
 
-            <div className="text-center w-14 flex justify-center items-center ">
-                <p>{value}</p>
-            </div>
+                            <button className="border border-cart-500 p-2 rounded-md" onClick={decrement}>
+                                <MinusIcon className="h-4 w-4 text-secondary" /></button>
+                        </div>
 
-            <div className="p-2 rounded-md">
+                        <div className="text-center w-14 flex justify-center items-center ">
+                            <p>{value}</p>
+                        </div>
 
-                <button className="bg-cart-500 p-2 rounded-md" 
-                // disabled
-                onClick={increment}>
-                    <PlusIcon className="h-4 w-4  text-surface-base" /></button>
-            </div>
+                        <div className="p-2 rounded-md">
 
-        </div >
+                            <button className="bg-cart-500 p-2 rounded-md"
+                                // disabled
+                                onClick={increment}>
+                                <PlusIcon className="h-4 w-4  text-surface-base" /></button>
+                        </div>
+
+                    </div >
+                )
+
+            }
+
+            {
+                selectorType === 'cartItem' && (
+                    <div className="flex flex-row  items-center">
+                        <div className="p-2 rounded-md">
+
+                            <button className="border border-cart-500 p-1 rounded-md" onClick={decrement}>
+                                <MinusIcon className="h-4 w-4 text-secondary" /></button>
+                        </div>
+
+                        <div className="text-center w-6 flex justify-center items-center ">
+                            <p>{value}</p>
+                        </div>
+
+                        <div className="p-2 rounded-md">
+
+                            <button className="bg-cart-500 p-1 rounded-md"
+                                // disabled
+                                onClick={increment}>
+                                <PlusIcon className="h-4 w-4  text-surface-base" /></button>
+                        </div>
+
+                    </div >
+                )
+            }
+        </>
     )
+
 }
 export default QuantitySelector;

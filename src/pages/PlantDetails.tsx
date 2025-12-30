@@ -170,7 +170,7 @@ return <p>Loading data!!</p>
                 <p className="text-sm mt-4">Quantity</p>
                 <QuantitySelector
                     value={quantity} onChange={setQuantity} min={1} max={plantInfo.stock_quantity}
-                    disabled={isOutOfStock}
+                    disabled={isOutOfStock} selectorType="plantItem"
 
                 />
                 <Button btnType="add" price={(discountedPrice * quantity).toFixed(2)} disabled={isOutOfStock}></Button>

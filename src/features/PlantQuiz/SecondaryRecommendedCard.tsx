@@ -4,7 +4,7 @@ import {
 } from 'lucide-react';
 import { useMemo } from 'react';
 import { PlantRecommendation } from "../../types/types";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 function SecondaryRecommendedCard({ secondRecom }: { secondRecom: PlantRecommendation }) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
 

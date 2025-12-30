@@ -17,7 +17,7 @@ function BestProductDetails({ products }: { products: PlantWithSize }) {
 
     
     <div
-      className="max-w-fit h-50 mt-8 mb-8 p-4 border m-4 border-green-900 rounded-lg shadow-lg mx-auto mx-4"
+      className="max-w-fit h-50 mt-8 mb-8 p-4 border m-4 border-green-900 rounded-lg shadow-lg mx-auto"
     >
       <div className="flex flex-row justify-between">
         <div>
@@ -44,10 +44,10 @@ function BestProductDetails({ products }: { products: PlantWithSize }) {
       </h2>
       <div className="flex flex-row justify-start gap-2">
         <p className="text-xxs text-brand-700 font-semibold">
-          ${products.sizes[0].original_price}
+          ${products.sizes[0].original_price.toFixed(2)}
         </p>
         <p className="text-xs line-through">
-          ${products.sizes[0].discounted_price}
+          ${products.sizes[0].discounted_price.toFixed(2)}
         </p>
 
             
