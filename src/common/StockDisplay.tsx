@@ -3,6 +3,7 @@ import { FaCheck, FaExclamationTriangle, FaTimes } from "react-icons/fa";
 
 interface StockStatusProps {
     stockQuantity?: number;
+    stockType: "cart" | "plant-details"
 }
 const getStockStatus = (stockQuantity: number) => {
 
@@ -31,12 +32,16 @@ const getStockStatus = (stockQuantity: number) => {
 
 }
 
-function ShowStockQuantity({stockQuantity = 0} : StockStatusProps){
+function ShowStockQuantity({stockQuantity = 0, stockType} : StockStatusProps){
 
     const status = getStockStatus(stockQuantity);
     const StatusIcon = status.Icon;
 return (
-    <>
+  <>
+    {
+       ( stockType === "plant-details") && (
+<>
+
     <StatusIcon 
         className={`w-3 h-4 mt-[.1rem] ${status.stockColor}`}
       />
@@ -45,7 +50,26 @@ return (
       className={`font-medium ${status.stockColor}`}
       >
         {status.text}
-      </p>
+      </p></>
+       )
+
+    }
+
+        {
+       ( stockType === "cart") && (
+<>
+
+
+      
+      <p
+      className={`px-2 bg-success-300/30 rounded-full py-1 w-fit text-success-700 text-[.6rem] ${status.stockColor}`}
+      >
+        {status.text}
+      </p></>
+       )
+
+    }
+
     </>
 )
 }

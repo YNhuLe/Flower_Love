@@ -29,7 +29,7 @@ if( loading) return <p>Loading...</p>
 if(error) return <p>Error...</p>
 
     return (
-        <section >
+        <section className="bg-green-500" >
             {
 
            newProducts.map((newProduct) => (
