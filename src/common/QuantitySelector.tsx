@@ -55,11 +55,11 @@ function QuantitySelector({ value, onChange, min = 0, max = value, disabled, sel
                         <div className="p-2 rounded-md">
 
                             <button className="border border-cart-500 p-1 rounded-md" onClick={decrement}>
-                                <MinusIcon className="h-4 w-4 text-secondary" /></button>
+                                <MinusIcon className="h-3 w-3 text-secondary" /></button>
                         </div>
 
-                        <div className="text-center w-6 flex justify-center items-center ">
-                            <p>{value}</p>
+                        <div className="text-center w-4 flex justify-center items-center ">
+                            <p className="text-xs">{value}</p>
                         </div>
 
                         <div className="p-2 rounded-md">
@@ -67,7 +67,7 @@ function QuantitySelector({ value, onChange, min = 0, max = value, disabled, sel
                             <button className="bg-cart-500 p-1 rounded-md"
                                 // disabled
                                 onClick={increment}>
-                                <PlusIcon className="h-4 w-4  text-surface-base" /></button>
+                                <PlusIcon className="h-3 w-3  text-surface-base" /></button>
                         </div>
 
                     </div >

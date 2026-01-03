@@ -10,7 +10,7 @@ function CustomGiftBoxCard({ name, price, img_url }: GiftItemProps) {
     const imgSrc = img_url ? `${cloud_url}/${img_url}` : `${cloud_url}/v1758512182/grass_drtecm.jpg`;
 
     return (
-        <div className="border rounded-xl  w-full mx-auto mx-4 my-6 overflow-hidden relative">
+        <div className="border rounded-xl  w-full mx-auto my-6 overflow-hidden relative">
           
             <img loading="lazy"
                 src={imgSrc} className="w-full h-[22rem] object-cover transform transition-transform duration-300 hover:scale-105" />
@@ -18,6 +18,7 @@ function CustomGiftBoxCard({ name, price, img_url }: GiftItemProps) {
             <h1 className="text-sm m-4 mb-2"> {name}</h1>
             <p className="text-cart-500 font-semibold ml-4"> $ {price}</p>
             <QuantitySelector value={quantity}
+            selectorType="plantItem"
                 onChange={setQuantity}
                 min={1} max={200}
             />

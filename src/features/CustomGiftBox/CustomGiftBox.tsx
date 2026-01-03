@@ -33,8 +33,6 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
 
 
     const filteredGifts = giftItems.filter((item) => item.category_name === selectedCategory);
-    console.log(filteredGifts.map(g => g.id));
-
     return (
         <section className="my-10 mx-4">
             <h1 className="text-2xl font-semibold text-center">Custom Gift Box</h1>
@@ -47,8 +45,8 @@ function CustomGiftBox({ giftItems }: CustomGiftBoxProps) {
 
                 {
                     filteredGifts.length > 0 ? (
-                        filteredGifts.map(({ id, name, price, category_id, category_name, img_url }) => (
-                            <CustomGiftBoxCard key={id} name={name} id={id}
+                        filteredGifts.map(({ gift_id, name, price, category_id, category_name, img_url }) => (
+                            <CustomGiftBoxCard key={gift_id} name={name} gift_id={gift_id}
                             
                                 price={price} category_id={category_id} category_name={category_name} img_url={img_url} />
                         ))

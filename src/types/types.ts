@@ -33,7 +33,7 @@ interface GiftboxWithItemsProps extends GiftBoxProps {
 
 //gift interface
 interface GiftItemProps {
-  id: number;
+  gift_id: number;
   name: string;
   category_name: string;
   description?: string;
