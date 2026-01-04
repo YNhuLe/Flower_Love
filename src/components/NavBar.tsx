@@ -17,12 +17,15 @@ import {
   ChevronRight,
   Dice1, User
 } from 'lucide-react';
+import useCartStore from "../hooks/useCartStore";
 function NavBar() {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-
+const totalItemCount = useCartStore((state) =>
+state.items.reduce((sum, item) => sum + item.quantity, 0)
+)
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -65,8 +68,11 @@ function NavBar() {
           > <User />
           </Link>
           <Link to="/products/cart">
+          <div className="relative">
             <ShoppingCart />
-          </Link>
+            <p className="absolute  -right-2 -top-5 text-text-inverse rounded-md  bg-error-700">
+              <span className="text-[.65rem] p-[.5rem] px-[.35rem] m-0">{totalItemCount}</span></p>
+         </div> </Link>
           <img
             loading="lazy"
 
