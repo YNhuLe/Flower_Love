@@ -13,11 +13,11 @@ function ToggleMenu( {giftCategories, selectedCategory, setSelectedCategory }: T
     return (
         <div className="bg-surface-base flex flex-row justify-between  my-4 mx-auto border border-brand-700 rounded-full">
             {
-                giftCategories.map((labelCate, index) => (
+                giftCategories.map((labelCate) => (
 
                     <button
                     //  key={labelCate.id}
-                    key={index}
+                    key={labelCate.id}
                         onClick={() => setSelectedCategory(labelCate.category_name)}
                         className={`px-4 py-2 rounded-full text-[.65rem] w-full ${selectedCategory === labelCate.category_name ? "bg-brand-700 text-white" : "bg-surface-base text-brand-700"
                             }`}

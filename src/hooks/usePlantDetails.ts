@@ -10,7 +10,7 @@ const fetchPlantDetails = async (plantID: number): Promise<PlantWithSize> => {
 //  console.log("🔍 fetchPlantDetails - Input plantID:", plantID);
 //   console.log("🌐 Request URL:", `${baseUrl}/allplants/${plantID}`);
   
-//   console.log(`${baseUrl}/allplants/${plantID}`);
+  console.log(plantID);
   
   const response = await axios.get(`${baseUrl}/allplants/${plantID}`);
 // console.log("📦 Raw response.data:", response.data);

@@ -5,10 +5,14 @@ import useCartStore from "../../hooks/useCartStore";
 import StockDisplay from "../../common/StockDisplay";
 function ItemsInCart() {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-    const {items, updateQuantity} = useCartStore();
-    return (
+    const {items,updateQuantity} = useCartStore();
+    const removeFromCart = useCartStore((state) =>state.removeFromCart);
+    const handleRemove = (product_id: number, size: string) =>{
+        removeFromCart(product_id, size)
+    }
 
-        <>
+     return (
+<>
         {
             items.map((item) =>(
         <article className="flex gap-2 bg-surface-raised/80 p-4 m-4 rounded-xl">
@@ -19,7 +23,7 @@ function ItemsInCart() {
             <section>
                 <div className="flex items-center justify-between gap-8 m-2">
                     <h1 className="text-xxs">{item.name}</h1>
-                    <Trash2 className="w-4 h-4 text-error-500 " />
+                    <Trash2 className="w-4 h-4 text-error-500 cursor-pointer" onClick={() => handleRemove(item.product_id, item.size)} />
                 </div>
                 <h2 className="text-xs text-text-muted italic m-2">{item.science_name}</h2>
                 <p className="text-xs bg-text-muted/30 w-fit p-2 py-1 rounded-full object-cover m-2">{item.size}</p>

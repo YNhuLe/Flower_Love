@@ -56,7 +56,7 @@ interface GiftItemsCategoriesProps extends GiftCategories {
 
 //categories interface
 interface CategoriesProps{ 
-  category_id: string;
+  category_id: number;
   name: string;
   description: string;
   quantity: number;
@@ -93,7 +93,7 @@ interface NewProductProps{
   isnewarrival: boolean;
   plantinglevel: string;
   isonsale: boolean;
-  category_id: string;
+  category_id: number;
   benefits: string[]
 }
 
@@ -105,7 +105,7 @@ interface PlantSizeProps{
 size: string
 }
 //Plant details with nested sizes array
-interface PlantWithSize extends NewProductProps, BestProductProp{
+interface PlantWithSize extends NewProductProps{
 sizes: (PlantSizeProps & {discounted_price: number})[];
 }
 
@@ -151,7 +151,7 @@ interface ProductWithCategory {
   benefits: string[];
   
   // Category fields (from CategoriesProps)
-  category_id: string;
+  category_id: number;
   name: string; // Category name
   quantity: number;
   cate_img?: string;

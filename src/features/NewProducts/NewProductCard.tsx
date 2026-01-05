@@ -1,23 +1,16 @@
 import Button from "../../common/Button";
 import { FaStar, FaPaw } from "react-icons/fa";
 import { BsHandThumbsUp } from "react-icons/bs";
-import { ProductWithCategory } from "../../types/types";
+// import { ProductWithCategory } from "../../types/types";
+import {PlantWithSize} from "../../types/types";
 import HeartButton from "../../common/HeartButton";
 
-function NewProductCard({ newProduct }: { newProduct: ProductWithCategory }) {
+function NewProductCard({ newProduct }: { newProduct: PlantWithSize }) {
     const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
-   
-   
     const imgSrc = newProduct.image_url ? `${cloud_url}/${newProduct.image_url[0]}` : `${cloud_url}/v1759276481/mathias-reding-dMhVYCT_xn0-unsplash_xrnswy.jpg`;
     if (!newProduct) {
         return <p>Loading new products...</p>
     }
-
-    
-// console.log("New prod with cate: ", newProduct.id);
-console.log("New product object:", newProduct.id);
-
-    
     return (
         <section className="border rounded-xl w-[calc(100%-2rem)] mx-auto my-6 overflow-hidden relative transform transition-shadow duration-300 hover:shadow-lg">
 
@@ -26,12 +19,10 @@ console.log("New product object:", newProduct.id);
                     newProduct.isnewarrival && (
                         <p className="text-surface-base text-[.65rem] absolute z-40 border rounded-lg m-4 px-2 py-1 bg-brand-700">New</p>
                     )
-
-
                 }
 
                 <img
-                    className="w-full h-[10rem] object-cover transform transition-transform duration-300 hover:scale-105"
+                    className="w-full h-[15rem] object-cover transform transition-transform duration-300 hover:scale-105"
 
                     src={imgSrc} alt="categories-pictures"
                     loading="lazy"
@@ -43,7 +34,6 @@ console.log("New product object:", newProduct.id);
                             <p className="bg-surface-base p-2 border rounded-full">
                                 <BsHandThumbsUp className="w-4 h-4" />
                             </p>
-
                         )
                     }
                     {newProduct.is_pet_friendly && (
@@ -51,7 +41,6 @@ console.log("New product object:", newProduct.id);
                             <FaPaw className="w-4 h-4" />
                         </p>
                     )}
-
                     <HeartButton btnType="new_product"/>
                 </div>
             </div>
@@ -59,7 +48,7 @@ console.log("New product object:", newProduct.id);
 
                 <h2 className="text-lg font-semibold pt-4">{newProduct.common_name}</h2>
 
-                <p className="text-xs mb-4">{newProduct.name}</p>
+                {/* <p className="text-xs mb-4"> category id {newProduct}</p> */}
                 <div className="flex gap-2 justify-between">
                     <div className="flex row gap-1">
                         <FaStar className="text-yellow-400 w-5 h-5" />
@@ -85,7 +74,7 @@ console.log("New product object:", newProduct.id);
                 </div>
             </div>
 
-            <div className="flex bg-slate-900 gap-2 justify-start mb-6 pl-4">
+            <div className="flex gap-2 justify-start mb-6 pl-4">
                 <Button btnType="add_to_cart" />
                 <Button btnType="quick_view" url={`/products/${newProduct.id}`} />
             </div>
