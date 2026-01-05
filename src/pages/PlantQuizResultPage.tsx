@@ -22,8 +22,6 @@ function PlantQuizResultPage() {
   //reset the quiz page
   const resetAnalysis = () => {
     setStep('questionnaire');
-    console.log("New analysis button rendered: ");
-
     setConditions({
       light: "",
       temperature_range: "",
@@ -38,9 +36,6 @@ function PlantQuizResultPage() {
     navigate("/products/quiz");
 
   }
-
-  // console.log("recommendations: ", recommendations);
-  console.log("Selected Plant: ", selectedPlant?.id);
 
   const firstRecom = recommendations[0];
   let formatArr: string[] = [];
@@ -65,7 +60,6 @@ function PlantQuizResultPage() {
   ];
   const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
     const selectedGradient = useMemo(() => randomGradient, []);
-    console.log("Gradients: ", selectedGradient);
     
   return (
     <>
