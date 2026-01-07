@@ -40,8 +40,6 @@ function ShowStockQuantity({ stockQuantity = 0, stockType }: StockStatusProps) {
     const status = getStockStatus(stockQuantity);
     const StatusIcon = status.Icon;
 
-    console.log("Syock status: ", status);
-
     return (
         <>
             {

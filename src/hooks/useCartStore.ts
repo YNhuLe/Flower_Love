@@ -1,3 +1,6 @@
+
+
+
 import {create} from "zustand";
 
 interface CartItem{
@@ -11,16 +14,62 @@ quantity: number;
 size: string;
 image: string}
 
+
+//   const totalItemCount = useCartStore((state) =>
+//     state.items.reduce((sum, item) => sum + item.quantity, 0)
+//   );
+
+//   const totalSpend = useCartStore((state) =>
+//     state.items.reduce((sumSpend, item) => sumSpend + item.price * item.quantity, 0)
+//   )
 interface CartState{
     items: CartItem[];
-    addToCart : (item : CartItem) => void,
+// totalSpend: number,
+totalItemCount: () => number;
+    addToCart : (item : CartItem) => void;
     removeFromCart: (product_id: number, size:string) => void;
     updateQuantity: (product_id: number, quantity: number, size: string) => void;
+shippingFee: () => number;
+totalSpend: () => number;
+freeShippingThreshold: number;
+amountToFreeShipping: () => number;
+
 }
 
 
-const useCartStore = create<CartState>((set) => ({
+const useCartStore = create<CartState>((set, get) => ({
     items: [],
+  totalItemCount: () =>
+    get().items.reduce((sum, item) => sum + item.quantity, 0),
+  totalSpend: () =>
+  get().items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+
+    shippingFee: () =>{
+        const total = get().totalSpend();
+
+ 
+
+if (total < 25){
+    return 12.99;
+}
+
+if( total < 50 && total >=25){
+    return 7.99;
+}
+
+if( total <75 && total >=50){
+    return 4.99;
+}
+
+return 0;
+
+    },
+    freeShippingThreshold: 75, 
+    amountToFreeShipping: () => { 
+        
+    const total = get().totalSpend(); 
+    const threshold = get().freeShippingThreshold; 
+    return Math.max(0, threshold - total); },
     addToCart: (item: CartItem) =>
         set((state: CartState): Partial<CartState> => {
             //check if the item already in the cart

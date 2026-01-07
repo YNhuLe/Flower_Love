@@ -16,7 +16,6 @@ function ToggleMenu( {giftCategories, selectedCategory, setSelectedCategory }: T
                 giftCategories.map((labelCate) => (
 
                     <button
-                    //  key={labelCate.id}
                     key={labelCate.id}
                         onClick={() => setSelectedCategory(labelCate.category_name)}
                         className={`px-4 py-2 rounded-full text-[.65rem] w-full ${selectedCategory === labelCate.category_name ? "bg-brand-700 text-white" : "bg-surface-base text-brand-700"

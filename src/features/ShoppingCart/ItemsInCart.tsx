@@ -9,13 +9,13 @@ function ItemsInCart() {
     const removeFromCart = useCartStore((state) =>state.removeFromCart);
     const handleRemove = (product_id: number, size: string) =>{
         removeFromCart(product_id, size)
-    }
+    }    
 
      return (
 <>
         {
             items.map((item) =>(
-        <article className="flex gap-2 bg-surface-raised/80 p-4 m-4 rounded-xl">
+        <article key={item.product_id} className="flex gap-2 bg-surface-raised/80 p-4 m-4 rounded-xl">
             <div className="max-w-24 max-h-20 rounded-xl bg-text-inverse/80 flex flex-col justify-center">
                 <img className="" src={`${cloud_url}/${item.image}`} />
                   </div>

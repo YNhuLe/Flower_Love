@@ -70,8 +70,10 @@ state.items.reduce((sum, item) => sum + item.quantity, 0)
           <Link to="/products/cart">
           <div className="relative">
             <ShoppingCart />
-            <p className="absolute  -right-2 -top-5 text-text-inverse rounded-md  bg-error-700">
-              <span className="text-[.65rem] p-[.5rem] px-[.35rem] m-0">{totalItemCount}</span></p>
+            <div className="absolute  -right-4 -top-5 text-text-inverse rounded-[.4rem]  bg-error-700 px-2 py-1 w-fit h-[1.5rem] flex flex-col justify-center">
+              <span className="text-[.65rem] m-0 text-center">{totalItemCount}</span>
+              
+              </div>
          </div> </Link>
           <img
             loading="lazy"

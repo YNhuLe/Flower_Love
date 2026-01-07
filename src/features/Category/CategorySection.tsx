@@ -13,7 +13,6 @@ function CategorySection() {
             try {
                 const response = await axios.get(`${baseUrl}/category`);
                 setCategories(response.data);
-                console.log("categories response: ", response.data);
 
             } catch (error: any) {
                 setError(error.message || `Failes to load the categories!`)

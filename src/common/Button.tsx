@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { ReactNode } from "react";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { ShoppingCart } from "lucide-react";
 import {
   Share2,
@@ -12,7 +11,7 @@ import {
 } from 'lucide-react';
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all"
-  | "add_to_cart" | "quick_view" | "AI_analyze" | "new_analysis" | "all_recommendations" | "start_shopping";
+  | "add_to_cart" | "quick_view" | "AI_analyze" | "new_analysis" | "all_recommendations" | "start_shopping" | "promo_apply";
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -41,7 +40,8 @@ const styleMap: Record<string, string> = {
   AI_disabled: "opacity-50 cursor-not-allowed pointer-events-none",
   new_analysis: "bg-text-inverse p-2 border  rounded-xl text-xs curosr-pointer ",
   all_recommendations: "",
-  start_shopping: "flex gap-2 items-center text-text-inverse p-2 border  rounded-xl text-xs curosr-pointer bg-amber-600 px-8 m-8 mb-12 hover:bg-amber-800 transition-all duration-300"
+  start_shopping: "flex gap-2 items-center text-text-inverse p-2 border  rounded-xl text-xs cursor-pointer bg-amber-600 px-8 m-8 mb-12 hover:bg-amber-800 transition-all duration-300",
+  promo_apply:"text-amber-800 text-xs cursor-pointer  rounded-xl border border-1 border-amber-300 p-2 px-4 hover:border-amber-600 transition-all duration-300 hover:text-text-primary hover:bg-amber-50"
 }
 
 const labelMap: Record<string, string> = {
@@ -61,17 +61,16 @@ const labelMap: Record<string, string> = {
   AI_analyze: "Find My Perfect Plant",
   new_analysis: "Start New Analysis",
   all_recommendations: "View All Recommendations",
-  start_shopping: "Start Shopping"
+  start_shopping: "Start Shopping",
+  promo_apply: "Apply"
 }
 
 const iconMap: Record<string, ReactNode> = {
-  add: <ShoppingCartIcon className="w-5 h-5 text-white-700 hover:text-green-500 transition" />,
+  add: <ShoppingCart className="w-5 h-5 text-white-700 hover:text-green-500 transition" />,
   AI_analyze: <Sparkles className="w-5 h-5 text-white-700" />,
   plant_quiz: <Sparkles className="w-5 h-5 text-white-700" />,
   new_analysis: <ArrowLeft className="w-5 h-5 text-text-muted transition-transform duration-200 hover:-translate-x-1" />,
-  start_shopping: <ShoppingCart className="w-5 h-5 " />
-
-
+  start_shopping: <ShoppingCart className="w-5 h-5" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",
@@ -103,6 +102,30 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
     if (targetUrl) navigate(targetUrl);
   }
 
+  const renderContent = () =>{
+    switch(btnType) {
+    case "start_shopping": 
+    case "new_analysis": 
+    case "plant_quiz":
+    case "add":
+      return (
+         <>
+                {iconMap[btnType]} {label}</>
+      );
+      case "AI_analyze":
+        return(
+          <>{label} {iconMap[btnType]}</>
+        );
+        default:
+          return (
+            <>
+            {label} {iconMap[btnType]}
+            </>
+          )
+    }
+  }
+
+
   return (
     <div className="">
       <button className={`cursor-pointer flex flex-row justify-center items-center gap-3 ${finalStyle}`}
@@ -110,34 +133,9 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
         disabled={disabled}
       >
         <span className="flex items-center gap-2">
-          {/* start shopping button */}
-          {
-            btnType === "start_shopping" && (
-              <>
-                {iconMap[btnType]} {label}</>
-            )
-          }
-
-          {/* new_analysis button */}
-          {
-            btnType === 'new_analysis' || btnType== "plant_quiz" && (
-
-              <>
-
-                {iconMap[btnType]} {label} </>
-            )
-          }
-          {/* AI-analyze button */}
-          {
-            btnType === 'AI_analyze'  && (
-              <>
-
-               {label}  {iconMap[btnType]} </>
-            )
-          }
-
-          {btnType !== "start_shopping" && btnType!=="plant_quiz" && btnType !== "AI_analyze" && btnType !== "new_analysis" && (<> {label} {iconMap[btnType]} </>)}
-        </span>
+         
+         {renderContent()}
+              </span>
 
       </button>
 
