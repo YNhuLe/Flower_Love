@@ -51,5 +51,5 @@ const [error,setError] = useState<string | null>(null);
     )
 }
 
-export {CartContextProvider, useCart};
+export {CartContextProvider, useCart,CartItem};
 export default CartContext;

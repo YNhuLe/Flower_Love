@@ -43,13 +43,11 @@ function PlantQuizPage() {
         { question_key: "temperature", answer_value: conditions.temperature_range }
       ]
     }
-
-    // console.log("Pay load: ", payload);
     
       const response = await axios.post(`${baseUrl}/quiz/answers`,   
         payload
       );
-     console.log("Result data : ", response.data);
+
        navigate('/products/quiz/quiz_result');
        setRecommendations(response.data.recommendations);
  setStep('results');
@@ -63,7 +61,6 @@ function PlantQuizPage() {
     }
   };
 
-  // console.log("Conditions from quiz: ", conditions)
   return (
     <section>
       <BreadCrumbs />

@@ -68,7 +68,6 @@ image: plantInfo.image_url[selectImage]
         try {
             formatArr = JSON.parse(plantInfo.benefits);
         } catch (error: any) {
-            console.log("Error: Could not parse benefit data.", error);
             formatArr = [];
         }
     }

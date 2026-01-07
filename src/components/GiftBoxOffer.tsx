@@ -17,7 +17,6 @@ function GiftBoxOffer() {
             try {
                 const response = await axios.get(`${baseUrl}/products`);
                 setGiftboxes(response.data);
-                console.log("Reponse gift: ", response.data);
 
             } catch (error: any) {
                 setError(error.message || `Failed to load the giftbox`)

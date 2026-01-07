@@ -12,15 +12,15 @@ function TestimonialsList() {
         See what our users have to say about their experience with our platform.
       </p>
       <div className="desktop:flex desktop:flex-row desktop:flex-wrap desktop:justify-center">
-        {testimonials.map(({ id, name, title, content, profilePic }) => (
+        {testimonials.map((test) => (
           <div className=" w-full desktop:w-1/2 desktop:p-4">
             <TestimonialsCard
-              id={id}
-              key={id}
-              name={name}
-              title={title}
-              content={content}
-              profilePic={profilePic || "default-profile-pic-url"}
+              id={test.id}
+              key={test.id}
+              name={test.name}
+              title={test.title}
+              content={test.content}
+              profilePic={test.profilePic || "default-profile-pic-url"}
             />
           </div>
         ))}
