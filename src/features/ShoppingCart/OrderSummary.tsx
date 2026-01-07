@@ -1,7 +1,7 @@
-import { Badge, Tag } from "lucide-react";
+import {  Tag, Truck , Shield, Gift} from "lucide-react";
 import Button from "../../common/Button";
 import useCartStore from "../../hooks/useCartStore";
-import { P } from "framer-motion/dist/types.d-DagZKalS";
+
 function OrderSummary() {
 
 
@@ -9,7 +9,7 @@ function OrderSummary() {
         state.items.reduce((sumSpend, item) => sumSpend + item.price * item.quantity, 0)
     )
 
- 
+
     return (
         <section className="bg-surface-raised/80 p-4 m-4 rounded-xl ">
 
@@ -34,7 +34,7 @@ function OrderSummary() {
             <hr className="border-t border-gray-300" />
 
 
-            <div className="mt-6 flex justify-between ">
+            <div className="my-6 flex justify-between ">
 
 
                 <div className="flex flex-col">
@@ -42,13 +42,38 @@ function OrderSummary() {
                     <p>Shipping</p>
                     <p>Tax (8%)</p>
                 </div>
-                <div className="flex flex-col"><p>${totalSpend.toFixed(2)}</p>
+                <div className="flex flex-col">
+                    <p className="text-text-primary/60">${totalSpend.toFixed(2)}</p>
                     <p>{
-                        totalSpend > 50 ? <p className="text-success-300">FREE</p> : <p></p>
+                        totalSpend > 50 ? <p className="text-success-300">FREE</p> : <p>--</p>
                     }</p>
-                    <p>{(totalSpend * 0.08).toFixed(2)}</p>
+                    <p className="text-text-primary/60">${(totalSpend * 0.08).toFixed(2)}</p>
 
                 </div>
+            </div>
+
+            <hr className="border-t border-gray-300" />
+            <div className="flex justify-between my-6">
+                <p>Total: </p>
+                <p>${(totalSpend*1.08).toFixed(2)}</p>
+            </div>
+            <Button btnType="process_checkout" />
+<Button btnType="continue_shopping" />
+  <hr className="border-t border-gray-300" />
+            <div className="mt-8">
+
+                <div className="flex gap-2 m-2">
+                  <Shield className="w-4 h-4 text-success-300" />
+                  <p className="text-xs">Secure Checkout</p>
+                </div>
+                 <div className="flex gap-2 m-2">
+
+<Truck className="w-4 h-4 text-amber-600" />
+                    
+                <p className="text-xs">Free shipping on orders over $75</p>
+                 </div>
+                  <div className="flex gap-2 m-2">  <Gift className="w-4 h-4 text-icon-emerald-600" />
+                    <p className="text-xs">Gift wrapping available</p></div>
             </div>
         </section>
     )

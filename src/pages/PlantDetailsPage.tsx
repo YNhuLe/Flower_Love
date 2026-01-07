@@ -3,6 +3,7 @@ import SearchBar from "../common/SearchBar";
 import NavBar from "../components/NavBar";
 import PlantDetails from "./PlantDetails";
 import BreadCrumbs from "../common/BreadCrumbs"
+import MightLikeSection from "../features/ShoppingCart/MightLikeSection";
 function PlantDetailsPage() {
   return (
     <section>
@@ -10,6 +11,7 @@ function PlantDetailsPage() {
       <SearchBar />
       <BreadCrumbs />
       <PlantDetails />
+  
       <Footer />
     </section>
   )
