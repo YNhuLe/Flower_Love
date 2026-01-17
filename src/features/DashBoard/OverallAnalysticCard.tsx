@@ -1,28 +1,43 @@
-import { DollarSign, Package, TrendingDown, TrendingUp, ShoppingCart } from "lucide-react";
+import { DollarSign, Package, TrendingDown, TrendingUp, ShoppingCart, LeafyGreen } from "lucide-react";
 import useSaleData from "../../hooks/useSaleData";
 import { SaleSummary, SaleBreakdown } from "../../types/dataTypes";
 import KPICard from "./KPICard";
-import { calculateTrend } from "../../utils/chart";
+import { calculateKPI, calculateTrend } from "../../utils/chart";
+
 function normalizeBreakdown(b: SaleBreakdown) {
     const revenue = b.values.reduce((a, v) => a + v, 0);
     const totalOrders = b.total_orders.reduce((a, v) => a + v, 0);
     const totalItems = b.total_items_sold.reduce((a, v) => a + v, 0);
     const avgOrderValues = totalOrders ? revenue / totalOrders : 0;
-    // const topCategory = b.top_selling_product[0] || "N/A";
+    const topSelling = b.top_selling_product[0] || "N/A";
 
+    const revenueSparkline = [revenue * 1.1, revenue * .9, revenue * 1.2]
+    const totalOrderSparkline = [totalOrders * 1.2, totalOrders * .9, totalOrders * 1.3, totalOrders * 1.5]
+    const totalItemsSparkline = [totalItems * 1.1, totalItems * .9, totalItems * .98, totalItems * 1.2]
+    const avgOrdersValueSparkline = [avgOrderValues * 1.2, avgOrderValues * .98, avgOrderValues * 1.2, avgOrderValues * 1.18]
     return {
 
 
         revenue, total_orders: totalOrders,
         total_items_sold: totalItems,
         avg_order_value: avgOrderValues,
-        // top_category: topCategory,
-        revenue_sparkline: [12, 13, 14, 16, 15, 14],
-        total_orders_sparkline: b.total_orders,
+        revenue_sparkline: revenueSparkline,
+        kpi_value: Number(calculateKPI(revenueSparkline)),
+        trend_value: Number(calculateTrend(revenueSparkline)),
 
-        total_items_sold_sparkline: b.total_items_sold,
-        avg_order_value_sparkline: b.avg_order_value,
 
+        total_orders_sparkline: totalOrderSparkline,
+        kpi_total_order: Number(calculateKPI(totalOrderSparkline)),
+        trend_total_orders: Number(calculateTrend(totalOrderSparkline)),
+
+        total_items_sold_sparkline: totalItemsSparkline,
+        trend_total_items: Number(calculateTrend(totalItemsSparkline)),
+        kpi_total_items: Number(calculateKPI(totalItemsSparkline)),
+        // total_items_sold_sparkline: b.total_items_sold,
+        avg_order_value_sparkline: avgOrdersValueSparkline,
+        trend_avg_order_value: Number(calculateTrend(avgOrdersValueSparkline)),
+        kpi_avg_order_value: Number(calculateKPI(avgOrdersValueSparkline)),
+        top_selling: topSelling
     }
 }
 
@@ -33,22 +48,13 @@ function normalizeSummary(s: SaleSummary) {
     const totalItems = s.total_items_sold;
     const avgOrderValues = totalOrders ? revenue / totalOrders : 0;
     const topCategory = s.top_category || "N/A";
-    const revenueSparkline = [revenue * .9, revenue * .98, revenue * .97, revenue * .99];
-    const kpiValue = ((revenueSparkline[revenueSparkline.length - 1] - revenueSparkline[0]) / revenueSparkline[0]) * 100;
+    const revenueSparkline = [revenue, revenue * .15, revenue * 1.14];
 
-    const totalOrdersSparkline = [totalOrders, totalOrders * .12, totalOrders * .14];
-    const kpiOrders = ((totalOrdersSparkline[totalOrdersSparkline.length - 1] - totalOrdersSparkline[0]) / totalOrdersSparkline[0]) * 100;
-    const totalItemsSparkline = [totalItems * .1, totalItems * .15, totalItems * .14];
+    const totalOrdersSparkline = [totalOrders, totalOrders * 1.2, totalOrders * 1.1, totalOrders * .92];
+    const totalItemsSparkline = [totalItems * .11, totalItems * .1, totalItems * .13, totalItems * .14];
 
-    const kpiItemsSold = ((totalItemsSparkline[totalItemsSparkline.length - 1] - totalItemsSparkline[0]) / totalItemsSparkline[0]) * 100;
-    const avgOrder = [avgOrderValues * .1, avgOrderValues * .12, avgOrderValues * .23, avgOrderValues * .2]
+    const avgOrder = [avgOrderValues, avgOrderValues * .12, avgOrderValues * .13, avgOrderValues * 1.2]
 
-    const kpiAvgOrders = ((avgOrder[avgOrder.length - 1] - avgOrder[0])/avgOrder[0]) * 100
-    const revenueTrend =
-        (revenueSparkline.length - 1) - revenueSparkline[0];
-    const ordersTrend = (totalOrdersSparkline.length - 1) - totalOrdersSparkline[0];
-    const itemsSoldOrdersTrend = (totalItemsSparkline.length - 1) - totalItemsSparkline[0];
-    const avg = (avgOrder.length - 1) - avgOrder[0];
 
     return {
 
@@ -59,18 +65,18 @@ function normalizeSummary(s: SaleSummary) {
         top_category: topCategory,
 
         revenue_sparkline: revenueSparkline,
-        kpi_value: kpiValue,
-        revenue_trend: revenueTrend,
-        itemsSoldTrend: itemsSoldOrdersTrend,
-        avgTrend: avg,
+        kpi_value: Number(calculateKPI(revenueSparkline)),
+        revenue_trend: Number(calculateTrend(revenueSparkline)),
+        itemsSoldTrend: Number(calculateTrend(totalItemsSparkline)),
+        avgTrend: Number(calculateTrend(avgOrder)),
         total_orders_sparkline: totalOrdersSparkline,
-        order_trend: ordersTrend,
+        order_trend: Number(calculateTrend(totalOrdersSparkline)),
         total_items_sold_sparkline: totalItemsSparkline,
-        kpi_total: calculateTrend(totalItemsSparkline),
+        kpi_total: Number(calculateKPI(totalOrdersSparkline)),
         avg_order_value_sparkline: avgOrder,
-        kpi_avg_orders: calculateTrend(avgOrder),
-        kpi_items_sold: calculateTrend(totalItemsSparkline),
-  
+        kpi_avg_orders: Number(calculateKPI(avgOrder)),
+        kpi_items_sold: Number(calculateKPI(totalItemsSparkline)),
+
     }
 }
 
@@ -95,7 +101,8 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                     color="#287d0b"
                     bgColor="rgba(40, 125, 11, 0.2)"
                     bgColorFade="rgba(40, 125, 11, 0.02)"
-
+                    trend={kpi.trend_value}
+                    kpi={kpi.kpi_value}
                 />
 
                 <KPICard
@@ -106,7 +113,8 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                     color="#7C3AED"
                     bgColor="rgba(124, 58, 237, 0.2)"
                     bgColorFade="rgba(124, 58, 237, 0.02)"
-
+                    trend={kpi.total_orders}
+                    kpi={kpi.kpi_total_order}
                 />
 
                 <KPICard labels="Items Sold"
@@ -116,7 +124,8 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                     color="#2563EB"
                     bgColor="rgba(37, 99, 235, 0.2)"
                     bgColorFade="rgba(37, 99, 235, 0.02)"
-
+                    trend={kpi.trend_total_items}
+                    kpi={kpi.kpi_total_items}
                 />
 
                 <KPICard labels="Avg Order Value"
@@ -126,9 +135,20 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                     color="#D97706"
                     bgColor="rgba(217, 119, 6, 0.2)"
                     bgColorFade="rgba(217, 119, 6, 0.02)"
-
+                    trend={kpi.trend_avg_order_value}
+                    kpi={kpi.kpi_avg_order_value}
                 />
 
+                <KPICard labels="Top Selling Product"
+
+                    icon={LeafyGreen}
+
+                    color="#287d0b"
+                    bgColor="rgba(40, 125, 11, 0.2)"
+                    bgColorFade="rgba(40, 125, 11, 0.02)"
+                    top_selling={kpi.top_selling}
+
+                />
             </div>
         );
     }
@@ -164,7 +184,7 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 top_category={kpi.top_category}
                 kpi={kpi.kpi_total}
 
-        trend={kpi.order_trend}
+                trend={kpi.order_trend}
             />
 
             <KPICard labels="Items Sold"
@@ -175,8 +195,8 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 bgColor="rgba(37, 99, 235, 0.2)"
                 bgColorFade="rgba(37, 99, 235, 0.02)"
                 top_category={kpi.top_category}
-trend={kpi.itemsSoldTrend}
-kpi={kpi.kpi_items_sold}
+                trend={kpi.itemsSoldTrend}
+                kpi={kpi.kpi_items_sold}
             />
 
             <KPICard labels="Avg Order Value"
@@ -188,8 +208,8 @@ kpi={kpi.kpi_items_sold}
                 bgColor="rgba(217, 119, 6, 0.2)"
                 bgColorFade="rgba(217, 119, 6, 0.02)"
                 top_category={kpi.top_category}
-trend={kpi.avgTrend}
-kpi={kpi.kpi_avg_orders}
+                trend={kpi.avgTrend}
+                kpi={kpi.kpi_avg_orders}
             />
 
 
@@ -203,6 +223,8 @@ kpi={kpi.kpi_avg_orders}
                 top_category={kpi.top_category}
 
             />
+
+
 
         </div>
     )
