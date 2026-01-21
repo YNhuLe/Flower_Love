@@ -1,13 +1,20 @@
 import {  Tag, Truck , Shield, Gift} from "lucide-react";
 import Button from "../../common/Button";
 import useCartStore from "../../hooks/useCartStore";
+import { useState } from "react";
 
 function OrderSummary() {
 
 
     const totalSpend = useCartStore((state) =>
         state.items.reduce((sumSpend, item) => sumSpend + item.price * item.quantity, 0)
-    )
+    );
+
+    function getShippingFee(subtotal: number) {
+  if (subtotal === 0) return "--";
+  if (subtotal < 75) return (subtotal * 0.3).toFixed(2);
+  return "FREE";
+}
 
 
     return (
@@ -44,9 +51,25 @@ function OrderSummary() {
                 </div>
                 <div className="flex flex-col">
                     <p className="text-text-primary/60">${totalSpend.toFixed(2)}</p>
-                    <p>{
-                        totalSpend > 50 ? <p className="text-success-300">FREE</p> : <p>--</p>
-                    }</p>
+                    {/* <p>{
+                        totalSpend > 75 ? <p className="text-success-300">FREE</p> : <p>--</p>
+                    }</p> */}
+                    <p className="text-sm">
+  {(() => {
+    const fee = getShippingFee(totalSpend);
+
+    if (fee === "FREE") {
+      return <span className="text-success-300">FREE</span>;
+    }
+
+    if (fee === "--") {
+      return <span>--</span>;
+    }
+
+    return <span>${fee}</span>;
+  })()}
+</p>
+
                     <p className="text-text-primary/60">${(totalSpend * 0.08).toFixed(2)}</p>
 
                 </div>
@@ -55,7 +78,7 @@ function OrderSummary() {
             <hr className="border-t border-gray-300" />
             <div className="flex justify-between my-6">
                 <p>Total: </p>
-                <p>${(totalSpend*1.08).toFixed(2)}</p>
+                <p>${((totalSpend*1.08) + getShippingFee(totalSpend))}</p>
             </div>
             <Button btnType="process_checkout" />
 <Button btnType="continue_shopping" />
