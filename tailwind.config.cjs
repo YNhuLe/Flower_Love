@@ -14,7 +14,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
       },
       colors: {
-          brand: {
+        brand: {
           900: "#1E2203", // deep forest
           700: "#204807", // brand-700
           500: "#63734A", // accent
@@ -27,7 +27,7 @@ module.exports = {
         surface: {
           base: "#FFFDF6", // main background
           raised: "#f1f4f4ff", // cards / panels
-          card: "#FFFFFF", 
+          card: "#FFFFFF",
         },
 
         // -----------------------------------
@@ -55,7 +55,7 @@ module.exports = {
           700: "#b12a2a", // darker (hover)
           500: "#E43636", // main
           300: "#f17878", // lighter
-           200: "#f6b3a4ff", 
+          200: "#f6b3a4ff",
           100: "#fde7e7",
         },
 
@@ -84,6 +84,10 @@ module.exports = {
             600: "#059669",
             100: "#d4f7ec",
           },
+          purple: {
+            600: "#7C3AED",
+            100: "#ede1ff",
+          },
         },
       },
       keyframes: {
@@ -102,5 +106,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

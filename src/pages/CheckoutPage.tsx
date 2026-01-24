@@ -1,12 +1,30 @@
 import ShippingInfoForm from "../features/Checkout/ShippingInfoForm";
-import { Truck, Box } from "lucide-react";
+import {Box, ChevronLeft } from "lucide-react";
 import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
+import useSaleData from "../hooks/useSaleData";
+import useCartStore from "../hooks/useCartStore";
+
 function CheckoutPage() {
+    const navigate = useNavigate();
+// const totalSpend = useCartStore();
+ const totalSpend = useCartStore((state) =>
+        state.items.reduce((sumSpend, item) => sumSpend + item.price * item.quantity, 0)
+    );
+console.log("Data from useSaleData: ", totalSpend.toFixed(2));
+
 
     return (
-        <>
-            <h1>Check out</h1>
-            <h2>Complete your order and bring nature home</h2>
+        <section className="mt-8">
+
+            <div className="flex gap-2 items-center">
+                <ChevronLeft className="w-5 h-5 cursor-pointer ml-6"
+
+                    onClick={() => navigate(-1)} />
+
+                <p>Back to Cart</p></div>
+            <h1 className="ml-4 text-xs mt-6">Check out</h1>
+            <h2 className="ml-4 text-xs mb-6">Complete your order and bring nature home</h2>
             <ShippingInfoForm />
 
             <div className="rounded-md bg-surface-card p-4 shadow-md w-ful m-4 ">
@@ -25,7 +43,7 @@ function CheckoutPage() {
             </div>
 
             <Button btnType="place_order" />
-        </>
+        </section>
     )
 }
 export default CheckoutPage;

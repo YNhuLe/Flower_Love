@@ -21,15 +21,15 @@ ChartJS.register(
   Filler
 );
 import { useRef, useEffect, useState, useMemo } from "react";
+import useSaleData from "../../hooks/useSaleData";
 function MainChartCard({date, revenue, total_orders, labels} : {date:string[], revenue: number[], total_orders:number[], labels: string[]}){
 
     const chartRef = useRef<ChartJS<'line'>>(null);
-//     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
-//    const [dataChart, setDataChart] = useState<ChartData<'line'>>({labels: [], datasets: []});
 console.log("Date: ", date);
 
 console.log("total orders: ", total_orders);
 console.log("revenue: ", revenue);
+
 
 
 const [chartData, setChartData] = useState<ChartData<'line'>>({

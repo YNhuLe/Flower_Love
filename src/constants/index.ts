@@ -9,6 +9,10 @@ const navLinks = [
     id: "signup/login",
     title: "Sign Up/Log In",
   },
+  {
+    id: 'dashboard',
+    title: 'Dashboard',
+  }
 ];
 
 const imgList = [

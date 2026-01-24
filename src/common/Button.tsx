@@ -6,14 +6,15 @@ import {
   Droplets,
   Sun,
   Thermometer,
-  Wind,
-  Sparkles, ArrowRight, ArrowLeft
+  Wind, Download,
+  Sparkles, ArrowRight, ArrowLeft, Lock
 } from 'lucide-react';
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all"
-  | "add_to_cart" | "quick_view" | 
-  "AI_analyze" | "new_analysis" | "all_recommendations" 
-  | "start_shopping" | "promo_apply" | "process_checkout" |"continue_shopping";
+  | "add_to_cart" | "quick_view" |
+  "AI_analyze" | "new_analysis" | "all_recommendations"
+  | "start_shopping" | "promo_apply" | "process_checkout" | "continue_shopping"
+  | "export" | "place_order";
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -43,11 +44,12 @@ const styleMap: Record<string, string> = {
   new_analysis: "bg-text-inverse p-2 border  rounded-xl text-xs curosr-pointer ",
   all_recommendations: "",
   start_shopping: "flex gap-2 items-center text-text-inverse p-2 border  rounded-xl text-xs cursor-pointer bg-amber-600 px-8 m-8 mb-12 hover:bg-amber-800 transition-all duration-300",
-  promo_apply:"text-amber-800 text-xs cursor-pointer  rounded-xl border border-1 border-amber-300 p-2 px-4 hover:border-amber-600 transition-all duration-300 hover:text-text-primary hover:bg-amber-50",
-  process_checkout:"text-text-inverse bg-amber-600 rounded-xl w-full group my-4 cursor-pointer  hover:bg-amber-800 py-2 ",
-  continue_shopping: "text-text-primary border border-1 border-text-muted mb-8 rounded-xl p-2 cursor-pointer w-full my-4 hover:bg-text-inverse"
-
-
+  promo_apply: "text-amber-800 text-xs cursor-pointer  rounded-xl border border-1 border-amber-300 p-2 px-4 hover:border-amber-600 transition-all duration-300 hover:text-text-primary hover:bg-amber-50",
+  process_checkout: "text-text-inverse bg-amber-600 rounded-xl w-full group my-4 cursor-pointer  hover:bg-amber-800 py-2 ",
+  continue_shopping: "text-text-primary border border-1 border-text-muted mb-8 rounded-xl p-2 cursor-pointer w-full my-4 hover:bg-text-inverse",
+  place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto"
+  ,
+  export: "p-2 rounded rounded-md border border-1 mt-4 text-xs"
 }
 
 const labelMap: Record<string, string> = {
@@ -69,9 +71,10 @@ const labelMap: Record<string, string> = {
   all_recommendations: "View All Recommendations",
   start_shopping: "Start Shopping",
   promo_apply: "Apply",
-  process_checkout:"Process to Checkout",
-  continue_shopping:"Continue Shopping"
-
+  process_checkout: "Process to Checkout",
+  continue_shopping: "Continue Shopping",
+  export: "Export",
+  place_order: "Place Order"
 }
 
 const iconMap: Record<string, ReactNode> = {
@@ -80,7 +83,9 @@ const iconMap: Record<string, ReactNode> = {
   plant_quiz: <Sparkles className="w-5 h-5 text-white-700" />,
   new_analysis: <ArrowLeft className="w-5 h-5 text-text-muted transition-transform duration-200 hover:-translate-x-1" />,
   start_shopping: <ShoppingCart className="w-5 h-5" />,
-  process_checkout:<ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"/>
+  process_checkout: <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />,
+  export: <  Download className="w-4 h-4" />,
+  place_order: < Lock className="w-4 h-4" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",
@@ -95,8 +100,9 @@ const urlMap: Record<string, string> = {
   plant_quiz: "/plant_quiz",
   AI_analyze: "/products/quiz/quiz_result",
   start_shopping: "/products",
-  process_checkout:"/checkout",
-  continue_shopping:"/products"
+  process_checkout: "/checkout",
+  continue_shopping: "/products",
+
 }
 
 function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: ButtonProps) {
@@ -114,27 +120,29 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
     if (targetUrl) navigate(targetUrl);
   }
 
-  const renderContent = () =>{
-    switch(btnType) {
-    case "start_shopping": 
-    case "new_analysis": 
-    case "plant_quiz":
-    case "add":
-      return (
-         <>
-                {iconMap[btnType]} {label}</>
-      );
+  const renderContent = () => {
+    switch (btnType) {
+      case "start_shopping":
+      case "new_analysis":
+      case "plant_quiz":
+      case "add":
+      case "export":
+      case "place_order":
+        return (
+          <>
+            {iconMap[btnType]} {label}</>
+        );
       case "AI_analyze":
-        case "process_checkout":
-        return(
+      case "process_checkout":
+        return (
           <>{label} {iconMap[btnType]}</>
         );
-        default:
-          return (
-            <>
+      default:
+        return (
+          <>
             {label} {iconMap[btnType]}
-            </>
-          )
+          </>
+        )
     }
   }
 
@@ -146,9 +154,9 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
         disabled={disabled}
       >
         <span className="flex items-center gap-2">
-         
-         {renderContent()}
-              </span>
+
+          {renderContent()}
+        </span>
 
       </button>
 

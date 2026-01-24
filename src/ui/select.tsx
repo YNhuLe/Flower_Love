@@ -51,7 +51,7 @@ function Select({
         <div
             ref={refs.setReference}
             {...getReferenceProps()}
-            className={`px-3 py-2 border  rounded-md  text-xs cursor-pointer select-none flex gap-1 ${className}`}
+            className={` px-3 py-2 border  rounded-md  text-xs cursor-pointer select-none flex justify-between ${className}`}
 
         >{value} 
         <ChevronDown className="w-5 h-5"/>

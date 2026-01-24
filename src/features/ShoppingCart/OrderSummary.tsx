@@ -77,9 +77,9 @@ function OrderSummary() {
             </div>
 
             <div className="flex gap-2">
-
+<div className="flex flex-col w-full">
                 <input
-                    className="p-1 rounded-xl bg-text-muted/30 w-full text-xs pl-2"
+                    className="p-1 rounded-xl bg-text-muted/30 w-full text-xs pl-2 h-9"
                     placeholder="Enter code"
 
                     value={discountCode}
@@ -100,10 +100,10 @@ function OrderSummary() {
 
                 {
                     discountCode && !["PLANT10", "WELCOME20"].includes(discountCode.trim().toUpperCase()) && (
-                        <p className="text-error-500 text-xs ">Invalid discount code</p>
+                    <p className="text-error-500 text-xs mt-1 text-center">Invalid discount code</p>
                     )
                 }
-
+</div>
                 <Button btnType="promo_apply" onClick={handleDiscountApply} disabled={isApplyDisabled} />
             </div>
             <p className="text-xs mt-2 mb-6">Try: PLANT10 or WELCOME20</p>
