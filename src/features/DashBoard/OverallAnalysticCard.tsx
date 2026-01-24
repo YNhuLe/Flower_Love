@@ -1,4 +1,4 @@
-import { DollarSign, Package, TrendingDown, TrendingUp, ShoppingCart, LeafyGreen } from "lucide-react";
+import { DollarSign, Package, ShoppingCart, LeafyGreen } from "lucide-react";
 import useSaleData from "../../hooks/useSaleData";
 import { SaleSummary, SaleBreakdown } from "../../types/dataTypes";
 import KPICard from "./KPICard";
@@ -25,7 +25,6 @@ function normalizeBreakdown(b: SaleBreakdown) {
         kpi_value: Number(calculateKPI(revenueSparkline)),
         trend_value: Number(calculateTrend(revenueSparkline)),
 
-
         total_orders_sparkline: totalOrderSparkline,
         kpi_total_order: Number(calculateKPI(totalOrderSparkline)),
         trend_total_orders: Number(calculateTrend(totalOrderSparkline)),
@@ -33,7 +32,7 @@ function normalizeBreakdown(b: SaleBreakdown) {
         total_items_sold_sparkline: totalItemsSparkline,
         trend_total_items: Number(calculateTrend(totalItemsSparkline)),
         kpi_total_items: Number(calculateKPI(totalItemsSparkline)),
-        // total_items_sold_sparkline: b.total_items_sold,
+
         avg_order_value_sparkline: avgOrdersValueSparkline,
         trend_avg_order_value: Number(calculateTrend(avgOrdersValueSparkline)),
         kpi_avg_order_value: Number(calculateKPI(avgOrdersValueSparkline)),
@@ -45,7 +44,7 @@ function normalizeBreakdown(b: SaleBreakdown) {
 function normalizeSummary(s: SaleSummary) {
     const revenue = s.revenue;
     const totalOrders = s.total_orders;
-    const totalItems = s.total_items_sold;
+    const totalItems = s.total_items_sold || 0;
     const avgOrderValues = totalOrders ? revenue / totalOrders : 0;
     const topCategory = s.top_category || "N/A";
     const revenueSparkline = [revenue, revenue * .15, revenue * 1.14];
@@ -140,14 +139,14 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 />
 
                 <KPICard labels="Top Selling Product"
-
                     icon={LeafyGreen}
-
+                    sparkline={kpi.total_items_sold_sparkline}
                     color="#287d0b"
                     bgColor="rgba(40, 125, 11, 0.2)"
                     bgColorFade="rgba(40, 125, 11, 0.02)"
                     top_selling={kpi.top_selling}
-
+                    trend={kpi.trend_total_items}
+                    kpi={kpi.kpi_total_items}
                 />
             </div>
         );
@@ -167,7 +166,7 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 color="#287d0b"
                 bgColor="rgba(40, 125, 11, 0.2)"
                 bgColorFade="rgba(40, 125, 11, 0.02)"
-                top_category={kpi.top_category}
+
                 trend={kpi.revenue_trend}
                 kpi={kpi.kpi_value}
             />
@@ -181,7 +180,6 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 color="#7C3AED"
                 bgColor="rgba(124, 58, 237, 0.2)"
                 bgColorFade="rgba(124, 58, 237, 0.02)"
-                top_category={kpi.top_category}
                 kpi={kpi.kpi_total}
 
                 trend={kpi.order_trend}
@@ -194,7 +192,6 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 color="#2563EB"
                 bgColor="rgba(37, 99, 235, 0.2)"
                 bgColorFade="rgba(37, 99, 235, 0.02)"
-                top_category={kpi.top_category}
                 trend={kpi.itemsSoldTrend}
                 kpi={kpi.kpi_items_sold}
             />
@@ -203,25 +200,23 @@ function OverallAnalysticCard({ range, category }: { range: string, category: st
                 value={kpi.avg_order_value}
                 sparkline={kpi.avg_order_value_sparkline}
                 icon={DollarSign}
-
                 color="#D97706"
                 bgColor="rgba(217, 119, 6, 0.2)"
                 bgColorFade="rgba(217, 119, 6, 0.02)"
-                top_category={kpi.top_category}
                 trend={kpi.avgTrend}
                 kpi={kpi.kpi_avg_orders}
             />
 
 
             <KPICard labels="Top Category"
-
-                icon={DollarSign}
-
-                color="#D97706"
-                bgColor="rgba(217, 119, 6, 0.2)"
-                bgColorFade="rgba(217, 119, 6, 0.02)"
+                icon={LeafyGreen}
+                sparkline={kpi.total_items_sold_sparkline}
+                color="#287d0b"
+                bgColor="rgba(40, 125, 11, 0.2)"
+                bgColorFade="rgba(40, 125, 11, 0.02)"
                 top_category={kpi.top_category}
-
+                trend={kpi.itemsSoldTrend}
+                kpi={kpi.kpi_items_sold}
             />
 
 

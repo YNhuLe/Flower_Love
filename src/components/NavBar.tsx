@@ -87,7 +87,7 @@ state.items.reduce((sum, item) => sum + item.quantity, 0)
             {navLinks.map((nav: { id: string; title: string }) => (
               <li key={nav.id} onClick={() => setActive(nav.title)}>
                 <a
-                  href={`#${nav.id}`}
+                  href={`/${nav.id}`}
                   className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl
                 desktop:text-3xl
                 ">
@@ -136,7 +136,7 @@ state.items.reduce((sum, item) => sum + item.quantity, 0)
           {navLinks.map((nav: { id: string; title: string }) => (
             <li key={nav.id} onClick={() => setActive(nav.title)}>
               <a
-                href={`#${nav.id}`}
+                href={`/${nav.id}`}
                 className="transition-all duration-300 hover:text-brand-700 hover:scale-150 tablet:text-2xl">
                 {nav.title}
               </a>

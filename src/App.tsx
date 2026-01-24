@@ -25,7 +25,9 @@ import {
 } from '@tanstack/react-query';
 import PaymentPage from "./pages/PaymentPage";
 import { CartContextProvider } from "./context/CartContext";
-
+import { Toaster } from "sonner";
+import CheckoutPage from "./pages/CheckoutPage";
+import DashBoardPage from "./pages/DashBoardPage";
 const queryClient = new QueryClient(
   {
     defaultOptions:{
@@ -38,6 +40,9 @@ const queryClient = new QueryClient(
 
 function App() {
   return (
+
+    <>
+      <Toaster richColors position="top-right"/>
     <CartContextProvider>
     <QuizProvider>
     <QueryClientProvider client={queryClient}>
@@ -52,11 +57,13 @@ function App() {
         <Route path="/products/cart" element={<PaymentPage />} />
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<SignInPage />} /> */}
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
     </Router>
     </QueryClientProvider>
     </QuizProvider>
-    </CartContextProvider>
+    </CartContextProvider></>
         );
 }
 export default App;

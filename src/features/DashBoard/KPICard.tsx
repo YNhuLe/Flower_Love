@@ -1,8 +1,5 @@
 import { Line } from 'react-chartjs-2';
 import { useMemo, useState, useRef , useEffect} from 'react';
-import useSaleData from '../../hooks/useSaleData';
-import { NormalizedKPI, SaleData } from "../../types/dataTypes";
-import type { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 import {
   TrendingUp,
   TrendingDown,
@@ -37,7 +34,7 @@ ChartJS.register(
   Legend,
   Filler
 );
-function KPICard({ labels, value, sparkline, icon: Icon, color, bgColor, bgColorFade }: { labels: string, value: number, sparkline: number[], icon?: React.ElementType, color?: string, bgColor: string , bgColorFade: string}) {
+function KPICard({ labels, value, sparkline, icon: Icon, color, bgColor, bgColorFade , top_category, kpi, trend, top_selling}: { labels: string, value?: number, sparkline?: number[], icon?: React.ElementType, color?: string, bgColor: string , bgColorFade: string, top_category?:string, kpi?:number, trend?: number, top_selling?: string}) {
 
 const chartRef = useRef<ChartJS<'line'>>(null);
 const [dataChart, setDataChart] = useState<ChartData<'line'>>({ labels: [], datasets: [] });
@@ -95,12 +92,29 @@ setDataChart({
 
   return (
     <div className="rounded-md bg-text-inverse p-4 shadow-md w-ful ml-4 mr-4  cursor-pointer">
-      <div className="p-1 mb-2 rounded-md w-fit" style={{ backgroundColor: bgColor }}>
-        {Icon && <Icon style={{ color }}/>}</div>
+      <div className='flex justify-between'>
+        <p className="p-1 mb-2 rounded-md w-fit"  style={{ backgroundColor: bgColor }}>
+        {Icon && <Icon style={{ color }}/>}</p>
+        
+          <p className='w-fit'>
+          {
+            trend !== undefined && (trend > 0 ?   <span className='text-xs text-success-500  flex gap-1'> <TrendingUp className=' w-4 h-4'/>+{kpi} %</span>: <span className='text-xs text-error-300  flex gap-1'> <TrendingDown className='w-4 h-4'/>{kpi} %</span>)
+          }
+      
+          </p>
+          
+          </div>
 
-      <h2 className="text-lg font-bold">{(labels.toLowerCase().includes('revenue') || labels.toLowerCase().replace(/[_\s]/g, '').includes('avgordervalue')) ? `$${value}` : `${value}`}</h2>
+    <h2 className="text-lg font-bold">
+      {value ? (
+        (labels.toLowerCase().includes('revenue') || labels.toLowerCase().replace(/[_\s]/g, '').includes('avgordervalue')) ? `$${value}` : `${value}`
+      ) : ""}
+    </h2>
       <p className="text-text-muted  text-xs">{labels}</p>
-      <div className="h-24 mt-2"
+      <p>{labels==="Top Category" ? top_category : ""}</p>
+      <p>{labels==="Top Selling Product" ? top_selling : ""}</p>
+      
+     <div className="h-24 mt-2"
  
 
       >

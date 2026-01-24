@@ -69,7 +69,7 @@ function ShippingInfoForm() {
             <label className="block  text-xxs text-text-primary mb-1">First Name</label>
             <input
               {...register('firstName')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-text-muted/30'}`}
 
             />
             {errors.firstName && <p className="text-error-500 text-xs mt-1">{errors.firstName.message}</p>}
@@ -80,7 +80,7 @@ function ShippingInfoForm() {
             <label className="block  text-xxs text-text-primary mb-1">Last Name</label>
             <input
               {...register('lastName')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.lastName ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.lastName ? 'border-error-500' : 'border-text-muted/30'}`}
 
             />
             {errors.lastName && <p className="text-error-500 text-xs mt-1">{errors.lastName.message}</p>}
@@ -90,7 +90,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">Email Address</label>
             <input {...register('email')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.email ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.email ? 'border-error-500' : 'border-text-muted/30'}`}
               placeholder="you@example.com"
 
             />
@@ -100,7 +100,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">Phone Number</label>
             <input {...register('phone')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.phone ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.phone ? 'border-error-500' : 'border-text-muted/30'}`}
               placeholder="(000) 000-0000"
 
             />
@@ -110,7 +110,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">Street Address</label>
             <input {...register('streetAddress')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.streetAddress ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.streetAddress ? 'border-error-500' : 'border-text-muted/30'}`}
               placeholder="123 Main Street"
 
             />
@@ -120,7 +120,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">Apartment, Suits, etc. (optional)</label>
             <input {...register('aptSuit')}
-              className={` text-xs w-full p-2 rounded-lg border ${errors.aptSuit ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`bg-text-muted/10 text-xs w-full p-2 rounded-lg border ${errors.aptSuit ? 'border-error-500' : 'border-text-muted/30'}`}
               placeholder="Apt 4B"
 
             />
@@ -130,7 +130,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">City</label>
             <input {...register('city')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.city ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.city ? 'border-error-500' : 'border-text-muted/30'}`}
 
 
             />
@@ -150,6 +150,7 @@ function ShippingInfoForm() {
               options={statesList}
               value={stateCa}
               onChange={setStateCa}
+              className="bg-text-muted/10"
             />
           </div>
 
@@ -157,7 +158,7 @@ function ShippingInfoForm() {
           <div>
             <label className="block text-xxs text-text-primary mb-1">Zip Code</label>
             <input {...register('state')}
-              className={`text-xs w-full p-2 rounded-lg border ${errors.state ? 'border-error-500' : 'border-text-muted/30'}`}
+              className={`text-xs bg-text-muted/10 w-full p-2 rounded-lg border ${errors.state ? 'border-error-500' : 'border-text-muted/30'}`}
               placeholder="A1A 1A1"
 
             />
@@ -177,7 +178,10 @@ function ShippingInfoForm() {
               label="Country *"
               options={countriesList}
               value={countries}
-              onChange={setCountries} />
+              onChange={setCountries} 
+              className="bg-text-muted/10"
+              />
+              
           </div>
         </form>
 
