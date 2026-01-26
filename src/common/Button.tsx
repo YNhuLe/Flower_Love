@@ -110,7 +110,8 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
   const btnClasses = styleMap[btnType] || "bg-gray-300 text-text-primary";
   const disabledClass = disabled ? styleMap.disabled : "";
   const finalStyle = `${btnClasses} ${disabledClass}`;
-  const label = btnType === "add" && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
+  // const label = (btnType === "add" || btnType === "place_order") && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
+ const label = labelMap[btnType]
   const targetUrl = url || urlMap[btnType];
 
   const handleClick = () => {
@@ -125,13 +126,20 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
       case "start_shopping":
       case "new_analysis":
       case "plant_quiz":
-      case "add":
+   
       case "export":
-      case "place_order":
+   
         return (
           <>
-            {iconMap[btnType]} {label}</>
+            {iconMap[btnType]} {label} </>
         );
+
+   case "place_order":
+   case "add":
+    return(
+       <>
+            {iconMap[btnType]} {label} - ${price}</>
+    )
       case "AI_analyze":
       case "process_checkout":
         return (

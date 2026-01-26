@@ -2,7 +2,6 @@ import ShippingInfoForm from "../features/Checkout/ShippingInfoForm";
 import {Box, ChevronLeft } from "lucide-react";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
-import useSaleData from "../hooks/useSaleData";
 import useCartStore from "../hooks/useCartStore";
 
 function CheckoutPage() {
@@ -42,7 +41,8 @@ console.log("Data from useSaleData: ", totalSpend.toFixed(2));
                 </div>
             </div>
 
-            <Button btnType="place_order" />
+            <Button btnType="place_order" price={totalSpend.toFixed(2)}/>
+    
         </section>
     )
 }
