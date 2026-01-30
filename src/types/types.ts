@@ -186,9 +186,9 @@ interface PlantRecommendation {
   id: string;
   common_name: string;
   scientific_name: string;
-  image_url: string;
+  image_url: string[];
   scoreMatch: number;
-  reasoning: string;
+  reasoning: string[];
   careLevel: string;
   original_price: number;
   plantinglevel: string,

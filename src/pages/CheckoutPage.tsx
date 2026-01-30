@@ -6,13 +6,10 @@ import useCartStore from "../hooks/useCartStore";
 
 function CheckoutPage() {
     const navigate = useNavigate();
-// const totalSpend = useCartStore();
- const totalSpend = useCartStore((state) =>
-        state.items.reduce((sumSpend, item) => sumSpend + item.price * item.quantity, 0)
-    );
-console.log("Data from useSaleData: ", totalSpend.toFixed(2));
 
-
+const totalSpend=   useCartStore((state) =>
+state.getTotal(state.discountCode)
+    )
     return (
         <section className="mt-8">
 
