@@ -5,6 +5,7 @@ import {
 import { useMemo } from 'react';
 import { PlantRecommendation } from "../../types/types";
 import { Link, useNavigate } from "react-router-dom";
+import useCartStore from '../../hooks/useCartStore';
 function SecondaryRecommendedCard({ secondRecom }: { secondRecom: PlantRecommendation }) {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
   const navigate = useNavigate();
@@ -22,18 +23,15 @@ function SecondaryRecommendedCard({ secondRecom }: { secondRecom: PlantRecommend
   const handleCardClick = () => {
     navigate(`/products/${secondRecom.id}`);
   }
+  console.log("Second Recoms: ", secondRecom)
 
-  console.log('Recommendations: ', secondRecom);
-console.log(Array.isArray(secondRecom.reasoning))
+
+
   return (
     <section className="border borer-1 h-fit m-4 rounded-2xl overflow-hidden flex gap-2 hover:shadow-lg  transition-all duration-300
       
         p-4
         ">
-
-      {/* <div className="w-[32rem] h-32 flex flex-col justify-start">
-                <img className="rounded-xl w-full h-full object-cover" src={`${cloud_url}/${secondRecom.image_url[0]}`} alt={secondRecom.image_url} />
-            </div> */}
 
       <div onClick={handleCardClick}
         className="group w-[5rem] h-full 
@@ -74,21 +72,21 @@ console.log(Array.isArray(secondRecom.reasoning))
         </div>
 
 
-  
+
 
         <ul className='mb-4'>
 
           {
-         ( secondRecom.reasoning).map( (r, index) =>(
-          <li key={index} className='text-[.6rem] flex gap-1'> 
-          <Leaf className='w-3 h-3 text-success-500' />
-          {r}</li>
-         ))
+            (secondRecom.reasoning).map((r, index) => (
+              <li key={index} className='text-[.6rem] flex gap-1'>
+                <Leaf className='w-3 h-3 text-success-500' />
+                {r}</li>
+            ))
           }
         </ul>
         <div className="flex justify-between w-full">
           <p className="text-text-muted text-xs">{secondRecom.plantinglevel}</p>
-          <p className="text-amber-600 text-xs">${secondRecom.original_price}</p>
+          <p className="text-amber-600 text-xs">${((secondRecom.sizes[0].original_price) * ((100 - secondRecom.sizes[0].discount_percentage) * .01)).toFixed(2)}</p>
         </div>
       </div>
     </section>

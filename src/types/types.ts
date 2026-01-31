@@ -110,12 +110,6 @@ sizes: (PlantSizeProps & {discounted_price: number})[];
 }
 
 
-// interface ProductWithCategory extends CategoriesProps, NewProductProps,PlantWithSize {
-// plant_id: number;
-// }
-
-// ...existing code...
-
 // Create a base interface without id conflicts
 interface ProductWithCategory {
   // Plant fields (from NewProductProps)
@@ -191,8 +185,11 @@ interface PlantRecommendation {
   reasoning: string[];
   careLevel: string;
   original_price: number;
+  discount_percentage: number;
+  discounted_price: number;
   plantinglevel: string,
-  benefits: string[]
+  benefits: string[],
+  sizes: PlantSizeProps[]
 }
 
 export type {

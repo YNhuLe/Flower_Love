@@ -41,7 +41,7 @@ function PlantQuizResultPage() {
   let formatArr: string[] = [];
   if (Array.isArray(firstRecom.benefits)) {
     formatArr = firstRecom.benefits;
-  } else if (typeof firstRecom.benefits === 'string') {
+  } else if (typeof firstRecom.benefits[0] === 'string') {
     try {
       formatArr = JSON.parse(firstRecom.benefits);
     } catch (error: any) {
@@ -60,6 +60,8 @@ function PlantQuizResultPage() {
   ];
   const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
     const selectedGradient = useMemo(() => randomGradient, []);
+    console.log(firstRecom.sizes[0].discount_percentage);
+    
     
   return (
     <>
@@ -133,7 +135,7 @@ function PlantQuizResultPage() {
               <span className="text-success-500 text-xs">{firstRecom.plantinglevel}</span>
 
             </div>
-            <p className="text-center text-amber-600">${firstRecom.original_price}</p></div>
+            <p className="text-center text-amber-600">${((firstRecom.sizes[0].original_price)*((100 - firstRecom.sizes[0].discount_percentage)* .01)).toFixed(2)}</p></div>
 
           <div className="m-4">
 
