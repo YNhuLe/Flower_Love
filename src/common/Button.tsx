@@ -6,15 +6,25 @@ import {
   Droplets,
   Sun,
   Thermometer,
-  Wind, Download,
-  Sparkles, ArrowRight, ArrowLeft, Lock
+  Wind, 
+  Download,
+  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+  Lock
 } from 'lucide-react';
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all"
-  | "add_to_cart" | "quick_view" |
-  "AI_analyze" | "new_analysis" | "all_recommendations"
-  | "start_shopping" | "promo_apply" | "process_checkout" | "continue_shopping"
-  | "export" | "place_order";
+  | "add_to_cart" | "quick_view" 
+  | "AI_analyze" | "new_analysis" 
+  | "all_recommendations"
+  | "start_shopping" 
+  | "promo_apply" 
+  | "process_checkout" 
+  | "continue_shopping"
+  | "export" 
+  | "place_order" 
+  | "create_account";
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -33,10 +43,8 @@ const styleMap: Record<string, string> = {
   customize: "p-1 text-xs px-4 py-2 rounded-2xl text-surface-base bg-cart-500 hover:bg-cart-700 transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
   shop_now: "text-xs px-4 py-2 rounded-2xl text-surface-base bg-brand-500 hover:bg-brand-700 transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
   explore: "text-xs rounded-2xl text-success-500",
-
-  view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500"
-  , add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 "
-  , quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 ",
+  view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500", add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 ",
+  quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 ",
   disabled: "opacity-50 cursor-not-allowed pointer-events-none bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white",
   plant_quiz: "p-2 text-xxs px-4 rounded-lg text-brand-100 text-center bg-gradient-to-r from-cart-700 to-amber-600 hover:bg-amber-800 transition-all duration-300",
   AI_analyze: "p-2 text-xxs rounded-lg bg-gradient-to-r from-cart-700 to-amber-600 text-surface-card mt-10 mx-auto ",
@@ -47,9 +55,9 @@ const styleMap: Record<string, string> = {
   promo_apply: "text-amber-800 text-xs cursor-pointer  rounded-xl border border-1 border-amber-300 p-2 px-4 hover:border-amber-600 transition-all duration-300 hover:text-text-primary hover:bg-amber-50",
   process_checkout: "text-text-inverse bg-amber-600 rounded-xl w-full group my-4 cursor-pointer  hover:bg-amber-800 py-2 ",
   continue_shopping: "text-text-primary border border-1 border-text-muted mb-8 rounded-xl p-2 cursor-pointer w-full my-4 hover:bg-text-inverse",
-  place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto"
-  ,
-  export: "p-2 rounded rounded-md border border-1 mt-4 text-xs"
+  place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto",
+  export: "p-2 rounded rounded-md border border-1 mt-4 text-xs",
+  create_account:"p-2 rounded-md text-xs bg-success-500 text-text-inverse"
 }
 
 const labelMap: Record<string, string> = {
@@ -74,7 +82,8 @@ const labelMap: Record<string, string> = {
   process_checkout: "Process to Checkout",
   continue_shopping: "Continue Shopping",
   export: "Export",
-  place_order: "Place Order"
+  place_order: "Place Order",
+  create_account: "Create Account"
 }
 
 const iconMap: Record<string, ReactNode> = {
@@ -85,7 +94,8 @@ const iconMap: Record<string, ReactNode> = {
   start_shopping: <ShoppingCart className="w-5 h-5" />,
   process_checkout: <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />,
   export: <  Download className="w-4 h-4" />,
-  place_order: < Lock className="w-4 h-4" />
+  place_order: < Lock className="w-4 h-4" />,
+  create_account: <ArrowRight className="w-4 h-4" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",
@@ -94,7 +104,6 @@ const urlMap: Record<string, string> = {
   customize: "/customize",
   shop_now: "/shop",
   explore: "/category",
-
   view_all: "/view_all",
   add_to_cart: "/products/cart",
   plant_quiz: "/plant_quiz",
@@ -102,7 +111,7 @@ const urlMap: Record<string, string> = {
   start_shopping: "/products",
   process_checkout: "/checkout",
   continue_shopping: "/products",
-
+  create_account:"/signup"
 }
 
 function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: ButtonProps) {
@@ -126,7 +135,7 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
       case "start_shopping":
       case "new_analysis":
       case "plant_quiz":
-   
+    
       case "export":
    
         return (
@@ -142,6 +151,7 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
     )
       case "AI_analyze":
       case "process_checkout":
+          case "create_account":
         return (
           <>{label} {iconMap[btnType]}</>
         );
@@ -162,7 +172,6 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
         disabled={disabled}
       >
         <span className="flex items-center gap-2">
-
           {renderContent()}
         </span>
 
