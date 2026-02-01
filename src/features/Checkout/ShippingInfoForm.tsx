@@ -14,14 +14,20 @@ function ShippingInfoForm() {
     resolver: zodResolver(shippingSchema), defaultValues: {
       firstName: '',
       lastName: '',
-      phone: '', email: '', streetAddress: '',
-      aptSuit: '', city: '', postalCode: '', state: '', country: '',
+      phone: '', 
+      email: '', 
+      streetAddress: '',
+      aptSuit: '', 
+      city: '', 
+      postalCode: '', 
+      state: '', 
+      country: '',
       shippingMethod: 'standard'
-
     }
   })
 
-  const statesList = ["Alberta",
+  const statesList = [
+    "Alberta",
     "British Columbia",
     "Manitoba",
     "New Brunswick",
@@ -34,16 +40,13 @@ function ShippingInfoForm() {
     "Northwest Territories",
     "Nunavut",
     "Yukon"];
-  const countriesList = [
-    "Canada", "USA"
-  ]
+  const countriesList = ["Canada", "USA"]
 
   const [stateCa, setStateCa] = useState('State');
 
   const [countries, setCountries] = useState('Country');
+  
   const handleForSubmit = async (data: ShippingFormData) => {
-    // const loadingToast = toast.loading("S")
-
     try {
       await axios.post("", data)
     } catch (error: any) {

@@ -28,6 +28,7 @@ import { CartContextProvider } from "./context/CartContext";
 import { Toaster } from "sonner";
 import CheckoutPage from "./pages/CheckoutPage";
 import DashBoardPage from "./pages/DashBoardPage";
+import AuthenticationPage from "./pages/AuthenticationPage";
 const queryClient = new QueryClient(
   {
     defaultOptions:{
@@ -59,6 +60,9 @@ function App() {
         <Route path="/login" element={<SignInPage />} /> */}
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
+
+        {/* routes for user authentication( signup, login, ) */}
+        <Route path="/signup" element={<AuthenticationPage/>} />
       </Routes>
     </Router>
     </QueryClientProvider>
