@@ -307,7 +307,7 @@ function PlantQuizPage() {
               <div>
                 <Button
                   onClick={handleSubmit}
-                  btnType='AI_analyze' disabled={!conditions.light || !conditions.light ||
+                  btnType='AI_analyze' disabled={!conditions.light ||
                     !conditions.humidity_preference || !conditions.name || !conditions.plantinglevel || !conditions.temperature_range
                   }></Button>
 
