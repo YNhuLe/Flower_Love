@@ -57,7 +57,7 @@ const styleMap: Record<string, string> = {
   continue_shopping: "text-text-primary border border-1 border-text-muted mb-8 rounded-xl p-2 cursor-pointer w-full my-4 hover:bg-text-inverse",
   place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto",
   export: "p-2 rounded rounded-md border border-1 mt-4 text-xs",
-  create_account:"p-2 rounded-md text-xs bg-success-500 text-text-inverse"
+  create_account:"p-2 rounded-md text-xs bg-success-500 text-text-inverse w-full group"
 }
 
 const labelMap: Record<string, string> = {
@@ -95,7 +95,7 @@ const iconMap: Record<string, ReactNode> = {
   process_checkout: <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />,
   export: <  Download className="w-4 h-4" />,
   place_order: < Lock className="w-4 h-4" />,
-  create_account: <ArrowRight className="w-4 h-4" />
+  create_account: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",

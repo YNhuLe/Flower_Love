@@ -64,7 +64,7 @@ state.items.reduce((sum, item) => sum + item.quantity, 0)
 
         <div className="flex gap-6">
           <Link
-            to="https://www.youtube.com/watch?v=eB5tWQqa3po&t=3357s"
+            to="/signup"
           > <User />
           </Link>
           <Link to="/products/cart">
