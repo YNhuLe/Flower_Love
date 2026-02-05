@@ -4,8 +4,8 @@ import {z} from "zod";
 const shippingSchema  = z.object({
     firstName: z.string().nonempty("First name is required"),
     lastName: z.string().nonempty("Last name is required"),
-    phone: z.string().nonempty("Phone number is required"),
-    email: z.string().email("Invalid email").nonempty("Email is required"),
+    phone: z.string().min(14, "Phone number is required."),
+    email: z.string().email("Invalid email").nonempty("Email is required."),
     streetAddress: z.string().nonempty("Address is required"),
     aptSuit: z.string().optional(),
     city: z.string().nonempty("City is required."),
