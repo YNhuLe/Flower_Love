@@ -1,6 +1,7 @@
-
-
-import { Facebook } from "lucide-react";
+import { signInWithPopup, getRedirectResult, onAuthStateChanged } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase/config";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const GoogleIcon = () => (
     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -10,58 +11,40 @@ const GoogleIcon = () => (
     </svg>
 );
 
-const InstagramIcon = () => (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <defs>
-            <linearGradient id="insta-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#f09433', stopOpacity: 1 }} />
-                <stop offset="25%" style={{ stopColor: '#e6683c', stopOpacity: 1 }} />
-                <stop offset="50%" style={{ stopColor: '#dc2743', stopOpacity: 1 }} />
-                <stop offset="75%" style={{ stopColor: '#cc2366', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: '#bc1888', stopOpacity: 1 }} />
-            </linearGradient>
-        </defs>
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#insta-gradient)" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#insta-gradient)" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#insta-gradient)" />
-    </svg>
-);
 
 const FacebookIcon = () => (
     <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     </svg>
-)
+);
+const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+
 function SocialAuth() {
+    const navigate = useNavigate();
+    const handleSignUpWithGoogle = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+            if (!user) {
+                console.error("User not found after sign up!");
+                return;
+            }
 
-    const socialButtons = [
-
-        {
-            name: 'Google', icon: <GoogleIcon />
-        },
-        {
-            name: 'Instagram', icon: <InstagramIcon />
-        },
-        {
-            name: 'Facebook', icon: <FacebookIcon />
+            const token = await user.getIdToken();
+            await axios.post(`${baseUrl}/auth/google`, {},
+                { headers: { Authorization: `Bearer ${token}`, }, });
+            navigate("/signup/profile", { state: { name: user.displayName, uid: user.uid, }, });
+        } catch (error) {
+            console.error("Google Sign-In error:", error);
         }
-    ]
-
-    return (
-        <div className="flex gap-2 w-full p-4 justify-center items-center my-4">
-
-
-            {socialButtons.map((social) => (
-                <button className="px-8 text-xs py-2 border border-text-primary rounded-xl w-fit flex items-center">
-
-                    {social.icon}
-
-
-                </button>))}
-
-
-        </div>
-    )
+    };
+    const handleSignUpWithFacebook = () => { console.log("facebook"); };
+    const socialButtons = [{ name: "Google", icon: <GoogleIcon /> },
+    { name: "Facebook", icon: <FacebookIcon /> },];
+    return (<div className="flex gap-2 w-full p-4 justify-center items-center my-4">
+        {socialButtons.map((social) => (
+            <button key={social.name}
+                onClick={social.name === "Google" ? handleSignUpWithGoogle : handleSignUpWithFacebook}
+                className="px-14 text-xs py-2 border border-text-primary rounded-xl w-fit flex items-center hover:border-success-800 hover:shadow-lg transition-colors duration-300" > {social.icon} </button>))} </div>);
 }
-
 export default SocialAuth;
