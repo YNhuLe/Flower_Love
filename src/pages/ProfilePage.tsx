@@ -2,14 +2,32 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
-function ProfilePage(){
+import {
+    Camera, Edit,
+    UserIcon
+} from "lucide-react";
+import RecentOrders from "../features/UserProfile/Overview/RecentOrders";
+import ToggleCate from "../features/UserProfile/ToggleCate";
+import Settings from "../features/UserProfile/Settings/SavedAddresses";
+import PaymentMethods from "../features/UserProfile/Settings/PaymentMethods";
+import AccountActions from "../features/UserProfile/Settings/AccountActions";
+import NavBar from "../components/NavBar";
+import SearchBar from "../common/SearchBar";
+import Footer from "../common/Footer";
+import RecentOrdersCart from "../features/UserProfile/Overview/RecentOrdersCart";
+import SavedPlantsSection from "../features/UserProfile/SavedPlants/SavedPlantsSection";
+import EditUserInfo from "../features/UserProfile/EditUserInfo";
+function ProfilePage() {
 
     const navigate = useNavigate();
-
-const [firebaseUser, setFirebaseUser] = useState<User>();
-    useEffect(() =>{
-        const unsubscribe = onAuthStateChanged(auth, (user) =>{
-            if( !user){
+    const category_name = ['Overview', 'Orders',  "Saved Plants", 'AI History', 'Settings'];
+    const [firebaseUser, setFirebaseUser] = useState<User>();
+    const [selectedCate, setSelectedCate] = useState<string>('Overview');
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState("");
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (!user) {
                 navigate("/signup");
                 return;
             }
@@ -18,14 +36,114 @@ const [firebaseUser, setFirebaseUser] = useState<User>();
         return unsubscribe;
     }, []);
 
-    if( !firebaseUser) return <p> Loading...</p>;
+    if (!firebaseUser) return <p> Loading...</p>;
+    const time = new Date(firebaseUser.metadata.creationTime || "");
+
+    const sections: Record<string, JSX.Element> = {
+        "Overview": (
+            <>
+
+
+                <RecentOrders />
+                <SavedPlantsSection />    </>
+
+
+        ),
+        "Orders": (
+            <>         <EditUserInfo />
+            </>
+        ),
+        "Saved Plants": (
+            <>       <SavedPlantsSection />
+            </>
+        ),
+     "AI History": (
+            <>   <EditUserInfo />
+            </>
+        ),
+        "Settings": (
+            <>  <Settings />
+                <PaymentMethods />
+                <AccountActions />
+
+            </>
+        )
+
+    }
+    // console.log(sections[selectedCate]);
+
+    const handleImageChange = (e: any) => {
+        const file = e.target;
+        if (!file) return;
+        setSelectedImage(file);
+        setPreviewUrl(URL.createObjectURL(file));
+    };
+
+    const handleAddImage = (e:any) =>{
+         const file = e.target;
+        if (!file) return;
+        setSelectedImage(file);
+        setPreviewUrl(URL.createObjectURL(file));
+console.log("Add more images")
+ }
     return (
+
         <>
-        <h1>Name:{firebaseUser.displayName} </h1>
-  <h1>Welcome, {firebaseUser.displayName}</h1>
-      <p>Email: {firebaseUser.email}</p>
-      <p>UID: {firebaseUser.uid}</p>
-        </>
+            <NavBar />
+            <SearchBar />
+            <article className="bg-surface-base">
+
+                <section className="p-4">
+                    <section className="p-4 flex-col items-center  rounded-md bg-surface-card shadow-md w-full">
+
+                        <div className="flex justify-between items-center relative">
+
+                            <div 
+                                    onClick={handleAddImage}
+                            className=" w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-success-500 to-success-800 flex items-center justify-center shadow-lg">
+
+                                <UserIcon className="text-surface-base w-10 h-10" />
+                                <button
+                        
+                                className="cursor-pointer rounded-full bg-text-primary w-8 h-8 flex justify-center items-center absolute top-14 left-12 hover:bg-text-primary/80">
+                                    <Camera className="text-surface-raised w-4 h-4" />
+                                        <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    hidden
+                                />
+                                </button>
+                                {previewUrl ? (
+                                    <img src={previewUrl} alt="Preview" className="profile__img" />
+                                ) : (
+                                    <span className="profile__text"> Add Profile Picture</span>
+                                )}
+                            
+                            </div>
+                            <div>
+                                <h1 className="text-3xl font-semibold">{firebaseUser.displayName} </h1>
+
+                                <p className="text-xs">{firebaseUser.email}</p>
+
+                                <p className="text-xs">Joined since: {time.toLocaleString("en-US", { month: "short", year: "numeric" })}</p>
+
+                            </div></div>
+                        <button className="cursor-pointer mt-4 flex gap-2 items-center rounded-md w-fit h-fit p-1 contain  border-success-800 text-success-800 text-xs hover:bg-success-500/30 hover:text-text-primary border-[.02rem]">
+                            <Edit className="w-3 h-3 text-center text-success-800 text-xxs" />
+
+                            Edit Profile</button>
+                    </section>
+                    <ToggleCate selectedCate={selectedCate} setSelectedCate={setSelectedCate} profileCategories={category_name} />
+
+                    <section>
+                        {sections[selectedCate]}
+                    </section>
+                </section>
+
+       
+                <Footer />
+            </article> </>
     )
 }
 
