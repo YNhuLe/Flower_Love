@@ -1,14 +1,36 @@
-
+import { useEffect } from "react";
+import { useAuth } from "../../../context/AuthContext";
 import {
     MapPin, Edit,
     Trash2,
 } from "lucide-react";
+import useProfileStore from "../../../hooks/useProfileStore";
+import { auth } from "../../../firebase/config"
+
 function Settings() {
+
+    // const { profile, loadProfile } = useProfileStore();
+    const profile = useProfileStore((state) => state.profile);
+const loadProfile = useProfileStore((state) => state.loadProfile);
+    const { firebaseUser, isAuthReady } = useAuth();
+
+    useEffect(() => {
+        if (!isAuthReady) return;
+        if (!firebaseUser) return;
+        // if (!auth.currentUser) return;
+        loadProfile();
+    }, [firebaseUser, isAuthReady]);
+    // useEffect(() =>{
+    //     if(!isAuthReady) return;
+    //     loadProfile();
+
+    // }, [isAuthReady])
+    console.log("Profile: ", profile)
+
 
     return (
 
         <>
-
             <section className="p-4 flex-col items-center  rounded-md bg-surface-card shadow-md w-full mt-6">
 
 
@@ -18,8 +40,9 @@ function Settings() {
 
                         <p
                             className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-full border-none `} >
-
-                            sarah joe   </p>
+                            {firebaseUser?.displayName?.trim() ? firebaseUser.displayName : profile?.name} 
+                       
+                             </p>
 
                     </div>
 
@@ -28,7 +51,7 @@ function Settings() {
 
                         <p className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-full border-none `}>
 
-                            test@gmail.com
+                            {firebaseUser?.email}
 
                         </p>
 
@@ -39,7 +62,9 @@ function Settings() {
 
                         <p
                             className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-full border-none `} >
-                            64705392542</p>
+
+                            {profile?.phone_number}
+                        </p>
 
                     </div>
                 </div>
@@ -102,10 +127,10 @@ function Settings() {
                             <p className="p-1 bg-success-300/20 rounded-md text-success-300 text-[.5rem]">Default</p></div>
 
                         <div className="flex gap-0">
-                               <button className="cursor-pointer border-text-muted border-1 hover:bg-text-muted/10 p-2 rounded-md">
-                            <Edit className="w-4 h-4 text-success-800 cursor-pointer" /></button>
-                               <button className="cursor-pointer border-text-muted border-1 hover:bg-text-muted/10 p-2 rounded-md">
-                            <Trash2 className="w-4 h-4 text-error-700 cursor-pointer" /></button></div>
+                            <button className="cursor-pointer border-text-muted border-1 hover:bg-text-muted/10 p-2 rounded-md">
+                                <Edit className="w-4 h-4 text-success-800 cursor-pointer" /></button>
+                            <button className="cursor-pointer border-text-muted border-1 hover:bg-text-muted/10 p-2 rounded-md">
+                                <Trash2 className="w-4 h-4 text-error-700 cursor-pointer" /></button></div>
 
                     </div>
 
@@ -121,3 +146,4 @@ function Settings() {
 }
 
 export default Settings;
+
