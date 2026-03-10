@@ -3,10 +3,10 @@ import axios from "axios";
 import {auth} from "../firebase/config";
 
 interface UserProfile{
-profile_id: number;
+id: number;
 uid: string;
 name: string;
-phone:string;
+phone_number: string;
 }
 interface UserProfileState{
 profile: UserProfile | null;
@@ -17,14 +17,21 @@ updateProfile: (data: Partial<UserProfile>) => Promise<void>;
 const useProfileStore = create<UserProfileState>((set, get)=>({
 profile: null,
 loadProfile: async () =>{ 
-    const token = await auth.currentUser?.getIdToken();
+  const currentUser = auth.currentUser;
+  if( !currentUser) {
+     console.log("No currentUser yet — skipping loadProfile");
+     return;
+  };
+    const token = await currentUser?.getIdToken();console.log("Token: ", token);
     const res = await axios.get(`${baseUrl}/users/me`, {
         headers: {Authorization: `Bearer ${token}`}
     });
      set({profile: res.data})
 },
   updateProfile: async (data: Partial<UserProfile>) => {
-    const token = await auth.currentUser?.getIdToken();
+    const currentUser = auth.currentUser;
+    if(!currentUser) return;
+    const token = await currentUser?.getIdToken();
     if (!token) return;
     await axios.put(`${baseUrl}/users/me`, data, {
       headers: { Authorization: `Bearer ${token}` }
