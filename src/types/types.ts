@@ -6,8 +6,7 @@ interface BestProductProp {
   details: string;
   rating: number;
   isnewarrival: boolean;
-  watering_requirements:string;
-
+  watering_requirements: string;
 }
 interface GiftBoxProps {
   id: string;
@@ -55,7 +54,7 @@ interface GiftItemsCategoriesProps extends GiftCategories {
 }
 
 //categories interface
-interface CategoriesProps{ 
+interface CategoriesProps {
   category_id: number;
   name: string;
   description: string;
@@ -64,7 +63,7 @@ interface CategoriesProps{
 }
 
 //products interface
-interface NewProductProps{
+interface NewProductProps {
   id: number;
   common_name: string;
   scientific_name: string;
@@ -94,21 +93,20 @@ interface NewProductProps{
   plantinglevel: string;
   isonsale: boolean;
   category_id: number;
-  benefits: string[]
+  benefits: string[];
 }
 
-interface PlantSizeProps{
+interface PlantSizeProps {
   size_id: number;
   plant_id: number;
   original_price: number;
-  discount_percentage: number
-size: string
+  discount_percentage: number;
+  size: string;
 }
 //Plant details with nested sizes array
-interface PlantWithSize extends NewProductProps{
-sizes: (PlantSizeProps & {discounted_price: number})[];
+interface PlantWithSize extends NewProductProps {
+  sizes: (PlantSizeProps & { discounted_price: number })[];
 }
-
 
 // Create a base interface without id conflicts
 interface ProductWithCategory {
@@ -143,35 +141,35 @@ interface ProductWithCategory {
   plantinglevel: string;
   isonsale: boolean;
   benefits: string[];
-  
+
   // Category fields (from CategoriesProps)
   category_id: number;
   name: string; // Category name
   quantity: number;
   cate_img?: string;
-  
+
   // Sizes (from PlantWithSize)
-  sizes: (PlantSizeProps & {discounted_price: number})[];
-  
+  sizes: (PlantSizeProps & { discounted_price: number })[];
+
   // Best product fields
   best_pro_id?: string;
   details?: string;
   img_url?: string;
 }
 
-interface ProductAndInfo{
-  new_products : ProductWithCategory[]
+interface ProductAndInfo {
+  new_products: ProductWithCategory[];
 }
 
 //room condition
 interface RoomConditions {
- light: string;
+  light: string;
   temperature_range: string;
   humidity_preference: string;
   plantinglevel: string;
   room_type: string;
   //category name
-  name: string,
+  name: string;
   plantsToAvoid: string[];
 }
 
@@ -187,9 +185,10 @@ interface PlantRecommendation {
   original_price: number;
   discount_percentage: number;
   discounted_price: number;
-  plantinglevel: string,
-  benefits: string[],
-  sizes: PlantSizeProps[]
+  plantinglevel: string;
+  benefits: string[];
+  sizes: PlantSizeProps[];
+  stock_quantity: number;
 }
 
 export type {
@@ -199,9 +198,10 @@ export type {
   GiftCategories,
   GiftItemProps,
   CategoriesProps,
-ProductAndInfo,
-NewProductProps,ProductWithCategory,
-PlantWithSize,
-PlantRecommendation,
-RoomConditions
+  ProductAndInfo,
+  NewProductProps,
+  ProductWithCategory,
+  PlantWithSize,
+  PlantRecommendation,
+  RoomConditions,
 };

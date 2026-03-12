@@ -10,7 +10,11 @@ function AuthCallback() {
         const handleUser = async () => {
             if (!isAuthenticated) return;
 
-            const token = await getAccessTokenSilently();
+            const token = await getAccessTokenSilently({
+                authorizationParams:{
+                    audience: import.meta.env.VITE_AUTH0_AUDIENCE
+                }
+            });
             //send user to the backend
             const response = await axios.post(`${baseUrl}/auth/google`, {
                 email: user?.email,
@@ -21,7 +25,7 @@ function AuthCallback() {
                 headers: { Authorization: `Bearer ${token}` },
             });
             //navigate based on the user status
-            if (response.status) {
+            if (response.status === 201) {
                 navigate("/signup/profile")
             } else {
                 navigate("/")
@@ -29,12 +33,12 @@ function AuthCallback() {
 
         }
         handleUser();
-    }, [isAuthenticated])
+    }, [isAuthenticated, user])
 
 
 
     return (
-        <></>
+        <>Loading..</>
     )
 }
 

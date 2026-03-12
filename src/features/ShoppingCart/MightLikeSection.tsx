@@ -40,7 +40,7 @@ function MightLikeSection() {
               <img className="rounded-2xl w-full object-cover h-32 bg-text-muted/10 p-2"
                 src={`${cloud_url}/${random.image_url[0]}`} alt={random.common_name} /> </Link>
               <p className="mt-2 text-xxs">{random.common_name}</p>
-              <p className="text-amber-600 mt-1 text-xs">${random.sizes[0].original_price}</p>
+              <p className="text-amber-600 mt-1 text-xs">${(random.sizes[0].discounted_price.toFixed(2))}</p>
             </div>
           ))
         }

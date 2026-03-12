@@ -40,6 +40,7 @@ module.exports = {
           inverse: "#FFFDF6",
         },
         success: {
+          800: "#2D4739",
           700: "#1d5b08", // darker (hover)
           500: "#287d0bff", // main (DEFAULT)
           300: "#4cb52cff", // lighter
