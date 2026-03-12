@@ -23,7 +23,7 @@ function SecondaryRecommendedCard({ secondRecom }: { secondRecom: PlantRecommend
   const handleCardClick = () => {
     navigate(`/products/${secondRecom.id}`);
   }
-  console.log("Second Recoms: ", secondRecom)
+  // console.log("Second Recoms: ", secondRecom)
 
 
 

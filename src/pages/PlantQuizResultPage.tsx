@@ -9,6 +9,7 @@ import Button from "../common/Button";
 import SecondaryRecommendedCard from "../features/PlantQuiz/SecondaryRecommendedCard";
 import Footer from "../common/Footer";
 import { useNavigate, Link } from "react-router-dom";
+import useCartStore from "../hooks/useCartStore";
 function PlantQuizResultPage() {
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function PlantQuizResultPage() {
     </div>
   );
 
+  console.log("Recommd: ", recommendations);
   //reset the quiz page
   const resetAnalysis = () => {
     setStep('questionnaire');
@@ -37,6 +39,23 @@ function PlantQuizResultPage() {
 
   }
 
+  const {addToCart} = useCartStore();
+    const handleAddToCart = () => {
+    if (!recommendations[0].id) return;
+    addToCart({
+      product_id: Number(recommendations[0].id),
+      name: recommendations[0].common_name,
+      science_name: recommendations[0].scientific_name,
+      level: recommendations[0].plantinglevel,
+      stock: recommendations[0].stock_quantity,
+      price: recommendations[0].sizes[0].original_price,
+      image: recommendations[0].image_url[0],
+      quantity: 1,
+      size: recommendations[0].sizes[0].size
+    })
+    navigate("/products/cart")
+  }
+  const isOutOfStock =  recommendations[0].stock_quantity <= 0;
   const firstRecom = recommendations[0];
   let formatArr: string[] = [];
   if (Array.isArray(firstRecom.benefits)) {
@@ -156,7 +175,7 @@ function PlantQuizResultPage() {
 
           <div className="px-4">
 
-            <Button btnType="add_to_cart"></Button></div>
+            <Button btnType="add_to_cart" onClick={handleAddToCart} disabled={isOutOfStock}></Button></div>
         </article>
 
         <article className="bg-text-inverse h-fit m-4 rounded-2xl overflow-hidden shadow-lg pb-6">
@@ -177,6 +196,7 @@ function PlantQuizResultPage() {
       </section>
 
       <Footer />
+  
     </>
   )
 }

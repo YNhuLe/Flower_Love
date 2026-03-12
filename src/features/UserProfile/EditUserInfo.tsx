@@ -106,13 +106,13 @@ function EditUserInfo({onClose}: {onClose: () => void}) {
 
                     <button
 
-                        className="cursor-pointer rounded-lg bg-success-800 p-2 text-text-inverse flex justify-center items-center   hover:bg-success-800/80">
+                        className=" text-xs cursor-pointer rounded-lg bg-success-800 p-2 text-text-inverse flex justify-center items-center   hover:bg-success-800/80">
                         Save Changes
                     </button>
 
                     <button
-
-                        className="cursor-pointer rounded-lg p-2 border border-text-muted flex justify-center items-center  hover:bg-text-muted/40">
+  onClick={onClose}
+                        className=" text-xs cursor-pointer rounded-lg p-2 border border-text-muted flex justify-center items-center  hover:bg-text-muted/40">
                         Cancel
                     </button>
                 </section>

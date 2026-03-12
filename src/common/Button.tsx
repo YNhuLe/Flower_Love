@@ -6,7 +6,7 @@ import {
   Droplets,
   Sun,
   Thermometer,
-  Wind, 
+  Wind,
   Download,
   Sparkles,
   ArrowRight,
@@ -15,16 +15,19 @@ import {
 } from 'lucide-react';
 interface ButtonProps {
   btnType?: "add" | "submit" | "cancel" | "signup" | "learn_more" | "shop_now" | "customize" | "explore" | "plant_quiz" | "view_all"
-  | "add_to_cart" | "quick_view" 
-  | "AI_analyze" | "new_analysis" 
+  | "add_to_cart" | "quick_view"
+  | "AI_analyze" | "new_analysis"
   | "all_recommendations"
-  | "start_shopping" 
-  | "promo_apply" 
-  | "process_checkout" 
+  | "start_shopping"
+  | "promo_apply"
+  | "process_checkout"
   | "continue_shopping"
-  | "export" 
-  | "place_order" 
-  | "create_account";
+  | "export"
+  | "place_order"
+  | "create_account"
+
+  | "sign_in"
+  ;
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -57,7 +60,8 @@ const styleMap: Record<string, string> = {
   continue_shopping: "text-text-primary border border-1 border-text-muted mb-8 rounded-xl p-2 cursor-pointer w-full my-4 hover:bg-text-inverse",
   place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto",
   export: "p-2 rounded rounded-md border border-1 mt-4 text-xs",
-  create_account:"p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4"
+  create_account: "p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4",
+  sign_in: "p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4"
 }
 
 const labelMap: Record<string, string> = {
@@ -83,7 +87,8 @@ const labelMap: Record<string, string> = {
   continue_shopping: "Continue Shopping",
   export: "Export",
   place_order: "Place Order",
-  create_account: "Create Account"
+  create_account: "Create Account",
+  sign_in: "Sign In"
 }
 
 const iconMap: Record<string, ReactNode> = {
@@ -95,7 +100,8 @@ const iconMap: Record<string, ReactNode> = {
   process_checkout: <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />,
   export: <  Download className="w-4 h-4" />,
   place_order: < Lock className="w-4 h-4" />,
-  create_account: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+  create_account: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />,
+  sign_in: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
 }
 const urlMap: Record<string, string> = {
   add: "/add-item",
@@ -111,7 +117,8 @@ const urlMap: Record<string, string> = {
   start_shopping: "/products",
   process_checkout: "/checkout",
   continue_shopping: "/products",
-  create_account:"/signup"
+  create_account: "/signup",
+  sign_in: "/signin"
 }
 
 function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: ButtonProps) {
@@ -120,7 +127,7 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
   const disabledClass = disabled ? styleMap.disabled : "";
   const finalStyle = `${btnClasses} ${disabledClass}`;
   // const label = (btnType === "add" || btnType === "place_order") && price ? `Add to Cart - $${price}` : labelMap[btnType] || "Click";
- const label = labelMap[btnType]
+  const label = labelMap[btnType]
   const targetUrl = url || urlMap[btnType];
 
   const handleClick = () => {
@@ -135,23 +142,24 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
       case "start_shopping":
       case "new_analysis":
       case "plant_quiz":
-    
+
       case "export":
-   
+
         return (
           <>
             {iconMap[btnType]} {label} </>
         );
 
-   case "place_order":
-   case "add":
-    return(
-       <>
+      case "place_order":
+      case "add":
+        return (
+          <>
             {iconMap[btnType]} {label} - ${price}</>
-    )
+        )
       case "AI_analyze":
       case "process_checkout":
-          case "create_account":
+      case "create_account":
+      case "sign_in":
         return (
           <>{label} {iconMap[btnType]}</>
         );

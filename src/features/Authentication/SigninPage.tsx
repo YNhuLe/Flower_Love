@@ -20,36 +20,33 @@ import { useForm } from "react-hook-form";
 function SigninPage() {
 
     const {
-        register, handleSubmit, setValue, watch, formState:{
+        register, handleSubmit, setValue, watch, formState: {
             errors, isSubmitting, isValid
-    }} = useForm<AuthBaseData>(
+        } } = useForm<AuthBaseData>(
             {
-          resolver:zodResolver(authBase) , mode:"onChange", defaultValues:{
-            email:'', password:''
-          } 
-    })
+                resolver: zodResolver(authBase), mode: "onChange", defaultValues: {
+                    email: '', password: ''
+                }
+            })
 
-    const handleSigninSubmit = async ( data: AuthBaseData) =>{
-        try
-    
-    
-        {
+    const handleSigninSubmit = async (data: AuthBaseData) => {
+        try {
             await axios.post("", data)
-        
-        }    catch(error: any){
+
+        } catch (error: any) {
             console.log(error)
         }
     }
-        const watchedPass1 = watch("password", "");
+    const watchedPass1 = watch("password", "");
     const { inputType: inputType1, togglePass: togglePassword1, isPasswordVisible: showPassword1 } = useTogglePassword();
 
 
     return (
         <section className="mx-4 pt-4">
 
- <form onSubmit={handleSubmit(handleSigninSubmit)}>
- 
-       {/* Email */}
+            <form onSubmit={handleSubmit(handleSigninSubmit)}>
+
+                {/* Email */}
 
                 <div className=" mb-2">
                     <label className="mb-2 text-xs">Email</label>
@@ -64,7 +61,7 @@ function SigninPage() {
 
                 </div>
 
-                 <div className=" mb-2 relative">
+                <div className=" mb-2 relative">
                     <label className="mb-2 text-xs">Password</label>
                     <div className="relative ">
                         <Lock className="w-4 h-4 absolute m-2 text-text-muted/50" />
@@ -81,17 +78,29 @@ function SigninPage() {
 
                             {showPassword1 ? <Eye className="w-4 h-4  m-2 text-text-muted/50 " /> : <EyeOff className="w-4 h-4 m-2 text-text-muted/50 " />}
                         </span>
-                 
+
 
                     </div>
 
                 </div>
-                     <Button btnType="sign_in"
 
-                    disabled={!isValid || isSubmitting } />
+                <div className="flex justify-between my-4">
 
- </form>
-     
+                    <div className="flex gap-2">
+
+                    <input type="checkbox"
+
+                        className="rounded-md accent-black" />
+                    <p className="text-[.6rem] ">Remember me </p></div>
+                    <p className="text-[.6rem]  text-success-700 font-semibold">Forgot Password?</p>
+                </div>
+
+                <Button btnType="sign_in"
+
+                    disabled={!isValid || isSubmitting} />
+
+            </form>
+
         </section>
     )
 }

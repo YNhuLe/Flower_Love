@@ -14,7 +14,7 @@ function Home() {
       {/* <NavBar /> */}
       <Hero />
       {/* <EntryList /> */}
-      <ShowCase />
+      {/* <ShowCase /> */}
 
       {/* <FlashCard /> */}
       <CardList type="card" />

@@ -29,6 +29,10 @@ import { Toaster } from "sonner";
 import CheckoutPage from "./pages/CheckoutPage";
 import DashBoardPage from "./pages/DashBoardPage";
 import AuthenticationPage from "./pages/AuthenticationPage";
+import SigninFormPage from "./pages/SigninFormPage";
+import ProfilePage from "./pages/ProfilePage";
+import { AuthProvider } from "./context/AuthContext";
+import AuthCallback from "../src/features/Authentication/AuthCallback"
 const queryClient = new QueryClient(
   {
     defaultOptions:{
@@ -44,6 +48,7 @@ function App() {
 
     <>
       <Toaster richColors position="top-right"/>
+      <AuthProvider>
     <CartContextProvider>
     <QuizProvider>
     <QueryClientProvider client={queryClient}>
@@ -62,12 +67,17 @@ function App() {
         <Route path="/dashboard" element={<DashBoardPage />} />
 
         {/* routes for user authentication( signup, login, ) */}
+
+        {/* Authentication */}
         <Route path="/signup" element={<AuthenticationPage/>} />
+        <Route path="/callback" element={<AuthCallback />} />
+            <Route path="/signup/profile" element={<ProfilePage/>} />
+        <Route path="/signin" element={<SigninFormPage />} />
       </Routes>
     </Router>
     </QueryClientProvider>
     </QuizProvider>
-    </CartContextProvider></>
+    </CartContextProvider></AuthProvider></>
         );
 }
 export default App;

@@ -2,6 +2,7 @@ import { signInWithPopup, getRedirectResult, onAuthStateChanged } from "firebase
 import { auth, googleProvider } from "../../firebase/config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 const GoogleIcon = () => (
     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -19,32 +20,30 @@ const FacebookIcon = () => (
 );
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
-function SocialAuth() {
+function SocialAuth(){
+    const {loginWithRedirect, user, isAuthenticated, getAccessTokenSilently} = useAuth0();
     const navigate = useNavigate();
-    const handleSignUpWithGoogle = async () => {
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            const user = result.user;
-            if (!user) {
-                console.error("User not found after sign up!");
-                return;
-            }
-
-            const token = await user.getIdToken();
-            await axios.post(`${baseUrl}/auth/google`, {},
-                { headers: { Authorization: `Bearer ${token}`, }, });
-            navigate("/signup/profile", { state: { name: user.displayName, uid: user.uid, }, });
-        } catch (error) {
-            console.error("Google Sign-In error:", error);
+    const handleSignupWithGoogle = async () => { await loginWithRedirect({
+        authorizationParams: {
+            connection: "google-oauth2",
         }
-    };
-    const handleSignUpWithFacebook = () => { console.log("facebook"); };
+    })
+
+ }
+
+ const handleSignUpWithFacebook = async ()=>{
+    await loginWithRedirect({
+        authorizationParams: {
+            connection: "facebook"
+        }
+    })
+ }
     const socialButtons = [{ name: "Google", icon: <GoogleIcon /> },
     { name: "Facebook", icon: <FacebookIcon /> },];
     return (<div className="flex gap-2 w-full p-4 justify-center items-center my-4">
         {socialButtons.map((social) => (
             <button key={social.name}
-                onClick={social.name === "Google" ? handleSignUpWithGoogle : handleSignUpWithFacebook}
+                onClick={social.name === "Google" ? handleSignupWithGoogle : handleSignUpWithFacebook}
                 className="px-14 text-xs py-2 border border-text-primary rounded-xl w-fit flex items-center hover:border-success-800 hover:shadow-lg transition-colors duration-300" > {social.icon} </button>))} </div>);
 }
 export default SocialAuth;

@@ -23,7 +23,7 @@ state.getTotal(state.discountCode)
             <h2 className="ml-4 text-xs mb-6">Complete your order and bring nature home</h2>
             <ShippingInfoForm />
 
-            <div className="rounded-md bg-surface-card p-4 shadow-md w-ful m-4 ">
+            <div className="rounded-md bg-surface-card p-4 shadow-md w-full m-4 ">
 
                 <div className="flex gap-2 items-center mb-6">
                     <p className="p-2 rounded-full bg-icon-amber-600/20">
