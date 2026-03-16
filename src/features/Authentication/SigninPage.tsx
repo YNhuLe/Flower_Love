@@ -4,20 +4,18 @@ import axios from "axios";
 import useTogglePassword from "../../hooks/useTogglePassword";
 import Button from "../../common/Button";
 import {
-    Share2,
-    Droplets,
-    Sun,
-    Thermometer,
-    Wind,
-    Download,
-    Sparkles, Eye, EyeOff,
-    ArrowRight,
-    ArrowLeft,
-    Lock, Phone, User, Mail,
-    CheckCircle2, Circle
+    Eye, EyeOff,
+
+    Lock, Mail,
+
 } from 'lucide-react';
 import { useForm } from "react-hook-form";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 function SigninPage() {
+    const navigate = useNavigate();
+    const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+    const addUserUrl = `${baseUrl}/users`;
 
     const {
         register, handleSubmit, setValue, watch, formState: {
@@ -28,15 +26,25 @@ function SigninPage() {
                     email: '', password: ''
                 }
             })
+    const { loginWithRedirect, getAccessTokenSilently } = useAuth0();
+
 
     const handleSigninSubmit = async (data: AuthBaseData) => {
         try {
-            await axios.post("", data)
-
+            const tokenResponse = await axios.post(`${baseUrl}/auth/token`, {
+                email: data.email,
+                password: data.password
+            });
+            const token = tokenResponse.data.access_token;
+            const userResponse = await axios.get(`${baseUrl}/users/profile`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            navigate("/signin/profile", { state: { user: userResponse.data } })
         } catch (error: any) {
-            console.log(error)
+            console.error("Signin error:", error);
         }
     }
+
     const watchedPass1 = watch("password", "");
     const { inputType: inputType1, togglePass: togglePassword1, isPasswordVisible: showPassword1 } = useTogglePassword();
 
@@ -88,10 +96,10 @@ function SigninPage() {
 
                     <div className="flex gap-2">
 
-                    <input type="checkbox"
+                        <input type="checkbox"
 
-                        className="rounded-md accent-black" />
-                    <p className="text-[.6rem] ">Remember me </p></div>
+                            className="rounded-md accent-black" />
+                        <p className="text-[.6rem] ">Remember me </p></div>
                     <p className="text-[.6rem]  text-success-700 font-semibold">Forgot Password?</p>
                 </div>
 
