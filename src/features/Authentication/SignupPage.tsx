@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../../common/Button";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import {
     Eye, EyeOff,
     Lock, Phone, User, Mail,
@@ -32,7 +32,7 @@ function SignupPage() {
     const navigate = useNavigate();
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
-
+  const { loginWithRedirect, getAccessTokenSilently } = useAuth0();
     const addUserUrl = `${baseUrl}/users`;
     const watchedPass1 = watch("password", "");
     const { inputType: inputType1, togglePass: togglePassword1, isPasswordVisible: showPassword1 } = useTogglePassword();
@@ -82,35 +82,10 @@ function SignupPage() {
         setValue('confirm_password', '');
         // setValue('errors', '');
     }
+  
     const handleSignupSubmit = async (data: SignupFormData) => {
-        try {
-
-            const userCredentials = await createUserWithEmailAndPassword(
-                auth, data.email, data.password
-            );
-
-            const user = userCredentials.user;
-            const userData = {
-                uid: user.uid,
-                name: data.name,
-                email: user.email,
-                phone_number: data.phone_number
-            }
-            await axios.post(addUserUrl, userData);
-            navigate("/signup/profile",
-                {
-                    state: {
-                        name: data.name,
-                        uid: user.uid,
-
-                    }
-                }
-            )
-
-            handleResetForm();
-        } catch (error: any) {
-            console.log(error)
-        }
+   console.log("Submit sign up");
+   
     }
 
 

@@ -1,10 +1,9 @@
-import { onAuthStateChanged, User } from "firebase/auth";
+
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { auth } from "../firebase/config";
 import {
     Camera, Edit,
-    UserIcon, X
+    UserIcon
 } from "lucide-react";
 import RecentOrders from "../features/UserProfile/Overview/RecentOrders";
 import ToggleCate from "../features/UserProfile/ToggleCate";
@@ -19,29 +18,28 @@ import SavedPlantsSection from "../features/UserProfile/SavedPlants/SavedPlantsS
 import EditUserInfo from "../features/UserProfile/EditUserInfo";
 import { toast } from "sonner";
 import useProfileStore from "../hooks/useProfileStore";
+import { useAuth0 } from "@auth0/auth0-react";
 function ProfilePage() {
 
     const navigate = useNavigate();
+    const { user, isAuthenticated, isLoading } = useAuth0();
     const category_name = ['Overview', 'Orders', "Saved Plants", 'AI History', 'Settings'];
-    const [firebaseUser, setFirebaseUser] = useState<User>();
+    // const [firebaseUser, setFirebaseUser] = useState<User>();
     const [selectedCate, setSelectedCate] = useState<string>('Overview');
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
     const profile = useProfileStore((state) => state.profile)
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                navigate("/signup");
-                return;
-            }
-            setFirebaseUser(user);
-        });
-        return unsubscribe;
-    }, []);
+        if (!isLoading && !isAuthenticated) {
+            navigate("/signup")
+        }
+    }, [isLoading, isAuthenticated, navigate]);
 
-    if (!firebaseUser) return <p> Loading...</p>;
-    const time = new Date(firebaseUser.metadata.creationTime || "");
+    if (isLoading) return (<p>Loading...</p>);
+    if (!isAuthenticated || !user) return null;
+
+
 
     const sections: Record<string, JSX.Element> = {
         "Overview": (
@@ -97,6 +95,7 @@ function ProfilePage() {
         // toast.success("Successfully changed the profile.");
 
     }
+    const time = new Date();
     return (
         <>
             <NavBar />
@@ -127,10 +126,10 @@ function ProfilePage() {
                                 )}
                             </div>
                             <div>
-                                <h1 className="text-3xl font-semibold"> {firebaseUser?.displayName?.trim() ? firebaseUser.displayName : profile?.name}
+                                <h1 className="text-3xl font-semibold"> {user?.displayName?.trim() ? user.displayName : profile?.name}
                                 </h1>
 
-                                <p className="text-xs">{firebaseUser.email}</p>
+                                <p className="text-xs">{user.email}</p>
 
                                 <p className="text-xs">Joined since: {time.toLocaleString("en-US", { month: "short", year: "numeric" })}</p>
 
