@@ -1,30 +1,26 @@
 import { useEffect } from "react";
-import { useAuth } from "../../../context/AuthContext";
 import {
     MapPin, Edit,
     Trash2,
 } from "lucide-react";
 import useProfileStore from "../../../hooks/useProfileStore";
-import { auth } from "../../../firebase/config"
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Settings() {
 
     // const { profile, loadProfile } = useProfileStore();
     const profile = useProfileStore((state) => state.profile);
 const loadProfile = useProfileStore((state) => state.loadProfile);
-    const { firebaseUser, isAuthReady } = useAuth();
+const {user, isAuthenticated, isLoading, getAccessTokenSilently} = useAuth0();
+
 
     useEffect(() => {
-        if (!isAuthReady) return;
-        if (!firebaseUser) return;
+        if (isLoading) return;
+        if (!isAuthenticated) return;
         // if (!auth.currentUser) return;
-        loadProfile();
-    }, [firebaseUser, isAuthReady]);
-    // useEffect(() =>{
-    //     if(!isAuthReady) return;
-    //     loadProfile();
+        loadProfile(getAccessTokenSilently);
+    }, [isAuthenticated, isLoading]);
 
-    // }, [isAuthReady])
     console.log("Profile: ", profile)
 
 
@@ -40,7 +36,7 @@ const loadProfile = useProfileStore((state) => state.loadProfile);
 
                         <p
                             className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-full border-none `} >
-                            {firebaseUser?.displayName?.trim() ? firebaseUser.displayName : profile?.name} 
+                            {user?.name?.trim() ? user.name : profile?.name} 
                        
                              </p>
 
@@ -51,7 +47,7 @@ const loadProfile = useProfileStore((state) => state.loadProfile);
 
                         <p className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-full border-none `}>
 
-                            {firebaseUser?.email}
+                            {user?.email}
 
                         </p>
 
