@@ -1,23 +1,85 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, X, Send, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaSmile } from "react-icons/fa";
+import axios from "axios";
 
-function ChatbotWindow() {
+interface Messages {
+    role: "user" | "bot";
+    content: string;
+}
+
+interface ChatbotWindowProps {
+    sessionId: number;
+
+}
+function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
 
 
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
+    const [messages, setMessages] = useState<Messages[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const bottomRef = useRef<HTMLDivElement | null>(null);
+    const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+    //auto scroll to the bottom of the chat when a new message is added
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages]);
+
+    //default welcome message when chat first open
+
+    useEffect(() => {
+        if (isOpen && messages.length === 0) {
+            setMessages(
+                [
+                    {
+                        role: 'bot',
+                        content: "Hi! I can answer questions about your plant recommendations. What would you like to know?"
+
+                    }
+                ]
+            )
+        }
+    }, [isOpen])
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             handleSendMessage();
         }
     };
-    const handleSendMessage = () => {
-        if (!inputValue.trim()) return;
-        console.log("User message:", inputValue);
-        setInputValue("");
+    const handleSendMessage = async () => {
+        if (!inputValue.trim() || isLoading) return;
+
+        const userMessage = inputValue.trim();
+        setInputValue('');
+        //messages will contains the list of previous messages and the new ones from user
+        setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+        setIsLoading(true);
+        //send the message to backend for processing and get the response
+        try {
+            const result = await axios.post(`${baseUrl}/chat`, {
+                session_id: sessionId,
+                message: userMessage
+            });
+
+            const data = result.data;
+            setMessages(prev => [...prev, { role: "bot", content: data.reply }]);
+
+        } catch (err: any) {
+            console.error("Error sending message:", err.response?.data || err.message || err);
+        } finally {
+            setIsLoading(false);
+        }
+
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
+        }
     };
     return (
 
@@ -80,6 +142,39 @@ function ChatbotWindow() {
                                     <X className="w-6 h-6 text-text-muted" />
                                 </button>
                             </div>
+                            {/* add this between header div and input div */}
+                            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+                                {messages.map((msg, i) => (
+                                    <div
+                                        key={i}
+                                        className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                                    >
+                                        <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm leading-relaxed
+          ${msg.role === "user"
+                                                ? "bg-success-700 text-text-inverse rounded-tr-sm"
+                                                : "bg-text-primary/40 text-text-inverse rounded-tl-sm"
+                                            }`}
+                                        >
+                                            {msg.content}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                {/* typing indicator */}
+                                {isLoading && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-text-primary/40 rounded-2xl rounded-tl-sm px-4 py-3">
+                                            <div className="flex gap-1">
+                                                <div className="w-2 h-2 bg-text-muted rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                                                <div className="w-2 h-2 bg-text-muted rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                                                <div className="w-2 h-2 bg-text-muted rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div ref={bottomRef} />
+                            </div>
 
                             {/* Input */}
                             <div className="p-4 bg-text-primary/40 border-t border-text-muted mt-auto">
@@ -95,7 +190,7 @@ function ChatbotWindow() {
                                     />
                                     <button
                                         onClick={() => handleSendMessage()}
-                                        disabled={!inputValue.trim()}
+                                        disabled={!inputValue.trim() || isLoading}
                                         className="bg-success-500 hover:bg-success-600 
                                 disabled:opacity-50        
     disabled:cursor-not-allowed
