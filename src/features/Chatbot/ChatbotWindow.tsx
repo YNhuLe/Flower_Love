@@ -137,6 +137,12 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
     ];
 
     const updateQuickActions = (lastMessage: string) => {
+
+        //add gaurd clause to check if lastMessage is empty or null, if so set to default quick actions
+        if (!lastMessage) {
+            setQuickActions(quickActionsMap['default'])
+            return;
+        }
         const lower = lastMessage.toLowerCase();
 
         const match = keywordMap.find(({ keywords }) =>
