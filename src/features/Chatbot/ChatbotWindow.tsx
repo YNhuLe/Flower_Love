@@ -3,6 +3,7 @@ import { Sparkles, X, Send, MessageCircle } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { FaSmile } from "react-icons/fa";
 import axios from "axios";
+import { useQuiz } from "../../context/QuizContext";
 
 interface Messages {
     role: "user" | "bot";
@@ -13,6 +14,10 @@ interface ChatbotWindowProps {
     sessionId: number;
 
 }
+interface QuickAction {
+    label: string;
+    query: string;
+}
 function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
 
 
@@ -22,6 +27,8 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
     const [isLoading, setIsLoading] = useState(false);
     const bottomRef = useRef<HTMLDivElement | null>(null);
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+    const { recommendations } = useQuiz();
+    const [quickActions, setQuickActions] = useState<QuickAction[]>([]);
     //auto scroll to the bottom of the chat when a new message is added
 
     useEffect(() => {
@@ -32,28 +39,47 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
 
     useEffect(() => {
         if (isOpen && messages.length === 0) {
-            setMessages(
-                [
-                    {
-                        role: 'bot',
-                        content: "Hi! I can answer questions about your plant recommendations. What would you like to know?"
+            setTimeout(() => {
 
-                    }
-                ]
-            )
+
+                setMessages(
+                    [
+                        {
+                            role: 'bot',
+                            content: `Hi! Based on your quiz I recommended **${recommendations[0].common_name}**. Want to know how to care for it?`
+                        }
+                    ]
+                );
+                setQuickActions([
+                    {
+                        label: "Watering tips?",
+                        query: "How do I water this plant?",
+                    },
+                    {
+                        label: "Is it pet-safe?",
+                        query: "Is it safe for my pets?",
+                    },
+                    {
+                        label: "More plants",
+                        query: "Show me more plant recommendations",
+                    },
+                ]);
+            }, 500) // add a slight delay to make it feel more natural
         }
-    }, [isOpen])
+    }, [isOpen, recommendations])
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             handleSendMessage();
         }
     };
-    const handleSendMessage = async () => {
-        if (!inputValue.trim() || isLoading) return;
+    const handleSendMessage = async (message?: string) => {
 
-        const userMessage = inputValue.trim();
+
+        const userMessage = message || inputValue.trim();
+        if (!userMessage || isLoading) return;
         setInputValue('');
+        setQuickActions([]);
         //messages will contains the list of previous messages and the new ones from user
         setMessages(prev => [...prev, { role: "user", content: userMessage }]);
         setIsLoading(true);
@@ -66,7 +92,7 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
 
             const data = result.data;
             setMessages(prev => [...prev, { role: "bot", content: data.reply }]);
-
+            updateQuickActions(data.quick_actions);
         } catch (err: any) {
             console.error("Error sending message:", err.response?.data || err.message || err);
         } finally {
@@ -75,6 +101,50 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
 
     };
 
+    const quickActionsMap: Record<string, QuickAction[]> = {
+        water: [
+            { label: "Light needs?", query: "How much light does it need?" },
+            { label: "Fertilizing?", query: "How do I fertilize it?" },
+            { label: "Is it pet safe?", query: "Is it safe for my cat?" },
+        ],
+        pet: [
+            { label: "Care guide", query: "Give me a full care guide" },
+            { label: "Watering tips?", query: "How often do I water it?" },
+            { label: "Where to buy?", query: "Where can I buy it?" },
+        ],
+        light: [
+            { label: "Watering tips?", query: "How often do I water it?" },
+            { label: "Temperature?", query: "What temperature does it need?" },
+            { label: "Is it pet safe?", query: "Is it safe for my cat?" },
+        ],
+        buy: [
+            { label: "Care guide", query: "Give me a full care guide" },
+            { label: "Watering tips?", query: "How often do I water it?" },
+        ],
+        default: [
+            { label: "Watering tips?", query: "How often do I water it?" },
+            { label: "Is it pet safe?", query: "Is it safe for my cat?" },
+            { label: "Care guide", query: "Give me a full care guide" },
+            { label: "Where to buy?", query: "Where can I buy it?" },
+        ]
+    }
+
+    const keywordMap: { keywords: string[], key: string }[] = [
+        { keywords: ["water", "watering"], key: "water" },
+        { keywords: ["pet", "cat", "dog", "toxic"], key: "pet" },
+        { keywords: ["light", "sun", "bright"], key: "light" },
+        { keywords: ["buy", "page", "purchase"], key: "buy" },
+    ];
+
+    const updateQuickActions = (lastMessage: string) => {
+        const lower = lastMessage.toLowerCase();
+
+        const match = keywordMap.find(({ keywords }) =>
+            keywords.some(keyword => lower.includes(keyword))
+        );
+
+        setQuickActions(quickActionsMap[match?.key ?? "default"]);
+    };
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -160,7 +230,7 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                     </div>
                                 ))}
 
-                                {/* typing indicator */}
+
                                 {isLoading && (
                                     <div className="flex justify-start">
                                         <div className="bg-text-primary/40 rounded-2xl rounded-tl-sm px-4 py-3">
@@ -176,7 +246,22 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                 <div ref={bottomRef} />
                             </div>
 
-                            {/* Input */}
+                            {quickActions.length > 0 && !isLoading && (
+                                <div className="px-4 pb-3 flex gap-2 flex-wrap">
+                                    {quickActions.map((action, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => handleSendMessage(action.query)}
+                                            className="text-xs px-3 py-2 rounded-full border border-text-muted 
+          bg-text-primary/20 text-text-inverse hover:bg-success-700/40 
+          transition-colors cursor-pointer"
+                                        >
+                                            {action.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
                             <div className="p-4 bg-text-primary/40 border-t border-text-muted mt-auto">
                                 <div className="flex gap-2">
                                     <input
@@ -184,7 +269,7 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                         onChange={(e) =>
                                             setInputValue(e.target.value)
                                         }
-                                        onKeyPress={handleKeyPress}
+                                        onKeyDown={handleKeyDown}
                                         placeholder="Ask about your plants..."
                                         className="flex-1 rounded-full bg-text-primary/90 border-text-muted text-text-inverse placeholder:text-text-muted focus:border-text-primary h-12"
                                     />
