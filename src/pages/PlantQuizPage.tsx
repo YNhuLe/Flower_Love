@@ -4,7 +4,7 @@ import {
   Thermometer,
   Award,
   Sparkles,
-  Camera,  CheckCircle,
+  Camera, CheckCircle,
   Leaf, AlertOctagon,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,18 +13,19 @@ import axios from 'axios';
 import BreadCrumbs from '../common/BreadCrumbs';
 import AI_PlantQuizHeader from '../features/PlantQuiz/AI_PlantQuizHeader';
 import { useQuiz } from '../context/QuizContext';
-import PlantQuizResultPage from './PlantQuizResultPage';
 import { useNavigate } from 'react-router-dom';
 
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
 function PlantQuizPage() {
-
+  const currentUser = { id: 123, name: "John Doe" }; // Replace with actual user data from context or props
   const { step, setStep, conditions, setConditions, error, setError, loading, setLoading,
     recommendations, setRecommendations, selectedPlant, setSelectedPlant
   } = useQuiz();
   const navigate = useNavigate();
-  //send the result to the Backend to look for the plant
+
+  //the prompts for the AI to generate the recommendations based on the user answers and the plant data from the DB
+
   const handleSubmit = async () => {
 
     setStep('analyzing');
@@ -32,26 +33,31 @@ function PlantQuizPage() {
     try {
       await new Promise(resolve => setTimeout(resolve, 3000));
 
-       const payload = {
-      user_id: 123, 
-      answers: [
-        { question_key: "plant_interest", answer_value: conditions.name },
-        { question_key: "avoid_types", answer_value: conditions.plantsToAvoid },
-        { question_key: "sunlight", answer_value: conditions.light },
-        { question_key: "humidity", answer_value: conditions.humidity_preference },
-        { question_key: "plantinglevel", answer_value: conditions.plantinglevel },
-        { question_key: "temperature", answer_value: conditions.temperature_range }
-      ]
-    }
-    
-      const response = await axios.post(`${baseUrl}/quiz/answers`,   
+      const payload = {
+        user_id: currentUser?.id || null,
+        answers: [
+          { question_key: "plant_interest", answer_value: conditions.name },
+          { question_key: "avoid_types", answer_value: conditions.plantsToAvoid },
+          { question_key: "sunlight", answer_value: conditions.light },
+          { question_key: "humidity", answer_value: conditions.humidity_preference },
+          { question_key: "plantinglevel", answer_value: conditions.plantinglevel },
+          { question_key: "temperature", answer_value: conditions.temperature_range }
+        ]
+      }
+
+      const response = await axios.post(`${baseUrl}/quiz/answers`,
         payload
       );
 
-       navigate('/products/quiz/quiz_result');
-       setRecommendations(response.data.recommendations);
- setStep('results');
-   
+
+      //if user is the guest user then the user_id will be null and session_id will be store temporary in the localStorage
+      if (!currentUser) {
+        localStorage.setItem("session_id", response.data.session_id);
+      }
+      //loged in user will have the session_id stored in the DB and can be fetched when needed
+      setRecommendations(response.data.recommendations);
+      navigate('/products/quiz/quiz_result');
+
 
     } catch (error: any) {
       setError(error.message || "Failed to send the plant quiz result to backend!")
@@ -356,8 +362,9 @@ function PlantQuizPage() {
 
 
         </AnimatePresence>
-   
+
       </div>
+
     </section>
   )
 }
