@@ -12,13 +12,14 @@ interface Messages {
 
 interface ChatbotWindowProps {
     sessionId: number;
+    userId: number;
 
 }
 interface QuickAction {
     label: string;
     query: string;
 }
-function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
+function ChatbotWindow({ sessionId, userId }: ChatbotWindowProps) {
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -226,7 +227,7 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                         className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                                     >
                                         <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm leading-relaxed
-          ${msg.role === "user"
+                                                ${msg.role === "user"
                                                 ? "bg-success-700 text-text-inverse rounded-tr-sm"
                                                 : "bg-text-primary/40 text-text-inverse rounded-tl-sm"
                                             }`}
@@ -258,9 +259,7 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                         <button
                                             key={idx}
                                             onClick={() => handleSendMessage(action.query)}
-                                            className="text-xs px-3 py-2 rounded-full border border-text-muted 
-          bg-text-primary/20 text-text-inverse hover:bg-success-700/40 
-          transition-colors cursor-pointer"
+                                            className="text-xs px-3 py-2 rounded-full border border-text-muted bg-text-primary/20 text-text-inverse hover:bg-success-700/40 transition-colors cursor-pointer"
                                         >
                                             {action.label}
                                         </button>
@@ -282,12 +281,8 @@ function ChatbotWindow({ sessionId }: ChatbotWindowProps) {
                                     <button
                                         onClick={() => handleSendMessage()}
                                         disabled={!inputValue.trim() || isLoading}
-                                        className="bg-success-500 hover:bg-success-600 
-                                disabled:opacity-50        
-    disabled:cursor-not-allowed
-    disabled:hover:bg-success-500
-                                rounded-full w-12 h-12 p-0 flex items-center justify-center"
-                                    >
+                                        className="bg-success-500 hover:bg-success-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-success-500
+                                                    rounded-full w-12 h-12 p-0 flex items-center justify-center">
                                         <Send className="w-5 h-5" />
                                     </button>
                                 </div>
