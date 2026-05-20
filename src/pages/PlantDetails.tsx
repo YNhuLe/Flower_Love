@@ -18,13 +18,13 @@ import HeartButton from "../common/HeartButton";
 import usePlantDetails from "../hooks/usePlantDetails";
 import useCartStore from "../hooks/useCartStore";
 function PlantDetails() {
-    const { plant_id } = useParams<{ plant_id: string }>();
+    const { slug } = useParams<{ slug: string }>();
     const {
         data: plantInfo,
         isLoading,
         isError,
         error
-    } = usePlantDetails(Number(plant_id));
+    } = usePlantDetails(slug || "");
     const [quantity, setQuantity] = useState(1);
     const [selectSize, setSelectedSize] = useState(0);
     const [selectImage, setSelectedImage] = useState(0);
@@ -33,7 +33,7 @@ function PlantDetails() {
    const {addToCart} = useCartStore();
    const navigate = useNavigate();
    const handleAddToCart = () =>{
-    if (!plantInfo?.id) return;
+    if (!plantInfo?.slug) return;
     addToCart({
 product_id: plantInfo?.id,
 name: plantInfo.common_name,
