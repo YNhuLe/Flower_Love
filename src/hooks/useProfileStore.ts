@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-
 interface UserProfile {
   id: number;
   uid: string;
@@ -9,6 +8,8 @@ interface UserProfile {
 }
 interface UserProfileState {
   profile: UserProfile | null;
+  setProfile: (profile: UserProfile | null) => void;
+  clearProfile: () => void;
   loadProfile: (getAccessToken: () => Promise<string>) => Promise<void>;
   updateProfile: (
     getAccessToken: () => Promise<string>,
@@ -18,6 +19,8 @@ interface UserProfileState {
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 const useProfileStore = create<UserProfileState>((set, get) => ({
   profile: null,
+  setProfile: (profile) => set({profile}),
+  clearProfile: () => set({profile: null}),
   loadProfile: async (getAccessToken) => {
     try {
       const token = await getAccessToken();
