@@ -18,25 +18,38 @@ import SavedPlantsSection from "../features/UserProfile/SavedPlants/SavedPlantsS
 import EditUserInfo from "../features/UserProfile/EditUserInfo";
 import { toast } from "sonner";
 import useProfileStore from "../hooks/useProfileStore";
+import useEnsureUserInDatabase from "../hooks/useEnsureUserInDatabase";
 import { useAuth0 } from "@auth0/auth0-react";
 function ProfilePage() {
 
     const navigate = useNavigate();
     const { user, isAuthenticated, isLoading } = useAuth0();
+    const { syncing, error } = useEnsureUserInDatabase()
+    // Add these console logs
+    console.log("ProfilePage - isLoading:", isLoading);
+    console.log("ProfilePage - isAuthenticated:", isAuthenticated);
+    console.log("ProfilePage - user:", user?.nickname
+
+    );
     const category_name = ['Overview', 'Orders', "Saved Plants", 'AI History', 'Settings'];
-    // const [firebaseUser, setFirebaseUser] = useState<User>();
     const [selectedCate, setSelectedCate] = useState<string>('Overview');
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
     const profile = useProfileStore((state) => state.profile)
     useEffect(() => {
+        console.log("useEffect triggered - isLoading:", isLoading, "isAuthenticated:", isAuthenticated);
+
         if (!isLoading && !isAuthenticated) {
-            navigate("/signup")
+
+            navigate("/signup");
+            console.log("User is not authenticated, redirecting to signup page.");
         }
     }, [isLoading, isAuthenticated, navigate]);
 
-    if (isLoading) return (<p>Loading...</p>);
+    if (isLoading && syncing)
+
+        if (isLoading) return (<p>Loading...</p>);
     if (!isAuthenticated || !user) return null;
 
 
@@ -44,11 +57,8 @@ function ProfilePage() {
     const sections: Record<string, JSX.Element> = {
         "Overview": (
             <>
-
-
                 <RecentOrders />
                 <SavedPlantsSection />    </>
-
 
         ),
         "Orders": (
@@ -103,12 +113,11 @@ function ProfilePage() {
             <article className="bg-surface-base">
                 <section className="p-4">
                     <section className="p-4 flex-col items-center  rounded-md bg-surface-card shadow-md w-full">
-                        <div className="flex justify-between items-center relative">
+                        <div className="flex gap-4 items-center relative">
                             <div
                                 onClick={handleAddImage}
                                 className=" w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-success-500 to-success-800 flex items-center justify-center shadow-lg">
 
-                                <UserIcon className="text-surface-base w-10 h-10" />
                                 <button
                                     className="cursor-pointer rounded-full bg-text-primary w-8 h-8 flex justify-center items-center absolute top-14 left-12 hover:bg-text-primary/80">
                                     <Camera className="text-surface-raised w-4 h-4" />
@@ -119,14 +128,18 @@ function ProfilePage() {
                                         hidden
                                     />
                                 </button>
-                                {previewUrl ? (
-                                    <img src={previewUrl} alt="Preview" className="profile__img" />
-                                ) : (
-                                    <span className="profile__text"> Add Profile Picture</span>
-                                )}
+
+                                <div className="w-full h-full">
+                                    {profile?.avatar_url ? (
+                                        <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                                    ) : (
+
+                                        <UserIcon className="text-surface-base" />
+                                    )}
+                                </div>
                             </div>
                             <div>
-                                <h1 className="text-3xl font-semibold"> {user?.displayName?.trim() ? user.displayName : profile?.name}
+                                <h1 className="text-xl font-semibold"> {user?.nickname?.trim() ? user.nickname : profile?.name}
                                 </h1>
 
                                 <p className="text-xs">{user.email}</p>
