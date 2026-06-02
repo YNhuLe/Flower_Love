@@ -41,17 +41,27 @@ function AuthCallback() {
                 const token = await getAccessTokenSilently({
                     authorizationParams: {
                         audience: import.meta.env.VITE_AUTH0_AUDIENCE
-                    }
+                    }, cacheMode: "off"
                 });
-
+                console.log('✅ Access token obtained:', token);
+                const payload = JSON.parse(atob(token.split('.')[1]));
                 console.log('📤 Sending user to backend...');
-                
-                // FIXED: Use the correct backend route
+
+
+                const isGoogleUser = payload.sub?.startsWith('google-oauth2|');
+                const endpoint = isGoogleUser ? `${baseUrl}/auth/google` : `${baseUrl}/users`;
+
+                const body = isGoogleUser ? {} : {
+                    name: payload['https://eververdant.com/name'],
+                    email: payload['https://eververdant.com/email'],
+                    phone_number: payload['https://eververdant.com/phone_number'],
+                    uid: payload.sub,
+                };
                 const response = await axios.post(
-                    `${baseUrl}/users`,
-                    {}, 
+                    endpoint,
+                    body,
                     {
-                        headers: { 
+                        headers: {
                             Authorization: `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         },
@@ -64,8 +74,9 @@ function AuthCallback() {
                 navigate('/users/profile');
 
             } catch (err: any) {
-                console.error('❌ Error syncing user:', err);
-                
+                console.error('❌ Error syncing user:', err.message);
+ localStorage.removeItem(`@@auth0spajs@@::${import.meta.env.VITE_AUTH0_CLIENT_ID}::${import.meta.env.VITE_AUTH0_AUDIENCE}::openid profile email offline_access`);
+   
                 // Even if backend sync fails, let them proceed if authenticated
                 if (isAuthenticated) {
                     console.log('⚠️ Backend sync failed but user is authenticated, proceeding to profile');
