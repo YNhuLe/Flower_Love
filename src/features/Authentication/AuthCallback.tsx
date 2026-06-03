@@ -2,17 +2,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import useProfileStore from "../../hooks/useProfileStore";
 
 function AuthCallback() {
+    const { setProfile } = useProfileStore();
     const { user, isAuthenticated, isLoading, getAccessTokenSilently, error } = useAuth0();
     const navigate = useNavigate();
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
-
-    console.log('AuthCallback - isLoading:', isLoading);
-    console.log('AuthCallback - isAuthenticated:', isAuthenticated);
-    console.log('AuthCallback - user:', user);
-    console.log('AuthCallback - error:', error);
-
     useEffect(() => {
         const handleUser = async () => {
             // Wait for Auth0 to finish loading
@@ -43,11 +40,8 @@ function AuthCallback() {
                         audience: import.meta.env.VITE_AUTH0_AUDIENCE
                     }, cacheMode: "off"
                 });
-                console.log('✅ Access token obtained:', token);
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                console.log('📤 Sending user to backend...');
 
-
+                const payload: any = jwtDecode(token);
                 const isGoogleUser = payload.sub?.startsWith('google-oauth2|');
                 const endpoint = isGoogleUser ? `${baseUrl}/auth/google` : `${baseUrl}/users`;
 
@@ -68,15 +62,15 @@ function AuthCallback() {
                     }
                 );
 
-                console.log('✅ User synced to database:', response.data);
+                setProfile(response.data);
 
                 // Navigate to profile regardless of 200 or 201
                 navigate('/users/profile');
 
             } catch (err: any) {
                 console.error('❌ Error syncing user:', err.message);
- localStorage.removeItem(`@@auth0spajs@@::${import.meta.env.VITE_AUTH0_CLIENT_ID}::${import.meta.env.VITE_AUTH0_AUDIENCE}::openid profile email offline_access`);
-   
+                localStorage.removeItem(`@@auth0spajs@@::${import.meta.env.VITE_AUTH0_CLIENT_ID}::${import.meta.env.VITE_AUTH0_AUDIENCE}::openid profile email offline_access`);
+
                 // Even if backend sync fails, let them proceed if authenticated
                 if (isAuthenticated) {
                     console.log('⚠️ Backend sync failed but user is authenticated, proceeding to profile');
