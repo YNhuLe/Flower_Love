@@ -24,13 +24,7 @@ function ProfilePage() {
 
     const navigate = useNavigate();
     const { user, isAuthenticated, isLoading } = useAuth0();
-    const { syncing, error } = useEnsureUserInDatabase()
-    // Add these console logs
-    console.log("ProfilePage - isLoading:", isLoading);
-    console.log("ProfilePage - isAuthenticated:", isAuthenticated);
-    console.log("ProfilePage - user:", user?.nickname
-
-    );
+    const { syncing, error } = useEnsureUserInDatabase();
     const category_name = ['Overview', 'Orders', "Saved Plants", 'AI History', 'Settings'];
     const [selectedCate, setSelectedCate] = useState<string>('Overview');
     const [selectedImage, setSelectedImage] = useState(null);
@@ -41,7 +35,6 @@ function ProfilePage() {
         console.log("useEffect triggered - isLoading:", isLoading, "isAuthenticated:", isAuthenticated);
 
         if (!isLoading && !isAuthenticated) {
-
             navigate("/signup");
             console.log("User is not authenticated, redirecting to signup page.");
         }
@@ -85,10 +78,11 @@ function ProfilePage() {
 
     //Changing the images from the image for user profile
     const handleImageChange = (e: any) => {
-        const file = e.target;
+        const file = e.target.files?.[0];
         if (!file) return;
         setSelectedImage(file);
         setPreviewUrl(URL.createObjectURL(file));
+        console.log("Image changed: ", file);
     };
 
     const handleAddImage = (e: any) => {
@@ -115,31 +109,43 @@ function ProfilePage() {
                     <section className="p-4 flex-col items-center  rounded-md bg-surface-card shadow-md w-full">
                         <div className="flex gap-4 items-center relative">
                             <div
-                                onClick={handleAddImage}
-                                className=" w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-success-500 to-success-800 flex items-center justify-center shadow-lg">
 
+                                className=" w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-success-500 to-success-800 flex items-center justify-center shadow-lg">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    hidden
+                                    id="avatar-upload"
+                                />
                                 <button
-                                    className="cursor-pointer rounded-full bg-text-primary w-8 h-8 flex justify-center items-center absolute top-14 left-12 hover:bg-text-primary/80">
+                                    className="cursor-pointer rounded-full bg-text-primary w-8 h-8 flex justify-center items-center absolute top-14 left-12 hover:bg-text-primary/80"
+                                    type="button"
+
+                                    onClick={() => document.getElementById('avatar-upload')?.click()}
+
+                                >
                                     <Camera className="text-surface-raised w-4 h-4" />
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleImageChange}
-                                        hidden
-                                    />
+
                                 </button>
 
-                                <div className="w-full h-full">
-                                    {profile?.avatar_url ? (
+                                <div className="w-full h-full flex items-center justify-center">
+
+                                    {previewUrl ? (
+                                        <img src={previewUrl} alt="Profile" className="w-full h-full object-cover" />
+                                    ) : profile?.avatar_url ? (
                                         <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
                                     ) : (
-
                                         <UserIcon className="text-surface-base" />
                                     )}
                                 </div>
                             </div>
                             <div>
-                                <h1 className="text-xl font-semibold"> {user?.nickname?.trim() ? user.nickname : profile?.name}
+                                <h1 className="text-xl font-semibold">
+
+                                    {user?.name && user.name !== user.email
+                                        ? user.name
+                                        : profile?.name || user?.email}
                                 </h1>
 
                                 <p className="text-xs">{user.email}</p>
