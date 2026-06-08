@@ -20,6 +20,15 @@ import { toast } from "sonner";
 import useProfileStore from "../hooks/useProfileStore";
 import useEnsureUserInDatabase from "../hooks/useEnsureUserInDatabase";
 import { useAuth0 } from "@auth0/auth0-react";
+
+/**
+ * ProfilePage component displays the user's profile information, recent orders, saved plants, and settings. It also allows users to edit their profile picture and information.
+ * The component uses Auth0 for authentication and ensures that the user is authenticated before displaying the profile page. If the user is not authenticated, they are redirected to the signup page.
+ * The profile picture can be updated by clicking on the camera icon, which opens a file input to select a new image. The selected image is previewed before being uploaded.
+ * The component also includes a toggle to switch between different sections of the profile, such as Overview, Orders, Saved Plants, AI History, and Settings.
+ * @returns JSX.Element
+ * 
+ */
 function ProfilePage() {
 
     const navigate = useNavigate();
@@ -27,7 +36,6 @@ function ProfilePage() {
     const { syncing, error } = useEnsureUserInDatabase();
     const category_name = ['Overview', 'Orders', "Saved Plants", 'AI History', 'Settings'];
     const [selectedCate, setSelectedCate] = useState<string>('Overview');
-    const [selectedImage, setSelectedImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
     const profile = useProfileStore((state) => state.profile)
@@ -40,12 +48,8 @@ function ProfilePage() {
         }
     }, [isLoading, isAuthenticated, navigate]);
 
-    if (isLoading && syncing)
-
-        if (isLoading) return (<p>Loading...</p>);
+    if (isLoading && syncing) return (<p>Loading...</p>);
     if (!isAuthenticated || !user) return null;
-
-
 
     const sections: Record<string, JSX.Element> = {
         "Overview": (
@@ -77,26 +81,23 @@ function ProfilePage() {
     }
 
     //Changing the images from the image for user profile
-    const handleImageChange = (e: any) => {
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
-        setSelectedImage(file);
+
+        if (file.size > 2 * 1024 * 1024) {
+            toast.error("Image must be under 2MB in size.");
+            return;
+        }
+        // setSelectedImage(file);
         setPreviewUrl(URL.createObjectURL(file));
         console.log("Image changed: ", file);
     };
 
-    const handleAddImage = (e: any) => {
-        const file = e.target;
-        if (!file) return;
-        setSelectedImage(file);
-        setPreviewUrl(URL.createObjectURL(file));
-        console.log("Add more images")
-    }
-
     //handle to edit user information
     const handleEditUserProfile = () => {
         setShowEditProfileModal(!showEditProfileModal);
-        // toast.success("Successfully changed the profile.");
+        toast.success("Successfully changed the profile.");
 
     }
     const time = new Date();
