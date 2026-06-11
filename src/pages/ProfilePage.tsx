@@ -5,6 +5,7 @@ import {
     Camera, Edit,
     UserIcon
 } from "lucide-react";
+import axios from "axios";
 import RecentOrders from "../features/UserProfile/Overview/RecentOrders";
 import ToggleCate from "../features/UserProfile/ToggleCate";
 import Settings from "../features/UserProfile/Settings/SavedAddresses";
@@ -32,13 +33,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 function ProfilePage() {
 
     const navigate = useNavigate();
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
     const { syncing, error } = useEnsureUserInDatabase();
     const category_name = ['Overview', 'Orders', "Saved Plants", 'AI History', 'Settings'];
     const [selectedCate, setSelectedCate] = useState<string>('Overview');
     const [previewUrl, setPreviewUrl] = useState("");
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
-    const profile = useProfileStore((state) => state.profile)
+    const profile = useProfileStore((state) => state.profile);
+    const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+
     useEffect(() => {
         console.log("useEffect triggered - isLoading:", isLoading, "isAuthenticated:", isAuthenticated);
 
@@ -89,10 +92,37 @@ function ProfilePage() {
             toast.error("Image must be under 2MB in size.");
             return;
         }
-        // setSelectedImage(file);
         setPreviewUrl(URL.createObjectURL(file));
         console.log("Image changed: ", file);
-    };
+
+        try {
+            const formData = new FormData();
+            formData.append("avatar", file);
+
+            const auth0Id = user?.sub;
+
+            const token = await getAccessTokenSilently();
+            const response = await axios.patch(`${baseUrl}/users/profile/${auth0Id}/avatar`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+
+                },
+            });
+
+            if (response.status < 200 || response.status >= 300) {
+                toast.error("Failed to upload image. Please try again.");
+            }
+            toast.success("Profile picture updated successfully!");
+
+        } catch (error: any) {
+            setPreviewUrl("");
+            console.error("Full error object:", error);
+            toast.error(
+                error.response?.data?.message || "Failed to upload image. Please try again."
+            );
+        };
+
+    }
 
     //handle to edit user information
     const handleEditUserProfile = () => {
