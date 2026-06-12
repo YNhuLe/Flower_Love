@@ -10,13 +10,34 @@ import {
     CheckCircle2, Circle, X
 } from 'lucide-react';
 import useSaleData from "../../hooks/useSaleData";
-function EditUserInfo({onClose}: {onClose: () => void}) {
+import type { UserProfile } from "../../types/user";
+import { toast } from "sonner";
+import useProfileStore from "../../hooks/useProfileStore";
+/**
+ * EditUserInfo component allows users to edit their profile information.
+ * The component includes a form with fields for name, email, and phone number. The email field is disabled and cannot be edited. The phone number field has a custom formatting function to format the input as a US phone number.
+ * The form uses react-hook-form for form state management and validation, with zod for schema validation. When the form is submitted, it calls the updateProfile function from the profile store to update the user's profile information in the database. If the update is successful, a success toast message is shown and the edit profile modal is closed. If there is an error during the update, it is logged to the console.
+ * @param user - The current user's profile information, used to populate the form fields with existing data.
+ * @param getAccessToken - A function to retrieve the access token for authentication when making API requests to update the profile information.
+ * @param param0 - onClose function to close the edit profile modal
+ * @returns JSX.Element
+ */
+function EditUserInfo({ user,
+    onClose,
+    getAccessToken }: {
+        user: UserProfile | null;
+        getAccessToken: () => Promise<string>;
+        onClose: () => void
+    }) {
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+    const updateProfile = useProfileStore((state) => state.updateProfile);
     const { register, handleSubmit, setValue, watch, formState: {
         errors, isSubmitting, isValid
     } } = useForm<EditProfileData>({
         resolver: zodResolver(editProfile), mode: "onChange", defaultValues: {
-            name: '', phone_number: '', email: ''
+            name: user?.name || '',
+            phone_number: user?.phone_number || '',
+            email: user?.email || ''
         }
     });
     const [prevPhone, setPrevPhone] = useState("");
@@ -38,9 +59,15 @@ function EditUserInfo({onClose}: {onClose: () => void}) {
         setPrevPhone(formatted);
         setValue("phone_number", formatted, { shouldValidate: true });
     }
-    const handleEditProfile = async () => {
+    const handleEditProfile = async (data: EditProfileData) => {
         try {
+            await updateProfile(getAccessToken, {
+                name: data.name,
+                phone_number: data.phone_number,
 
+            });
+            toast.success("Successfully changed the profile.");
+            onClose();
         } catch (error: any) {
             console.log(error)
         }
@@ -79,7 +106,9 @@ function EditUserInfo({onClose}: {onClose: () => void}) {
                     <Mail className="w-4 h-4 absolute m-2 text-text-muted/50" />
 
                     <input
-                        {...register('email')}
+                        // {...register('email')}
+                        value={user?.email || ""}
+                        disabled
                         placeholder="you@example.com"
                         className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-lg border ${errors.email ? 'border-red-500' : 'border-text-muted/30'}`}
                     />
@@ -111,7 +140,7 @@ function EditUserInfo({onClose}: {onClose: () => void}) {
                     </button>
 
                     <button
-  onClick={onClose}
+                        onClick={onClose}
                         className=" text-xs cursor-pointer rounded-lg p-2 border border-text-muted flex justify-center items-center  hover:bg-text-muted/40">
                         Cancel
                     </button>
