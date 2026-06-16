@@ -5,6 +5,17 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import useProfileStore from "../../hooks/useProfileStore";
 
+/**
+ * Handles the Auth0 callback after authentication.
+ * - Checks if the user is authenticated and retrieves the access token.
+ * - Decodes the token to determine if the user is a Google user or a regular user.
+ * - Sends a POST request to the appropriate backend endpoint to create or update the user in the database.
+ * - Sets the user profile in the global state and navigates to the profile page.
+ * - Handles errors gracefully, allowing authenticated users to proceed even if backend sync fails.
+ * @returns The AuthCallback component
+ * 
+ */
+
 function AuthCallback() {
     const { setProfile } = useProfileStore();
     const { user, isAuthenticated, isLoading, getAccessTokenSilently, error } = useAuth0();
@@ -40,7 +51,7 @@ function AuthCallback() {
                         audience: import.meta.env.VITE_AUTH0_AUDIENCE
                     }, cacheMode: "off"
                 });
-
+                console.log('Received token:', token);
                 const payload: any = jwtDecode(token);
                 const isGoogleUser = payload.sub?.startsWith('google-oauth2|');
                 const endpoint = isGoogleUser ? `${baseUrl}/auth/google` : `${baseUrl}/users`;
@@ -63,11 +74,16 @@ function AuthCallback() {
                 );
 
                 setProfile(response.data);
-
                 // Navigate to profile regardless of 200 or 201
                 navigate('/users/profile');
 
             } catch (err: any) {
+
+                if (axios.isAxiosError(err) && err.response?.status === 409) {
+                    console.warn('⚠️ User already exists, fetching existing profile...');
+                    navigate('/users/profile');
+                    return;
+                }
                 console.error('❌ Error syncing user:', err.message);
                 localStorage.removeItem(`@@auth0spajs@@::${import.meta.env.VITE_AUTH0_CLIENT_ID}::${import.meta.env.VITE_AUTH0_AUDIENCE}::openid profile email offline_access`);
 
