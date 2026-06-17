@@ -7,17 +7,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../../common/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import {
     Eye, EyeOff,
     Lock, Phone, User, Mail,
     CheckCircle2, Circle
 } from 'lucide-react';
+import { toast } from "sonner";
 import useTogglePassword from "../../hooks/useTogglePassword";
 import SocialAuth from "./SocialAuth";
+/**
+ * Sign up page component allows users to create a new account using email and password or social authentication.
+ *  It includes form validation for user input and provides feedback on password strength. 
+ * The component also handles the signup process by communicating with the Auth0 API and redirects users to the profile page upon successful signup.
+ * @returns JSX.Element - The rendered sign up page component
+ */
 function SignupPage() {
     const {
-        register, handleSubmit, setValue, watch, formState: {
+        register, handleSubmit, setValue, watch, setError, formState: {
             errors, isSubmitting, isValid
         }
     } = useForm<SignupFormData>({
@@ -32,18 +38,16 @@ function SignupPage() {
     const navigate = useNavigate();
 
     const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
-  const { loginWithRedirect, getAccessTokenSilently } = useAuth0();
-    const addUserUrl = `${baseUrl}/users`;
+    const { loginWithRedirect } = useAuth0();
     const watchedPass1 = watch("password", "");
     const { inputType: inputType1, togglePass: togglePassword1, isPasswordVisible: showPassword1 } = useTogglePassword();
-
-    const watchedPass2 = watch("password", "");
     const { inputType: inputType2, togglePass: togglePassword2, isPasswordVisible: showPassword2 } = useTogglePassword();
 
     const watchAcceptedTerm = watch("acceptedTerms");
     //format phone number
 
     const [prevPhone, setPrevPhone] = useState("");
+    const [checkingField, setCheckingField] = useState<"email" | "phone_number" | null>(null);
 
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const raw = e.target.value.replace(/\D/g, "");
@@ -64,6 +68,44 @@ function SignupPage() {
         setValue("phone_number", formatted, { shouldValidate: true });
     }
 
+    //check if email or phone number already exists in the database before submitting the form
+    const checkExistingFields = async (field: "email" | "phone_number", value: string) => {
+        if (!value) return;
+        setCheckingField(field);
+        try {
+            await axios.get(`${baseUrl}/users/check-existing`, {
+                params: { field, value }
+            }
+            );
+        } catch (err: any) {
+            console.error('Error checking existing fields:', err);
+            if (axios.isAxiosError(err) && err.response?.status === 409) {
+                if (field === "email") {
+                    setError("email", {
+                        type: "manual",
+                        message: "This email is already registered. Try signing in instead."
+                    }, { shouldFocus: true });
+                    toast.error(<span>
+                        Email already in use.{" "}
+                        <span
+                            className="underline cursor-pointer font-semibold"
+                            onClick={() => navigate("/signin")}
+                        >
+                            Sign in instead?
+                        </span>
+                    </span>)
+                } else {
+                    setError("phone_number", {
+                        type: "manual",
+                        message: 'Phone number is already registered. Please use a different one.'
+                    }, { shouldFocus: true });
+                    toast.error('Phone number is already in use. Please use a different one.');
+                }
+            }
+        } finally {
+            setCheckingField(null);
+        }
+    }
     //Password checker logic
     const passRequirements = [
         { label: "8+ characters", met: watchedPass1.length >= 8 },
@@ -71,23 +113,75 @@ function SignupPage() {
         { label: "A number", met: /[0-9]/.test(watchedPass1) },
         { label: "Special character", met: /[^A-Za-z0-9]/.test(watchedPass1) }
     ]
-
-    //reset the form after submitting the form
-
-    const handleResetForm = () => {
-        setValue('name', '');
-        setValue('email', '');
-        setValue('phone_number', '');
-        setValue('password', '');
-        setValue('confirm_password', '');
-        // setValue('errors', '');
-    }
-  
     const handleSignupSubmit = async (data: SignupFormData) => {
-   console.log("Submit sign up");
-   
-    }
+        console.log("Submit sign up");
 
+        try {
+            const signupResponse = await axios.post(
+                `https://${import.meta.env.VITE_AUTH0_DOMAIN}/dbconnections/signup`,
+                {
+                    client_id: import.meta.env.VITE_AUTH0_CLIENT_ID,
+                    email: data.email,
+                    password: data.password,
+                    connection: 'Username-Password-Authentication',
+                    user_metadata: {
+                        name: data.name,
+                        phone_number: data.phone_number
+                    }
+                }
+            );
+
+            if (signupResponse.status !== 200 && signupResponse.status !== 201) {
+                const error = signupResponse.data;
+                console.error('Auth0 signup failed:', error);
+                toast.error('Signup failed: ' + error.description);
+                return;
+            }
+
+            localStorage.clear();
+            sessionStorage.clear();
+            await loginWithRedirect({
+                authorizationParams: {
+                    login_hint: data.email,
+                    max_age: 0, // force to get the fresh token from Auth0
+                },
+                appState: {
+                    returnTo: '/users/profile',
+                    signupData: {
+                        name: data.name,
+                        phone_number: data.phone_number
+                    }
+                }
+            });
+
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response?.status === 409) {
+                const message = error.response.data.message || "";
+
+                if (message.includes("email")) {
+                    setError("email", { message: "This email is already registered." });
+                    toast.error(
+                        <span>
+                            Email already in use.{" "}
+                            <span
+                                className="underline cursor-pointer font-semibold"
+                                onClick={() => navigate("/signin")}
+                            >
+                                Sign in instead?
+                            </span>
+                        </span>
+                    );
+                } else if (message.includes("phone")) {
+                    setError("phone_number", {
+                        message: "This phone number is already in use."
+                    });
+                }
+                return;
+            }
+            toast.error("An error occurred during signup.");
+        }
+
+    }
 
     return (
         <section className="mx-4 pt-4">
@@ -121,6 +215,18 @@ function SignupPage() {
                         {...register('email')}
                         placeholder="you@example.com"
                         className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-lg border ${errors.email ? 'border-red-500' : 'border-text-muted/30'}`}
+                        disabled={checkingField === "email"}
+                        onBlur={
+                            (e) => {
+                                if (e.target.value.includes("@")) {
+                                    checkExistingFields("email", e.target.value);
+                                }
+                            }
+
+
+                        }
+
+
                     />
                     {errors.email && <p className="text-error-500 text-xs mt-1">{errors.email.message}</p>}
 
@@ -134,6 +240,18 @@ function SignupPage() {
                         {...register('phone_number')}
                         maxLength={14}
                         onChange={handlePhoneChange}
+                        disabled={checkingField === "phone_number"}
+                        onBlur={
+                            (e) => {
+                                const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+                                if (phoneRegex.test(e.target.value)) {
+                                    checkExistingFields("phone_number", e.target.value);
+                                }
+                            }
+                        }
+
+
                         placeholder="(000) 000-0000"
                         className={`text-xs bg-text-muted/10 w-full p-2 pl-8 rounded-lg border ${errors.phone_number ? 'border-red-500' : 'border-text-muted/30'}`}
                     />
