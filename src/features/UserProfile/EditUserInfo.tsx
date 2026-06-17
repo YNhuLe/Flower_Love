@@ -59,6 +59,9 @@ function EditUserInfo({ user,
         setPrevPhone(formatted);
         setValue("phone_number", formatted, { shouldValidate: true });
     }
+
+
+    //check if the phone number is already existing in the database
     const handleEditProfile = async (data: EditProfileData) => {
         try {
             await updateProfile(getAccessToken, {
@@ -69,6 +72,7 @@ function EditUserInfo({ user,
             toast.success("Successfully changed the profile.");
             onClose();
         } catch (error: any) {
+            toast.error("The phone number is already in use. Please try again.");
             console.log(error)
         }
     }
@@ -106,7 +110,6 @@ function EditUserInfo({ user,
                     <Mail className="w-4 h-4 absolute m-2 text-text-muted/50" />
 
                     <input
-                        // {...register('email')}
                         value={user?.email || ""}
                         disabled
                         placeholder="you@example.com"
