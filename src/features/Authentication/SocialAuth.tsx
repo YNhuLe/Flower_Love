@@ -1,6 +1,3 @@
-import { signInWithPopup, getRedirectResult, onAuthStateChanged } from "firebase/auth";
-import { auth, googleProvider } from "../../firebase/config";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 const GoogleIcon = () => (
@@ -20,24 +17,30 @@ const FacebookIcon = () => (
 );
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
-function SocialAuth(){
-    const {loginWithRedirect, user, isAuthenticated, getAccessTokenSilently} = useAuth0();
+/**
+ * sign in with google or facebook using auth0. The user will be redirected to the auth0 login page and then back to the app. The user information will be stored in the auth0 user object and can be accessed using the useAuth0 hook.
+ *  The user information can also be sent to the backend to create a new user in the database if it doesn't exist already.
+ * @returns JSX.Element
+ */
+function SocialAuth() {
+    const { loginWithRedirect, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const navigate = useNavigate();
-    const handleSignupWithGoogle = async () => { await loginWithRedirect({
-        authorizationParams: {
-            connection: "google-oauth2",
-        }
-    })
+    const handleSignupWithGoogle = async () => {
+        await loginWithRedirect({
+            authorizationParams: {
+                connection: "google-oauth2",
+            }
+        })
 
- }
+    }
 
- const handleSignUpWithFacebook = async ()=>{
-    await loginWithRedirect({
-        authorizationParams: {
-            connection: "facebook"
-        }
-    })
- }
+    const handleSignUpWithFacebook = async () => {
+        await loginWithRedirect({
+            authorizationParams: {
+                connection: "facebook"
+            }
+        })
+    }
     const socialButtons = [{ name: "Google", icon: <GoogleIcon /> },
     { name: "Facebook", icon: <FacebookIcon /> },];
     return (<div className="flex gap-2 w-full p-4 justify-center items-center my-4">
