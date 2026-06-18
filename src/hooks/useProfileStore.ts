@@ -1,11 +1,15 @@
 import { create } from "zustand";
 import axios from "axios";
-interface UserProfile {
-  id: number;
-  uid: string;
-  name: string;
-  phone_number: string;
-}
+import type { UserProfile } from "../types/user";
+
+
+/** Zustand store for managing user profile state 
+ * This store includes the user's profile information and functions to set, clear, load, and update the profile. 
+ * The loadProfile function retrieves the user's profile from the backend using an access token for authentication, while the updateProfile function allows updating the user's profile information in the backend and updates the local state accordingly.
+ *  Both functions handle errors by logging them to the console.
+ * 
+ * 
+*/
 interface UserProfileState {
   profile: UserProfile | null;
   setProfile: (profile: UserProfile | null) => void;
@@ -19,8 +23,8 @@ interface UserProfileState {
 const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 const useProfileStore = create<UserProfileState>((set, get) => ({
   profile: null,
-  setProfile: (profile) => set({profile}),
-  clearProfile: () => set({profile: null}),
+  setProfile: (profile) => set({ profile }),
+  clearProfile: () => set({ profile: null }),
   loadProfile: async (getAccessToken) => {
     try {
       const token = await getAccessToken();
@@ -35,12 +39,13 @@ const useProfileStore = create<UserProfileState>((set, get) => ({
   updateProfile: async (getAccessToken, data) => {
     try {
       const token = await getAccessToken();
-      await axios.post(`${baseUrl}/users/me`, data, {
+      await axios.patch(`${baseUrl}/users/me`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       set({ profile: { ...get().profile, ...data } as UserProfile });
     } catch (error: any) {
       console.log("failed to update user profile ", error);
+      throw error;
     }
   },
 }));
