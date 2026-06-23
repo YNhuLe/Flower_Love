@@ -12,6 +12,7 @@ import { useNavigate, Link } from "react-router-dom";
 import useCartStore from "../hooks/useCartStore";
 import ChatbotWindow from "../features/Chatbot/ChatbotWindow";
 import axios from "axios";
+import FeedbackThumb from "../common/FeedbackThumb";
 function PlantQuizResultPage() {
   const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
   const cloud_url = import.meta.env.CLOUDINARY_URL || "https://res.cloudinary.com/dvdr5bwc7/image/upload/c_fill,f_auto,q_auto";
@@ -85,19 +86,19 @@ function PlantQuizResultPage() {
     })
     navigate("/products/cart")
   }
-  const isOutOfStock = recommendations[0].stock_quantity <= 0;
-  const firstRecom = recommendations[0];
-  let formatArr: string[] = [];
-  if (Array.isArray(firstRecom.benefits)) {
-    formatArr = firstRecom.benefits;
-  } else if (typeof firstRecom.benefits[0] === 'string') {
-    try {
-      formatArr = JSON.parse(firstRecom.benefits);
-    } catch (error: any) {
-      console.log("Error: Could not parse benefit data.", error);
-      formatArr = [];
-    }
-  }
+
+
+  // let formatArr: string[] = [];
+  // if (Array.isArray(firstRecom.benefits)) {
+  //   formatArr = firstRecom.benefits;
+  // } else if (typeof firstRecom.benefits[0] === 'string') {
+  //   try {
+  //     formatArr = JSON.parse(firstRecom.benefits);
+  //   } catch (error: any) {
+  //     console.log("Error: Could not parse benefit data.", error);
+  //     formatArr = [];
+  //   }
+  // }
 
   const gradients = [
     "from-green-500 via-emerald-600 to-teal-700",
@@ -111,12 +112,42 @@ function PlantQuizResultPage() {
   const selectedGradient = useMemo(() => randomGradient, []);
   // console.log(firstRecom.sizes[0].discount_percentage);
 
+  if (!recommendations || recommendations.length === 0) {
+    return <div>Loading your recommendations...</div>
+  }
 
+  const firstRecom = recommendations[0];
+  const isOutOfStock = firstRecom.stock_quantity <= 0;
 
+  let formatArr: string[] = [];
+  if (Array.isArray(firstRecom.benefits)) {
+    formatArr = firstRecom.benefits;
+  } else if (typeof firstRecom.benefits[0] === 'string') {
+    try {
+      formatArr = JSON.parse(firstRecom.benefits);
+    } catch (error: any) {
+      console.log("Error: Could not parse benefit data.", error);
+      formatArr = [];
+    }
+  }
 
+  const [vote, setVote] = useState<"up" | "down" | null>(null);
+
+  const submitFeedback = async (value: "up" | "down") => {
+    setVote(value);
+    try {
+      await axios.post(`${baseUrl}/api/recommendation/feedback`, {
+        session_id: sessionId,
+        plant_id: firstRecom.id,
+        feedback: value === "up" ? 1 : -1,
+      });
+    } catch (err) {
+      console.error("Failed to save feedback", err);
+    }
+  };
   return (
     <section>
-    {/* if(!recommendations || recommendations.length === 0){
+      {/* if(!recommendations || recommendations.length === 0){
     <div> Loading the recommendations...</div>
     } */}
       <BreadCrumbs />
@@ -205,10 +236,19 @@ function PlantQuizResultPage() {
               ))
             }
           </div>
-          <div className="px-4">
+          <div className="flex flex-row px-1">
+            {sessionId && (
+              <div className="flex items-center gap-2 mx-4 mt-2">
+                <span className="text-[0.65rem] text-text-muted">Helpful?</span>
+                <FeedbackThumb feedback="up" selected={vote === "up"} disabled={vote !== null} onClick={() => submitFeedback("up")} />
+                <FeedbackThumb feedback="down" selected={vote === "down"} disabled={vote !== null} onClick={() => submitFeedback("down")} />
+              </div>
+            )}
+
+
             <Button btnType="add_to_cart" onClick={handleAddToCart} disabled={isOutOfStock}></Button>
-            
-            </div>
+
+          </div>
         </article>
 
         <article className="bg-text-inverse h-fit m-4 rounded-2xl overflow-hidden shadow-lg pb-6">
