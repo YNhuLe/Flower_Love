@@ -2,14 +2,14 @@ import { create } from "zustand";
 import axios from "axios";
 import type { UserProfile } from "../types/user";
 
-
-/** Zustand store for managing user profile state 
- * This store includes the user's profile information and functions to set, clear, load, and update the profile. 
+/** Zustand store for managing user profile state
+ * This store includes the user's profile information and functions to set, clear, load, and update the profile.
  * The loadProfile function retrieves the user's profile from the backend using an access token for authentication, while the updateProfile function allows updating the user's profile information in the backend and updates the local state accordingly.
  *  Both functions handle errors by logging them to the console.
- * 
- * 
-*/
+ *
+ * @returns UserProfileState - An object containing the user's profile and functions to manage it.
+ *
+ */
 interface UserProfileState {
   profile: UserProfile | null;
   setProfile: (profile: UserProfile | null) => void;
