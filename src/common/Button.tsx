@@ -2,11 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { ReactNode } from "react";
 import { ShoppingCart } from "lucide-react";
 import {
-  Share2,
-  Droplets,
-  Sun,
-  Thermometer,
-  Wind,
   Download,
   Sparkles,
   ArrowRight,
@@ -25,9 +20,8 @@ interface ButtonProps {
   | "export"
   | "place_order"
   | "create_account"
-
   | "sign_in"
-  ;
+  | "add_to_cart_recommendation";
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -46,7 +40,10 @@ const styleMap: Record<string, string> = {
   customize: "p-1 text-xs px-4 py-2 rounded-2xl text-surface-base bg-cart-500 hover:bg-cart-700 transition-all duration-300 absolute bottom-[1rem] left-[1rem]",
   shop_now: "text-xs px-4 py-2 rounded-2xl text-surface-base bg-brand-500 hover:bg-brand-700 transition-all duration-300  absolute bottom-[1rem] left-[1rem]",
   explore: "text-xs rounded-2xl text-success-500",
-  view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500", add_to_cart: "p-1 w-full rounded-2xl px-[37px] text-xs text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 ",
+  view_all: "text-xs rounded-2xl text-brand-700 hover:bg-success-500 transition-all duration-300 hover:text-brand-100 hover:bg-success-500",
+  add_to_cart: "p-1 w-[calc(100% - 1rem)] rounded-2xl px-[1rem] text-[.75rem] text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 ",
+  add_to_cart_recommendation:"p-1 w-[calc(100% - 1rem)] rounded-2xl px-[.75rem] text-[.65rem] text-brand-100 bg-brand-700 border border-brand-100 hover:bg-surface-base hover:border-brand-700 hover:text-brand-700 transition-all duration-300 text-brand-100 ",
+
   quick_view: "p-1 text-xs px-4 rounded-2xl text-brand-700 bg-brand-100 border rounded-xl hover:bg-brand-700 hover:text-brand-100 transition-all duration-300 ",
   disabled: "opacity-50 cursor-not-allowed pointer-events-none bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white",
   plant_quiz: "p-2 text-xxs px-4 rounded-lg text-brand-100 text-center bg-gradient-to-r from-cart-700 to-amber-600 hover:bg-amber-800 transition-all duration-300",
@@ -73,9 +70,9 @@ const labelMap: Record<string, string> = {
   learn_more: "Learn More 🌻",
   shop_now: "Shop Now",
   customize: "Build Now",
-
   view_all: "View All Plants",
   add_to_cart: "Add to Cart",
+  add_to_cart_recommendation:"Add to Cart",
   quick_view: "Quick View",
   plant_quiz: "Try AI plant Finder",
   AI_analyze: "Find My Perfect Plant",
@@ -98,7 +95,7 @@ const iconMap: Record<string, ReactNode> = {
   new_analysis: <ArrowLeft className="w-5 h-5 text-text-muted transition-transform duration-200 hover:-translate-x-1" />,
   start_shopping: <ShoppingCart className="w-5 h-5" />,
   process_checkout: <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />,
-  export: <  Download className="w-4 h-4" />,
+  export: <Download className="w-4 h-4" />,
   place_order: < Lock className="w-4 h-4" />,
   create_account: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />,
   sign_in: <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -106,18 +103,19 @@ const iconMap: Record<string, ReactNode> = {
 const urlMap: Record<string, string> = {
   add: "/add-item",
   learn_more: "/products",
-  signup: "/signup",
+  // signup: "/signup",
   customize: "/customize",
   shop_now: "/shop",
   explore: "/category",
   view_all: "/view_all",
   add_to_cart: "/products/cart",
+  add_to_cart_recommendation: "/products/cart",
   plant_quiz: "/plant_quiz",
   AI_analyze: "/products/quiz/quiz_result",
   start_shopping: "/products",
   process_checkout: "/checkout",
   continue_shopping: "/products",
-  create_account: "/signup",
+  create_account: "/users/profile",
   sign_in: "/signin"
 }
 
@@ -142,7 +140,6 @@ function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: Bu
       case "start_shopping":
       case "new_analysis":
       case "plant_quiz":
-
       case "export":
 
         return (
