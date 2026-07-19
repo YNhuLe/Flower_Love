@@ -4,14 +4,14 @@ import { useEffect, useState, useRef } from "react";
 import { FaSmile } from "react-icons/fa";
 import axios from "axios";
 import { useQuiz } from "../../context/QuizContext";
-
+import ReactMarkdown from "react-markdown";
 interface Messages {
     role: "user" | "bot";
     content: string;
 }
 
 interface ChatbotWindowProps {
-    sessionId: number;
+    quizSessionId: number;
     userId: number;
 
 }
@@ -19,7 +19,13 @@ interface QuickAction {
     label: string;
     query: string;
 }
-function ChatbotWindow({ sessionId, userId }: ChatbotWindowProps) {
+/**
+ * 
+ * @param param0 quizSessionId, userId
+ * @returns chatbot window component that allows user to chat with the bot and get recommendations based on their quiz results.
+ *      It also provides quick actions based on the bot's response.
+ */
+function ChatbotWindow({ quizSessionId, userId }: ChatbotWindowProps) {
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +80,22 @@ function ChatbotWindow({ sessionId, userId }: ChatbotWindowProps) {
             handleSendMessage();
         }
     };
+
+    const [chatSessionId, setChatSessionId] = useState<number | null>(null); // <-- new: the real chat_sessions.id, created lazily
+    // ...keep all your other existing state as-is
+
+    const ensureChatSession = async (): Promise<number> => {
+        if (chatSessionId) return chatSessionId;
+
+        const result = await axios.post(`${baseUrl}/chat-sessions`, {
+            user_id: userId,
+            quiz_sessions_id: quizSessionId,
+        });
+        const newId = result.data.id;
+        setChatSessionId(newId);
+        return newId;
+    };
+
     const handleSendMessage = async (message?: string) => {
 
 
@@ -86,8 +108,9 @@ function ChatbotWindow({ sessionId, userId }: ChatbotWindowProps) {
         setIsLoading(true);
         //send the message to backend for processing and get the response
         try {
+            const activeChatSessionId = await ensureChatSession();
             const result = await axios.post(`${baseUrl}/chat`, {
-                session_id: sessionId,
+                session_id: activeChatSessionId,
                 message: userMessage
             });
 
@@ -226,13 +249,20 @@ function ChatbotWindow({ sessionId, userId }: ChatbotWindowProps) {
                                         key={i}
                                         className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                                     >
-                                        <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm leading-relaxed
-                                                ${msg.role === "user"
-                                                ? "bg-success-700 text-text-inverse rounded-tr-sm"
-                                                : "bg-text-primary/40 text-text-inverse rounded-tl-sm"
-                                            }`}
+
+
+                                        <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm leading-relaxed prose prose-invert prose-sm
+                                            ${msg.role === "user" ? "bg-success-700 text-text-inverse rounded-tr-sm" : "bg-text-primary/40 text-text-inverse rounded-tl-sm"}`}
                                         >
-                                            {msg.content}
+                                            <ReactMarkdown
+                                                components={{
+                                                    a: ({ node, ...props }) => (
+                                                        <a {...props} target="_blank" rel="noopener noreferrer" className="underline text-success-300" />
+                                                    )
+                                                }}
+                                            >
+                                                {msg.content}
+                                            </ReactMarkdown>
                                         </div>
                                     </div>
                                 ))}
