@@ -4,6 +4,10 @@ import useCartStore from "../../hooks/useCartStore";
 import { useState } from "react";
 
 
+/**
+ * 
+ * @returns A JSX element representing the order summary component
+ */
 function OrderSummary() {
 
     const [typedCode, setTypedCode] = useState("");
@@ -18,13 +22,13 @@ function OrderSummary() {
     const shippingFee = useCartStore(state => state.shippingFee)
     const saving = useCartStore(s => s.getDiscountSave(discountRate));
 
-    const [applyDiscountCode, setApplyDiscountCode] = useState("");
+    const [applyDiscountCode, setApplyDiscountCode] = useState<string | null>(null);
     const discountSave = useCartStore(s => s.getDiscountSave(discountRate));
     const isDisabled = useCartStore((state) => state.isApplyDisabled);
     const handleDiscountApply = (() => {
         applyDiscount(typedCode.trim().toLocaleUpperCase());
         setTypedCode("");
-    })
+    });
 
 
     return (
@@ -55,6 +59,7 @@ function OrderSummary() {
                             if (isDisabled(typedCode)) { setApplyDiscountCode("") }
                         }}
 
+                        onKeyDown={(e) => e.key === "Enter" && handleDiscountApply()}
                     />
 
                     {
@@ -64,7 +69,7 @@ function OrderSummary() {
 
 
                             <p className="text-error-500 text-xs mt-1 text-center">Invalid discount code</p>
-                            : <p className="text-success-500 text-xs text-center mt-1"> {typedCode}</p>
+                            : <p className="text-success-500 text-xs text-center mt-1"> {typedCode.trim().toLocaleUpperCase()} -{(discountRate) * 100}%</p>
 
 
                     }
@@ -81,18 +86,21 @@ function OrderSummary() {
 
                 <div className="flex flex-col">
                     <p>Subtotal: </p>
+                    <p className="text-success-500">Discount: ({appliedCode})</p>
                     <p>Shipping</p>
                     <p>Tax (5%)</p>
+
                 </div>
+
                 <div className="flex flex-col">
                     <p className="text-text-primary/60">${subTotal.toFixed(2)}</p>
-
+                    <p className=" text-success-500">-${discountSave.toFixed(2)}</p>
                     <p className="text-sm">
                         {(() => {
                             const fee = shippingFee();
 
                             if (fee === 0) {
-                                return <span className="text-success-300">FREE</span>;
+                                return <span className="text-success-500">FREE</span>;
                             }
 
                             if (fee === null) {
@@ -116,11 +124,11 @@ function OrderSummary() {
 
             </div>
 
-            <div className="flex gap-2 justify-between mb-6">
+            {/* <div className="flex gap-2 justify-between mb-6">
 
                 <p className="text-xs">You saved: </p>
                 <p className="text-xs text-success-500">${discountSave.toFixed(2)}</p>
-            </div>
+            </div> */}
             <Button btnType="process_checkout"
 
 
