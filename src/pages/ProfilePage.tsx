@@ -193,10 +193,10 @@ function ProfilePage() {
                     <section>
                         {sections[selectedCate]}
                         {showEditProfileModal && <div className="fixed inset-0 bg-text-muted/50 flex items-center justify-center z-50 p-4">
-                            <EditUserInfo 
-                            user={profile}
-                            getAccessToken={getAccessTokenSilently}
-                            onClose={() => setShowEditProfileModal(false)}
+                            <EditUserInfo
+                                user={profile}
+                                getAccessToken={getAccessTokenSilently}
+                                onClose={() => setShowEditProfileModal(false)}
                             />
                         </div>}
                     </section>
