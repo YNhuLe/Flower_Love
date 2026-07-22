@@ -94,6 +94,7 @@ interface NewProductProps {
   isonsale: boolean;
   category_id: number;
   benefits: string[];
+  slug: string;
 }
 
 interface PlantSizeProps {
@@ -189,6 +190,7 @@ interface PlantRecommendation {
   benefits: string[];
   sizes: PlantSizeProps[];
   stock_quantity: number;
+  slug: string;
 }
 
 export type {
