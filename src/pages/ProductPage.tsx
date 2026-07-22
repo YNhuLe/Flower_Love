@@ -9,6 +9,11 @@ import CategorySection from "../features/Category/CategorySection";
 import PlantQuiz from "../features/PlantQuiz/PlantQuiz";
 import NewProductSection from "../features/NewProducts/NewProductSection";
 import SearchBar from "../common/SearchBar";
+import Footer from "../common/Footer";
+/**
+ * ProductPage component
+ * @returns {JSX.Element} - The rendered ProductPage component.
+ */
 function ProductPage() {
   const [giftItems, setGiftItems] = useState<GiftItemProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,6 +47,7 @@ function ProductPage() {
       <CategorySection />
       <PlantQuiz />
       <NewProductSection />
+      <Footer />
     </>
   );
 }
