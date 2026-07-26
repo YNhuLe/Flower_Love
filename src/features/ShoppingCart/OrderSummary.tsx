@@ -2,8 +2,8 @@ import { Tag, Truck, Shield, Gift } from "lucide-react";
 import Button from "../../common/Button";
 import useCartStore from "../../hooks/useCartStore";
 import { useState } from "react";
-
-
+import { Badge } from "../../components/ui/badge";
+import { X } from "lucide-react";
 /**
  * 
  * @returns A JSX element representing the order summary component
@@ -30,7 +30,10 @@ function OrderSummary() {
         setTypedCode("");
     });
 
+    const removePromoCode = () => {
+        setApplyDiscountCode(null);
 
+    }
     return (
         <section className="bg-surface-raised/80 p-4 m-4 rounded-xl ">
 
@@ -43,40 +46,63 @@ function OrderSummary() {
                 </p>
             </div>
 
-            <div className="flex gap-2">
-                <div className="flex flex-col w-full">
-                    <input
-                        className="p-1 rounded-xl bg-text-muted/30 w-full text-xs pl-2 h-9"
-                        placeholder="Enter code"
-
-                        value={typedCode}
-
-                        onChange={(e) => {
-
-
-                            const value = e.target.value;
-                            setTypedCode(value)
-                            if (isDisabled(typedCode)) { setApplyDiscountCode("") }
-                        }}
-
-                        onKeyDown={(e) => e.key === "Enter" && handleDiscountApply()}
-                    />
-
-                    {
-                        typedCode && !["PLANT10", "WELCOME20"].includes(typedCode.trim().toUpperCase()) ?
 
 
 
+            {
+                appliedCode ? (
+                    <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center gap-2">
+                            <Badge className="bg-green-100 text-green-700">
+                                {appliedCode.toUpperCase()}
+                            </Badge>å
+                            <span className="text-green-700 text-sm">
+                                -{(discountRate * 100).toFixed(0)}% off
+                            </span>
+                        </div>
+                        <button
 
-                            <p className="text-error-500 text-xs mt-1 text-center">Invalid discount code</p>
-                            : <p className="text-success-500 text-xs text-center mt-1"> {typedCode.trim().toLocaleUpperCase()} -{(discountRate) * 100}%</p>
+
+                            onClick={removePromoCode}
+                            className="h-6 w-6 p-0 text-green-700 hover:text-green-800"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>) : (
+                    <div className="flex items-center gap-2 mb-2">
+                        {/* <Badge className="bg-green-100 text-green-700">
+                            {appliedCode.toUpperCase()}
+                        </Badge>
+                        <span className="text-green-700 text-sm">
+                            -{(discountRate * 100).toFixed(0)}% off
+                        </span> */}
+
+                        <div className="flex flex-col w-full">
+                            <input
+                                className="p-1 rounded-xl bg-text-muted/30 w-full text-xs pl-2 h-9"
+                                placeholder="Enter code"
+
+                                value={typedCode}
+
+                                onChange={(e) => {
 
 
-                    }
+                                    const value = e.target.value;
+                                    setTypedCode(value)
+                                    if (isDisabled(typedCode)) { setApplyDiscountCode("") }
+                                }}
 
-                </div>
-                <Button btnType="promo_apply" onClick={handleDiscountApply} disabled={isDisabled(typedCode)} />
-            </div>
+                                onKeyDown={(e) => e.key === "Enter" && handleDiscountApply()}
+                            />
+
+
+
+
+                        </div>
+
+                        <Button btnType="promo_apply" onClick={handleDiscountApply} disabled={isDisabled(typedCode)} /></div>
+                )}
+
             <p className="text-xs mt-2 mb-6">Try: PLANT10 or WELCOME20</p>
             <hr className="border-t border-gray-300" />
 
@@ -124,11 +150,7 @@ function OrderSummary() {
 
             </div>
 
-            {/* <div className="flex gap-2 justify-between mb-6">
-
-                <p className="text-xs">You saved: </p>
-                <p className="text-xs text-success-500">${discountSave.toFixed(2)}</p>
-            </div> */}
+     
             <Button btnType="process_checkout"
 
 
