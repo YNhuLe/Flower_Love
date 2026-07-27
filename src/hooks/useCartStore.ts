@@ -27,7 +27,9 @@ interface CartState {
   getDiscountRate: (code: string) => number;
   discountCode: string;
   setDiscountCode: (code: string) => void;
-isApplyDisabled: (discountCode: string) => boolean;
+  discountRate: number;
+  setDiscountrate: (rate: number) => void;
+  isApplyDisabled: (discountCode: string) => boolean;
   getTotal: (discountCode: string) => number;
   getDiscountSave: (discountRate: number) => number;
 }
@@ -105,6 +107,8 @@ const useCartStore = create<CartState>((set, get) => ({
 
   discountCode: "",
   setDiscountCode: (code) => set({ discountCode: code }),
+  discountRate: 0,
+  setDiscountrate: (rate) => set({ discountRate: rate }),
   getDiscountRate: (code: string) => {
     const normalized = code.trim().toUpperCase();
     if (normalized === "PLANT10") return 0.1;

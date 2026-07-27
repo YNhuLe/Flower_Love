@@ -16,6 +16,7 @@ function OrderSummary() {
     const applyDiscount = useCartStore(s => s.setDiscountCode);
 
     const discountRate = useCartStore(state => state.getDiscountRate(appliedCode))
+    const setDiscountRate = useCartStore(state => state.setDiscountrate)
     const total = useCartStore((state) => state.getTotal(appliedCode)
     );
     const subTotal = useCartStore((state) => state.totalSpend())
@@ -32,6 +33,8 @@ function OrderSummary() {
 
     const removePromoCode = () => {
         setApplyDiscountCode(null);
+        setDiscountRate(0);
+        applyDiscount("");
 
     }
     return (
@@ -55,7 +58,7 @@ function OrderSummary() {
                         <div className="flex items-center gap-2">
                             <Badge className="bg-green-100 text-green-700">
                                 {appliedCode.toUpperCase()}
-                            </Badge>å
+                            </Badge>
                             <span className="text-green-700 text-sm">
                                 -{(discountRate * 100).toFixed(0)}% off
                             </span>
@@ -70,12 +73,7 @@ function OrderSummary() {
                         </button>
                     </div>) : (
                     <div className="flex items-center gap-2 mb-2">
-                        {/* <Badge className="bg-green-100 text-green-700">
-                            {appliedCode.toUpperCase()}
-                        </Badge>
-                        <span className="text-green-700 text-sm">
-                            -{(discountRate * 100).toFixed(0)}% off
-                        </span> */}
+
 
                         <div className="flex flex-col w-full">
                             <input
@@ -112,7 +110,11 @@ function OrderSummary() {
 
                 <div className="flex flex-col">
                     <p>Subtotal: </p>
-                    <p className="text-success-500">Discount: ({appliedCode})</p>
+
+                    {
+                        appliedCode && (<p className="text-success-500 text-sm">Discount: ({appliedCode})</p>)
+                    }
+
                     <p>Shipping</p>
                     <p>Tax (5%)</p>
 
@@ -120,7 +122,10 @@ function OrderSummary() {
 
                 <div className="flex flex-col">
                     <p className="text-text-primary/60">${subTotal.toFixed(2)}</p>
-                    <p className=" text-success-500">-${discountSave.toFixed(2)}</p>
+                    {
+                        appliedCode && (<p className=" text-success-500 text-sm">-${discountSave.toFixed(2)}</p>)
+                    }
+
                     <p className="text-sm">
                         {(() => {
                             const fee = shippingFee();
@@ -150,7 +155,7 @@ function OrderSummary() {
 
             </div>
 
-     
+
             <Button btnType="process_checkout"
 
 
