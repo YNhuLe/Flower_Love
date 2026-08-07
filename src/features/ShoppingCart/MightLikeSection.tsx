@@ -5,7 +5,10 @@ import useAllPlants from "../../hooks/useAllPlants";
 import { PlantWithSize } from "../../types/types";
 import { Link } from "react-router-dom";
 
-
+/**
+ * 
+ * @returns Section with plants that recommended to customer base on products that they buying
+ */
 
 
 function MightLikeSection() {
@@ -36,7 +39,7 @@ function MightLikeSection() {
         {
           randomPlants.map((random, id) => (
             <div key={id} className="rounded-xl w-full mb-4">
-<Link to={`/products/${random.id}`} >
+              <Link to={`/products/${random.slug}`} >
               <img className="rounded-2xl w-full object-cover h-32 bg-text-muted/10 p-2"
                 src={`${cloud_url}/${random.image_url[0]}`} alt={random.common_name} /> </Link>
               <p className="mt-2 text-xxs">{random.common_name}</p>
