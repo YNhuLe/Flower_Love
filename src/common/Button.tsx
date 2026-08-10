@@ -21,7 +21,8 @@ interface ButtonProps {
   | "place_order"
   | "create_account"
   | "sign_in"
-  | "add_to_cart_recommendation";
+  | "add_to_cart_recommendation"
+  | 'subscribe';
   url?: string;
   price?: string | number;
   onSubmit?: () => void;
@@ -58,7 +59,8 @@ const styleMap: Record<string, string> = {
   place_order: "text-text-inverse bg-icon-amber-600 rounded-md hover:bg-amber-icon-800 p-2 cursor-pointer w-[calc(100%-2rem)] my-8 mx-auto",
   export: "p-2 rounded rounded-md border border-1 mt-4 text-xs",
   create_account: "p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4",
-  sign_in: "p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4"
+  sign_in: "p-2 rounded-md text-xs bg-success-800 text-text-inverse w-full group my-4",
+  subscribe:"p-2 rounded-md text-xs text-success-500 bg-text-inverse w-full group my-4"
 }
 
 const labelMap: Record<string, string> = {
@@ -85,7 +87,8 @@ const labelMap: Record<string, string> = {
   export: "Export",
   place_order: "Place Order",
   create_account: "Create Account",
-  sign_in: "Sign In"
+  sign_in: "Sign In",
+  subscribe: "Subscribe"
 }
 
 const iconMap: Record<string, ReactNode> = {
@@ -116,7 +119,8 @@ const urlMap: Record<string, string> = {
   process_checkout: "/checkout",
   continue_shopping: "/products",
   create_account: "/users/profile",
-  sign_in: "/signin"
+  sign_in: "/signin",
+  subscribe: "/subscribe"
 }
 
 function Button({ btnType = "add", url, price, onSubmit, onClick, disabled }: ButtonProps) {
