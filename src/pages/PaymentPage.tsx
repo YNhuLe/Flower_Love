@@ -23,7 +23,7 @@ function PaymentPage() {
           {amountLeft > 0
             ? <p className="m-4 text-xs p-4 bg-amber-300/30 rounded-xl w-fit">"You're <span className="text-error-500">${amountLeft.toFixed(2)}</span> away from <span className="text-success-300">FREE</span> shipping"</p>
             : <p>"You unlocked FREE shipping!"</p>}</>
-    :
+          :
           <>
             {shippingFee > 75 ? <p className="flex gap-4 items-center p-2 bg-success-300 mt-8 mx-4 text-text-inverse rounded-2xl"><Truck className="w-8 h-8" />Congratulations! You qualify for FREE shipping! 🎉</p> : ""
             }
@@ -48,7 +48,7 @@ function PaymentPage() {
       }
 
 
-      <OrderSummary />
+      <OrderSummary isCheckout={false} />
       <Footer />
     </section>
   )
