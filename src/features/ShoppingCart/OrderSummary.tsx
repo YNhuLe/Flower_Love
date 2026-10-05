@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Badge } from "../../components/ui/badge";
 import { X } from "lucide-react";
 import ItemsInCart from "./ItemsInCart";
+import {Separator} from "../../components/ui/separator";
 /**
  * @params isCheckout: boolean - indicates whether the component is being rendered in the checkout page or not
  * @description This component displays the order summary for the shopping cart. It shows the subtotal, discount, shipping fee, tax, and total amount for the order. 
@@ -53,7 +54,7 @@ function OrderSummary({ isCheckout }: { isCheckout: boolean }) {
                         <ItemsInCart isCheckout={true} />
                     </section> :
 
-                    <section className="bg-surface-raised/80 p-4 m-4 rounded-xl ">
+                    <section className="bg-surface-raised/80 p-4 m-4 rounded-xl z-10">
 
                         <h1>Order Summary</h1>
                         <div className="flex gap-2 items-center mt-6 mb-2 ">
@@ -113,7 +114,7 @@ function OrderSummary({ isCheckout }: { isCheckout: boolean }) {
                             )}
 
                         <p className="text-xs mt-2 mb-6">Try: PLANT10 or WELCOME20</p>
-                        <hr className="border-t border-gray-300" />
+                        <Separator orientation="horizontal" />
 
 
                         <div className="my-6 flex justify-between ">
@@ -159,7 +160,7 @@ function OrderSummary({ isCheckout }: { isCheckout: boolean }) {
                             </div>
                         </div>
 
-                        <hr className="border-t border-gray-300" />
+                        <Separator orientation="horizontal" />
                         <div className="flex justify-between my-6 mb-2">
                             <p>Total: </p>
                             <p>${total.toFixed(2)}</p>
@@ -172,7 +173,7 @@ function OrderSummary({ isCheckout }: { isCheckout: boolean }) {
 
                         />
                         <Button btnType="continue_shopping" />
-                        <hr className="border-t border-gray-300" />
+                        <Separator orientation="horizontal"  />
                         <div className="mt-8">
 
                             <div className="flex gap-2 m-2">
