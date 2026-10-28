@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Phone, Twitter, MapPin, Mail } from 'lucide-react'
 import { Separator } from "../components/ui/separator";
+import SubscribeComponent from "../components/SubscribeComponent";
 const date = new Date().getFullYear();
 
 
@@ -44,6 +45,7 @@ function Footer() {
 
   return (
     <footer className="p-4 bg-gray-900">
+      <SubscribeComponent />
       <a href="/">
         <div className="flex flex-row items-center gap-4 justify-left mt-16 mb-4 ultra:mb-12">
 
