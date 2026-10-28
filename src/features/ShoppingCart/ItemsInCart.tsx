@@ -3,9 +3,10 @@ import { useState } from "react";
 import QuantitySelector from "../../common/QuantitySelector";
 import useCartStore from "../../hooks/useCartStore";
 import StockDisplay from "../../common/StockDisplay";
-
+import { Separator } from "../../components/ui/separator";
 /**
- *  
+ *  @params isCheckout: boolean (optional) - indicates whether the component is being rendered in the checkout page or not
+ *  @description This component displays the items in the shopping cart, along with their details such as name, price, quantity, and size. It also allows users to update the quantity of items or remove them from the cart. If rendered in the checkout page, it shows a summary of the order including subtotal, discount, shipping fee, tax, and total amount.
  * @returns A JSX element representing the items in the shopping cart
  */
 function ItemsInCart({ isCheckout }: { isCheckout?: boolean }) {
@@ -29,13 +30,10 @@ function ItemsInCart({ isCheckout }: { isCheckout?: boolean }) {
 
     return (
         <>
-
-
-
             {
                 isCheckout ?
-                    <div className="rounded-md bg-surface-card/10 p-4 shadow-md w-auto m-4">
-
+                    <div className="rounded-md bg-surface-card p-4 shadow-xl w-auto m-4">
+                        <h1>Order Summary</h1>
                         {
                             items.map((item) => (
 
@@ -62,7 +60,7 @@ function ItemsInCart({ isCheckout }: { isCheckout?: boolean }) {
                                 </>
                             ))
                         }
-                        <hr className="border-t border-gray-300" />
+                        <Separator orientation="horizontal" />
                         <div className="my-6 flex justify-between ">
 
 
@@ -106,13 +104,13 @@ function ItemsInCart({ isCheckout }: { isCheckout?: boolean }) {
                             </div>
                         </div>
 
-                        <hr className="border-t border-gray-300" />
-                        <div className="flex justify-between my-6 mb-2">
+                        <Separator orientation="horizontal"/>
+                        <div className="flex justify-between my-6">
                             <p>Total: </p>
                             <p>${total.toFixed(2)}</p>
 
                         </div>
-
+                        <Separator orientation="horizontal"/>
                         <div className="mt-8">
 
                             <div className="flex gap-2 m-2">
