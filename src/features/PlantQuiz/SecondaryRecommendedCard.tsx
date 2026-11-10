@@ -11,6 +11,7 @@ import Button from '../../common/Button';
  * 
  * 
  * @param secondRecom - The plant recommendation data
+ * @param sessionId - The session ID for the quiz
  * @returns A JSX element representing the secondary recommended plant card
  */
 function SecondaryRecommendedCard({ secondRecom, sessionId }: { secondRecom: PlantRecommendation, sessionId: number | null }) {
@@ -26,7 +27,7 @@ function SecondaryRecommendedCard({ secondRecom, sessionId }: { secondRecom: Pla
   ];
   const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
   const selectedGradient = useMemo(() => randomGradient, []);
-  const { vote, submitFeedback } = useFeedback({ sessionId, plantId: secondRecom.id });
+  const { vote, submitFeedback } = useFeedback({ quizSessionId: sessionId, plantId: secondRecom.id });
 
   const handleCardClick = () => {
     navigate(`/products/${secondRecom.id}`);
@@ -86,13 +87,13 @@ function SecondaryRecommendedCard({ secondRecom, sessionId }: { secondRecom: Pla
           <div className="flex gap-1 mb-2 justify-between">
             <div>
               <h1 className="text-xxs mb-1">{secondRecom.common_name}</h1>
-              <p className="italic text-xs text-text-muted">{secondRecom.scientific_name}</p>
+              <p className="italic text-[.5rem] text-text-muted">{secondRecom.scientific_name}</p>
             </div>
 
             <div className="w-fit h-fit p-2 py-1 bg-amber-600/40 rounded-3xl flex  items-center">
               <p className="text-amber-800 text-[.6rem]">{Math.round(secondRecom.scoreMatch * 100)}%</p></div>
           </div>
-     <ul className='mb-4'>
+          <ul className='mb-4'>
 
             {
               (secondRecom.reasoning).map((r, index) => (
@@ -105,10 +106,10 @@ function SecondaryRecommendedCard({ secondRecom, sessionId }: { secondRecom: Pla
           <div className="flex justify-between w-full">
             <p className="text-text-muted text-xs">{secondRecom.plantinglevel}</p>
             <p className="text-amber-600 text-xs">${((secondRecom.sizes[0].original_price) * ((100 - secondRecom.sizes[0].discount_percentage) * .01)).toFixed(2)}</p>
-          </div>
-        </div>
+
+          </div>  </div>
       </div>
-      <div className=" w-full flex items-center justify-between px-1">
+      <div className=" w-full flex items-center justify-between my-4">
         {sessionId && (
           <div className="flex items-center gap-2 mx-1">
             <span className="text-[0.5rem] text-text-muted">Helpful?</span>
@@ -116,7 +117,7 @@ function SecondaryRecommendedCard({ secondRecom, sessionId }: { secondRecom: Pla
             <FeedbackThumb feedback="down" selected={vote === "down"} disabled={vote === 'down'} onClick={() => submitFeedback("down")} />
           </div>
         )}
-        <Button btnType="add_to_cart" onClick={handleAddToCart} disabled={isOutOfStock}></Button>
+        <Button btnType="add_to_cart_recommendation" onClick={handleAddToCart} disabled={isOutOfStock}></Button>
       </div>
     </section>
 
