@@ -49,7 +49,7 @@ function BestProductDetails({ products }: { products: PlantWithSize }) {
         </div>
         <HeartButton btnType="gift_box" />
       </div>
-      <Link to={`/products/${products.id}`} >
+      <Link to={`/products/${products.slug}`} >
         <img
           className="h-60 w-60 m-auto transform transition-transform duration-300 hover:scale-105"
           src={`${cloud_url}/${products.image_url[0]
@@ -84,7 +84,7 @@ function BestProductDetails({ products }: { products: PlantWithSize }) {
 
       <div className="flex gap-2 justify-start mt-6 mb-4 ">
         <Button btnType="add_to_cart" onClick={handleAddToCart} disabled={isOutOfStock} />
-        <Button btnType="quick_view" url={`/products/${products.id}`} />
+        <Button btnType="quick_view" url={`/products/${products.slug}`} />
       </div>
     </div>
 
